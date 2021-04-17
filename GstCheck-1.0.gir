@@ -1053,6 +1053,23 @@ MT safe.</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="set_live" c:identifier="gst_harness_set_live" version="1.20">
+        <doc xml:space="preserve">Sets the liveness reported by #GstHarness when receiving a latency-query.
+The default is %TRUE.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="h" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstHarness</doc>
+            <type name="Harness" c:type="GstHarness*"/>
+          </instance-parameter>
+          <parameter name="is_live" transfer-ownership="none">
+            <doc xml:space="preserve">%TRUE for live, %FALSE for non-live</doc>
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="set_propose_allocator" c:identifier="gst_harness_set_propose_allocator" version="1.6">
         <doc xml:space="preserve">Sets the @allocator and @params to propose when receiving an allocation
 query.
