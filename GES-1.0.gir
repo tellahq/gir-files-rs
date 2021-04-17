@@ -62,7 +62,7 @@ could do the following:
 
    // Print some infos about the formatter GESAsset
    for (tmp = formatter_assets; tmp; tmp = tmp-&gt;next) {
-     g_print ("Name of the formatter: %s, file extension it produces: %s",
+     gst_print ("Name of the formatter: %s, file extension it produces: %s",
        ges_meta_container_get_string (
          GES_META_CONTAINER (tmp-&gt;data), GES_META_FORMATTER_NAME),
        ges_meta_container_get_string (
@@ -219,10 +219,10 @@ asset_loaded_cb (GESAsset * source, GAsyncResult * res, gpointer user_data)
 
   asset = ges_asset_request_finish (res, &amp;error);
   if (asset) {
-   g_print ("The file: %s is usable as a GESUriClip",
+   gst_print ("The file: %s is usable as a GESUriClip",
        ges_asset_get_id (asset));
   } else {
-   g_print ("The file: %s is *not* usable as a GESUriClip because: %s",
+   gst_print ("The file: %s is *not* usable as a GESUriClip because: %s",
        ges_asset_get_id (source), error-&gt;message);
   }
 
@@ -2311,18 +2311,19 @@ a layer</doc>
         <type name="ContainerClass" c:type="GESContainerClass"/>
       </field>
       <field name="create_track_element">
-        <doc xml:space="preserve">Method to create the core #GESTrackElement of
-a clip of this class. If a clip of this class may create several track
-elements per track type, this should be left as %NULL, and
-create_track_elements() should be used instead. Otherwise, you should
-implement this class method and leave create_track_elements() as the
-default implementation</doc>
+        <doc xml:space="preserve">Method to create the core #GESTrackElement of a clip
+of this class. If a clip of this class may create several track elements per
+track type, this should be left as %NULL, and
+GESClipClass::create_track_elements should be used instead. Otherwise, you
+should implement this class method and leave
+GESClipClass::create_track_elements as the default implementation</doc>
         <type name="CreateTrackElementFunc" c:type="GESCreateTrackElementFunc"/>
       </field>
       <field name="create_track_elements">
         <doc xml:space="preserve">Method to create the (multiple) core
-#GESTrackElement-s of a clip of this class. If create_track_element()
-is implemented, this should be kept as the default implementation</doc>
+#GESTrackElement-s of a clip of this class. If
+GESClipClass::create_track_element is implemented, this should be kept as the
+default implementation</doc>
         <type name="CreateTrackElementsFunc" c:type="GESCreateTrackElementsFunc"/>
       </field>
       <union name="ABI" c:type="ABI">
@@ -2351,6 +2352,17 @@ is implemented, this should be kept as the default implementation</doc>
           </parameter>
           <parameter name="commands" transfer-ownership="none">
             <type name="utf8" c:type="gchar**"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="get_timeline_uri" c:identifier="ges_command_line_formatter_get_timeline_uri" version="1.20">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <parameter name="timeline" transfer-ownership="none">
+            <doc xml:space="preserve">A GESTimeline to serialize</doc>
+            <type name="Timeline" c:type="GESTimeline*"/>
           </parameter>
         </parameters>
       </function>
@@ -7261,6 +7273,38 @@ only to find out what the new location is.</doc>
       <doc xml:space="preserve">Base class for single-media sources</doc>
       <implements name="Extractable"/>
       <implements name="MetaContainer"/>
+      <virtual-method name="create_source" version="1.20">
+        <doc xml:space="preserve">Creates the GstElement to put in the source topbin. Other elements will be
+queued, like a volume. In the case of a AudioUriSource, for example, the
+subclass will return a decodebin, and we will append a volume.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">The source element to use.</doc>
+          <type name="Gst.Element" c:type="GstElement*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="source" transfer-ownership="none">
+            <doc xml:space="preserve">The #GESAudioSource</doc>
+            <type name="Source" c:type="GESSource*"/>
+          </instance-parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="select_pad" version="1.20">
+        <doc xml:space="preserve">Check whether @pad should be exposed/used.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if @pad should be used %FALSE otherwise.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="source" transfer-ownership="none">
+            <doc xml:space="preserve">The @source for which to check if @pad should be used or not</doc>
+            <type name="Source" c:type="GESSource*"/>
+          </instance-parameter>
+          <parameter name="pad" transfer-ownership="none">
+            <doc xml:space="preserve">The pad to check</doc>
+            <type name="Gst.Pad" c:type="GstPad*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
       <field name="parent" readable="0" private="1">
         <type name="TrackElement" c:type="GESTrackElement"/>
       </field>
@@ -7277,8 +7321,40 @@ only to find out what the new location is.</doc>
       <field name="parent_class" readable="0" private="1">
         <type name="TrackElementClass" c:type="GESTrackElementClass"/>
       </field>
+      <field name="select_pad">
+        <callback name="select_pad">
+          <return-value transfer-ownership="none">
+            <doc xml:space="preserve">%TRUE if @pad should be used %FALSE otherwise.</doc>
+            <type name="gboolean" c:type="gboolean"/>
+          </return-value>
+          <parameters>
+            <parameter name="source" transfer-ownership="none">
+              <doc xml:space="preserve">The @source for which to check if @pad should be used or not</doc>
+              <type name="Source" c:type="GESSource*"/>
+            </parameter>
+            <parameter name="pad" transfer-ownership="none">
+              <doc xml:space="preserve">The pad to check</doc>
+              <type name="Gst.Pad" c:type="GstPad*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="create_source">
+        <callback name="create_source">
+          <return-value transfer-ownership="none">
+            <doc xml:space="preserve">The source element to use.</doc>
+            <type name="Gst.Element" c:type="GstElement*"/>
+          </return-value>
+          <parameters>
+            <parameter name="source" transfer-ownership="none">
+              <doc xml:space="preserve">The #GESAudioSource</doc>
+              <type name="Source" c:type="GESSource*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
       <field name="_ges_reserved" readable="0" private="1">
-        <array zero-terminated="0" fixed-size="4">
+        <array zero-terminated="0" fixed-size="2">
           <type name="gpointer" c:type="gpointer"/>
         </array>
       </field>
@@ -12514,14 +12590,17 @@ and out-point of the element. This can be switched off by setting
       <implements name="Extractable"/>
       <implements name="MetaContainer"/>
       <virtual-method name="active_changed">
+        <doc xml:space="preserve">Notify when the #GESTrackElement:active property changes</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="object" transfer-ownership="none">
+            <doc xml:space="preserve">A #GESTrackElement</doc>
             <type name="TrackElement" c:type="GESTrackElement*"/>
           </instance-parameter>
           <parameter name="active" transfer-ownership="none">
+            <doc xml:space="preserve">Whether the element is active or not inside the #nlecomposition</doc>
             <type name="gboolean" c:type="gboolean"/>
           </parameter>
         </parameters>
@@ -12536,27 +12615,36 @@ and out-point of the element. This can be switched off by setting
           </instance-parameter>
         </parameters>
       </virtual-method>
-      <virtual-method name="create_element" introspectable="0">
-        <return-value>
+      <virtual-method name="create_element">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the #GstElement that the underlying nleobject
+controls.</doc>
           <type name="Gst.Element" c:type="GstElement*"/>
         </return-value>
         <parameters>
           <instance-parameter name="object" transfer-ownership="none">
+            <doc xml:space="preserve">The #GESTrackElement</doc>
             <type name="TrackElement" c:type="GESTrackElement*"/>
           </instance-parameter>
         </parameters>
       </virtual-method>
-      <virtual-method name="create_gnl_object" introspectable="0">
-        <return-value>
+      <virtual-method name="create_gnl_object">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the #NLEObject to use in the #nlecomposition</doc>
           <type name="Gst.Element" c:type="GstElement*"/>
         </return-value>
         <parameters>
           <instance-parameter name="object" transfer-ownership="none">
+            <doc xml:space="preserve">The #GESTrackElement</doc>
             <type name="TrackElement" c:type="GESTrackElement*"/>
           </instance-parameter>
         </parameters>
       </virtual-method>
-      <virtual-method name="list_children_properties" introspectable="0">
+      <virtual-method name="list_children_properties" introspectable="0" deprecated="1" deprecated-version="1.14">
+        <doc xml:space="preserve">Listing children properties is handled by
+ges_timeline_element_list_children_properties() instead.</doc>
+        <doc-deprecated xml:space="preserve">Use #GESTimelineElementClass::list_children_properties
+instead</doc-deprecated>
         <return-value>
           <type name="GObject.ParamSpec" c:type="GParamSpec**"/>
         </return-value>
@@ -12569,7 +12657,7 @@ and out-point of the element. This can be switched off by setting
           </parameter>
         </parameters>
       </virtual-method>
-      <virtual-method name="lookup_child" invoker="lookup_child" deprecated="1">
+      <virtual-method name="lookup_child" invoker="lookup_child" deprecated="1" deprecated-version="1.14">
         <doc xml:space="preserve">Looks up which @element and @pspec would be effected by the given @name. If various
 contained elements have this property name you will get the first one, unless you
 specify the class name in @name.</doc>
@@ -13523,29 +13611,32 @@ should get into</doc>
         <type name="TimelineElementClass" c:type="GESTimelineElementClass"/>
       </field>
       <field name="nleobject_factorytype">
-        <doc xml:space="preserve">The name of the #GstElementFactory to use to
-create the underlying nleobject of a track element</doc>
         <type name="utf8" c:type="const gchar*"/>
       </field>
-      <field name="create_gnl_object" introspectable="0">
-        <callback name="create_gnl_object" introspectable="0">
-          <return-value>
+      <field name="create_gnl_object">
+        <callback name="create_gnl_object">
+          <return-value transfer-ownership="none">
+            <doc xml:space="preserve">the #NLEObject to use in the #nlecomposition</doc>
             <type name="Gst.Element" c:type="GstElement*"/>
           </return-value>
           <parameters>
             <parameter name="object" transfer-ownership="none">
+              <doc xml:space="preserve">The #GESTrackElement</doc>
               <type name="TrackElement" c:type="GESTrackElement*"/>
             </parameter>
           </parameters>
         </callback>
       </field>
-      <field name="create_element" introspectable="0">
-        <callback name="create_element" introspectable="0">
-          <return-value>
+      <field name="create_element">
+        <callback name="create_element">
+          <return-value transfer-ownership="none">
+            <doc xml:space="preserve">the #GstElement that the underlying nleobject
+controls.</doc>
             <type name="Gst.Element" c:type="GstElement*"/>
           </return-value>
           <parameters>
             <parameter name="object" transfer-ownership="none">
+              <doc xml:space="preserve">The #GESTrackElement</doc>
               <type name="TrackElement" c:type="GESTrackElement*"/>
             </parameter>
           </parameters>
@@ -13558,9 +13649,11 @@ create the underlying nleobject of a track element</doc>
           </return-value>
           <parameters>
             <parameter name="object" transfer-ownership="none">
+              <doc xml:space="preserve">A #GESTrackElement</doc>
               <type name="TrackElement" c:type="GESTrackElement*"/>
             </parameter>
             <parameter name="active" transfer-ownership="none">
+              <doc xml:space="preserve">Whether the element is active or not inside the #nlecomposition</doc>
               <type name="gboolean" c:type="gboolean"/>
             </parameter>
           </parameters>
@@ -13934,12 +14027,12 @@ filesource_asset_loaded_cb (GESAsset * source, GAsyncResult * res, gpointer user
 
   filesource_asset = ges_uri_clip_asset_finish (res, &amp;error);
   if (filesource_asset) {
-   g_print ("The file: %s is usable as a FileSource, it is%s an image and lasts %" GST_TIME_FORMAT,
+   gst_print ("The file: %s is usable as a FileSource, it is%s an image and lasts %" GST_TIME_FORMAT,
        ges_asset_get_id (GES_ASSET (filesource_asset))
        ges_uri_clip_asset_is_image (filesource_asset) ? "" : " not",
        GST_TIME_ARGS (ges_uri_clip_asset_get_duration (filesource_asset));
   } else {
-   g_print ("The file: %s is *not* usable as a FileSource because: %s",
+   gst_print ("The file: %s is *not* usable as a FileSource because: %s",
        ges_asset_get_id (source), error-&gt;message);
   }
 
@@ -14230,10 +14323,10 @@ contains one frame)</doc>
     <constant name="VERSION_MAJOR" value="1" c:type="GES_VERSION_MAJOR">
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="VERSION_MICRO" value="2" c:type="GES_VERSION_MICRO">
+    <constant name="VERSION_MICRO" value="1" c:type="GES_VERSION_MICRO">
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="VERSION_MINOR" value="18" c:type="GES_VERSION_MINOR">
+    <constant name="VERSION_MINOR" value="19" c:type="GES_VERSION_MINOR">
       <type name="gint" c:type="gint"/>
     </constant>
     <constant name="VERSION_NANO" value="0" c:type="GES_VERSION_NANO">
@@ -14762,9 +14855,10 @@ modify these fields, or add additional ones.</doc>
           <type name="VideoTransition" c:type="GESVideoTransition*"/>
         </return-value>
       </constructor>
-      <method name="get_border" c:identifier="ges_video_transition_get_border">
+      <method name="get_border" c:identifier="ges_video_transition_get_border" deprecated="1" deprecated-version="1.20">
         <doc xml:space="preserve">Get the border property of @self, this value represents
 the border width of the transition.</doc>
+        <doc-deprecated xml:space="preserve">Use ges_timeline_element_get_child_property instead.</doc-deprecated>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The border values of @self or -1 if not meaningful
 (this will happen when not using a smpte transition).</doc>
@@ -14790,9 +14884,10 @@ the border width of the transition.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="is_inverted" c:identifier="ges_video_transition_is_inverted">
+      <method name="is_inverted" c:identifier="ges_video_transition_is_inverted" deprecated="1" deprecated-version="1.20">
         <doc xml:space="preserve">Get the invert property of @self, this value represents
 the direction of the transition.</doc>
+        <doc-deprecated xml:space="preserve">Use ges_timeline_element_get_child_property instead.</doc-deprecated>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The invert value of @self</doc>
           <type name="gboolean" c:type="gboolean"/>
@@ -14804,11 +14899,12 @@ the direction of the transition.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="set_border" c:identifier="ges_video_transition_set_border">
+      <method name="set_border" c:identifier="ges_video_transition_set_border" deprecated="1" deprecated-version="1.20">
         <doc xml:space="preserve">Set the border property of @self, this value represents
 the border width of the transition. In case this value does
 not make sense for the current transition type, it is cached
 for later use.</doc>
+        <doc-deprecated xml:space="preserve">Use ges_timeline_element_set_child_property instead.</doc-deprecated>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -14823,11 +14919,12 @@ for later use.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_inverted" c:identifier="ges_video_transition_set_inverted">
+      <method name="set_inverted" c:identifier="ges_video_transition_set_inverted" deprecated="1" deprecated-version="1.20">
         <doc xml:space="preserve">Set the invert property of @self, this value represents
 the direction of the transition. In case this value does
 not make sense for the current transition type, it is cached
 for later use.</doc>
+        <doc-deprecated xml:space="preserve">Use ges_timeline_element_set_child_property instead.</doc-deprecated>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -14863,8 +14960,9 @@ for later use.</doc>
         <doc xml:space="preserve">This value represents the border width of the transition.</doc>
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="invert" writable="1" transfer-ownership="none">
+      <property name="invert" deprecated="1" deprecated-version="1.20" writable="1" transfer-ownership="none">
         <doc xml:space="preserve">This value represents the direction of the transition.</doc>
+        <doc-deprecated xml:space="preserve">Use ges_timeline_element_[sg]et_child_property instead.</doc-deprecated>
         <type name="gboolean" c:type="gboolean"/>
       </property>
       <property name="transition-type" writable="1" transfer-ownership="none">
