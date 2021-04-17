@@ -283,6 +283,8 @@ and/or use gtk-doc annotations.  -->
       </parameters>
     </function-macro>
     <class name="Player" c:symbol-prefix="player" c:type="GstPlayer" parent="Gst.Object" glib:type-name="GstPlayer" glib:get-type="gst_player_get_type" glib:type-struct="PlayerClass">
+      <doc xml:space="preserve">Starting from GStreamer 1.20, application developers are strongly advised to migrate to #GstPlay.
+#GstPlayer will be deprecated in 1.20 and most likely removed by 1.24.</doc>
       <constructor name="new" c:identifier="gst_player_new">
         <doc xml:space="preserve">Creates a new #GstPlayer instance that uses @signal_dispatcher to dispatch
 signals to some event loop system, or emits signals directly if NULL is
@@ -645,7 +647,9 @@ The caller should free it with g_object_unref()</doc>
       </method>
       <method name="get_pipeline" c:identifier="gst_player_get_pipeline">
         <return-value transfer-ownership="full">
-          <doc xml:space="preserve">The internal playbin instance</doc>
+          <doc xml:space="preserve">The internal playbin instance.
+
+The caller should free it with g_object_unref()</doc>
           <type name="Gst.Element" c:type="GstElement*"/>
         </return-value>
         <parameters>
@@ -1130,7 +1134,11 @@ Sets the video track @stream_index.</doc>
         </parameters>
       </method>
       <method name="set_volume" c:identifier="gst_player_set_volume">
-        <doc xml:space="preserve">Sets the volume level of the stream as a percentage between 0 and 1.</doc>
+        <doc xml:space="preserve">Sets the volume level of the stream as a percentage between 0 and 1.
+
+This volume is a linear factor. For showing the volume in a GUI it
+might make sense to first convert from a different format. Volume sliders
+should usually use a cubic volume. See gst_stream_volume_convert_volume().</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -1206,7 +1214,7 @@ in the stream.</doc>
       <property name="video-multiview-mode" writable="1" transfer-ownership="none">
         <type name="GstVideo.VideoMultiviewFramePacking"/>
       </property>
-      <property name="video-renderer" readable="0" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="video-renderer" transfer-ownership="none">
         <type name="PlayerVideoRenderer"/>
       </property>
       <property name="volume" writable="1" transfer-ownership="none">

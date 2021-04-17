@@ -201,19 +201,19 @@ and/or use gtk-doc annotations.  -->
       </parameters>
     </function-macro>
     <enumeration name="WebRTCBundlePolicy" version="1.16" glib:type-name="GstWebRTCBundlePolicy" glib:get-type="gst_webrtc_bundle_policy_get_type" c:type="GstWebRTCBundlePolicy">
-      <doc xml:space="preserve">GST_WEBRTC_BUNDLE_POLICY_NONE: none
-GST_WEBRTC_BUNDLE_POLICY_BALANCED: balanced
-GST_WEBRTC_BUNDLE_POLICY_MAX_COMPAT: max-compat
-GST_WEBRTC_BUNDLE_POLICY_MAX_BUNDLE: max-bundle
-See https://tools.ietf.org/html/draft-ietf-rtcweb-jsep-24#section-4.1.1
+      <doc xml:space="preserve">See https://tools.ietf.org/html/draft-ietf-rtcweb-jsep-24#section-4.1.1
 for more information.</doc>
       <member name="none" value="0" c:identifier="GST_WEBRTC_BUNDLE_POLICY_NONE" glib:nick="none">
+        <doc xml:space="preserve">none</doc>
       </member>
       <member name="balanced" value="1" c:identifier="GST_WEBRTC_BUNDLE_POLICY_BALANCED" glib:nick="balanced">
+        <doc xml:space="preserve">balanced</doc>
       </member>
       <member name="max_compat" value="2" c:identifier="GST_WEBRTC_BUNDLE_POLICY_MAX_COMPAT" glib:nick="max-compat">
+        <doc xml:space="preserve">max-compat</doc>
       </member>
       <member name="max_bundle" value="3" c:identifier="GST_WEBRTC_BUNDLE_POLICY_MAX_BUNDLE" glib:nick="max-bundle">
+        <doc xml:space="preserve">max-bundle</doc>
       </member>
     </enumeration>
     <enumeration name="WebRTCDTLSSetup" glib:type-name="GstWebRTCDTLSSetup" glib:get-type="gst_webrtc_dtls_setup_get_type" c:type="GstWebRTCDTLSSetup">
@@ -239,9 +239,6 @@ for more information.</doc>
           <parameter name="session_id" transfer-ownership="none">
             <type name="guint" c:type="guint"/>
           </parameter>
-          <parameter name="rtcp" transfer-ownership="none">
-            <type name="gboolean" c:type="gboolean"/>
-          </parameter>
         </parameters>
       </constructor>
       <method name="set_transport" c:identifier="gst_webrtc_dtls_transport_set_transport">
@@ -266,9 +263,6 @@ for more information.</doc>
       <property name="remote-certificate" transfer-ownership="none">
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="rtcp" writable="1" construct-only="1" transfer-ownership="none">
-        <type name="gboolean" c:type="gboolean"/>
-      </property>
       <property name="session-id" writable="1" construct-only="1" transfer-ownership="none">
         <type name="guint" c:type="guint"/>
       </property>
@@ -286,9 +280,6 @@ for more information.</doc>
       </field>
       <field name="state">
         <type name="WebRTCDTLSTransportState" c:type="GstWebRTCDTLSTransportState"/>
-      </field>
-      <field name="is_rtcp">
-        <type name="gboolean" c:type="gboolean"/>
       </field>
       <field name="client">
         <type name="gboolean" c:type="gboolean"/>
@@ -720,21 +711,21 @@ for more information.</doc>
       </field>
     </record>
     <enumeration name="WebRTCDataChannelState" version="1.16" glib:type-name="GstWebRTCDataChannelState" glib:get-type="gst_webrtc_data_channel_state_get_type" c:type="GstWebRTCDataChannelState">
-      <doc xml:space="preserve">GST_WEBRTC_DATA_CHANNEL_STATE_NEW: new
-GST_WEBRTC_DATA_CHANNEL_STATE_CONNECTING: connection
-GST_WEBRTC_DATA_CHANNEL_STATE_OPEN: open
-GST_WEBRTC_DATA_CHANNEL_STATE_CLOSING: closing
-GST_WEBRTC_DATA_CHANNEL_STATE_CLOSED: closed
-See &lt;http://w3c.github.io/webrtc-pc/#dom-rtcdatachannelstate&gt;</doc>
+      <doc xml:space="preserve">See &lt;http://w3c.github.io/webrtc-pc/#dom-rtcdatachannelstate&gt;</doc>
       <member name="new" value="0" c:identifier="GST_WEBRTC_DATA_CHANNEL_STATE_NEW" glib:nick="new">
+        <doc xml:space="preserve">new</doc>
       </member>
       <member name="connecting" value="1" c:identifier="GST_WEBRTC_DATA_CHANNEL_STATE_CONNECTING" glib:nick="connecting">
+        <doc xml:space="preserve">connection</doc>
       </member>
       <member name="open" value="2" c:identifier="GST_WEBRTC_DATA_CHANNEL_STATE_OPEN" glib:nick="open">
+        <doc xml:space="preserve">open</doc>
       </member>
       <member name="closing" value="3" c:identifier="GST_WEBRTC_DATA_CHANNEL_STATE_CLOSING" glib:nick="closing">
+        <doc xml:space="preserve">closing</doc>
       </member>
       <member name="closed" value="4" c:identifier="GST_WEBRTC_DATA_CHANNEL_STATE_CLOSED" glib:nick="closed">
+        <doc xml:space="preserve">closed</doc>
       </member>
     </enumeration>
     <enumeration name="WebRTCFECType" version="1.14.1" glib:type-name="GstWebRTCFECType" glib:get-type="gst_webrtc_fec_type_get_type" c:type="GstWebRTCFECType">
@@ -937,13 +928,25 @@ See &lt;http://w3c.github.io/webrtc-pc/#dom-rtcdatachannelstate&gt;</doc>
       </field>
     </record>
     <enumeration name="WebRTCICETransportPolicy" version="1.16" glib:type-name="GstWebRTCICETransportPolicy" glib:get-type="gst_webrtc_ice_transport_policy_get_type" c:type="GstWebRTCICETransportPolicy">
-      <doc xml:space="preserve">GST_WEBRTC_ICE_TRANSPORT_POLICY_ALL: all
-GST_WEBRTC_ICE_TRANSPORT_POLICY_RELAY: relay
-See https://tools.ietf.org/html/draft-ietf-rtcweb-jsep-24#section-4.1.1
+      <doc xml:space="preserve">See https://tools.ietf.org/html/draft-ietf-rtcweb-jsep-24#section-4.1.1
 for more information.</doc>
       <member name="all" value="0" c:identifier="GST_WEBRTC_ICE_TRANSPORT_POLICY_ALL" glib:nick="all">
+        <doc xml:space="preserve">all</doc>
       </member>
       <member name="relay" value="1" c:identifier="GST_WEBRTC_ICE_TRANSPORT_POLICY_RELAY" glib:nick="relay">
+        <doc xml:space="preserve">relay</doc>
+      </member>
+    </enumeration>
+    <enumeration name="WebRTCKind" version="1.20" glib:type-name="GstWebRTCKind" glib:get-type="gst_webrtc_kind_get_type" c:type="GstWebRTCKind">
+      <doc xml:space="preserve">https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack-kind</doc>
+      <member name="unknown" value="0" c:identifier="GST_WEBRTC_KIND_UNKNOWN" glib:nick="unknown">
+        <doc xml:space="preserve">Kind has not yet been set</doc>
+      </member>
+      <member name="audio" value="1" c:identifier="GST_WEBRTC_KIND_AUDIO" glib:nick="audio">
+        <doc xml:space="preserve">Kind is audio</doc>
+      </member>
+      <member name="video" value="2" c:identifier="GST_WEBRTC_KIND_VIDEO" glib:nick="video">
+        <doc xml:space="preserve">Kind is audio</doc>
       </member>
     </enumeration>
     <enumeration name="WebRTCPeerConnectionState" glib:type-name="GstWebRTCPeerConnectionState" glib:get-type="gst_webrtc_peer_connection_state_get_type" c:type="GstWebRTCPeerConnectionState">
@@ -968,59 +971,38 @@ for more information.</doc>
       </member>
     </enumeration>
     <enumeration name="WebRTCPriorityType" version="1.16" glib:type-name="GstWebRTCPriorityType" glib:get-type="gst_webrtc_priority_type_get_type" c:type="GstWebRTCPriorityType">
-      <doc xml:space="preserve">GST_WEBRTC_PRIORITY_TYPE_VERY_LOW: very-low
-GST_WEBRTC_PRIORITY_TYPE_LOW: low
-GST_WEBRTC_PRIORITY_TYPE_MEDIUM: medium
-GST_WEBRTC_PRIORITY_TYPE_HIGH: high
-See &lt;http://w3c.github.io/webrtc-pc/#dom-rtcprioritytype&gt;</doc>
+      <doc xml:space="preserve">See &lt;http://w3c.github.io/webrtc-pc/#dom-rtcprioritytype&gt;</doc>
       <member name="very_low" value="1" c:identifier="GST_WEBRTC_PRIORITY_TYPE_VERY_LOW" glib:nick="very-low">
+        <doc xml:space="preserve">very-low</doc>
       </member>
       <member name="low" value="2" c:identifier="GST_WEBRTC_PRIORITY_TYPE_LOW" glib:nick="low">
+        <doc xml:space="preserve">low</doc>
       </member>
       <member name="medium" value="3" c:identifier="GST_WEBRTC_PRIORITY_TYPE_MEDIUM" glib:nick="medium">
+        <doc xml:space="preserve">medium</doc>
       </member>
       <member name="high" value="4" c:identifier="GST_WEBRTC_PRIORITY_TYPE_HIGH" glib:nick="high">
+        <doc xml:space="preserve">high</doc>
       </member>
     </enumeration>
-    <class name="WebRTCRTPReceiver" c:symbol-prefix="webrtc_rtp_receiver" c:type="GstWebRTCRTPReceiver" parent="Gst.Object" glib:type-name="GstWebRTCRTPReceiver" glib:get-type="gst_webrtc_rtp_receiver_get_type" glib:type-struct="WebRTCRTPReceiverClass">
+    <class name="WebRTCRTPReceiver" c:symbol-prefix="webrtc_rtp_receiver" c:type="GstWebRTCRTPReceiver" version="1.16" parent="Gst.Object" glib:type-name="GstWebRTCRTPReceiver" glib:get-type="gst_webrtc_rtp_receiver_get_type" glib:type-struct="WebRTCRTPReceiverClass">
+      <doc xml:space="preserve">An object to track the receiving aspect of the stream
+
+Mostly matches the WebRTC RTCRtpReceiver interface.</doc>
       <constructor name="new" c:identifier="gst_webrtc_rtp_receiver_new">
         <return-value transfer-ownership="none">
           <type name="WebRTCRTPReceiver" c:type="GstWebRTCRTPReceiver*"/>
         </return-value>
       </constructor>
-      <method name="set_rtcp_transport" c:identifier="gst_webrtc_rtp_receiver_set_rtcp_transport">
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="receiver" transfer-ownership="none">
-            <type name="WebRTCRTPReceiver" c:type="GstWebRTCRTPReceiver*"/>
-          </instance-parameter>
-          <parameter name="transport" transfer-ownership="none">
-            <type name="WebRTCDTLSTransport" c:type="GstWebRTCDTLSTransport*"/>
-          </parameter>
-        </parameters>
-      </method>
-      <method name="set_transport" c:identifier="gst_webrtc_rtp_receiver_set_transport">
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="receiver" transfer-ownership="none">
-            <type name="WebRTCRTPReceiver" c:type="GstWebRTCRTPReceiver*"/>
-          </instance-parameter>
-          <parameter name="transport" transfer-ownership="none">
-            <type name="WebRTCDTLSTransport" c:type="GstWebRTCDTLSTransport*"/>
-          </parameter>
-        </parameters>
-      </method>
+      <property name="transport" version="1.20" transfer-ownership="none">
+        <doc xml:space="preserve">The DTLS transport for this receiver</doc>
+        <type name="WebRTCDTLSTransport"/>
+      </property>
       <field name="parent">
         <type name="Gst.Object" c:type="GstObject"/>
       </field>
       <field name="transport">
-        <type name="WebRTCDTLSTransport" c:type="GstWebRTCDTLSTransport*"/>
-      </field>
-      <field name="rtcp_transport">
+        <doc xml:space="preserve">The transport for RTP packets</doc>
         <type name="WebRTCDTLSTransport" c:type="GstWebRTCDTLSTransport*"/>
       </field>
       <field name="_padding">
@@ -1039,51 +1021,57 @@ See &lt;http://w3c.github.io/webrtc-pc/#dom-rtcprioritytype&gt;</doc>
         </array>
       </field>
     </record>
-    <class name="WebRTCRTPSender" c:symbol-prefix="webrtc_rtp_sender" c:type="GstWebRTCRTPSender" parent="Gst.Object" glib:type-name="GstWebRTCRTPSender" glib:get-type="gst_webrtc_rtp_sender_get_type" glib:type-struct="WebRTCRTPSenderClass">
+    <class name="WebRTCRTPSender" c:symbol-prefix="webrtc_rtp_sender" c:type="GstWebRTCRTPSender" version="1.16" parent="Gst.Object" glib:type-name="GstWebRTCRTPSender" glib:get-type="gst_webrtc_rtp_sender_get_type" glib:type-struct="WebRTCRTPSenderClass">
+      <doc xml:space="preserve">An object to track the sending aspect of the stream
+
+Mostly matches the WebRTC RTCRtpSender interface.</doc>
       <constructor name="new" c:identifier="gst_webrtc_rtp_sender_new">
         <return-value transfer-ownership="none">
           <type name="WebRTCRTPSender" c:type="GstWebRTCRTPSender*"/>
         </return-value>
       </constructor>
-      <method name="set_rtcp_transport" c:identifier="gst_webrtc_rtp_sender_set_rtcp_transport">
+      <method name="set_priority" c:identifier="gst_webrtc_rtp_sender_set_priority" version="1.20">
+        <doc xml:space="preserve">Sets the content of the IPv4 Type of Service (ToS), also known as DSCP
+(Differentiated Services Code Point).
+This also sets the Traffic Class field of IPv6.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="sender" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstWebRTCRTPSender</doc>
             <type name="WebRTCRTPSender" c:type="GstWebRTCRTPSender*"/>
           </instance-parameter>
-          <parameter name="transport" transfer-ownership="none">
-            <type name="WebRTCDTLSTransport" c:type="GstWebRTCDTLSTransport*"/>
+          <parameter name="priority" transfer-ownership="none">
+            <doc xml:space="preserve">The priority of this sender</doc>
+            <type name="WebRTCPriorityType" c:type="GstWebRTCPriorityType"/>
           </parameter>
         </parameters>
       </method>
-      <method name="set_transport" c:identifier="gst_webrtc_rtp_sender_set_transport">
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="sender" transfer-ownership="none">
-            <type name="WebRTCRTPSender" c:type="GstWebRTCRTPSender*"/>
-          </instance-parameter>
-          <parameter name="transport" transfer-ownership="none">
-            <type name="WebRTCDTLSTransport" c:type="GstWebRTCDTLSTransport*"/>
-          </parameter>
-        </parameters>
-      </method>
+      <property name="priority" version="1.20" writable="1" transfer-ownership="none">
+        <doc xml:space="preserve">The priority from which to set the DSCP field on packets</doc>
+        <type name="WebRTCPriorityType"/>
+      </property>
+      <property name="transport" version="1.20" transfer-ownership="none">
+        <doc xml:space="preserve">The DTLS transport for this sender</doc>
+        <type name="WebRTCDTLSTransport"/>
+      </property>
       <field name="parent">
         <type name="Gst.Object" c:type="GstObject"/>
       </field>
       <field name="transport">
-        <type name="WebRTCDTLSTransport" c:type="GstWebRTCDTLSTransport*"/>
-      </field>
-      <field name="rtcp_transport">
+        <doc xml:space="preserve">The transport for RTP packets</doc>
         <type name="WebRTCDTLSTransport" c:type="GstWebRTCDTLSTransport*"/>
       </field>
       <field name="send_encodings">
+        <doc xml:space="preserve">Unused</doc>
         <array name="GLib.Array" c:type="GArray*">
           <type name="gpointer" c:type="gpointer"/>
         </array>
+      </field>
+      <field name="priority" version="1.20">
+        <doc xml:space="preserve">The priority of the stream</doc>
+        <type name="WebRTCPriorityType" c:type="GstWebRTCPriorityType"/>
       </field>
       <field name="_padding">
         <array zero-terminated="0" fixed-size="4">
@@ -1101,10 +1089,35 @@ See &lt;http://w3c.github.io/webrtc-pc/#dom-rtcprioritytype&gt;</doc>
         </array>
       </field>
     </record>
-    <class name="WebRTCRTPTransceiver" c:symbol-prefix="webrtc_rtp_transceiver" c:type="GstWebRTCRTPTransceiver" parent="Gst.Object" abstract="1" glib:type-name="GstWebRTCRTPTransceiver" glib:get-type="gst_webrtc_rtp_transceiver_get_type" glib:type-struct="WebRTCRTPTransceiverClass">
+    <class name="WebRTCRTPTransceiver" c:symbol-prefix="webrtc_rtp_transceiver" c:type="GstWebRTCRTPTransceiver" version="1.16" parent="Gst.Object" abstract="1" glib:type-name="GstWebRTCRTPTransceiver" glib:get-type="gst_webrtc_rtp_transceiver_get_type" glib:type-struct="WebRTCRTPTransceiverClass">
+      <doc xml:space="preserve">Mostly matches the WebRTC RTCRtpTransceiver interface.</doc>
+      <property name="codec-preferences" version="1.20" writable="1" transfer-ownership="none">
+        <doc xml:space="preserve">Caps representing the codec preferences.</doc>
+        <type name="Gst.Caps"/>
+      </property>
+      <property name="current-direction" version="1.20" transfer-ownership="none">
+        <doc xml:space="preserve">The transceiver's current directionality, or none if the
+transceiver is stopped or has never participated in an exchange
+of offers and answers. To change the transceiver's
+directionality, set the value of the direction property.</doc>
+        <type name="WebRTCRTPTransceiverDirection"/>
+      </property>
       <property name="direction" version="1.18" writable="1" transfer-ownership="none">
         <doc xml:space="preserve">Direction of the transceiver.</doc>
         <type name="WebRTCRTPTransceiverDirection"/>
+      </property>
+      <property name="kind" version="1.20" transfer-ownership="none">
+        <doc xml:space="preserve">The kind of media this transceiver transports</doc>
+        <type name="WebRTCKind"/>
+      </property>
+      <property name="mid" version="1.20" transfer-ownership="none">
+        <doc xml:space="preserve">The media ID of the m-line associated with this transceiver. This
+association is established, when possible, whenever either a
+local or remote description is applied. This field is null if
+neither a local or remote description has been applied, or if its
+associated m-line is rejected by either a remote offer or any
+answer.</doc>
+        <type name="utf8" c:type="gchar*"/>
       </property>
       <property name="mlineindex" writable="1" construct-only="1" transfer-ownership="none">
         <type name="guint" c:type="guint"/>
@@ -1119,28 +1132,49 @@ See &lt;http://w3c.github.io/webrtc-pc/#dom-rtcprioritytype&gt;</doc>
         <type name="Gst.Object" c:type="GstObject"/>
       </field>
       <field name="mline">
+        <doc xml:space="preserve">the mline number this transceiver corresponds to</doc>
         <type name="guint" c:type="guint"/>
       </field>
       <field name="mid">
+        <doc xml:space="preserve">The media ID of the m-line associated with this
+transceiver. This association is established, when possible,
+whenever either a local or remote description is applied. This
+field is NULL if neither a local or remote description has been
+applied, or if its associated m-line is rejected by either a remote
+offer or any answer.</doc>
         <type name="utf8" c:type="gchar*"/>
       </field>
       <field name="stopped">
+        <doc xml:space="preserve">Indicates whether or not sending and receiving using the paired
+#GstWebRTCRTPSender and #GstWebRTCRTPReceiver has been permanently disabled,
+either due to SDP offer/answer</doc>
         <type name="gboolean" c:type="gboolean"/>
       </field>
       <field name="sender">
+        <doc xml:space="preserve">The #GstWebRTCRTPSender object responsible sending  data to the
+remote peer</doc>
         <type name="WebRTCRTPSender" c:type="GstWebRTCRTPSender*"/>
       </field>
       <field name="receiver">
+        <doc xml:space="preserve">The #GstWebRTCRTPReceiver object responsible for receiver data from
+the remote peer.</doc>
         <type name="WebRTCRTPReceiver" c:type="GstWebRTCRTPReceiver*"/>
       </field>
       <field name="direction">
+        <doc xml:space="preserve">The transceiver's desired direction.</doc>
         <type name="WebRTCRTPTransceiverDirection" c:type="GstWebRTCRTPTransceiverDirection"/>
       </field>
       <field name="current_direction">
+        <doc xml:space="preserve">The transceiver's current direction (read-only)</doc>
         <type name="WebRTCRTPTransceiverDirection" c:type="GstWebRTCRTPTransceiverDirection"/>
       </field>
       <field name="codec_preferences">
+        <doc xml:space="preserve">A caps representing the codec preferences (read-only)</doc>
         <type name="Gst.Caps" c:type="GstCaps*"/>
+      </field>
+      <field name="kind" version="1.20">
+        <doc xml:space="preserve">Type of media</doc>
+        <type name="WebRTCKind" c:type="GstWebRTCKind"/>
       </field>
       <field name="_padding">
         <array zero-terminated="0" fixed-size="4">
@@ -1176,18 +1210,18 @@ See &lt;http://w3c.github.io/webrtc-pc/#dom-rtcprioritytype&gt;</doc>
       </member>
     </enumeration>
     <enumeration name="WebRTCSCTPTransportState" version="1.16" glib:type-name="GstWebRTCSCTPTransportState" glib:get-type="gst_webrtc_sctp_transport_state_get_type" c:type="GstWebRTCSCTPTransportState">
-      <doc xml:space="preserve">GST_WEBRTC_SCTP_TRANSPORT_STATE_NEW: new
-GST_WEBRTC_SCTP_TRANSPORT_STATE_CONNECTING: connecting
-GST_WEBRTC_SCTP_TRANSPORT_STATE_CONNECTED: connected
-GST_WEBRTC_SCTP_TRANSPORT_STATE_CLOSED: closed
-See &lt;http://w3c.github.io/webrtc-pc/#dom-rtcsctptransportstate&gt;</doc>
+      <doc xml:space="preserve">See &lt;http://w3c.github.io/webrtc-pc/#dom-rtcsctptransportstate&gt;</doc>
       <member name="new" value="0" c:identifier="GST_WEBRTC_SCTP_TRANSPORT_STATE_NEW" glib:nick="new">
+        <doc xml:space="preserve">new</doc>
       </member>
       <member name="connecting" value="1" c:identifier="GST_WEBRTC_SCTP_TRANSPORT_STATE_CONNECTING" glib:nick="connecting">
+        <doc xml:space="preserve">connecting</doc>
       </member>
       <member name="connected" value="2" c:identifier="GST_WEBRTC_SCTP_TRANSPORT_STATE_CONNECTED" glib:nick="connected">
+        <doc xml:space="preserve">connected</doc>
       </member>
       <member name="closed" value="3" c:identifier="GST_WEBRTC_SCTP_TRANSPORT_STATE_CLOSED" glib:nick="closed">
+        <doc xml:space="preserve">closed</doc>
       </member>
     </enumeration>
     <enumeration name="WebRTCSDPType" glib:type-name="GstWebRTCSDPType" glib:get-type="gst_webrtc_sdp_type_get_type" c:type="GstWebRTCSDPType">

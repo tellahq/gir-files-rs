@@ -14,7 +14,7 @@ the various ATSC specifications.
 Consult the relevant specifications for more details.</doc>
       <member name="stuffing" value="128" c:identifier="GST_MTS_DESC_ATSC_STUFFING">
       </member>
-      <member name="ac3" value="131" c:identifier="GST_MTS_DESC_ATSC_AC3">
+      <member name="ac3" value="129" c:identifier="GST_MTS_DESC_ATSC_AC3">
       </member>
       <member name="caption_service" value="134" c:identifier="GST_MTS_DESC_ATSC_CAPTION_SERVICE">
       </member>
@@ -55,6 +55,32 @@ Consult the relevant specifications for more details.</doc>
       <member name="crc32" value="181" c:identifier="GST_MTS_DESC_ATSC_CRC32">
       </member>
       <member name="group_link" value="184" c:identifier="GST_MTS_DESC_ATSC_GROUP_LINK">
+      </member>
+    </enumeration>
+    <enumeration name="ATSCStreamType" version="1.20" c:type="GstMpegtsATSCStreamType">
+      <doc xml:space="preserve">Type of mpeg-ts streams for ATSC, as defined by the ATSC Code Points
+Registry. For convenience, some stream types from %GstMpegtsScteStreamType
+are also included.</doc>
+      <member name="dcii_video" value="128" c:identifier="GST_MPEGTS_STREAM_TYPE_ATSC_DCII_VIDEO">
+        <doc xml:space="preserve">DigiCipher II video | Identical to ITU-T Rec. H.262 | ISO/IEC 13818-2 Video</doc>
+      </member>
+      <member name="audio_ac3" value="129" c:identifier="GST_MPEGTS_STREAM_TYPE_ATSC_AUDIO_AC3">
+        <doc xml:space="preserve">ATSC A/53 Audio | AC-3</doc>
+      </member>
+      <member name="subtitling" value="130" c:identifier="GST_MPEGTS_STREAM_TYPE_ATSC_SUBTITLING">
+        <doc xml:space="preserve">SCTE-27 Subtitling</doc>
+      </member>
+      <member name="isoch_data" value="131" c:identifier="GST_MPEGTS_STREAM_TYPE_ATSC_ISOCH_DATA">
+        <doc xml:space="preserve">SCTE-19 Isochronous data | Reserved</doc>
+      </member>
+      <member name="sit" value="134" c:identifier="GST_MPEGTS_STREAM_TYPE_ATSC_SIT">
+        <doc xml:space="preserve">SCTE-35 Splice Information Table</doc>
+      </member>
+      <member name="audio_eac3" value="135" c:identifier="GST_MPEGTS_STREAM_TYPE_ATSC_AUDIO_EAC3">
+        <doc xml:space="preserve">E-AC-3 A/52:2018</doc>
+      </member>
+      <member name="audio_dts_hd" value="136" c:identifier="GST_MPEGTS_STREAM_TYPE_ATSC_AUDIO_DTS_HD">
+        <doc xml:space="preserve">E-AC-3 A/107 (ATSC 2.0)</doc>
       </member>
     </enumeration>
     <record name="AtscEIT" c:type="GstMpegtsAtscEIT" glib:type-name="GstMpegtsAtscEIT" glib:get-type="gst_mpegts_atsc_eit_get_type" c:symbol-prefix="atsc_eit">
@@ -234,21 +260,25 @@ Consult the relevant specifications for more details.</doc>
         </return-value>
       </constructor>
     </record>
-    <record name="AtscRRTDimension" c:type="GstMpegtsAtscRRTDimension" glib:type-name="GstMpegtsAtscRRTDimension" glib:get-type="gst_mpegts_atsc_rrt_dimension_get_type" c:symbol-prefix="atsc_rrt_dimension">
+    <record name="AtscRRTDimension" c:type="GstMpegtsAtscRRTDimension" version="1.18" glib:type-name="GstMpegtsAtscRRTDimension" glib:get-type="gst_mpegts_atsc_rrt_dimension_get_type" c:symbol-prefix="atsc_rrt_dimension">
       <field name="names" writable="1">
+        <doc xml:space="preserve">the names</doc>
         <array name="GLib.PtrArray" c:type="GPtrArray*">
-          <type name="gpointer" c:type="gpointer"/>
+          <type name="AtscMultString"/>
         </array>
       </field>
       <field name="graduated_scale" writable="1">
+        <doc xml:space="preserve">whether the ratings represent a graduated scale</doc>
         <type name="gboolean" c:type="gboolean"/>
       </field>
       <field name="values_defined" writable="1">
+        <doc xml:space="preserve">the number of values defined for this dimension</doc>
         <type name="guint8" c:type="guint8"/>
       </field>
       <field name="values" writable="1">
+        <doc xml:space="preserve">set of values</doc>
         <array name="GLib.PtrArray" c:type="GPtrArray*">
-          <type name="gpointer" c:type="gpointer"/>
+          <type name="AtscRRTDimensionValue"/>
         </array>
       </field>
       <constructor name="new" c:identifier="gst_mpegts_atsc_rrt_dimension_new">
@@ -404,7 +434,7 @@ Consult the relevant specifications for more details.</doc>
       </field>
     </record>
     <record name="AtscVCTSource" c:type="GstMpegtsAtscVCTSource" glib:type-name="GstMpegtsAtscVCTSource" glib:get-type="gst_mpegts_atsc_vct_source_get_type" c:symbol-prefix="atsc_vct_source">
-      <doc xml:space="preserve">Source from a @GstMpegtsAtscVCT, can be used both for TVCT and CVCT tables</doc>
+      <doc xml:space="preserve">Source from a %GstMpegtsAtscVCT, can be used both for TVCT and CVCT tables</doc>
       <field name="short_name" writable="1">
         <doc xml:space="preserve">The short name of a source</doc>
         <type name="utf8" c:type="gchar*"/>
@@ -470,6 +500,50 @@ Consult the relevant specifications for more details.</doc>
         <array name="GLib.PtrArray" c:type="GPtrArray*">
           <type name="Descriptor"/>
         </array>
+      </field>
+    </record>
+    <record name="AudioPreselectionDescriptor" c:type="GstMpegtsAudioPreselectionDescriptor" version="1.20">
+      <doc xml:space="preserve">Table 110: Audio Preselection Descriptor (ETSI EN 300 468 v1.16.1)</doc>
+      <field name="preselection_id" writable="1">
+        <doc xml:space="preserve">5-bit</doc>
+        <type name="guint8" c:type="guint8"/>
+      </field>
+      <field name="audio_rendering_indication" writable="1">
+        <doc xml:space="preserve">3-bit field</doc>
+        <type name="guint8" c:type="guint8"/>
+      </field>
+      <field name="audio_description" writable="1">
+        <doc xml:space="preserve">visually impaired</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </field>
+      <field name="spoken_subtitles" writable="1">
+        <type name="gboolean" c:type="gboolean"/>
+      </field>
+      <field name="dialogue_enhancement" writable="1">
+        <type name="gboolean" c:type="gboolean"/>
+      </field>
+      <field name="interactivity_enabled" writable="1">
+        <type name="gboolean" c:type="gboolean"/>
+      </field>
+      <field name="language_code_present" writable="1">
+        <type name="gboolean" c:type="gboolean"/>
+      </field>
+      <field name="text_label_present" writable="1">
+        <type name="gboolean" c:type="gboolean"/>
+      </field>
+      <field name="multi_stream_info_present" writable="1">
+        <doc xml:space="preserve">indicates if this PID conveys a complete audio programme</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </field>
+      <field name="future_extension" writable="1">
+        <type name="gboolean" c:type="gboolean"/>
+      </field>
+      <field name="language_code" writable="1">
+        <doc xml:space="preserve">NULL terminated ISO 639 language code.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </field>
+      <field name="message_id" writable="1">
+        <type name="guint8" c:type="guint8"/>
       </field>
     </record>
     <record name="BAT" c:type="GstMpegtsBAT" glib:type-name="GstMpegtsBAT" glib:get-type="gst_mpegts_bat_get_type" c:symbol-prefix="bat">
@@ -715,6 +789,9 @@ Consult the relevant specifications for more details.</doc>
       <member name="frequency_list" value="98" c:identifier="GST_MTS_DESC_DVB_FREQUENCY_LIST">
       </member>
       <member name="partial_transport_stream" value="99" c:identifier="GST_MTS_DESC_DVB_PARTIAL_TRANSPORT_STREAM">
+        <doc xml:space="preserve">Partial Transport Stream descriptor. Only present in SIT Sections.
+
+See also: %GST_MPEGTS_SECTION_SIT, %GstMpegtsSIT</doc>
       </member>
       <member name="data_broadcast" value="100" c:identifier="GST_MTS_DESC_DVB_DATA_BROADCAST">
       </member>
@@ -819,6 +896,9 @@ Consult the relevant specifications for more details.</doc>
       <member name="uri_linkage" value="19" c:identifier="GST_MTS_DESC_EXT_DVB_URI_LINKAGE">
       </member>
       <member name="ac4" value="21" c:identifier="GST_MTS_DESC_EXT_DVB_AC4">
+      </member>
+      <member name="audio_preselection" value="25" c:identifier="GST_MTS_DESC_EXT_DVB_AUDIO_PRESELECTION" version="1.20">
+        <doc xml:space="preserve">Provide all avaliable audio programme for user selection</doc>
       </member>
     </enumeration>
     <record name="DVBLinkageDescriptor" c:type="GstMpegtsDVBLinkageDescriptor" glib:type-name="GstMpegtsDVBLinkageDescriptor" glib:get-type="gst_mpegts_dvb_linkage_descriptor_get_type" c:symbol-prefix="dvb_linkage_descriptor">
@@ -1187,6 +1267,26 @@ two bytes are the @tag and @length.</doc>
             <doc xml:space="preserve">The descriptor to free</doc>
             <type name="Descriptor" c:type="GstMpegtsDescriptor*"/>
           </instance-parameter>
+        </parameters>
+      </method>
+      <method name="parse_audio_preselection_list" c:identifier="gst_mpegts_descriptor_parse_audio_preselection_list" version="1.20">
+        <doc xml:space="preserve">Parses out a list of audio preselection from the @descriptor.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if the parsing happened correctly, else %FALSE.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="descriptor" transfer-ownership="none">
+            <doc xml:space="preserve">a %GST_MTS_DESC_EXT_DVB_AUDIO_PRESELECTION #GstMpegtsDescriptor</doc>
+            <type name="Descriptor" c:type="const GstMpegtsDescriptor*"/>
+          </instance-parameter>
+          <parameter name="list" direction="out" caller-allocates="0" transfer-ownership="full">
+            <doc xml:space="preserve">
+the list of audio preselection</doc>
+            <array name="GLib.PtrArray" c:type="GPtrArray**">
+              <type name="AudioPreselectionDescriptor"/>
+            </array>
+          </parameter>
         </parameters>
       </method>
       <method name="parse_ca" c:identifier="gst_mpegts_descriptor_parse_ca">
@@ -1876,6 +1976,33 @@ ISO 639-1 language code from the returned ISO 639-2 one.</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="parse_registration" c:identifier="gst_mpegts_descriptor_parse_registration" version="1.20">
+        <doc xml:space="preserve">Extracts the Registration information from @descriptor.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if parsing succeeded, else %FALSE.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="descriptor" transfer-ownership="none">
+            <doc xml:space="preserve">a %GST_MTS_DESC_REGISTRATION #GstMpegtsDescriptor</doc>
+            <type name="Descriptor" c:type="GstMpegtsDescriptor*"/>
+          </instance-parameter>
+          <parameter name="registration_id" direction="out" caller-allocates="0" transfer-ownership="full">
+            <doc xml:space="preserve">The registration ID (in host endiannes)</doc>
+            <type name="guint32" c:type="guint32*"/>
+          </parameter>
+          <parameter name="additional_info" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+            <doc xml:space="preserve">The additional information</doc>
+            <array length="2" zero-terminated="0" c:type="guint8**">
+              <type name="guint8" c:type="guint8*"/>
+            </array>
+          </parameter>
+          <parameter name="additional_info_length" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+            <doc xml:space="preserve">The size of @additional_info in bytes.</doc>
+            <type name="gsize" c:type="gsize*"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="parse_satellite_delivery_system" c:identifier="gst_mpegts_descriptor_parse_satellite_delivery_system">
         <doc xml:space="preserve">Extracts the satellite delivery system information from @descriptor.</doc>
         <return-value transfer-ownership="none">
@@ -1933,7 +2060,7 @@ ISO 639-1 language code from the returned ISO 639-2 one.</doc>
           </parameter>
         </parameters>
       </function>
-      <function name="from_custom_with_extension" c:identifier="gst_mpegts_descriptor_from_custom_with_extension">
+      <function name="from_custom_with_extension" c:identifier="gst_mpegts_descriptor_from_custom_with_extension" version="1.20">
         <doc xml:space="preserve">Creates a #GstMpegtsDescriptor with custom @tag, @tag_extension and @data</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">#GstMpegtsDescriptor</doc>
@@ -2055,6 +2182,26 @@ a single language</doc>
           <parameter name="additional_info_length" transfer-ownership="none">
             <doc xml:space="preserve">length of the optional @additional_info</doc>
             <type name="gsize" c:type="gsize"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="parse_audio_preselection_dump" c:identifier="gst_mpegts_descriptor_parse_audio_preselection_dump" version="1.20">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="source" transfer-ownership="none">
+            <type name="AudioPreselectionDescriptor" c:type="GstMpegtsAudioPreselectionDescriptor*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="parse_audio_preselection_free" c:identifier="gst_mpegts_descriptor_parse_audio_preselection_free" version="1.20">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="source" transfer-ownership="none">
+            <type name="AudioPreselectionDescriptor" c:type="GstMpegtsAudioPreselectionDescriptor*"/>
           </parameter>
         </parameters>
       </function>
@@ -2313,6 +2460,36 @@ Consult the relevant specifications for more details.</doc>
         <type name="utf8" c:type="gchar*"/>
       </field>
     </record>
+    <enumeration name="HdmvStreamType" version="1.20" c:type="GstMpegtsHdmvStreamType">
+      <doc xml:space="preserve">Type of mpeg-ts streams for Blu-ray formats. To be matched with the
+stream-type of a #GstMpegtsSection.</doc>
+      <member name="audio_lpcm" value="128" c:identifier="GST_MPEGTS_STREAM_TYPE_HDMV_AUDIO_LPCM">
+      </member>
+      <member name="audio_ac3" value="129" c:identifier="GST_MPEGTS_STREAM_TYPE_HDMV_AUDIO_AC3">
+      </member>
+      <member name="audio_dts" value="130" c:identifier="GST_MPEGTS_STREAM_TYPE_HDMV_AUDIO_DTS">
+      </member>
+      <member name="audio_ac3_true_hd" value="131" c:identifier="GST_MPEGTS_STREAM_TYPE_HDMV_AUDIO_AC3_TRUE_HD">
+      </member>
+      <member name="audio_ac3_plus" value="132" c:identifier="GST_MPEGTS_STREAM_TYPE_HDMV_AUDIO_AC3_PLUS">
+      </member>
+      <member name="audio_dts_hd" value="133" c:identifier="GST_MPEGTS_STREAM_TYPE_HDMV_AUDIO_DTS_HD">
+      </member>
+      <member name="audio_dts_hd_master_audio" value="134" c:identifier="GST_MPEGTS_STREAM_TYPE_HDMV_AUDIO_DTS_HD_MASTER_AUDIO">
+      </member>
+      <member name="audio_eac3" value="135" c:identifier="GST_MPEGTS_STREAM_TYPE_HDMV_AUDIO_EAC3">
+      </member>
+      <member name="subpicture_pgs" value="144" c:identifier="GST_MPEGTS_STREAM_TYPE_HDMV_SUBPICTURE_PGS">
+      </member>
+      <member name="igs" value="145" c:identifier="GST_MPEGTS_STREAM_TYPE_HDMV_IGS">
+      </member>
+      <member name="subtitle" value="146" c:identifier="GST_MPEGTS_STREAM_TYPE_HDMV_SUBTITLE">
+      </member>
+      <member name="audio_ac3_plus_secondary" value="161" c:identifier="GST_MPEGTS_STREAM_TYPE_HDMV_AUDIO_AC3_PLUS_SECONDARY">
+      </member>
+      <member name="audio_dts_hd_secondary" value="162" c:identifier="GST_MPEGTS_STREAM_TYPE_HDMV_AUDIO_DTS_HD_SECONDARY">
+      </member>
+    </enumeration>
     <enumeration name="ISDBDescriptorType" c:type="GstMpegtsISDBDescriptorType">
       <doc xml:space="preserve">These values correspond to the registered descriptor type from
 the various ISDB specifications.
@@ -2444,9 +2621,7 @@ Consult the relevant specifications for more details.</doc>
 
 These values correspond to miscellaneous descriptor types that are
 not yet identified from known specifications.</doc>
-      <member name="ac3_audio_stream" value="129" c:identifier="GST_MTS_DESC_AC3_AUDIO_STREAM">
-      </member>
-      <member name="dtg_logical_channel" value="131" c:identifier="GST_MTS_DESC_DTG_LOGICAL_CHANNEL">
+      <member name="mts_desc_dtg_logical_channel" value="131" c:identifier="GST_MTS_DESC_DTG_LOGICAL_CHANNEL">
       </member>
     </enumeration>
     <enumeration name="ModulationType" c:type="GstMpegtsModulationType">
@@ -2532,19 +2707,21 @@ not yet identified from known specifications.</doc>
       </constructor>
     </record>
     <record name="PMT" c:type="GstMpegtsPMT" glib:type-name="GstMpegtsPMT" glib:get-type="gst_mpegts_pmt_get_type" c:symbol-prefix="pmt">
-      <doc xml:space="preserve">Program Map Table (ISO/IEC 13818-1).
+      <doc xml:space="preserve">Program Map Table (ISO/IEC 13818-1). Provides the mappings between program
+numbers and the program elements that comprise them.
 
 The program_number is contained in the subtable_extension field of the
 container #GstMpegtsSection.</doc>
       <field name="pcr_pid" writable="1">
-        <doc xml:space="preserve">PID of the stream containing PCR</doc>
+        <doc xml:space="preserve">PID of the stream containing the PCR for this program.</doc>
         <type name="guint16" c:type="guint16"/>
       </field>
       <field name="program_number" writable="1">
+        <doc xml:space="preserve">The program to which this PMT is applicable.</doc>
         <type name="guint16" c:type="guint16"/>
       </field>
       <field name="descriptors" writable="1">
-        <doc xml:space="preserve">array of #GstMpegtsDescriptor</doc>
+        <doc xml:space="preserve">Array of #GstMpegtsDescriptor</doc>
         <array name="GLib.PtrArray" c:type="GPtrArray*">
           <type name="Descriptor"/>
         </array>
@@ -2556,7 +2733,9 @@ container #GstMpegtsSection.</doc>
         </array>
       </field>
       <constructor name="new" c:identifier="gst_mpegts_pmt_new">
-        <doc xml:space="preserve">Allocates and initializes a new #GstMpegtsPMT.</doc>
+        <doc xml:space="preserve">Allocates and initializes a new #GstMpegtsPMT. #GstMpegtsPMTStream can be
+added to the streams array, and global PMT #GstMpegtsDescriptor to the
+descriptors array.</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">#GstMpegtsPMT</doc>
           <type name="PMT" c:type="GstMpegtsPMT*"/>
@@ -2564,7 +2743,7 @@ container #GstMpegtsSection.</doc>
       </constructor>
     </record>
     <record name="PMTStream" c:type="GstMpegtsPMTStream" glib:type-name="GstMpegtsPMTStream" glib:get-type="gst_mpegts_pmt_stream_get_type" c:symbol-prefix="pmt_stream">
-      <doc xml:space="preserve">An individual stream definition.</doc>
+      <doc xml:space="preserve">An individual stream definition of a #GstMpegtsPMT.</doc>
       <field name="stream_type" writable="1">
         <doc xml:space="preserve">the type of stream. See #GstMpegtsStreamType</doc>
         <type name="guint8" c:type="guint8"/>
@@ -2589,6 +2768,7 @@ stream</doc>
       </constructor>
     </record>
     <callback name="PacketizeFunc" c:type="GstMpegtsPacketizeFunc">
+      <attribute name="doc.skip" value="true"/>
       <return-value transfer-ownership="none">
         <type name="gboolean" c:type="gboolean"/>
       </return-value>
@@ -2616,6 +2796,69 @@ stream</doc>
         </return-value>
       </constructor>
     </record>
+    <bitfield name="RegistrationId" version="1.20" c:type="GstMpegtsRegistrationId">
+      <doc xml:space="preserve">Well-known registration ids, expressed as native-endian 32bit integers. These
+are used in descriptors of type %GST_MTS_DESC_REGISTRATION. Unless specified
+otherwise (by use of the "OTHER" prefix), they are all registered by the
+[SMPTE Registration Authority](https://smpte-ra.org/) or specified in
+"official" documentation for the given format.</doc>
+      <member name="0" value="0" c:identifier="GST_MTS_REGISTRATION_0">
+        <doc xml:space="preserve">Undefined registration id</doc>
+      </member>
+      <member name="ac_3" value="1094921523" c:identifier="GST_MTS_REGISTRATION_AC_3">
+        <doc xml:space="preserve">Audio AC-3, ATSC A/52</doc>
+      </member>
+      <member name="cuei" value="1129661769" c:identifier="GST_MTS_REGISTRATION_CUEI">
+        <doc xml:space="preserve">SCTE 35, "Digital Program Insertion Cueing Message"</doc>
+      </member>
+      <member name="drac" value="1685217635" c:identifier="GST_MTS_REGISTRATION_drac">
+        <doc xml:space="preserve">Dirac Video codec</doc>
+      </member>
+      <member name="dts1" value="1146377009" c:identifier="GST_MTS_REGISTRATION_DTS1">
+        <doc xml:space="preserve">DTS Audio</doc>
+      </member>
+      <member name="dts2" value="1146377010" c:identifier="GST_MTS_REGISTRATION_DTS2">
+        <doc xml:space="preserve">DTS Audio</doc>
+      </member>
+      <member name="dts3" value="1146377011" c:identifier="GST_MTS_REGISTRATION_DTS3">
+        <doc xml:space="preserve">DTS Audio</doc>
+      </member>
+      <member name="bssd" value="1112757060" c:identifier="GST_MTS_REGISTRATION_BSSD">
+        <doc xml:space="preserve">SMPTE 302M, Mapping of AES3 Data in mpeg-ts</doc>
+      </member>
+      <member name="eac3" value="1161904947" c:identifier="GST_MTS_REGISTRATION_EAC3">
+        <doc xml:space="preserve">Enhanced AC-3 (i.e. EAC3)</doc>
+      </member>
+      <member name="etv1" value="1163154993" c:identifier="GST_MTS_REGISTRATION_ETV1">
+        <doc xml:space="preserve">Cablelabs ETV</doc>
+      </member>
+      <member name="ga94" value="1195456820" c:identifier="GST_MTS_REGISTRATION_GA94">
+        <doc xml:space="preserve">ATSC A/53 compliant stream (i.e. ATSC)</doc>
+      </member>
+      <member name="hdmv" value="1212435798" c:identifier="GST_MTS_REGISTRATION_HDMV">
+        <doc xml:space="preserve">Blu-ray, "System Description Blu-ray Disc
+            Read-Only Format part 3 Audio Visual Basic Specifications"</doc>
+      </member>
+      <member name="klva" value="1263294017" c:identifier="GST_MTS_REGISTRATION_KLVA">
+        <doc xml:space="preserve">SMPTE RP217 : Non-synchronized Mapping of KLV
+            Packets in mpeg-ts</doc>
+      </member>
+      <member name="opus" value="1330664787" c:identifier="GST_MTS_REGISTRATION_OPUS">
+        <doc xml:space="preserve">Opus Audio</doc>
+      </member>
+      <member name="tshv" value="1414744150" c:identifier="GST_MTS_REGISTRATION_TSHV">
+        <doc xml:space="preserve">HDV (Sony)</doc>
+      </member>
+      <member name="vc_1" value="1447243057" c:identifier="GST_MTS_REGISTRATION_VC_1">
+        <doc xml:space="preserve">Video VC-1, SMPTE RP227 "VC-1 Bitstream Transport Encodings"</doc>
+      </member>
+      <member name="ac_4" value="1094921524" c:identifier="GST_MTS_REGISTRATION_AC_4">
+        <doc xml:space="preserve">Audio AC-4, ETSI 103 190-2</doc>
+      </member>
+      <member name="other_hevc" value="1212503619" c:identifier="GST_MTS_REGISTRATION_OTHER_HEVC">
+        <doc xml:space="preserve">HEVC / h265</doc>
+      </member>
+    </bitfield>
     <enumeration name="RunningStatus" c:type="GstMpegtsRunningStatus">
       <doc xml:space="preserve">Running status of a service.
 
@@ -2631,6 +2874,25 @@ Corresponds to table 6 of ETSI EN 300 468 (v1.13.0)</doc>
       <member name="running" value="4" c:identifier="GST_MPEGTS_RUNNING_STATUS_RUNNING">
       </member>
       <member name="off_air" value="5" c:identifier="GST_MPEGTS_RUNNING_STATUS_OFF_AIR">
+      </member>
+    </enumeration>
+    <enumeration name="SCTEDescriptorType" version="1.20" c:type="GstMpegtsSCTEDescriptorType">
+      <doc xml:space="preserve">These values correspond to the ones defined by SCTE (amongst other in ANSI/SCTE 57)</doc>
+      <member name="stuffing" value="128" c:identifier="GST_MTS_DESC_SCTE_STUFFING">
+      </member>
+      <member name="ac3" value="129" c:identifier="GST_MTS_DESC_SCTE_AC3">
+      </member>
+      <member name="frame_rate" value="130" c:identifier="GST_MTS_DESC_SCTE_FRAME_RATE">
+      </member>
+      <member name="extended_video" value="131" c:identifier="GST_MTS_DESC_SCTE_EXTENDED_VIDEO">
+      </member>
+      <member name="component_name" value="132" c:identifier="GST_MTS_DESC_SCTE_COMPONENT_NAME">
+      </member>
+      <member name="frequency_spec" value="144" c:identifier="GST_MTS_DESC_SCTE_FREQUENCY_SPEC">
+      </member>
+      <member name="modulation_params" value="145" c:identifier="GST_MTS_DESC_SCTE_MODULATION_PARAMS">
+      </member>
+      <member name="transport_stream_id" value="146" c:identifier="GST_MTS_DESC_SCTE_TRANSPORT_STREAM_ID">
       </member>
     </enumeration>
     <record name="SCTESIT" c:type="GstMpegtsSCTESIT" glib:type-name="GstMpegtsSCTESIT" glib:get-type="gst_mpegts_scte_sit_get_type" c:symbol-prefix="scte_sit">
@@ -2831,6 +3093,38 @@ Corresponds to table 6 of ETSI EN 300 468 (v1.13.0)</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <record name="SIT" c:type="GstMpegtsSIT" version="1.20" glib:type-name="GstMpegtsSIT" glib:get-type="gst_mpegts_sit_get_type" c:symbol-prefix="sit">
+      <doc xml:space="preserve">Selection Information Table (EN 300 468)</doc>
+      <field name="descriptors" writable="1">
+        <doc xml:space="preserve">List of descriptors</doc>
+        <array name="GLib.PtrArray" c:type="GPtrArray*">
+          <type name="Descriptor"/>
+        </array>
+      </field>
+      <field name="services" writable="1">
+        <doc xml:space="preserve">List of services</doc>
+        <array name="GLib.PtrArray" c:type="GPtrArray*">
+          <type name="SITService"/>
+        </array>
+      </field>
+    </record>
+    <record name="SITService" c:type="GstMpegtsSITService" version="1.20" glib:type-name="GstMpegtsSITService" glib:get-type="gst_mpegts_sit_service_get_type" c:symbol-prefix="sit_service">
+      <doc xml:space="preserve">SIT Service entry</doc>
+      <field name="service_id" writable="1">
+        <doc xml:space="preserve">The Program number this table belongs to</doc>
+        <type name="guint16" c:type="guint16"/>
+      </field>
+      <field name="running_status" writable="1">
+        <doc xml:space="preserve">Status of this service</doc>
+        <type name="RunningStatus" c:type="GstMpegtsRunningStatus"/>
+      </field>
+      <field name="descriptors" writable="1">
+        <doc xml:space="preserve">List of descriptors</doc>
+        <array name="GLib.PtrArray" c:type="GPtrArray*">
+          <type name="Descriptor"/>
+        </array>
+      </field>
+    </record>
     <record name="SatelliteDeliverySystemDescriptor" c:type="GstMpegtsSatelliteDeliverySystemDescriptor" glib:type-name="GstMpegtsSatelliteDeliverySystemDescriptor" glib:get-type="gst_mpegts_satellite_delivery_system_descriptor_get_type" c:symbol-prefix="satellite_delivery_system_descriptor">
       <doc xml:space="preserve">Satellite Delivery System Descriptor (EN 300 468 v.1.13.1)</doc>
       <field name="frequency" writable="1">
@@ -2894,7 +3188,8 @@ else in the western part.</doc>
       </member>
     </enumeration>
     <enumeration name="ScteStreamType" c:type="GstMpegtsScteStreamType">
-      <doc xml:space="preserve">Type of mpeg-ts streams for SCTE</doc>
+      <doc xml:space="preserve">Type of mpeg-ts streams for SCTE. Most users would want to use the
+#GstMpegtsATSCStreamType instead since it also covers these stream types</doc>
       <member name="subtitling" value="130" c:identifier="GST_MPEGTS_STREAM_TYPE_SCTE_SUBTITLING">
         <doc xml:space="preserve">SCTE-27 Subtitling</doc>
       </member>
@@ -2924,26 +3219,69 @@ Signaling (OC-SP-ETV-AM1.0.1-120614)</doc>
       </member>
     </enumeration>
     <record name="Section" c:type="GstMpegtsSection" glib:type-name="GstMpegtsSection" glib:get-type="gst_mpegts_section_get_type" c:symbol-prefix="section">
-      <doc xml:space="preserve">For more details, refer to the ITU H.222.0 or ISO/IEC 13818-1 specifications
-and other specifications mentioned in the documentation.</doc>
+      <doc xml:space="preserve">## Generic usage of sections with %GstMpegtsSection
+
+The %GstMpegtsSection object is the representation of MPEG-TS Section (SI or
+PSI).
+
+Various elements can post those on the bus via %GstMessage of type
+%GST_MESSAGE_ELEMENT. The gst_message_parse_mpegts_section() function
+provides access to the section.
+
+Applications (or other elements) can create them either by using one of the
+`gst_mpegts_section_from_*` functions, or by providing the raw SI data via
+gst_mpegts_section_new().
+
+Elements outputting MPEG-TS streams can also create sections using the
+various convenience functions and then get the packetized data (to be
+inserted in MPEG-TS packets) using gst_mpegts_section_packetize().
+
+For more details, refer to the ITU H.222.0 or ISO/IEC 13818-1 specifications
+and other specifications mentioned in the documentation.
+
+# Supported base MPEG-TS sections
+These are the sections for which parsing and packetizing code exists.
+
+## Program Association Table (PAT)
+See:
+* gst_mpegts_section_get_pat()
+* gst_mpegts_pat_program_new()
+* %GstMpegtsPatProgram
+
+## Conditional Access Table (CAT)
+See:
+* gst_mpegts_section_get_cat()
+
+## Program Map Table (PMT)
+See:
+* %GstMpegtsPMT
+* gst_mpegts_section_get_pmt()
+* gst_mpegts_pmt_new()
+* %GstMpegtsPMTStream
+
+## Transport Stream Description Table (TSDT)
+See:
+* gst_mpegts_section_get_tsdt()
+# API</doc>
       <field name="parent" readable="0" private="1">
         <type name="Gst.MiniObject" c:type="GstMiniObject"/>
       </field>
       <field name="section_type" writable="1">
-        <doc xml:space="preserve">The type of section</doc>
+        <doc xml:space="preserve">The type of section.</doc>
         <type name="SectionType" c:type="GstMpegtsSectionType"/>
       </field>
       <field name="pid" writable="1">
-        <doc xml:space="preserve">The pid on which this section was found</doc>
+        <doc xml:space="preserve">The PID on which this section was found or belongs to.</doc>
         <type name="guint16" c:type="guint16"/>
       </field>
       <field name="table_id" writable="1">
-        <doc xml:space="preserve">The table id of this section</doc>
+        <doc xml:space="preserve">The table id of this section. See %GstMpegtsSectionTableID and
+     derivates for more information.</doc>
         <type name="guint8" c:type="guint8"/>
       </field>
       <field name="subtable_extension" writable="1">
         <doc xml:space="preserve">This meaning differs per section. See the documentation
-of the parsed section type for the meaning of this field</doc>
+     of the parsed section type for the meaning of this field</doc>
         <type name="guint16" c:type="guint16"/>
       </field>
       <field name="version_number" writable="1">
@@ -2963,7 +3301,7 @@ of the parsed section type for the meaning of this field</doc>
         <type name="guint8" c:type="guint8"/>
       </field>
       <field name="crc" writable="1">
-        <doc xml:space="preserve">CRC</doc>
+        <doc xml:space="preserve">Checksum (if applicable)</doc>
         <type name="guint32" c:type="guint32"/>
       </field>
       <field name="data" readable="0" private="1">
@@ -3012,8 +3350,8 @@ else %NULL</doc>
             <type name="guint16" c:type="guint16"/>
           </parameter>
           <parameter name="data" transfer-ownership="full">
-            <doc xml:space="preserve">a pointer to the beginning of the section (i.e. the first byte
-should contain the table_id field).</doc>
+            <doc xml:space="preserve">a pointer to the beginning of
+the section (i.e. the first byte should contain the `table_id` field).</doc>
             <array length="2" zero-terminated="0" c:type="guint8*">
               <type name="guint8" c:type="guint8"/>
             </array>
@@ -3137,11 +3475,13 @@ happened.</doc>
         </parameters>
       </method>
       <method name="get_cat" c:identifier="gst_mpegts_section_get_cat">
-        <doc xml:space="preserve">Returns the array of #GstMpegtsDescriptor contained in the Conditional
+        <doc xml:space="preserve">Parses a Conditional Access Table.
+
+Returns the array of #GstMpegtsDescriptor contained in the Conditional
 Access Table.</doc>
         <return-value transfer-ownership="container">
-          <doc xml:space="preserve">The
-#GstMpegtsDescriptor contained in the section, or %NULL if an error
+          <doc xml:space="preserve">The array
+of #GstMpegtsDescriptor contained in the section, or %NULL if an error
 happened. Release with #g_array_unref when done.</doc>
           <array name="GLib.PtrArray" c:type="GPtrArray*">
             <type name="Descriptor"/>
@@ -3200,12 +3540,13 @@ happened.</doc>
 
 Returns the array of #GstMpegtsPatProgram contained in the section.
 
-Note: The PAT "transport_id" field corresponds to the "subtable_extension"
-field of the provided @section.</doc>
+Note: The PAT `transport_stream_id` field corresponds to the
+"subtable_extension" field of the provided @section.</doc>
         <return-value transfer-ownership="container">
           <doc xml:space="preserve">The
-#GstMpegtsPatProgram contained in the section, or %NULL if an error
-happened. Release with #g_ptr_array_unref when done.</doc>
+#GstMpegtsPatProgram contained in the section, or %NULL if an error happened
+or the @section did not contain a valid PAT. Release with #g_ptr_array_unref
+when done.</doc>
           <array name="GLib.PtrArray" c:type="GPtrArray*">
             <type name="PatProgram"/>
           </array>
@@ -3218,7 +3559,7 @@ happened. Release with #g_ptr_array_unref when done.</doc>
         </parameters>
       </method>
       <method name="get_pmt" c:identifier="gst_mpegts_section_get_pmt">
-        <doc xml:space="preserve">Returns the #GstMpegtsPMT contained in the @section.</doc>
+        <doc xml:space="preserve">Parses the Program Map Table contained in the @section.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The #GstMpegtsPMT contained in the section, or %NULL if an error
 happened.</doc>
@@ -3259,6 +3600,20 @@ happened.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="get_sit" c:identifier="gst_mpegts_section_get_sit" version="1.20">
+        <doc xml:space="preserve">Returns the #GstMpegtsSIT contained in the @section.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">The #GstMpegtsSIT contained in the section, or %NULL if an error
+happened.</doc>
+          <type name="SIT" c:type="const GstMpegtsSIT*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="section" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstMpegtsSection of type %GST_MPEGTS_SECTION_SIT</doc>
+            <type name="Section" c:type="GstMpegtsSection*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="get_tdt" c:identifier="gst_mpegts_section_get_tdt">
         <doc xml:space="preserve">Returns the #GstDateTime of the TDT</doc>
         <return-value transfer-ownership="full">
@@ -3288,10 +3643,12 @@ happened.</doc>
         </parameters>
       </method>
       <method name="get_tsdt" c:identifier="gst_mpegts_section_get_tsdt">
-        <doc xml:space="preserve">Returns the array of #GstMpegtsDescriptor contained in the section</doc>
+        <doc xml:space="preserve">Parses a Transport Stream Description Table.
+
+Returns the array of #GstMpegtsDescriptor contained in the section</doc>
         <return-value transfer-ownership="container">
-          <doc xml:space="preserve">The
-#GstMpegtsDescriptor contained in the section, or %NULL if an error
+          <doc xml:space="preserve">The array
+of #GstMpegtsDescriptor contained in the section, or %NULL if an error
 happened. Release with #g_array_unref when done.</doc>
           <array name="GLib.PtrArray" c:type="GPtrArray*">
             <type name="Descriptor"/>
@@ -3305,10 +3662,11 @@ happened. Release with #g_array_unref when done.</doc>
         </parameters>
       </method>
       <method name="packetize" c:identifier="gst_mpegts_section_packetize">
-        <doc xml:space="preserve">If the data in @section has already been packetized, the data pointer is returned
-immediately. Otherwise, the data field is allocated and populated.</doc>
+        <doc xml:space="preserve">Packetize (i.e. serialize) the @section. If the data in @section has already
+been packetized, the data pointer is returned immediately. Otherwise, the
+data field is allocated and populated.</doc>
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">pointer to section data, or %NULL on fail</doc>
+          <doc xml:space="preserve">pointer to section data, or %NULL on failure.</doc>
           <type name="guint8" c:type="guint8*"/>
         </return-value>
         <parameters>
@@ -3323,10 +3681,10 @@ immediately. Otherwise, the data field is allocated and populated.</doc>
         </parameters>
       </method>
       <method name="send_event" c:identifier="gst_mpegts_section_send_event">
-        <doc xml:space="preserve">Creates a custom #GstEvent with a @GstMpegtsSection.
-The #GstEvent is sent to the @element #GstElement.</doc>
+        <doc xml:space="preserve">Creates a custom #GstEvent with a @GstMpegtsSection and send it the @element
+#GstElement.</doc>
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">%TRUE if the event is sent</doc>
+          <doc xml:space="preserve">%TRUE if the event was sent to the element.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
@@ -3454,34 +3812,51 @@ The #GstEvent is sent to the @element #GstElement.</doc>
     <enumeration name="SectionATSCTableID" c:type="GstMpegtsSectionATSCTableID">
       <doc xml:space="preserve">Values for a #GstMpegtsSection table_id.
 
-These are the registered ATSC table_id variants.
+These are the registered ATSC section `table_id` variants. Unless specified
+otherwise, they are defined in the "ATSC A/65" specification.
 
-see also: #GstMpegtsSectionTableID</doc>
+see also: #GstMpegtsSectionTableID and other variants.</doc>
       <member name="master_guide" value="199" c:identifier="GST_MTS_TABLE_ID_ATSC_MASTER_GUIDE">
+        <doc xml:space="preserve">Master Guide Table (MGT)</doc>
       </member>
       <member name="terrestrial_virtual_channel" value="200" c:identifier="GST_MTS_TABLE_ID_ATSC_TERRESTRIAL_VIRTUAL_CHANNEL">
+        <doc xml:space="preserve">Terrestrial Virtual Channel Table (TVCT)</doc>
       </member>
       <member name="cable_virtual_channel" value="201" c:identifier="GST_MTS_TABLE_ID_ATSC_CABLE_VIRTUAL_CHANNEL">
+        <doc xml:space="preserve">Cable Virtual Channel Table (CVCT)</doc>
       </member>
       <member name="rating_region" value="202" c:identifier="GST_MTS_TABLE_ID_ATSC_RATING_REGION">
+        <doc xml:space="preserve">Rating Region Table (RRT)</doc>
       </member>
       <member name="event_information" value="203" c:identifier="GST_MTS_TABLE_ID_ATSC_EVENT_INFORMATION">
+        <doc xml:space="preserve">Event Information Table (EIT)</doc>
       </member>
       <member name="channel_or_event_extended_text" value="204" c:identifier="GST_MTS_TABLE_ID_ATSC_CHANNEL_OR_EVENT_EXTENDED_TEXT">
+        <doc xml:space="preserve">Extended Text Table (ETT)</doc>
       </member>
       <member name="system_time" value="205" c:identifier="GST_MTS_TABLE_ID_ATSC_SYSTEM_TIME">
+        <doc xml:space="preserve">System Time Table (STT)</doc>
       </member>
       <member name="data_event" value="206" c:identifier="GST_MTS_TABLE_ID_ATSC_DATA_EVENT">
+        <doc xml:space="preserve">A/90: Data Event Table (DET)</doc>
       </member>
       <member name="data_service" value="207" c:identifier="GST_MTS_TABLE_ID_ATSC_DATA_SERVICE">
+        <doc xml:space="preserve">A/90: Data Service Table (DST)</doc>
+      </member>
+      <member name="program_identifier" value="208" c:identifier="GST_MTS_TABLE_ID_ATSC_PROGRAM_IDENTIFIER" version="1.20">
+        <doc xml:space="preserve">A/57B: Program Identifier Table.</doc>
       </member>
       <member name="network_resource" value="209" c:identifier="GST_MTS_TABLE_ID_ATSC_NETWORK_RESOURCE">
+        <doc xml:space="preserve">A/90: Network Resources Table (NRT)</doc>
       </member>
       <member name="long_term_service" value="210" c:identifier="GST_MTS_TABLE_ID_ATSC_LONG_TERM_SERVICE">
+        <doc xml:space="preserve">A/90: Long Term Service Table (LTST)</doc>
       </member>
       <member name="directed_channel_change" value="211" c:identifier="GST_MTS_TABLE_ID_ATSC_DIRECTED_CHANNEL_CHANGE">
+        <doc xml:space="preserve">Directed Channel Change Table (DCCT)</doc>
       </member>
       <member name="directed_channel_change_section_code" value="212" c:identifier="GST_MTS_TABLE_ID_ATSC_DIRECTED_CHANNEL_CHANGE_SECTION_CODE">
+        <doc xml:space="preserve">Directed Channel Change Selection Code Table (DCCSCT)</doc>
       </member>
       <member name="aggregate_event_information" value="214" c:identifier="GST_MTS_TABLE_ID_ATSC_AGGREGATE_EVENT_INFORMATION">
       </member>
@@ -3490,69 +3865,108 @@ see also: #GstMpegtsSectionTableID</doc>
       <member name="aggregate_data_event" value="217" c:identifier="GST_MTS_TABLE_ID_ATSC_AGGREGATE_DATA_EVENT">
       </member>
       <member name="satellite_virtual_channel" value="218" c:identifier="GST_MTS_TABLE_ID_ATSC_SATELLITE_VIRTUAL_CHANNEL">
+        <doc xml:space="preserve">A/81: Satellite Virtual Channel Table</doc>
       </member>
     </enumeration>
     <enumeration name="SectionDVBTableID" c:type="GstMpegtsSectionDVBTableID">
       <doc xml:space="preserve">Values for a #GstMpegtsSection table_id.
 
-These are the registered DVB table_id variants.
+These are the registered DVB table_id variants. Unless specified otherwise,
+they come from the DVB Specification for SI (ETSI EN 300 468).
 
 see also: #GstMpegtsSectionTableID</doc>
       <member name="network_information_actual_network" value="64" c:identifier="GST_MTS_TABLE_ID_NETWORK_INFORMATION_ACTUAL_NETWORK">
+        <doc xml:space="preserve">Network Information Table (NIT), Actual Network</doc>
       </member>
       <member name="network_information_other_network" value="65" c:identifier="GST_MTS_TABLE_ID_NETWORK_INFORMATION_OTHER_NETWORK">
+        <doc xml:space="preserve">Network Information Table (NIT), Other Network</doc>
       </member>
       <member name="service_description_actual_ts" value="66" c:identifier="GST_MTS_TABLE_ID_SERVICE_DESCRIPTION_ACTUAL_TS">
+        <doc xml:space="preserve">Service Description Table (SDT), Actual Transport Stream</doc>
       </member>
       <member name="service_description_other_ts" value="70" c:identifier="GST_MTS_TABLE_ID_SERVICE_DESCRIPTION_OTHER_TS">
+        <doc xml:space="preserve">Service Description Table (SDT), Other Transport Stream</doc>
       </member>
       <member name="bouquet_association" value="74" c:identifier="GST_MTS_TABLE_ID_BOUQUET_ASSOCIATION">
+        <doc xml:space="preserve">Bouquet Association Table (BAT)</doc>
+      </member>
+      <member name="update_notification" value="75" c:identifier="GST_MTS_TABLE_ID_UPDATE_NOTIFICATION" version="1.20">
+        <doc xml:space="preserve">ETSI TS 102 006: Update Notification Table (UNT)</doc>
+      </member>
+      <member name="downloadable_font_info" value="76" c:identifier="GST_MTS_TABLE_ID_DOWNLOADABLE_FONT_INFO" version="1.20">
+        <doc xml:space="preserve">ETSI EN 303 560: Downloadable Font Info</doc>
       </member>
       <member name="event_information_actual_ts_present" value="78" c:identifier="GST_MTS_TABLE_ID_EVENT_INFORMATION_ACTUAL_TS_PRESENT">
+        <doc xml:space="preserve">Event Information Table (EIT), Actual Transport Stream, present/following</doc>
       </member>
       <member name="event_information_other_ts_present" value="79" c:identifier="GST_MTS_TABLE_ID_EVENT_INFORMATION_OTHER_TS_PRESENT">
+        <doc xml:space="preserve">Event Information Table (EIT), Other Transport Stream, present/following</doc>
       </member>
       <member name="event_information_actual_ts_schedule_1" value="80" c:identifier="GST_MTS_TABLE_ID_EVENT_INFORMATION_ACTUAL_TS_SCHEDULE_1">
+        <doc xml:space="preserve">Event Information Table (EIT), Actual Transport Stream, Schedule (first)</doc>
       </member>
       <member name="event_information_actual_ts_schedule_n" value="95" c:identifier="GST_MTS_TABLE_ID_EVENT_INFORMATION_ACTUAL_TS_SCHEDULE_N">
+        <doc xml:space="preserve">Event Information Table (EIT), Actual Transport Stream, Schedule (last)</doc>
       </member>
       <member name="event_information_other_ts_schedule_1" value="96" c:identifier="GST_MTS_TABLE_ID_EVENT_INFORMATION_OTHER_TS_SCHEDULE_1">
+        <doc xml:space="preserve">Event Information Table (EIT), Other Transport Stream, Schedule (first)</doc>
       </member>
       <member name="event_information_other_ts_schedule_n" value="111" c:identifier="GST_MTS_TABLE_ID_EVENT_INFORMATION_OTHER_TS_SCHEDULE_N">
+        <doc xml:space="preserve">Event Information Table (EIT), Other Transport Stream, Schedule (last)</doc>
       </member>
       <member name="time_date" value="112" c:identifier="GST_MTS_TABLE_ID_TIME_DATE">
+        <doc xml:space="preserve">Time Date Table (TDT)</doc>
       </member>
       <member name="running_status" value="113" c:identifier="GST_MTS_TABLE_ID_RUNNING_STATUS">
+        <doc xml:space="preserve">Running Status Table (RST)</doc>
       </member>
       <member name="stuffing" value="114" c:identifier="GST_MTS_TABLE_ID_STUFFING">
+        <doc xml:space="preserve">Stuffing Table (ST)</doc>
       </member>
       <member name="time_offset" value="115" c:identifier="GST_MTS_TABLE_ID_TIME_OFFSET">
+        <doc xml:space="preserve">Time Offset Table (TOT)</doc>
       </member>
       <member name="application_information_table" value="116" c:identifier="GST_MTS_TABLE_ID_APPLICATION_INFORMATION_TABLE">
+        <doc xml:space="preserve">ETSI TS 102 323: Application Information Table (AIT)</doc>
       </member>
       <member name="container" value="117" c:identifier="GST_MTS_TABLE_ID_CONTAINER">
+        <doc xml:space="preserve">ETSI TS 102 323: Container Section</doc>
       </member>
       <member name="related_content" value="118" c:identifier="GST_MTS_TABLE_ID_RELATED_CONTENT">
+        <doc xml:space="preserve">ETSI TS 102 323: Related Content Table (RCT)</doc>
       </member>
       <member name="content_identifier" value="119" c:identifier="GST_MTS_TABLE_ID_CONTENT_IDENTIFIER">
+        <doc xml:space="preserve">ETSI TS 102 323: Content Identifier Table (CIT)</doc>
       </member>
       <member name="mpe_fec" value="120" c:identifier="GST_MTS_TABLE_ID_MPE_FEC">
+        <doc xml:space="preserve">ETSI TS 301 192: MPE-FEC Section</doc>
       </member>
       <member name="resolution_notification" value="121" c:identifier="GST_MTS_TABLE_ID_RESOLUTION_NOTIFICATION">
+        <doc xml:space="preserve">ETSI 103 323: Resolution Provider Notification Table (RNT)</doc>
       </member>
       <member name="mpe_ifec" value="122" c:identifier="GST_MTS_TABLE_ID_MPE_IFEC">
+        <doc xml:space="preserve">ETSI TS 102 772: MPE-IFEC Section</doc>
+      </member>
+      <member name="protection_message" value="123" c:identifier="GST_MTS_TABLE_ID_PROTECTION_MESSAGE" version="1.20">
+        <doc xml:space="preserve">ETSI TS 102 809: Protection Message Section</doc>
       </member>
       <member name="discontinuity_information" value="126" c:identifier="GST_MTS_TABLE_ID_DISCONTINUITY_INFORMATION">
+        <doc xml:space="preserve">Discontinuity Information Table (DIT)</doc>
       </member>
       <member name="selection_information" value="127" c:identifier="GST_MTS_TABLE_ID_SELECTION_INFORMATION">
+        <doc xml:space="preserve">Selection Information Table (SIT)</doc>
       </member>
       <member name="ca_message_ecm_0" value="128" c:identifier="GST_MTS_TABLE_ID_CA_MESSAGE_ECM_0">
+        <doc xml:space="preserve">ETSI TR 289: CA Message Table (CMT): ECM 0</doc>
       </member>
       <member name="ca_message_ecm_1" value="129" c:identifier="GST_MTS_TABLE_ID_CA_MESSAGE_ECM_1">
+        <doc xml:space="preserve">ETSI TR 289: CA Message Table (CMT): ECM 1</doc>
       </member>
       <member name="ca_message_system_private_1" value="130" c:identifier="GST_MTS_TABLE_ID_CA_MESSAGE_SYSTEM_PRIVATE_1">
+        <doc xml:space="preserve">ETSI TR 289: CA Message Table (CMT): CA System Private (First)</doc>
       </member>
       <member name="ca_message_system_private_n" value="143" c:identifier="GST_MTS_TABLE_ID_CA_MESSAGE_SYSTEM_PRIVATE_N">
+        <doc xml:space="preserve">ETSI TR 289: CA Message Table (CMT): CA System Private (Last)</doc>
       </member>
       <member name="sct" value="160" c:identifier="GST_MTS_TABLE_ID_SCT">
       </member>
@@ -3613,38 +4027,64 @@ These are the registered ITU H.222.0 | ISO/IEC 13818-1 table_id variants.
 see also #GstMpegtsSectionATSCTableID, #GstMpegtsSectionDVBTableID, and
 #GstMpegtsSectionSCTETableID</doc>
       <member name="program_association" value="0" c:identifier="GST_MTS_TABLE_ID_PROGRAM_ASSOCIATION">
+        <doc xml:space="preserve">Program Association Table (PAT)</doc>
       </member>
       <member name="conditional_access" value="1" c:identifier="GST_MTS_TABLE_ID_CONDITIONAL_ACCESS">
+        <doc xml:space="preserve">Conditional Access Table (CAT)</doc>
       </member>
       <member name="ts_program_map" value="2" c:identifier="GST_MTS_TABLE_ID_TS_PROGRAM_MAP">
+        <doc xml:space="preserve">Program Map Table (PMT)</doc>
       </member>
       <member name="ts_description" value="3" c:identifier="GST_MTS_TABLE_ID_TS_DESCRIPTION">
+        <doc xml:space="preserve">Transport Stream Description Table</doc>
       </member>
       <member name="14496_scene_description" value="4" c:identifier="GST_MTS_TABLE_ID_14496_SCENE_DESCRIPTION">
+        <doc xml:space="preserve">ISO/IEC 14496 Scene Description Table</doc>
       </member>
       <member name="14496_objet_descriptor" value="5" c:identifier="GST_MTS_TABLE_ID_14496_OBJET_DESCRIPTOR">
+        <doc xml:space="preserve">ISO/IEC 14496 Object Descriptor Table</doc>
       </member>
       <member name="metadata" value="6" c:identifier="GST_MTS_TABLE_ID_METADATA">
+        <doc xml:space="preserve">Metadata Section</doc>
       </member>
       <member name="ipmp_control_information" value="7" c:identifier="GST_MTS_TABLE_ID_IPMP_CONTROL_INFORMATION">
+        <doc xml:space="preserve">IPMP Control Information</doc>
+      </member>
+      <member name="14496_section" value="8" c:identifier="GST_MTS_TABLE_ID_14496_SECTION" version="1.20">
+        <doc xml:space="preserve">ISO/IEC 14496 Section.</doc>
+      </member>
+      <member name="23001_11_section" value="9" c:identifier="GST_MTS_TABLE_ID_23001_11_SECTION" version="1.20">
+        <doc xml:space="preserve">ISO/IEC 23001-11 (Green Access Unit) Section.</doc>
+      </member>
+      <member name="23001_10_section" value="10" c:identifier="GST_MTS_TABLE_ID_23001_10_SECTION" version="1.20">
+        <doc xml:space="preserve">ISO/ISO 23001-10 (Quality Access Unit) Section.</doc>
       </member>
       <member name="dsm_cc_multiproto_encapsulated_data" value="58" c:identifier="GST_MTS_TABLE_ID_DSM_CC_MULTIPROTO_ENCAPSULATED_DATA">
+        <doc xml:space="preserve">DSM-CC Multi-Protocol Encapsulated (MPE) Data</doc>
       </member>
       <member name="dsm_cc_u_n_messages" value="59" c:identifier="GST_MTS_TABLE_ID_DSM_CC_U_N_MESSAGES">
+        <doc xml:space="preserve">DSM-CC U-N Messages</doc>
       </member>
       <member name="dsm_cc_download_data_messages" value="60" c:identifier="GST_MTS_TABLE_ID_DSM_CC_DOWNLOAD_DATA_MESSAGES">
+        <doc xml:space="preserve">DSM-CC Download Data Messages</doc>
       </member>
       <member name="dsm_cc_stream_descriptors" value="61" c:identifier="GST_MTS_TABLE_ID_DSM_CC_STREAM_DESCRIPTORS">
+        <doc xml:space="preserve">DSM-CC Stream Descriptors</doc>
       </member>
       <member name="dsm_cc_private_data" value="62" c:identifier="GST_MTS_TABLE_ID_DSM_CC_PRIVATE_DATA">
+        <doc xml:space="preserve">DSM-CC Private Data</doc>
       </member>
       <member name="dsm_cc_addressable_sections" value="63" c:identifier="GST_MTS_TABLE_ID_DSM_CC_ADDRESSABLE_SECTIONS">
+        <doc xml:space="preserve">DSM-CC Addressable Section</doc>
       </member>
       <member name="unset" value="255" c:identifier="GST_MTS_TABLE_ID_UNSET">
+        <doc xml:space="preserve">Unset section table_id (value is forbidden to use in actual sections)</doc>
       </member>
     </enumeration>
     <enumeration name="SectionType" c:type="GstMpegtsSectionType">
-      <doc xml:space="preserve">Types of #GstMpegtsSection that the library handles.</doc>
+      <doc xml:space="preserve">Types of #GstMpegtsSection that the library handles. This covers all the
+MPEG-TS and derivate specification that the library can properly identify and
+use.</doc>
       <member name="unknown" value="0" c:identifier="GST_MPEGTS_SECTION_UNKNOWN">
         <doc xml:space="preserve">Unknown section type</doc>
       </member>
@@ -3678,32 +4118,36 @@ see also #GstMpegtsSectionATSCTableID, #GstMpegtsSectionDVBTableID, and
       <member name="tot" value="10" c:identifier="GST_MPEGTS_SECTION_TOT">
         <doc xml:space="preserve">Time Offset Table (EN 300 468)</doc>
       </member>
-      <member name="atsc_tvct" value="11" c:identifier="GST_MPEGTS_SECTION_ATSC_TVCT">
+      <member name="sit" value="11" c:identifier="GST_MPEGTS_SECTION_SIT" version="1.20">
+        <doc xml:space="preserve">Selection Information Table (EN 300 468)</doc>
+      </member>
+      <member name="atsc_tvct" value="12" c:identifier="GST_MPEGTS_SECTION_ATSC_TVCT">
         <doc xml:space="preserve">ATSC Terrestrial Virtual Channel Table (A65)</doc>
       </member>
-      <member name="atsc_cvct" value="12" c:identifier="GST_MPEGTS_SECTION_ATSC_CVCT">
+      <member name="atsc_cvct" value="13" c:identifier="GST_MPEGTS_SECTION_ATSC_CVCT">
         <doc xml:space="preserve">ATSC Cable Virtual Channel Table (A65)</doc>
       </member>
-      <member name="atsc_mgt" value="13" c:identifier="GST_MPEGTS_SECTION_ATSC_MGT">
+      <member name="atsc_mgt" value="14" c:identifier="GST_MPEGTS_SECTION_ATSC_MGT">
         <doc xml:space="preserve">ATSC Master Guide Table (A65)</doc>
       </member>
-      <member name="atsc_ett" value="14" c:identifier="GST_MPEGTS_SECTION_ATSC_ETT">
+      <member name="atsc_ett" value="15" c:identifier="GST_MPEGTS_SECTION_ATSC_ETT">
         <doc xml:space="preserve">ATSC Extended Text Table (A65)</doc>
       </member>
-      <member name="atsc_eit" value="15" c:identifier="GST_MPEGTS_SECTION_ATSC_EIT">
+      <member name="atsc_eit" value="16" c:identifier="GST_MPEGTS_SECTION_ATSC_EIT">
         <doc xml:space="preserve">ATSC Event Information Table (A65)</doc>
       </member>
-      <member name="atsc_stt" value="16" c:identifier="GST_MPEGTS_SECTION_ATSC_STT">
+      <member name="atsc_stt" value="17" c:identifier="GST_MPEGTS_SECTION_ATSC_STT">
         <doc xml:space="preserve">ATSC System Time Table (A65)</doc>
       </member>
-      <member name="atsc_rrt" value="17" c:identifier="GST_MPEGTS_SECTION_ATSC_RRT">
+      <member name="atsc_rrt" value="18" c:identifier="GST_MPEGTS_SECTION_ATSC_RRT">
+        <doc xml:space="preserve">ATSC Rating Region Table (A65)</doc>
       </member>
-      <member name="scte_sit" value="18" c:identifier="GST_MPEGTS_SECTION_SCTE_SIT">
+      <member name="scte_sit" value="19" c:identifier="GST_MPEGTS_SECTION_SCTE_SIT">
         <doc xml:space="preserve">SCTE Splice Information Table (SCTE-35)</doc>
       </member>
     </enumeration>
     <enumeration name="StreamType" c:type="GstMpegtsStreamType">
-      <doc xml:space="preserve">Type of mpeg-ts stream type.
+      <doc xml:space="preserve">Type of MPEG-TS stream type.
 
 These values correspond to the base standard registered types. Depending
 on the variant of mpeg-ts being used (Bluray, ATSC, DVB, ...), other
@@ -3714,11 +4158,12 @@ Corresponds to table 2-34 of ITU H.222.0 | ISO/IEC 13818-1</doc>
         <doc xml:space="preserve">ITU-T | ISO/IEC Reserved</doc>
       </member>
       <member name="video_mpeg1" value="1" c:identifier="GST_MPEGTS_STREAM_TYPE_VIDEO_MPEG1">
-        <doc xml:space="preserve">ISO/IEC 11172-2 Video</doc>
+        <doc xml:space="preserve">ISO/IEC 11172-2 Video (i.e. MPEG-1 Video)</doc>
       </member>
       <member name="video_mpeg2" value="2" c:identifier="GST_MPEGTS_STREAM_TYPE_VIDEO_MPEG2">
         <doc xml:space="preserve">Rec. ITU-T H.262 | ISO/IEC 13818-2
-Video or ISO/IEC 11172-2 constrained parameter video stream</doc>
+      Video or ISO/IEC 11172-2 constrained parameter video stream (i.e.
+      MPEG-2 Video)</doc>
       </member>
       <member name="audio_mpeg1" value="3" c:identifier="GST_MPEGTS_STREAM_TYPE_AUDIO_MPEG1">
         <doc xml:space="preserve">ISO/IEC 11172-3 Audio</doc>
@@ -3757,27 +4202,27 @@ Video or ISO/IEC 11172-2 constrained parameter video stream</doc>
         <doc xml:space="preserve">auxiliary streams</doc>
       </member>
       <member name="audio_aac_adts" value="15" c:identifier="GST_MPEGTS_STREAM_TYPE_AUDIO_AAC_ADTS">
-        <doc xml:space="preserve">ISO/IEC 13818-7 Audio with ADTS
-transport syntax</doc>
+        <doc xml:space="preserve">ISO/IEC 13818-7 Audio (AAC) with ADTS
+      transport syntax</doc>
       </member>
       <member name="video_mpeg4" value="16" c:identifier="GST_MPEGTS_STREAM_TYPE_VIDEO_MPEG4">
-        <doc xml:space="preserve">ISO/IEC 14496-2 Visual</doc>
+        <doc xml:space="preserve">ISO/IEC 14496-2 Visual (MPEG-4 Video)</doc>
       </member>
       <member name="audio_aac_latm" value="17" c:identifier="GST_MPEGTS_STREAM_TYPE_AUDIO_AAC_LATM">
-        <doc xml:space="preserve">ISO/IEC 14496-3 Audio with the LATM
-transport syntax as defined in ISO/IEC 14496-3</doc>
+        <doc xml:space="preserve">ISO/IEC 14496-3 Audio (AAC) with the LATM
+      transport syntax as defined in ISO/IEC 14496-3</doc>
       </member>
       <member name="sl_flexmux_pes_packets" value="18" c:identifier="GST_MPEGTS_STREAM_TYPE_SL_FLEXMUX_PES_PACKETS">
         <doc xml:space="preserve">ISO/IEC 14496-1
-SL-packetized stream or FlexMux stream carried in PES packets</doc>
+      SL-packetized stream or FlexMux stream carried in PES packets</doc>
       </member>
       <member name="sl_flexmux_sections" value="19" c:identifier="GST_MPEGTS_STREAM_TYPE_SL_FLEXMUX_SECTIONS">
         <doc xml:space="preserve">ISO/IEC 14496-1 SL-packetized
-stream or FlexMux stream carried in ISO/IEC 14496_sections</doc>
+      stream or FlexMux stream carried in ISO/IEC 14496_sections</doc>
       </member>
       <member name="synchronized_download" value="20" c:identifier="GST_MPEGTS_STREAM_TYPE_SYNCHRONIZED_DOWNLOAD">
         <doc xml:space="preserve">ISO/IEC 13818-6 Synchronized
-Download Protocol</doc>
+      Download Protocol</doc>
       </member>
       <member name="metadata_pes_packets" value="21" c:identifier="GST_MPEGTS_STREAM_TYPE_METADATA_PES_PACKETS">
         <doc xml:space="preserve">Metadata carried in PES packets</doc>
@@ -3787,19 +4232,19 @@ Download Protocol</doc>
       </member>
       <member name="metadata_data_carousel" value="23" c:identifier="GST_MPEGTS_STREAM_TYPE_METADATA_DATA_CAROUSEL">
         <doc xml:space="preserve">Metadata carried in ISO/IEC
-13818-6 Data Carousel</doc>
+      13818-6 Data Carousel</doc>
       </member>
       <member name="metadata_object_carousel" value="24" c:identifier="GST_MPEGTS_STREAM_TYPE_METADATA_OBJECT_CAROUSEL">
         <doc xml:space="preserve">Metadata carried in
-ISO/IEC 13818-6 Object Carousel</doc>
+      ISO/IEC 13818-6 Object Carousel</doc>
       </member>
       <member name="metadata_synchronized_download" value="25" c:identifier="GST_MPEGTS_STREAM_TYPE_METADATA_SYNCHRONIZED_DOWNLOAD">
         <doc xml:space="preserve">Metadata carried in
-ISO/IEC 13818-6 Synchronized Download Protocol</doc>
+      ISO/IEC 13818-6 Synchronized Download Protocol</doc>
       </member>
       <member name="mpeg2_ipmp" value="26" c:identifier="GST_MPEGTS_STREAM_TYPE_MPEG2_IPMP">
         <doc xml:space="preserve">IPMP stream (defined in ISO/IEC 13818-11,
-MPEG-2 IPMP)</doc>
+      MPEG-2 IPMP)</doc>
       </member>
       <member name="video_h264" value="27" c:identifier="GST_MPEGTS_STREAM_TYPE_VIDEO_H264">
         <doc xml:space="preserve">AVC video stream conforming to one or
@@ -3809,8 +4254,8 @@ sub-bitstream, as defined in 2.1.85, or AVC video sub-bitstream of MVC, as
 defined in 2.1.88</doc>
       </member>
       <member name="audio_aac_clean" value="28" c:identifier="GST_MPEGTS_STREAM_TYPE_AUDIO_AAC_CLEAN">
-        <doc xml:space="preserve">ISO/IEC 14496-3 Audio, without
-using any additional transport syntax, such as DST, ALS and SLS</doc>
+        <doc xml:space="preserve">ISO/IEC 14496-3 (AAC) Audio, without
+      using any additional transport syntax, such as DST, ALS and SLS</doc>
       </member>
       <member name="mpeg4_timed_text" value="29" c:identifier="GST_MPEGTS_STREAM_TYPE_MPEG4_TIMED_TEXT">
         <doc xml:space="preserve">ISO/IEC 14496-17 Text</doc>
@@ -3831,7 +4276,7 @@ of Rec. ITU-T H.264 | ISO/IEC 14496-10</doc>
       </member>
       <member name="video_jp2k" value="33" c:identifier="GST_MPEGTS_STREAM_TYPE_VIDEO_JP2K">
         <doc xml:space="preserve">Video stream conforming to one or more
-profiles as defined in Rec. ITU-T T.800 | ISO/IEC 15444-1</doc>
+      profiles as defined in Rec. ITU-T T.800 | ISO/IEC 15444-1 (i.e. JPEG 2000)</doc>
       </member>
       <member name="video_mpeg2_stereo_additional_view" value="34" c:identifier="GST_MPEGTS_STREAM_TYPE_VIDEO_MPEG2_STEREO_ADDITIONAL_VIEW">
         <doc xml:space="preserve">Additional view
@@ -3844,9 +4289,14 @@ Rec. ITU-T H.264 | ISO/IEC 14496-10 video stream conforming to one or more
 profiles defined in Annex A for service-compatible stereoscopic 3D services</doc>
       </member>
       <member name="video_hevc" value="36" c:identifier="GST_MPEGTS_STREAM_TYPE_VIDEO_HEVC">
+        <doc xml:space="preserve">Rec. ITU-T H.265 | ISO/IEC 23008-2 video
+     stream or an HEVC temporal video sub-bitstream</doc>
       </member>
       <member name="ipmp_stream" value="127" c:identifier="GST_MPEGTS_STREAM_TYPE_IPMP_STREAM">
         <doc xml:space="preserve">IPMP stream</doc>
+      </member>
+      <member name="user_private_ea" value="234" c:identifier="GST_MPEGTS_STREAM_TYPE_USER_PRIVATE_EA" version="1.20">
+        <doc xml:space="preserve">User Private stream id (used for VC-1) as defined by SMPTE RP227.</doc>
       </member>
     </enumeration>
     <record name="T2DeliverySystemCell" c:type="GstMpegtsT2DeliverySystemCell" glib:type-name="GstMpegtsT2DeliverySystemCell" glib:get-type="gst_mpegts_t2_delivery_system_cell_get_type" c:symbol-prefix="t2_delivery_system_cell">
@@ -4056,7 +4506,7 @@ profiles defined in Annex A for service-compatible stereoscopic 3D services</doc
         </parameter>
       </parameters>
     </function>
-    <function name="descriptor_from_custom_with_extension" c:identifier="gst_mpegts_descriptor_from_custom_with_extension" moved-to="Descriptor.from_custom_with_extension">
+    <function name="descriptor_from_custom_with_extension" c:identifier="gst_mpegts_descriptor_from_custom_with_extension" moved-to="Descriptor.from_custom_with_extension" version="1.20">
       <doc xml:space="preserve">Creates a #GstMpegtsDescriptor with custom @tag, @tag_extension and @data</doc>
       <return-value transfer-ownership="full">
         <doc xml:space="preserve">#GstMpegtsDescriptor</doc>
@@ -4181,6 +4631,26 @@ a single language</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="descriptor_parse_audio_preselection_dump" c:identifier="gst_mpegts_descriptor_parse_audio_preselection_dump" moved-to="Descriptor.parse_audio_preselection_dump" version="1.20">
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="source" transfer-ownership="none">
+          <type name="AudioPreselectionDescriptor" c:type="GstMpegtsAudioPreselectionDescriptor*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="descriptor_parse_audio_preselection_free" c:identifier="gst_mpegts_descriptor_parse_audio_preselection_free" moved-to="Descriptor.parse_audio_preselection_free" version="1.20">
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="source" transfer-ownership="none">
+          <type name="AudioPreselectionDescriptor" c:type="GstMpegtsAudioPreselectionDescriptor*"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="dvb_component_descriptor_free" c:identifier="gst_mpegts_dvb_component_descriptor_free">
       <return-value transfer-ownership="none">
         <type name="none" c:type="void"/>
@@ -4194,7 +4664,8 @@ a single language</doc>
     <function name="event_parse_mpegts_section" c:identifier="gst_event_parse_mpegts_section">
       <doc xml:space="preserve">Extracts the #GstMpegtsSection contained in the @event #GstEvent</doc>
       <return-value transfer-ownership="full">
-        <doc xml:space="preserve">The extracted #GstMpegtsSection</doc>
+        <doc xml:space="preserve">The extracted #GstMpegtsSection , or %NULL if the
+event did not contain a valid #GstMpegtsSection.</doc>
         <type name="Section" c:type="GstMpegtsSection*"/>
       </return-value>
       <parameters>
@@ -4227,6 +4698,140 @@ of #GstMpegtsDescriptor</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="find_descriptor_with_extension" c:identifier="gst_mpegts_find_descriptor_with_extension" version="1.20">
+      <doc xml:space="preserve">Finds the first descriptor of type @tag with @tag_extension in the array.
+
+Note: To look for descriptors that can be present more than once in an
+array of descriptors, iterate the #GArray manually.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">the first descriptor matchin @tag with @tag_extension, else %NULL.</doc>
+        <type name="Descriptor" c:type="const GstMpegtsDescriptor*"/>
+      </return-value>
+      <parameters>
+        <parameter name="descriptors" transfer-ownership="none">
+          <doc xml:space="preserve">an array
+of #GstMpegtsDescriptor</doc>
+          <array name="GLib.PtrArray" c:type="GPtrArray*">
+            <type name="Descriptor"/>
+          </array>
+        </parameter>
+        <parameter name="tag" transfer-ownership="none">
+          <doc xml:space="preserve">the tag to look for</doc>
+          <type name="guint8" c:type="guint8"/>
+        </parameter>
+        <parameter name="tag_extension" transfer-ownership="none">
+          <type name="guint8" c:type="guint8"/>
+        </parameter>
+      </parameters>
+    </function>
+    <docsection name="gst-atsc-descriptor">
+      <doc xml:space="preserve">This contains the various descriptors defined by the ATSC specifications</doc>
+    </docsection>
+    <docsection name="gst-atsc-section">
+      <doc xml:space="preserve">The list of section types defined and used by the ATSC specifications can be
+seen in %GstMpegtsSectionATSCTableID.
+
+# Supported ATSC MPEG-TS sections
+These are the sections for which parsing and packetizing code exists.
+
+## Master Guide Table (MGT)
+See:
+* gst_mpegts_section_get_atsc_mgt()
+* %GstMpegtsAtscMGT
+* %GstMpegtsAtscMGTTable
+* gst_mpegts_atsc_mgt_new()
+
+## Terrestrial (TVCT) and Cable (CVCT) Virtual Channel Table
+See:
+* gst_mpegts_section_get_atsc_tvct()
+* gst_mpegts_section_get_atsc_cvct()
+* %GstMpegtsAtscVCT
+* %GstMpegtsAtscVCTSource
+
+## Rating Region Table (RRT)
+See:
+* gst_mpegts_section_get_atsc_rrt()
+* %GstMpegtsAtscRRT
+* gst_mpegts_atsc_rrt_new()
+
+## Event Information Table (EIT)
+See:
+* gst_mpegts_section_get_atsc_eit()
+* %GstMpegtsAtscEIT
+* %GstMpegtsAtscEITEvent
+
+## Extended Text Table (ETT)
+See:
+* gst_mpegts_section_get_atsc_ett()
+* %GstMpegtsAtscETT
+
+## System Time Table (STT)
+See:
+* gst_mpegts_section_get_atsc_stt()
+* %GstMpegtsAtscSTT
+* gst_mpegts_atsc_stt_new()
+
+# API</doc>
+    </docsection>
+    <docsection name="gst-dvb-section">
+      <doc xml:space="preserve">The list of section types defined and used by the DVB specifications can be
+seen in %GstMpegtsSectionDVBTableID.
+
+# Supported DVB MPEG-TS sections
+These are the sections for which parsing and packetizing code exists.
+
+## Network Information Table (NIT)
+See:
+* gst_mpegts_section_get_nit()
+* %GstMpegtsNIT
+* %GstMpegtsNITStream
+* gst_mpegts_nit_new()
+
+## Service Description Table (SDT)
+See:
+* gst_mpegts_section_get_sdt()
+* %GstMpegtsSDT
+* %GstMpegtsSDTService
+* gst_mpegts_sdt_new()
+
+## Bouquet Association Table (BAT)
+See:
+* gst_mpegts_section_get_bat()
+* %GstMpegtsBAT
+* %GstMpegtsBATStream
+
+## Event Information Table (EIT)
+See:
+* gst_mpegts_section_get_eit()
+* %GstMpegtsEIT
+* %GstMpegtsEITEvent
+
+## Time Date Table (TDT)
+See:
+* gst_mpegts_section_get_tdt()
+
+## Time Offset Table (TOT)
+See:
+* gst_mpegts_section_get_tot()
+* %GstMpegtsTOT
+
+## Selection Information Table (SIT)
+See:
+* gst_mpegts_section_get_sit()
+* %GstMpegtsSIT
+* %GstMpegtsSITService
+
+# API</doc>
+    </docsection>
+    <docsection name="gst-isdb-descriptor">
+      <doc xml:space="preserve">This contains the various descriptors defined by the ISDB specifications</doc>
+    </docsection>
+    <docsection name="gst-scte-section">
+      <doc xml:space="preserve">This contains the %GstMpegtsSection relevent to SCTE specifications.</doc>
+    </docsection>
+    <docsection name="gstmpegts">
+      <doc xml:space="preserve">Before any usage of this library, the initialization function should be called.</doc>
+    </docsection>
     <function name="initialize" c:identifier="gst_mpegts_initialize">
       <doc xml:space="preserve">Initializes the MPEG-TS helper library. Must be called before any
 usage.</doc>
@@ -4290,7 +4895,8 @@ Release with #g_array_unref when done with it.</doc>
       </parameters>
     </function>
     <function name="pat_new" c:identifier="gst_mpegts_pat_new">
-      <doc xml:space="preserve">Allocates a new #GPtrArray for #GstMpegtsPatProgram</doc>
+      <doc xml:space="preserve">Allocates a new #GPtrArray for #GstMpegtsPatProgram. The array can be filled
+and then converted to a PAT section with gst_mpegts_section_from_pat().</doc>
       <return-value transfer-ownership="full">
         <doc xml:space="preserve">A newly allocated #GPtrArray</doc>
         <array name="GLib.PtrArray" c:type="GPtrArray*">
