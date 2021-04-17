@@ -565,6 +565,18 @@ preferred.</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="IS_VIDEO_AGGREGATOR_PARALLEL_CONVERT_PAD" c:identifier="GST_IS_VIDEO_AGGREGATOR_PARALLEL_CONVERT_PAD" introspectable="0">
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_VIDEO_AGGREGATOR_PARALLEL_CONVERT_PAD_CLASS" c:identifier="GST_IS_VIDEO_AGGREGATOR_PARALLEL_CONVERT_PAD_CLASS" introspectable="0">
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="IS_VIDEO_BUFFER_POOL" c:identifier="GST_IS_VIDEO_BUFFER_POOL" introspectable="0">
       <parameters>
         <parameter name="obj">
@@ -1520,6 +1532,24 @@ by any element in the pipeline (Since: 1.6)</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="VIDEO_AGGREGATOR_PARALLEL_CONVERT_PAD" c:identifier="GST_VIDEO_AGGREGATOR_PARALLEL_CONVERT_PAD" introspectable="0">
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="VIDEO_AGGREGATOR_PARALLEL_CONVERT_PAD_CLASS" c:identifier="GST_VIDEO_AGGREGATOR_PARALLEL_CONVERT_PAD_CLASS" introspectable="0">
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="VIDEO_AGGREGATOR_PARALLEL_CONVERT_PAD_GET_CLASS" c:identifier="GST_VIDEO_AGGREGATOR_PARALLEL_CONVERT_PAD_GET_CLASS" introspectable="0">
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="VIDEO_ANCILLARY_DID16" c:identifier="GST_VIDEO_ANCILLARY_DID16" version="1.16" introspectable="0">
       <doc xml:space="preserve">Returns the #GstVideoAncillaryDID16 of the ancillary data.</doc>
       <parameters>
@@ -1773,6 +1803,13 @@ Default is #GST_VIDEO_ALPHA_MODE_COPY.</doc>
     <constant name="VIDEO_CONVERTER_OPT_ALPHA_VALUE" value="GstVideoConverter.alpha-value" c:type="GST_VIDEO_CONVERTER_OPT_ALPHA_VALUE">
       <doc xml:space="preserve">#G_TYPE_DOUBLE, the alpha color value to use.
 Default to 1.0</doc>
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
+    <constant name="VIDEO_CONVERTER_OPT_ASYNC_TASKS" value="GstVideoConverter.async-tasks" c:type="GST_VIDEO_CONVERTER_OPT_ASYNC_TASKS" version="1.20">
+      <doc xml:space="preserve">#G_TYPE_BOOLEAN, whether gst_video_converter_frame() will return immediately
+without waiting for the conversion to complete.  A subsequent
+gst_video_converter_frame_finish() must be performed to ensure completion of the
+conversion before subsequent use.  Default %FALSE</doc>
       <type name="utf8" c:type="gchar*"/>
     </constant>
     <constant name="VIDEO_CONVERTER_OPT_BORDER_ARGB" value="GstVideoConverter.border-argb" c:type="GST_VIDEO_CONVERTER_OPT_BORDER_ARGB">
@@ -2116,7 +2153,7 @@ return to upstream/caller (indicating either GST_FLOW_ERROR or GST_FLOW_OK).</do
         </parameter>
       </parameters>
     </function-macro>
-    <constant name="VIDEO_FORMATS_ALL" value="{ AYUV64, ARGB64, GBRA_12BE, GBRA_12LE, Y412_BE, Y412_LE, A444_10BE, GBRA_10BE, A444_10LE, GBRA_10LE, A422_10BE, A422_10LE, A420_10BE, A420_10LE, Y410, RGB10A2_LE, BGR10A2_LE, GBRA, ABGR, VUYA, BGRA, AYUV, ARGB, RGBA, A420, Y444_16BE, Y444_16LE, v216, P016_BE, P016_LE, Y444_12BE, GBR_12BE, Y444_12LE, GBR_12LE, I422_12BE, I422_12LE, Y212_BE, Y212_LE, I420_12BE, I420_12LE, P012_BE, P012_LE, Y444_10BE, GBR_10BE, Y444_10LE, GBR_10LE, r210, I422_10BE, I422_10LE, NV16_10LE32, Y210, v210, UYVP, I420_10BE, I420_10LE, P010_10BE, P010_10LE, NV12_10LE32, NV12_10LE40, Y444, GBR, NV24, xBGR, BGRx, xRGB, RGBx, BGR, IYU2, v308, RGB, Y42B, NV61, NV16, VYUY, UYVY, YVYU, YUY2, I420, YV12, NV21, NV12, NV12_64Z32, NV12_4L4, NV12_32L32, Y41B, IYU1, YVU9, YUV9, RGB16, BGR16, RGB15, BGR15, RGB8P, GRAY16_BE, GRAY16_LE, GRAY10_LE32, GRAY8 }" c:type="GST_VIDEO_FORMATS_ALL">
+    <constant name="VIDEO_FORMATS_ALL" value="{ AYUV64, ARGB64, GBRA_12BE, GBRA_12LE, Y412_BE, Y412_LE, A444_10BE, GBRA_10BE, A444_10LE, GBRA_10LE, A422_10BE, A422_10LE, A420_10BE, A420_10LE, Y410, RGB10A2_LE, BGR10A2_LE, GBRA, ABGR, VUYA, BGRA, AYUV, ARGB, RGBA, A420, Y444_16BE, Y444_16LE, v216, P016_BE, P016_LE, Y444_12BE, GBR_12BE, Y444_12LE, GBR_12LE, I422_12BE, I422_12LE, Y212_BE, Y212_LE, I420_12BE, I420_12LE, P012_BE, P012_LE, Y444_10BE, GBR_10BE, Y444_10LE, GBR_10LE, r210, I422_10BE, I422_10LE, NV16_10LE32, Y210, v210, UYVP, I420_10BE, I420_10LE, P010_10BE, P010_10LE, NV12_10LE32, NV12_10LE40, Y444, GBR, RGBP, BGRP, NV24, xBGR, BGRx, xRGB, RGBx, BGR, IYU2, v308, RGB, Y42B, NV61, NV16, VYUY, UYVY, YVYU, YUY2, I420, YV12, NV21, NV12, NV12_64Z32, NV12_4L4, NV12_32L32, AV12, Y41B, IYU1, YVU9, YUV9, RGB16, BGR16, RGB15, BGR15, RGB8P, GRAY16_BE, GRAY16_LE, GRAY10_LE32, GRAY8 }" c:type="GST_VIDEO_FORMATS_ALL">
       <doc xml:space="preserve">List of all video formats, for use in template caps strings.
 
 Formats are sorted by decreasing "quality", using these criteria by priority:
@@ -3362,6 +3399,24 @@ Zorder for each input stream can be configured on the
           </parameter>
         </parameters>
       </virtual-method>
+      <method name="get_execution_task_pool" c:identifier="gst_video_aggregator_get_execution_task_pool" version="1.20">
+        <doc xml:space="preserve">The returned #GstTaskPool is used internally for performing parallel
+video format conversions/scaling/etc during the
+#GstVideoAggregatorPadClass::prepare_frame_start() process.
+Subclasses can add their own operation to perform using the returned
+#GstTaskPool during #GstVideoAggregatorClass::aggregate_frames().</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">the #GstTaskPool that can be used by subclasses
+    for performing concurrent operations</doc>
+          <type name="Gst.TaskPool" c:type="GstTaskPool*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="vagg" transfer-ownership="none">
+            <doc xml:space="preserve">the #GstVideoAggregator</doc>
+            <type name="VideoAggregator" c:type="GstVideoAggregator*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <field name="aggregator">
         <type name="GstBase.Aggregator" c:type="GstAggregator"/>
       </field>
@@ -3568,6 +3623,54 @@ update for any changes that have happened.</doc>
           </parameter>
         </parameters>
       </virtual-method>
+      <virtual-method name="prepare_frame_finish" version="1.20">
+        <doc xml:space="preserve">Finish preparing @prepared_frame.
+
+If overriden, `prepare_frame_start` must also be overriden.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="pad" transfer-ownership="none">
+            <doc xml:space="preserve">the #GstVideoAggregatorPad</doc>
+            <type name="VideoAggregatorPad" c:type="GstVideoAggregatorPad*"/>
+          </instance-parameter>
+          <parameter name="videoaggregator" transfer-ownership="none">
+            <doc xml:space="preserve">the parent #GstVideoAggregator</doc>
+            <type name="VideoAggregator" c:type="GstVideoAggregator*"/>
+          </parameter>
+          <parameter name="prepared_frame" transfer-ownership="none">
+            <doc xml:space="preserve">the #GstVideoFrame to prepare into</doc>
+            <type name="VideoFrame" c:type="GstVideoFrame*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="prepare_frame_start" version="1.20">
+        <doc xml:space="preserve">Begin preparing the frame from the pad buffer and sets it to prepared_frame.
+
+If overriden, `prepare_frame_finish` must also be overriden.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="pad" transfer-ownership="none">
+            <doc xml:space="preserve">the #GstVideoAggregatorPad</doc>
+            <type name="VideoAggregatorPad" c:type="GstVideoAggregatorPad*"/>
+          </instance-parameter>
+          <parameter name="videoaggregator" transfer-ownership="none">
+            <doc xml:space="preserve">the parent #GstVideoAggregator</doc>
+            <type name="VideoAggregator" c:type="GstVideoAggregator*"/>
+          </parameter>
+          <parameter name="buffer" transfer-ownership="none">
+            <doc xml:space="preserve">the input #GstBuffer to prepare</doc>
+            <type name="Gst.Buffer" c:type="GstBuffer*"/>
+          </parameter>
+          <parameter name="prepared_frame" transfer-ownership="none">
+            <doc xml:space="preserve">the #GstVideoFrame to prepare into</doc>
+            <type name="VideoFrame" c:type="GstVideoFrame*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
       <virtual-method name="update_conversion_info">
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -3731,13 +3834,77 @@ or from the #GstVideoAggregatorPadClass::prepare_frame virtual method of the agg
           </parameters>
         </callback>
       </field>
+      <field name="prepare_frame_start">
+        <callback name="prepare_frame_start">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="pad" transfer-ownership="none">
+              <doc xml:space="preserve">the #GstVideoAggregatorPad</doc>
+              <type name="VideoAggregatorPad" c:type="GstVideoAggregatorPad*"/>
+            </parameter>
+            <parameter name="videoaggregator" transfer-ownership="none">
+              <doc xml:space="preserve">the parent #GstVideoAggregator</doc>
+              <type name="VideoAggregator" c:type="GstVideoAggregator*"/>
+            </parameter>
+            <parameter name="buffer" transfer-ownership="none">
+              <doc xml:space="preserve">the input #GstBuffer to prepare</doc>
+              <type name="Gst.Buffer" c:type="GstBuffer*"/>
+            </parameter>
+            <parameter name="prepared_frame" transfer-ownership="none">
+              <doc xml:space="preserve">the #GstVideoFrame to prepare into</doc>
+              <type name="VideoFrame" c:type="GstVideoFrame*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="prepare_frame_finish">
+        <callback name="prepare_frame_finish">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="pad" transfer-ownership="none">
+              <doc xml:space="preserve">the #GstVideoAggregatorPad</doc>
+              <type name="VideoAggregatorPad" c:type="GstVideoAggregatorPad*"/>
+            </parameter>
+            <parameter name="videoaggregator" transfer-ownership="none">
+              <doc xml:space="preserve">the parent #GstVideoAggregator</doc>
+              <type name="VideoAggregator" c:type="GstVideoAggregator*"/>
+            </parameter>
+            <parameter name="prepared_frame" transfer-ownership="none">
+              <doc xml:space="preserve">the #GstVideoFrame to prepare into</doc>
+              <type name="VideoFrame" c:type="GstVideoFrame*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
       <field name="_gst_reserved">
-        <array zero-terminated="0" fixed-size="20">
+        <array zero-terminated="0" fixed-size="18">
           <type name="gpointer" c:type="gpointer"/>
         </array>
       </field>
     </record>
     <record name="VideoAggregatorPadPrivate" c:type="GstVideoAggregatorPadPrivate" disguised="1"/>
+    <class name="VideoAggregatorParallelConvertPad" c:symbol-prefix="video_aggregator_parallel_convert_pad" c:type="GstVideoAggregatorParallelConvertPad" version="1.20" parent="VideoAggregatorConvertPad" glib:type-name="GstVideoAggregatorParallelConvertPad" glib:get-type="gst_video_aggregator_parallel_convert_pad_get_type" glib:type-struct="VideoAggregatorParallelConvertPadClass">
+      <doc xml:space="preserve">An implementation of GstPad that can be used with #GstVideoAggregator.
+
+See #GstVideoAggregator for more details.</doc>
+      <field name="parent_instance">
+        <type name="VideoAggregatorConvertPad" c:type="GstVideoAggregatorConvertPad"/>
+      </field>
+    </class>
+    <record name="VideoAggregatorParallelConvertPadClass" c:type="GstVideoAggregatorParallelConvertPadClass" glib:is-gtype-struct-for="VideoAggregatorParallelConvertPad" version="1.20">
+      <field name="parent_class">
+        <type name="VideoAggregatorConvertPadClass" c:type="GstVideoAggregatorConvertPadClass"/>
+      </field>
+      <field name="_gst_reserved" readable="0" private="1">
+        <array zero-terminated="0" fixed-size="4">
+          <type name="gpointer" c:type="gpointer"/>
+        </array>
+      </field>
+    </record>
     <record name="VideoAggregatorPrivate" c:type="GstVideoAggregatorPrivate" disguised="1"/>
     <record name="VideoAlignment" c:type="GstVideoAlignment">
       <doc xml:space="preserve">Extra alignment parameters for the memory of video buffers. This
@@ -4234,7 +4401,58 @@ performed.</doc>
       <member name="dv" value="14" c:identifier="GST_VIDEO_CHROMA_SITE_DV" glib:nick="dv">
         <doc xml:space="preserve">DV style cositing</doc>
       </member>
+      <function name="from_string" c:identifier="gst_video_chroma_site_from_string" version="1.20">
+        <doc xml:space="preserve">Convert @s to a #GstVideoChromaSite</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">a #GstVideoChromaSite or %GST_VIDEO_CHROMA_SITE_UNKNOWN when @s does
+not contain a valid chroma-site description.</doc>
+          <type name="VideoChromaSite" c:type="GstVideoChromaSite"/>
+        </return-value>
+        <parameters>
+          <parameter name="s" transfer-ownership="none">
+            <doc xml:space="preserve">a chromasite string</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="to_string" c:identifier="gst_video_chroma_site_to_string" version="1.20">
+        <doc xml:space="preserve">Converts @site to its string representation.</doc>
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">a string representation of @site
+         or %NULL if @site contains undefined value or
+         is equal to %GST_VIDEO_CHROMA_SITE_UNKNOWN</doc>
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <parameter name="site" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoChromaSite</doc>
+            <type name="VideoChromaSite" c:type="GstVideoChromaSite"/>
+          </parameter>
+        </parameters>
+      </function>
     </bitfield>
+    <record name="VideoCodecAlphaMeta" c:type="GstVideoCodecAlphaMeta" version="1.20">
+      <doc xml:space="preserve">This meta is primarily for internal use in GStreamer elements to support
+VP8/VP9 transparent video stored into WebM or Matroska containers, or
+transparent static AV1 images. Nothing prevents you from using this meta
+for custom purposes, but it generally can't be used to easily to add support
+for alpha channels to CODECs or formats that don't support that out of the
+box.</doc>
+      <field name="meta" writable="1">
+        <doc xml:space="preserve">parent #GstMeta</doc>
+        <type name="Gst.Meta" c:type="GstMeta"/>
+      </field>
+      <field name="buffer" writable="1">
+        <doc xml:space="preserve">the encoded alpha frame</doc>
+        <type name="Gst.Buffer" c:type="GstBuffer*"/>
+      </field>
+      <function name="get_info" c:identifier="gst_video_codec_alpha_meta_get_info" version="1.20">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">#GstMetaInfo pointer that describes #GstVideoCodecAlphaMeta.</doc>
+          <type name="Gst.MetaInfo" c:type="const GstMetaInfo*"/>
+        </return-value>
+      </function>
+    </record>
     <record name="VideoCodecFrame" c:type="GstVideoCodecFrame" glib:type-name="GstVideoCodecFrame" glib:get-type="gst_video_codec_frame_get_type" c:symbol-prefix="video_codec_frame">
       <doc xml:space="preserve">A #GstVideoCodecFrame represents a video frame both in raw and
 encoded form.</doc>
@@ -4282,8 +4500,8 @@ encoded form.</doc>
       <field name="output_buffer" writable="1">
         <doc xml:space="preserve">the output #GstBuffer. Implementations should set this either
           directly, or by using the
-          @gst_video_decoder_allocate_output_frame() or
-          @gst_video_decoder_allocate_output_buffer() methods. The buffer is
+          gst_video_decoder_allocate_output_frame() or
+          gst_video_decoder_allocate_output_buffer() methods. The buffer is
           owned by the frame and references to the frame instead of the
           buffer should be kept.</doc>
         <type name="Gst.Buffer" c:type="GstBuffer*"/>
@@ -4400,6 +4618,9 @@ will be freed.</doc>
       <member name="force_keyframe_headers" value="8" c:identifier="GST_VIDEO_CODEC_FRAME_FLAG_FORCE_KEYFRAME_HEADERS">
         <doc xml:space="preserve">should the encoder output stream headers</doc>
       </member>
+      <member name="corrupted" value="16" c:identifier="GST_VIDEO_CODEC_FRAME_FLAG_CORRUPTED" version="1.20">
+        <doc xml:space="preserve">The buffer data is corrupted.</doc>
+      </member>
     </bitfield>
     <record name="VideoCodecState" c:type="GstVideoCodecState" glib:type-name="GstVideoCodecState" glib:get-type="gst_video_codec_state_get_type" c:symbol-prefix="video_codec_state">
       <doc xml:space="preserve">Structure representing the state of an incoming or outgoing video
@@ -4409,8 +4630,8 @@ Decoders and encoders will receive such a state through their
 respective @set_format vmethods.
 
 Decoders and encoders can set the downstream state, by using the
-@gst_video_decoder_set_output_state() or
-@gst_video_encoder_set_output_state() methods.</doc>
+gst_video_decoder_set_output_state() or
+gst_video_encoder_set_output_state() methods.</doc>
       <field name="ref_count" readable="0" private="1">
         <type name="gint" c:type="gint"/>
       </field>
@@ -4925,6 +5146,23 @@ with the parsed values.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="is_equal" c:identifier="gst_video_content_light_level_is_equal" version="1.20">
+        <doc xml:space="preserve">Checks equality between @linfo and @other.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if @linfo and @other are equal.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="linfo" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoContentLightLevel</doc>
+            <type name="VideoContentLightLevel" c:type="const GstVideoContentLightLevel*"/>
+          </instance-parameter>
+          <parameter name="other" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoContentLightLevel</doc>
+            <type name="VideoContentLightLevel" c:type="const GstVideoContentLightLevel*"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="to_string" c:identifier="gst_video_content_light_level_to_string" version="1.18">
         <doc xml:space="preserve">Convert @linfo to its string representation.</doc>
         <return-value transfer-ownership="full">
@@ -4957,7 +5195,11 @@ with the parsed values.</doc>
     </callback>
     <record name="VideoConverter" c:type="GstVideoConverter" disguised="1">
       <method name="frame" c:identifier="gst_video_converter_frame" version="1.6">
-        <doc xml:space="preserve">Convert the pixels of @src into @dest using @convert.</doc>
+        <doc xml:space="preserve">Convert the pixels of @src into @dest using @convert.
+
+If #GST_VIDEO_CONVERTER_OPT_ASYNC_TASKS is %TRUE then this function will
+return immediately and needs to be followed by a call to
+gst_video_converter_frame_finish().</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -4974,6 +5216,19 @@ with the parsed values.</doc>
             <doc xml:space="preserve">a #GstVideoFrame</doc>
             <type name="VideoFrame" c:type="GstVideoFrame*"/>
           </parameter>
+        </parameters>
+      </method>
+      <method name="frame_finish" c:identifier="gst_video_converter_frame_finish" version="1.20">
+        <doc xml:space="preserve">Wait for a previous async conversion performed using
+gst_video_converter_frame() to complete.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="convert" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoConverter</doc>
+            <type name="VideoConverter" c:type="GstVideoConverter*"/>
+          </instance-parameter>
         </parameters>
       </method>
       <method name="free" c:identifier="gst_video_converter_free" version="1.6">
@@ -5036,15 +5291,44 @@ with @config.</doc>
         <parameters>
           <parameter name="in_info" transfer-ownership="none">
             <doc xml:space="preserve">a #GstVideoInfo</doc>
-            <type name="VideoInfo" c:type="GstVideoInfo*"/>
+            <type name="VideoInfo" c:type="const GstVideoInfo*"/>
           </parameter>
           <parameter name="out_info" transfer-ownership="none">
             <doc xml:space="preserve">a #GstVideoInfo</doc>
-            <type name="VideoInfo" c:type="GstVideoInfo*"/>
+            <type name="VideoInfo" c:type="const GstVideoInfo*"/>
           </parameter>
           <parameter name="config" transfer-ownership="full">
             <doc xml:space="preserve">a #GstStructure with configuration options</doc>
             <type name="Gst.Structure" c:type="GstStructure*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="new_with_pool" c:identifier="gst_video_converter_new_with_pool" version="1.20" introspectable="0">
+        <doc xml:space="preserve">Create a new converter object to convert between @in_info and @out_info
+with @config.
+
+The optional @pool can be used to spawn threads, this is useful when
+creating new converters rapidly, for example when updating cropping.</doc>
+        <return-value>
+          <doc xml:space="preserve">a #GstVideoConverter or %NULL if conversion is not possible.</doc>
+          <type name="VideoConverter" c:type="GstVideoConverter*"/>
+        </return-value>
+        <parameters>
+          <parameter name="in_info" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoInfo</doc>
+            <type name="VideoInfo" c:type="const GstVideoInfo*"/>
+          </parameter>
+          <parameter name="out_info" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoInfo</doc>
+            <type name="VideoInfo" c:type="const GstVideoInfo*"/>
+          </parameter>
+          <parameter name="config" transfer-ownership="full">
+            <doc xml:space="preserve">a #GstStructure with configuration options</doc>
+            <type name="Gst.Structure" c:type="GstStructure*"/>
+          </parameter>
+          <parameter name="pool" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">a #GstTaskPool to spawn threads from</doc>
+            <type name="Gst.TaskPool" c:type="GstTaskPool*"/>
           </parameter>
         </parameters>
       </function>
@@ -5702,6 +5986,20 @@ and should therefore occur as soon/skippy as possible.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="get_needs_sync_point" c:identifier="gst_video_decoder_get_needs_sync_point" version="1.20">
+        <doc xml:space="preserve">Queries if the decoder requires a sync point before it starts outputting
+data in the beginning.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if a sync point is required in the beginning.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="dec" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoDecoder</doc>
+            <type name="VideoDecoder" c:type="GstVideoDecoder*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="get_oldest_frame" c:identifier="gst_video_decoder_get_oldest_frame">
         <doc xml:space="preserve">Get the oldest pending unfinished #GstVideoCodecFrame</doc>
         <return-value transfer-ownership="full">
@@ -5867,6 +6165,48 @@ after which it is considered finished and released.</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="request_sync_point" c:identifier="gst_video_decoder_request_sync_point" version="1.20">
+        <doc xml:space="preserve">Allows the #GstVideoDecoder subclass to request from the base class that
+a new sync should be requested from upstream, and that @frame was the frame
+when the subclass noticed that a new sync point is required. A reason for
+the subclass to do this could be missing reference frames, for example.
+
+The base class will then request a new sync point from upstream as long as
+the time that passed since the last one is exceeding
+#GstVideoDecoder:min-force-key-unit-interval.
+
+The subclass can signal via @flags how the frames until the next sync point
+should be handled:
+
+  * If %GST_VIDEO_DECODER_REQUEST_SYNC_POINT_DISCARD_INPUT is selected then
+    all following input frames until the next sync point are discarded.
+    This can be useful if the lack of a sync point will prevent all further
+    decoding and the decoder implementation is not very robust in handling
+    missing references frames.
+  * If %GST_VIDEO_DECODER_REQUEST_SYNC_POINT_CORRUPT_OUTPUT is selected
+    then all output frames following @frame are marked as corrupted via
+    %GST_BUFFER_FLAG_CORRUPTED. Corrupted frames can be automatically
+    dropped by the base class, see #GstVideoDecoder:discard-corrupted-frames.
+    Subclasses can manually mark frames as corrupted via %GST_VIDEO_CODEC_FRAME_FLAG_CORRUPTED
+    before calling gst_video_decoder_finish_frame().</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="dec" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoDecoder</doc>
+            <type name="VideoDecoder" c:type="GstVideoDecoder*"/>
+          </instance-parameter>
+          <parameter name="frame" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoCodecFrame</doc>
+            <type name="VideoCodecFrame" c:type="GstVideoCodecFrame*"/>
+          </parameter>
+          <parameter name="flags" transfer-ownership="none">
+            <doc xml:space="preserve">#GstVideoDecoderRequestSyncPointFlags</doc>
+            <type name="VideoDecoderRequestSyncPointFlags" c:type="GstVideoDecoderRequestSyncPointFlags"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="set_estimate_rate" c:identifier="gst_video_decoder_set_estimate_rate">
         <doc xml:space="preserve">Allows baseclass to perform byte to time estimated conversion.</doc>
         <return-value transfer-ownership="none">
@@ -5981,6 +6321,28 @@ or based on the input data.</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="set_needs_sync_point" c:identifier="gst_video_decoder_set_needs_sync_point" version="1.20">
+        <doc xml:space="preserve">Configures whether the decoder requires a sync point before it starts
+outputting data in the beginning. If enabled, the base class will discard
+all non-sync point frames in the beginning and after a flush and does not
+pass it to the subclass.
+
+If the first frame is not a sync point, the base class will request a sync
+point via the force-key-unit event.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="dec" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoDecoder</doc>
+            <type name="VideoDecoder" c:type="GstVideoDecoder*"/>
+          </instance-parameter>
+          <parameter name="enabled" transfer-ownership="none">
+            <doc xml:space="preserve">new state</doc>
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="set_output_state" c:identifier="gst_video_decoder_set_output_state">
         <doc xml:space="preserve">Creates a new #GstVideoCodecState with the specified @fmt, @width and @height
 as the output state for the decoder.
@@ -6061,10 +6423,24 @@ handler with %GST_PAD_SET_ACCEPT_INTERSECT and
           </parameter>
         </parameters>
       </method>
+      <property name="discard-corrupted-frames" version="1.20" writable="1" transfer-ownership="none">
+        <doc xml:space="preserve">If set to %TRUE the decoder will discard frames that are marked as
+corrupted instead of outputting them.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
       <property name="max-errors" version="1.18" writable="1" transfer-ownership="none">
         <doc xml:space="preserve">Maximum number of tolerated consecutive decode errors. See
 gst_video_decoder_set_max_errors() for more details.</doc>
         <type name="gint" c:type="gint"/>
+      </property>
+      <property name="min-force-key-unit-interval" version="1.20" writable="1" transfer-ownership="none">
+        <doc xml:space="preserve">Minimum interval between force-key-unit events sent upstream by the
+decoder. Setting this to 0 will cause every event to be handled, setting
+this to %GST_CLOCK_TIME_NONE will cause every event to be ignored.
+
+See gst_video_event_new_upstream_force_key_unit() for more details about
+force-key-unit events.</doc>
+        <type name="guint64" c:type="guint64"/>
       </property>
       <property name="qos" version="1.18" writable="1" transfer-ownership="none">
         <doc xml:space="preserve">If set to %TRUE the decoder will handle QoS events received
@@ -6402,6 +6778,18 @@ and likely as well.  If non-packetized input is supported or expected,
       </field>
     </record>
     <record name="VideoDecoderPrivate" c:type="GstVideoDecoderPrivate" disguised="1"/>
+    <bitfield name="VideoDecoderRequestSyncPointFlags" version="1.20" c:type="GstVideoDecoderRequestSyncPointFlags">
+      <doc xml:space="preserve">Flags to be used in combination with gst_video_decoder_request_sync_point().
+See the function documentation for more details.</doc>
+      <member name="discard_input" value="1" c:identifier="GST_VIDEO_DECODER_REQUEST_SYNC_POINT_DISCARD_INPUT">
+        <doc xml:space="preserve">discard all following
+    input until the next sync point.</doc>
+      </member>
+      <member name="corrupt_output" value="2" c:identifier="GST_VIDEO_DECODER_REQUEST_SYNC_POINT_CORRUPT_OUTPUT">
+        <doc xml:space="preserve">discard all following
+    output until the next sync point.</doc>
+      </member>
+    </bitfield>
     <interface name="VideoDirection" c:symbol-prefix="video_direction" c:type="GstVideoDirection" version="1.10" glib:type-name="GstVideoDirection" glib:get-type="gst_video_direction_get_type" glib:type-struct="VideoDirectionInterface">
       <doc xml:space="preserve">The interface allows unified access to control flipping and rotation
 operations of video-sources or operators.</doc>
@@ -8091,6 +8479,16 @@ for details about the layout and packing of these formats in memory.</doc>
       <member name="nv12_32l32" value="98" c:identifier="GST_VIDEO_FORMAT_NV12_32L32" version="1.18" glib:nick="nv12-32l32">
         <doc xml:space="preserve">NV12 with 32x32 tiles in linear order.</doc>
       </member>
+      <member name="rgbp" value="99" c:identifier="GST_VIDEO_FORMAT_RGBP" version="1.20" glib:nick="rgbp">
+        <doc xml:space="preserve">Planar 4:4:4 RGB, R-G-B order</doc>
+      </member>
+      <member name="bgrp" value="100" c:identifier="GST_VIDEO_FORMAT_BGRP" version="1.20" glib:nick="bgrp">
+        <doc xml:space="preserve">Planar 4:4:4 RGB, B-G-R order</doc>
+      </member>
+      <member name="av12" value="101" c:identifier="GST_VIDEO_FORMAT_AV12" version="1.20" glib:nick="av12">
+        <doc xml:space="preserve">Planar 4:2:0 YUV with interleaved UV plane with alpha as
+3rd plane.</doc>
+      </member>
       <function name="from_fourcc" c:identifier="gst_video_format_from_fourcc">
         <doc xml:space="preserve">Converts a FOURCC value into the corresponding #GstVideoFormat.
 If the FOURCC cannot be represented by #GstVideoFormat,
@@ -8595,7 +8993,19 @@ smaller than @src dimensions.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="map" c:identifier="gst_video_frame_map">
+      <method name="unmap" c:identifier="gst_video_frame_unmap">
+        <doc xml:space="preserve">Unmap the memory previously mapped with gst_video_frame_map.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="frame" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoFrame</doc>
+            <type name="VideoFrame" c:type="GstVideoFrame*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <function name="map" c:identifier="gst_video_frame_map">
         <doc xml:space="preserve">Use @info and @buffer to fill in the values of @frame. @frame is usually
 allocated on the stack, and you will pass the address to the #GstVideoFrame
 structure allocated on the stack; gst_video_frame_map() will then fill in
@@ -8644,13 +9054,13 @@ memory chunks for you.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
-          <instance-parameter name="frame" transfer-ownership="none">
+          <parameter name="frame" direction="out" caller-allocates="1" transfer-ownership="none">
             <doc xml:space="preserve">pointer to #GstVideoFrame</doc>
             <type name="VideoFrame" c:type="GstVideoFrame*"/>
-          </instance-parameter>
+          </parameter>
           <parameter name="info" transfer-ownership="none">
             <doc xml:space="preserve">a #GstVideoInfo</doc>
-            <type name="VideoInfo" c:type="GstVideoInfo*"/>
+            <type name="VideoInfo" c:type="const GstVideoInfo*"/>
           </parameter>
           <parameter name="buffer" transfer-ownership="none">
             <doc xml:space="preserve">the buffer to map</doc>
@@ -8661,8 +9071,8 @@ memory chunks for you.</doc>
             <type name="Gst.MapFlags" c:type="GstMapFlags"/>
           </parameter>
         </parameters>
-      </method>
-      <method name="map_id" c:identifier="gst_video_frame_map_id">
+      </function>
+      <function name="map_id" c:identifier="gst_video_frame_map_id">
         <doc xml:space="preserve">Use @info and @buffer to fill in the values of @frame with the video frame
 information of frame @id.
 
@@ -8676,13 +9086,13 @@ All video planes of @buffer will be mapped and the pointers will be set in
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
-          <instance-parameter name="frame" transfer-ownership="none">
+          <parameter name="frame" direction="out" caller-allocates="1" transfer-ownership="none">
             <doc xml:space="preserve">pointer to #GstVideoFrame</doc>
             <type name="VideoFrame" c:type="GstVideoFrame*"/>
-          </instance-parameter>
+          </parameter>
           <parameter name="info" transfer-ownership="none">
             <doc xml:space="preserve">a #GstVideoInfo</doc>
-            <type name="VideoInfo" c:type="GstVideoInfo*"/>
+            <type name="VideoInfo" c:type="const GstVideoInfo*"/>
           </parameter>
           <parameter name="buffer" transfer-ownership="none">
             <doc xml:space="preserve">the buffer to map</doc>
@@ -8697,19 +9107,7 @@ All video planes of @buffer will be mapped and the pointers will be set in
             <type name="Gst.MapFlags" c:type="GstMapFlags"/>
           </parameter>
         </parameters>
-      </method>
-      <method name="unmap" c:identifier="gst_video_frame_unmap">
-        <doc xml:space="preserve">Unmap the memory previously mapped with gst_video_frame_map.</doc>
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="frame" transfer-ownership="none">
-            <doc xml:space="preserve">a #GstVideoFrame</doc>
-            <type name="VideoFrame" c:type="GstVideoFrame*"/>
-          </instance-parameter>
-        </parameters>
-      </method>
+      </function>
     </record>
     <bitfield name="VideoFrameFlags" glib:type-name="GstVideoFrameFlags" glib:get-type="gst_video_frame_flags_get_type" c:type="GstVideoFrameFlags">
       <doc xml:space="preserve">Extra video frame flags</doc>
@@ -9003,7 +9401,10 @@ is required and @align will be updated with the new padding values.</doc>
         </parameters>
       </method>
       <method name="align_full" c:identifier="gst_video_info_align_full" version="1.18">
-        <doc xml:space="preserve">This variant of gst_video_info_align() provides the updated size, in bytes,
+        <doc xml:space="preserve">Extra padding will be added to the right side when stride alignment padding
+is required and @align will be updated with the new padding values.
+
+This variant of gst_video_info_align() provides the updated size, in bytes,
 of each video plane after the alignment, including all horizontal and vertical
 paddings.
 
@@ -9041,7 +9442,7 @@ function can be used to handle pad queries of the type GST_QUERY_CONVERT.</doc>
         <parameters>
           <instance-parameter name="info" transfer-ownership="none">
             <doc xml:space="preserve">a #GstVideoInfo</doc>
-            <type name="VideoInfo" c:type="GstVideoInfo*"/>
+            <type name="VideoInfo" c:type="const GstVideoInfo*"/>
           </instance-parameter>
           <parameter name="src_format" transfer-ownership="none">
             <doc xml:space="preserve">#GstFormat of the @src_value</doc>
@@ -9077,35 +9478,6 @@ function can be used to handle pad queries of the type GST_QUERY_CONVERT.</doc>
       <method name="free" c:identifier="gst_video_info_free" version="1.6">
         <doc xml:space="preserve">Free a GstVideoInfo structure previously allocated with gst_video_info_new()
 or gst_video_info_copy().</doc>
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="info" transfer-ownership="none">
-            <doc xml:space="preserve">a #GstVideoInfo</doc>
-            <type name="VideoInfo" c:type="GstVideoInfo*"/>
-          </instance-parameter>
-        </parameters>
-      </method>
-      <method name="from_caps" c:identifier="gst_video_info_from_caps">
-        <doc xml:space="preserve">Parse @caps and update @info.</doc>
-        <return-value transfer-ownership="none">
-          <doc xml:space="preserve">TRUE if @caps could be parsed</doc>
-          <type name="gboolean" c:type="gboolean"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="info" transfer-ownership="none">
-            <doc xml:space="preserve">a #GstVideoInfo</doc>
-            <type name="VideoInfo" c:type="GstVideoInfo*"/>
-          </instance-parameter>
-          <parameter name="caps" transfer-ownership="none">
-            <doc xml:space="preserve">a #GstCaps</doc>
-            <type name="Gst.Caps" c:type="const GstCaps*"/>
-          </parameter>
-        </parameters>
-      </method>
-      <method name="init" c:identifier="gst_video_info_init">
-        <doc xml:space="preserve">Initialize @info with default values.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -9207,6 +9579,35 @@ mode.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <function name="from_caps" c:identifier="gst_video_info_from_caps">
+        <doc xml:space="preserve">Parse @caps and update @info.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">TRUE if @caps could be parsed</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <parameter name="info" direction="out" caller-allocates="1" transfer-ownership="none">
+            <doc xml:space="preserve">#GstVideoInfo</doc>
+            <type name="VideoInfo" c:type="GstVideoInfo*"/>
+          </parameter>
+          <parameter name="caps" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstCaps</doc>
+            <type name="Gst.Caps" c:type="const GstCaps*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="init" c:identifier="gst_video_info_init">
+        <doc xml:space="preserve">Initialize @info with default values.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="info" direction="out" caller-allocates="1" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoInfo</doc>
+            <type name="VideoInfo" c:type="GstVideoInfo*"/>
+          </parameter>
+        </parameters>
+      </function>
     </record>
     <enumeration name="VideoInterlaceMode" glib:type-name="GstVideoInterlaceMode" glib:get-type="gst_video_interlace_mode_get_type" c:type="GstVideoInterlaceMode">
       <doc xml:space="preserve">The possible values of the #GstVideoInterlaceMode describing the interlace
@@ -12021,6 +12422,25 @@ the @dst one and @scaling is set to FALSE.</doc>
           </parameter>
         </parameters>
       </function>
+      <virtual-method name="set_info" version="1.20">
+        <doc xml:space="preserve">Notifies the subclass of changed #GstVideoInfo.</doc>
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="video_sink" transfer-ownership="none">
+            <type name="VideoSink" c:type="GstVideoSink*"/>
+          </instance-parameter>
+          <parameter name="caps" transfer-ownership="none">
+            <doc xml:space="preserve">A #GstCaps.</doc>
+            <type name="Gst.Caps" c:type="GstCaps*"/>
+          </parameter>
+          <parameter name="info" transfer-ownership="none">
+            <doc xml:space="preserve">A #GstVideoInfo corresponding to @caps.</doc>
+            <type name="VideoInfo" c:type="const GstVideoInfo*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
       <virtual-method name="show_frame">
         <return-value transfer-ownership="none">
           <type name="Gst.FlowReturn" c:type="GstFlowReturn"/>
@@ -12081,8 +12501,28 @@ frames will only be rendered in PLAYING state.</doc>
           </parameters>
         </callback>
       </field>
+      <field name="set_info">
+        <callback name="set_info">
+          <return-value transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </return-value>
+          <parameters>
+            <parameter name="video_sink" transfer-ownership="none">
+              <type name="VideoSink" c:type="GstVideoSink*"/>
+            </parameter>
+            <parameter name="caps" transfer-ownership="none">
+              <doc xml:space="preserve">A #GstCaps.</doc>
+              <type name="Gst.Caps" c:type="GstCaps*"/>
+            </parameter>
+            <parameter name="info" transfer-ownership="none">
+              <doc xml:space="preserve">A #GstVideoInfo corresponding to @caps.</doc>
+              <type name="VideoInfo" c:type="const GstVideoInfo*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
       <field name="_gst_reserved" readable="0" private="1">
-        <array zero-terminated="0" fixed-size="4">
+        <array zero-terminated="0" fixed-size="3">
           <type name="gpointer" c:type="gpointer"/>
         </array>
       </field>
@@ -12830,6 +13270,61 @@ non-linear RGB (R'G'B') and linear RGB</doc>
       <member name="bt601" value="16" c:identifier="GST_VIDEO_TRANSFER_BT601" version="1.18" glib:nick="bt601">
         <doc xml:space="preserve">also known as SMPTE170M / ITU-R BT1358 525 or 625 / ITU-R BT1700 NTSC</doc>
       </member>
+      <function name="decode" c:identifier="gst_video_transfer_function_decode" version="1.20">
+        <doc xml:space="preserve">Convert @val to its gamma decoded value. This is the inverse operation of
+gst_video_color_transfer_encode().
+
+For a non-linear value L' in the range [0..1], conversion to the linear
+L is in general performed with a power function like:
+
+|[
+   L = L' ^ gamma
+]|
+
+Depending on @func, different formulas might be applied. Some formulas
+encode a linear segment in the lower range.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the gamma decoded value of @val</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </return-value>
+        <parameters>
+          <parameter name="func" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoTransferFunction</doc>
+            <type name="VideoTransferFunction" c:type="GstVideoTransferFunction"/>
+          </parameter>
+          <parameter name="val" transfer-ownership="none">
+            <doc xml:space="preserve">a value</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="encode" c:identifier="gst_video_transfer_function_encode" version="1.20">
+        <doc xml:space="preserve">Convert @val to its gamma encoded value.
+
+For a linear value L in the range [0..1], conversion to the non-linear
+(gamma encoded) L' is in general performed with a power function like:
+
+|[
+   L' = L ^ (1 / gamma)
+]|
+
+Depending on @func, different formulas might be applied. Some formulas
+encode a linear segment in the lower range.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the gamma encoded value of @val</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </return-value>
+        <parameters>
+          <parameter name="func" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoTransferFunction</doc>
+            <type name="VideoTransferFunction" c:type="GstVideoTransferFunction"/>
+          </parameter>
+          <parameter name="val" transfer-ownership="none">
+            <doc xml:space="preserve">a value</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </function>
       <function name="from_iso" c:identifier="gst_video_transfer_function_from_iso" version="1.18">
         <doc xml:space="preserve">Converts the @value to the #GstVideoTransferFunction
 The transfer characteristics (TransferCharacteristics) value is
@@ -13193,6 +13688,24 @@ parameters.</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="buffer_add_video_codec_alpha_meta" c:identifier="gst_buffer_add_video_codec_alpha_meta" version="1.20">
+      <doc xml:space="preserve">Attaches a #GstVideoCodecAlphaMeta metadata to @buffer with
+the given alpha buffer.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">the #GstVideoCodecAlphaMeta on @buffer.</doc>
+        <type name="VideoCodecAlphaMeta" c:type="GstVideoCodecAlphaMeta*"/>
+      </return-value>
+      <parameters>
+        <parameter name="buffer" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstBuffer</doc>
+          <type name="Gst.Buffer" c:type="GstBuffer*"/>
+        </parameter>
+        <parameter name="alpha_buffer" transfer-ownership="full">
+          <doc xml:space="preserve">a #GstBuffer</doc>
+          <type name="Gst.Buffer" c:type="GstBuffer*"/>
+        </parameter>
+      </parameters>
+    </function>
     <function-macro name="buffer_add_video_crop_meta" c:identifier="gst_buffer_add_video_crop_meta" introspectable="0">
       <parameters>
         <parameter name="b">
@@ -13508,6 +14021,14 @@ Note: there may be two #GstVideoAFDMeta structs for interlaced video.</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="buffer_get_video_codec_alpha_meta" c:identifier="gst_buffer_get_video_codec_alpha_meta" version="1.20" introspectable="0">
+      <doc xml:space="preserve">Helper macro to get #GstVideoCodecAlphaMeta from an existing #GstBuffer.</doc>
+      <parameters>
+        <parameter name="b">
+          <doc xml:space="preserve">A #GstBuffer pointer, must be writable.</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="buffer_get_video_crop_meta" c:identifier="gst_buffer_get_video_crop_meta" introspectable="0">
       <parameters>
         <parameter name="b">
@@ -13634,7 +14155,7 @@ in @align</doc>
         </parameter>
         <parameter name="align" transfer-ownership="none">
           <doc xml:space="preserve">a #GstVideoAlignment</doc>
-          <type name="VideoAlignment" c:type="GstVideoAlignment*"/>
+          <type name="VideoAlignment" c:type="const GstVideoAlignment*"/>
         </parameter>
       </parameters>
     </function>
@@ -14294,8 +14815,9 @@ type, or %GST_VIDEO_CAPTION_TYPE_UNKNOWN.</doc>
         </parameter>
       </parameters>
     </function>
-    <function name="video_chroma_from_string" c:identifier="gst_video_chroma_from_string">
+    <function name="video_chroma_from_string" c:identifier="gst_video_chroma_from_string" deprecated="1" deprecated-version="1.20">
       <doc xml:space="preserve">Convert @s to a #GstVideoChromaSite</doc>
+      <doc-deprecated xml:space="preserve">Use gst_video_chroma_site_from_string() instead.</doc-deprecated>
       <return-value transfer-ownership="none">
         <doc xml:space="preserve">a #GstVideoChromaSite or %GST_VIDEO_CHROMA_SITE_UNKNOWN when @s does
 not contain a valid chroma description.</doc>
@@ -14364,8 +14886,38 @@ performed.</doc>
         </parameter>
       </parameters>
     </function>
-    <function name="video_chroma_to_string" c:identifier="gst_video_chroma_to_string">
+    <function name="video_chroma_site_from_string" c:identifier="gst_video_chroma_site_from_string" moved-to="VideoChromaSite.from_string" version="1.20">
+      <doc xml:space="preserve">Convert @s to a #GstVideoChromaSite</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">a #GstVideoChromaSite or %GST_VIDEO_CHROMA_SITE_UNKNOWN when @s does
+not contain a valid chroma-site description.</doc>
+        <type name="VideoChromaSite" c:type="GstVideoChromaSite"/>
+      </return-value>
+      <parameters>
+        <parameter name="s" transfer-ownership="none">
+          <doc xml:space="preserve">a chromasite string</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="video_chroma_site_to_string" c:identifier="gst_video_chroma_site_to_string" moved-to="VideoChromaSite.to_string" version="1.20">
       <doc xml:space="preserve">Converts @site to its string representation.</doc>
+      <return-value transfer-ownership="full" nullable="1">
+        <doc xml:space="preserve">a string representation of @site
+         or %NULL if @site contains undefined value or
+         is equal to %GST_VIDEO_CHROMA_SITE_UNKNOWN</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </return-value>
+      <parameters>
+        <parameter name="site" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstVideoChromaSite</doc>
+          <type name="VideoChromaSite" c:type="GstVideoChromaSite"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="video_chroma_to_string" c:identifier="gst_video_chroma_to_string" deprecated="1" deprecated-version="1.20">
+      <doc xml:space="preserve">Converts @site to its string representation.</doc>
+      <doc-deprecated xml:space="preserve">Use gst_video_chroma_site_to_string() instead.</doc-deprecated>
       <return-value transfer-ownership="none">
         <doc xml:space="preserve">a string describing @site.</doc>
         <type name="utf8" c:type="const gchar*"/>
@@ -14376,6 +14928,18 @@ performed.</doc>
           <type name="VideoChromaSite" c:type="GstVideoChromaSite"/>
         </parameter>
       </parameters>
+    </function>
+    <function name="video_codec_alpha_meta_api_get_type" c:identifier="gst_video_codec_alpha_meta_api_get_type" version="1.20">
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">#GType for the #GstVideoCodecAlphaMeta structure.</doc>
+        <type name="GType" c:type="GType"/>
+      </return-value>
+    </function>
+    <function name="video_codec_alpha_meta_get_info" c:identifier="gst_video_codec_alpha_meta_get_info" moved-to="VideoCodecAlphaMeta.get_info" version="1.20">
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">#GstMetaInfo pointer that describes #GstVideoCodecAlphaMeta.</doc>
+        <type name="Gst.MetaInfo" c:type="const GstMetaInfo*"/>
+      </return-value>
     </function>
     <function name="video_color_matrix_from_iso" c:identifier="gst_video_color_matrix_from_iso" moved-to="VideoColorMatrix.from_iso" version="1.18">
       <doc xml:space="preserve">Converts the @value to the #GstVideoColorMatrix
@@ -14534,21 +15098,9 @@ the component values in range [0.0 .. 1.0] back to their representation in
         </parameter>
       </parameters>
     </function>
-    <function name="video_color_transfer_decode" c:identifier="gst_video_color_transfer_decode" version="1.6">
-      <doc xml:space="preserve">Convert @val to its gamma decoded value. This is the inverse operation of
-@gst_video_color_transfer_encode().
-
-For a non-linear value L' in the range [0..1], conversion to the linear
-L is in general performed with a power function like:
-
-|[
-   L = L' ^ gamma
-]|
-
-Depending on @func, different formulas might be applied. Some formulas
-encode a linear segment in the lower range.</doc>
+    <function name="video_color_transfer_decode" c:identifier="gst_video_color_transfer_decode" version="1.6" deprecated="1" deprecated-version="1.20">
+      <doc-deprecated xml:space="preserve">Use gst_video_transfer_function_decode() instead.</doc-deprecated>
       <return-value transfer-ownership="none">
-        <doc xml:space="preserve">the gamma decoded value of @val</doc>
         <type name="gdouble" c:type="gdouble"/>
       </return-value>
       <parameters>
@@ -14562,20 +15114,9 @@ encode a linear segment in the lower range.</doc>
         </parameter>
       </parameters>
     </function>
-    <function name="video_color_transfer_encode" c:identifier="gst_video_color_transfer_encode" version="1.6">
-      <doc xml:space="preserve">Convert @val to its gamma encoded value.
-
-For a linear value L in the range [0..1], conversion to the non-linear
-(gamma encoded) L' is in general performed with a power function like:
-
-|[
-   L' = L ^ (1 / gamma)
-]|
-
-Depending on @func, different formulas might be applied. Some formulas
-encode a linear segment in the lower range.</doc>
+    <function name="video_color_transfer_encode" c:identifier="gst_video_color_transfer_encode" version="1.6" deprecated="1" deprecated-version="1.20">
+      <doc-deprecated xml:space="preserve">Use gst_video_transfer_function_encode() instead.</doc-deprecated>
       <return-value transfer-ownership="none">
-        <doc xml:space="preserve">the gamma encoded value of @val</doc>
         <type name="gdouble" c:type="gdouble"/>
       </return-value>
       <parameters>
@@ -14669,15 +15210,44 @@ with @config.</doc>
       <parameters>
         <parameter name="in_info" transfer-ownership="none">
           <doc xml:space="preserve">a #GstVideoInfo</doc>
-          <type name="VideoInfo" c:type="GstVideoInfo*"/>
+          <type name="VideoInfo" c:type="const GstVideoInfo*"/>
         </parameter>
         <parameter name="out_info" transfer-ownership="none">
           <doc xml:space="preserve">a #GstVideoInfo</doc>
-          <type name="VideoInfo" c:type="GstVideoInfo*"/>
+          <type name="VideoInfo" c:type="const GstVideoInfo*"/>
         </parameter>
         <parameter name="config" transfer-ownership="full">
           <doc xml:space="preserve">a #GstStructure with configuration options</doc>
           <type name="Gst.Structure" c:type="GstStructure*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="video_converter_new_with_pool" c:identifier="gst_video_converter_new_with_pool" moved-to="VideoConverter.new_with_pool" version="1.20" introspectable="0">
+      <doc xml:space="preserve">Create a new converter object to convert between @in_info and @out_info
+with @config.
+
+The optional @pool can be used to spawn threads, this is useful when
+creating new converters rapidly, for example when updating cropping.</doc>
+      <return-value>
+        <doc xml:space="preserve">a #GstVideoConverter or %NULL if conversion is not possible.</doc>
+        <type name="VideoConverter" c:type="GstVideoConverter*"/>
+      </return-value>
+      <parameters>
+        <parameter name="in_info" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstVideoInfo</doc>
+          <type name="VideoInfo" c:type="const GstVideoInfo*"/>
+        </parameter>
+        <parameter name="out_info" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstVideoInfo</doc>
+          <type name="VideoInfo" c:type="const GstVideoInfo*"/>
+        </parameter>
+        <parameter name="config" transfer-ownership="full">
+          <doc xml:space="preserve">a #GstStructure with configuration options</doc>
+          <type name="Gst.Structure" c:type="GstStructure*"/>
+        </parameter>
+        <parameter name="pool" transfer-ownership="none" nullable="1" allow-none="1">
+          <doc xml:space="preserve">a #GstTaskPool to spawn threads from</doc>
+          <type name="Gst.TaskPool" c:type="GstTaskPool*"/>
         </parameter>
       </parameters>
     </function>
@@ -15088,6 +15658,109 @@ the #GstVideoFormat if there is one, or NULL otherwise.</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="video_frame_map" c:identifier="gst_video_frame_map" moved-to="VideoFrame.map">
+      <doc xml:space="preserve">Use @info and @buffer to fill in the values of @frame. @frame is usually
+allocated on the stack, and you will pass the address to the #GstVideoFrame
+structure allocated on the stack; gst_video_frame_map() will then fill in
+the structures with the various video-specific information you need to access
+the pixels of the video buffer. You can then use accessor macros such as
+GST_VIDEO_FRAME_COMP_DATA(), GST_VIDEO_FRAME_PLANE_DATA(),
+GST_VIDEO_FRAME_COMP_STRIDE(), GST_VIDEO_FRAME_PLANE_STRIDE() etc.
+to get to the pixels.
+
+|[&lt;!-- language="C" --&gt;
+  GstVideoFrame vframe;
+  ...
+  // set RGB pixels to black one at a time
+  if (gst_video_frame_map (&amp;amp;vframe, video_info, video_buffer, GST_MAP_WRITE)) {
+    guint8 *pixels = GST_VIDEO_FRAME_PLANE_DATA (vframe, 0);
+    guint stride = GST_VIDEO_FRAME_PLANE_STRIDE (vframe, 0);
+    guint pixel_stride = GST_VIDEO_FRAME_COMP_PSTRIDE (vframe, 0);
+
+    for (h = 0; h &lt; height; ++h) {
+      for (w = 0; w &lt; width; ++w) {
+        guint8 *pixel = pixels + h * stride + w * pixel_stride;
+
+        memset (pixel, 0, pixel_stride);
+      }
+    }
+
+    gst_video_frame_unmap (&amp;amp;vframe);
+  }
+  ...
+]|
+
+All video planes of @buffer will be mapped and the pointers will be set in
+@frame-&gt;data.
+
+The purpose of this function is to make it easy for you to get to the video
+pixels in a generic way, without you having to worry too much about details
+such as whether the video data is allocated in one contiguous memory chunk
+or multiple memory chunks (e.g. one for each plane); or if custom strides
+and custom plane offsets are used or not (as signalled by GstVideoMeta on
+each buffer). This function will just fill the #GstVideoFrame structure
+with the right values and if you use the accessor macros everything will
+just work and you can access the data easily. It also maps the underlying
+memory chunks for you.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE on success.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="frame" direction="out" caller-allocates="1" transfer-ownership="none">
+          <doc xml:space="preserve">pointer to #GstVideoFrame</doc>
+          <type name="VideoFrame" c:type="GstVideoFrame*"/>
+        </parameter>
+        <parameter name="info" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstVideoInfo</doc>
+          <type name="VideoInfo" c:type="const GstVideoInfo*"/>
+        </parameter>
+        <parameter name="buffer" transfer-ownership="none">
+          <doc xml:space="preserve">the buffer to map</doc>
+          <type name="Gst.Buffer" c:type="GstBuffer*"/>
+        </parameter>
+        <parameter name="flags" transfer-ownership="none">
+          <doc xml:space="preserve">#GstMapFlags</doc>
+          <type name="Gst.MapFlags" c:type="GstMapFlags"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="video_frame_map_id" c:identifier="gst_video_frame_map_id" moved-to="VideoFrame.map_id">
+      <doc xml:space="preserve">Use @info and @buffer to fill in the values of @frame with the video frame
+information of frame @id.
+
+When @id is -1, the default frame is mapped. When @id != -1, this function
+will return %FALSE when there is no GstVideoMeta with that id.
+
+All video planes of @buffer will be mapped and the pointers will be set in
+@frame-&gt;data.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE on success.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="frame" direction="out" caller-allocates="1" transfer-ownership="none">
+          <doc xml:space="preserve">pointer to #GstVideoFrame</doc>
+          <type name="VideoFrame" c:type="GstVideoFrame*"/>
+        </parameter>
+        <parameter name="info" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstVideoInfo</doc>
+          <type name="VideoInfo" c:type="const GstVideoInfo*"/>
+        </parameter>
+        <parameter name="buffer" transfer-ownership="none">
+          <doc xml:space="preserve">the buffer to map</doc>
+          <type name="Gst.Buffer" c:type="GstBuffer*"/>
+        </parameter>
+        <parameter name="id" transfer-ownership="none">
+          <doc xml:space="preserve">the frame id to map</doc>
+          <type name="gint" c:type="gint"/>
+        </parameter>
+        <parameter name="flags" transfer-ownership="none">
+          <doc xml:space="preserve">#GstMapFlags</doc>
+          <type name="Gst.MapFlags" c:type="GstMapFlags"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="video_gl_texture_upload_meta_api_get_type" c:identifier="gst_video_gl_texture_upload_meta_api_get_type">
       <return-value transfer-ownership="none">
         <type name="GType" c:type="GType"/>
@@ -15124,6 +15797,35 @@ recognised, and %FALSE otherwise.</doc>
         <parameter name="dest_d" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
           <doc xml:space="preserve">Denominator of the calculated framerate</doc>
           <type name="gint" c:type="gint*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="video_info_from_caps" c:identifier="gst_video_info_from_caps" moved-to="VideoInfo.from_caps">
+      <doc xml:space="preserve">Parse @caps and update @info.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">TRUE if @caps could be parsed</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="info" direction="out" caller-allocates="1" transfer-ownership="none">
+          <doc xml:space="preserve">#GstVideoInfo</doc>
+          <type name="VideoInfo" c:type="GstVideoInfo*"/>
+        </parameter>
+        <parameter name="caps" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstCaps</doc>
+          <type name="Gst.Caps" c:type="const GstCaps*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="video_info_init" c:identifier="gst_video_info_init" moved-to="VideoInfo.init">
+      <doc xml:space="preserve">Initialize @info with default values.</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="info" direction="out" caller-allocates="1" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstVideoInfo</doc>
+          <type name="VideoInfo" c:type="GstVideoInfo*"/>
         </parameter>
       </parameters>
     </function>
@@ -15521,6 +16223,61 @@ Use this method when @mode is of type %GST_VIDEO_TILE_TYPE_INDEXED.</doc>
       <return-value transfer-ownership="none">
         <type name="Gst.MetaInfo" c:type="const GstMetaInfo*"/>
       </return-value>
+    </function>
+    <function name="video_transfer_function_decode" c:identifier="gst_video_transfer_function_decode" moved-to="VideoTransferFunction.decode" version="1.20">
+      <doc xml:space="preserve">Convert @val to its gamma decoded value. This is the inverse operation of
+gst_video_color_transfer_encode().
+
+For a non-linear value L' in the range [0..1], conversion to the linear
+L is in general performed with a power function like:
+
+|[
+   L = L' ^ gamma
+]|
+
+Depending on @func, different formulas might be applied. Some formulas
+encode a linear segment in the lower range.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">the gamma decoded value of @val</doc>
+        <type name="gdouble" c:type="gdouble"/>
+      </return-value>
+      <parameters>
+        <parameter name="func" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstVideoTransferFunction</doc>
+          <type name="VideoTransferFunction" c:type="GstVideoTransferFunction"/>
+        </parameter>
+        <parameter name="val" transfer-ownership="none">
+          <doc xml:space="preserve">a value</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="video_transfer_function_encode" c:identifier="gst_video_transfer_function_encode" moved-to="VideoTransferFunction.encode" version="1.20">
+      <doc xml:space="preserve">Convert @val to its gamma encoded value.
+
+For a linear value L in the range [0..1], conversion to the non-linear
+(gamma encoded) L' is in general performed with a power function like:
+
+|[
+   L' = L ^ (1 / gamma)
+]|
+
+Depending on @func, different formulas might be applied. Some formulas
+encode a linear segment in the lower range.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">the gamma encoded value of @val</doc>
+        <type name="gdouble" c:type="gdouble"/>
+      </return-value>
+      <parameters>
+        <parameter name="func" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstVideoTransferFunction</doc>
+          <type name="VideoTransferFunction" c:type="GstVideoTransferFunction"/>
+        </parameter>
+        <parameter name="val" transfer-ownership="none">
+          <doc xml:space="preserve">a value</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+      </parameters>
     </function>
     <function name="video_transfer_function_from_iso" c:identifier="gst_video_transfer_function_from_iso" moved-to="VideoTransferFunction.from_iso" version="1.18">
       <doc xml:space="preserve">Converts the @value to the #GstVideoTransferFunction

@@ -1698,7 +1698,7 @@ slave method.</doc>
         <doc xml:space="preserve">Aligning buffers failed because the timestamps are too discontinuous</doc>
       </member>
       <member name="device_failure" value="5" c:identifier="GST_AUDIO_BASE_SINK_DISCONT_REASON_DEVICE_FAILURE" glib:nick="device-failure">
-        <doc xml:space="preserve">Audio output device experienced and recovered from an error but introduced latency in the process (see also @gst_audio_base_sink_report_device_failure())</doc>
+        <doc xml:space="preserve">Audio output device experienced and recovered from an error but introduced latency in the process (see also gst_audio_base_sink_report_device_failure())</doc>
       </member>
     </enumeration>
     <record name="AudioBaseSinkPrivate" c:type="GstAudioBaseSinkPrivate" disguised="1"/>
@@ -1955,54 +1955,6 @@ The different channels in @planes are always in the GStreamer channel order.</do
           <type name="gpointer" c:type="gpointer"/>
         </array>
       </field>
-      <method name="map" c:identifier="gst_audio_buffer_map" version="1.16">
-        <doc xml:space="preserve">Maps an audio @gstbuffer so that it can be read or written and stores the
-result of the map operation in @buffer.
-
-This is especially useful when the @gstbuffer is in non-interleaved (planar)
-layout, in which case this function will use the information in the
-@gstbuffer's attached #GstAudioMeta in order to map each channel in a
-separate "plane" in #GstAudioBuffer. If a #GstAudioMeta is not attached
-on the @gstbuffer, then it must be in interleaved layout.
-
-If a #GstAudioMeta is attached, then the #GstAudioInfo on the meta is checked
-against @info. Normally, they should be equal, but in case they are not,
-a g_critical will be printed and the #GstAudioInfo from the meta will be
-used.
-
-In non-interleaved buffers, it is possible to have each channel on a separate
-#GstMemory. In this case, each memory will be mapped separately to avoid
-copying their contents in a larger memory area. Do note though that it is
-not supported to have a single channel spanning over two or more different
-#GstMemory objects. Although the map operation will likely succeed in this
-case, it will be highly sub-optimal and it is recommended to merge all the
-memories in the buffer before calling this function.
-
-Note: The actual #GstBuffer is not ref'ed, but it is required to stay valid
-as long as it's mapped.</doc>
-        <return-value transfer-ownership="none">
-          <doc xml:space="preserve">%TRUE if the map operation succeeded or %FALSE on failure</doc>
-          <type name="gboolean" c:type="gboolean"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="buffer" transfer-ownership="none">
-            <doc xml:space="preserve">pointer to a #GstAudioBuffer</doc>
-            <type name="AudioBuffer" c:type="GstAudioBuffer*"/>
-          </instance-parameter>
-          <parameter name="info" transfer-ownership="none">
-            <doc xml:space="preserve">the audio properties of the buffer</doc>
-            <type name="AudioInfo" c:type="const GstAudioInfo*"/>
-          </parameter>
-          <parameter name="gstbuffer" transfer-ownership="none">
-            <doc xml:space="preserve">the #GstBuffer to be mapped</doc>
-            <type name="Gst.Buffer" c:type="GstBuffer*"/>
-          </parameter>
-          <parameter name="flags" transfer-ownership="none">
-            <doc xml:space="preserve">the access mode for the memory</doc>
-            <type name="Gst.MapFlags" c:type="GstMapFlags"/>
-          </parameter>
-        </parameters>
-      </method>
       <method name="unmap" c:identifier="gst_audio_buffer_unmap" version="1.16">
         <doc xml:space="preserve">Unmaps an audio buffer that was previously mapped with
 gst_audio_buffer_map().</doc>
@@ -2050,6 +2002,54 @@ number of channels.</doc>
           </parameter>
         </parameters>
       </function>
+      <function name="map" c:identifier="gst_audio_buffer_map" version="1.16">
+        <doc xml:space="preserve">Maps an audio @gstbuffer so that it can be read or written and stores the
+result of the map operation in @buffer.
+
+This is especially useful when the @gstbuffer is in non-interleaved (planar)
+layout, in which case this function will use the information in the
+@gstbuffer's attached #GstAudioMeta in order to map each channel in a
+separate "plane" in #GstAudioBuffer. If a #GstAudioMeta is not attached
+on the @gstbuffer, then it must be in interleaved layout.
+
+If a #GstAudioMeta is attached, then the #GstAudioInfo on the meta is checked
+against @info. Normally, they should be equal, but in case they are not,
+a g_critical will be printed and the #GstAudioInfo from the meta will be
+used.
+
+In non-interleaved buffers, it is possible to have each channel on a separate
+#GstMemory. In this case, each memory will be mapped separately to avoid
+copying their contents in a larger memory area. Do note though that it is
+not supported to have a single channel spanning over two or more different
+#GstMemory objects. Although the map operation will likely succeed in this
+case, it will be highly sub-optimal and it is recommended to merge all the
+memories in the buffer before calling this function.
+
+Note: The actual #GstBuffer is not ref'ed, but it is required to stay valid
+as long as it's mapped.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if the map operation succeeded or %FALSE on failure</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <parameter name="buffer" direction="out" caller-allocates="1" transfer-ownership="none">
+            <doc xml:space="preserve">pointer to a #GstAudioBuffer</doc>
+            <type name="AudioBuffer" c:type="GstAudioBuffer*"/>
+          </parameter>
+          <parameter name="info" transfer-ownership="none">
+            <doc xml:space="preserve">the audio properties of the buffer</doc>
+            <type name="AudioInfo" c:type="const GstAudioInfo*"/>
+          </parameter>
+          <parameter name="gstbuffer" transfer-ownership="none">
+            <doc xml:space="preserve">the #GstBuffer to be mapped</doc>
+            <type name="Gst.Buffer" c:type="GstBuffer*"/>
+          </parameter>
+          <parameter name="flags" transfer-ownership="none">
+            <doc xml:space="preserve">the access mode for the memory</doc>
+            <type name="Gst.MapFlags" c:type="GstMapFlags"/>
+          </parameter>
+        </parameters>
+      </function>
       <function name="reorder_channels" c:identifier="gst_audio_buffer_reorder_channels">
         <doc xml:space="preserve">Reorders @buffer from the channel positions @from to the channel
 positions @to. @from and @to must contain the same number of
@@ -2090,6 +2090,12 @@ positions and the same positions, only in a different order.
         <doc xml:space="preserve">Truncate the buffer to finally have @samples number of samples, removing
 the necessary amount of samples from the end and @trim number of samples
 from the beginning.
+
+This function does not know the audio rate, therefore the caller is
+responsible for re-setting the correct timestamp and duration to the
+buffer. However, timestamp will be preserved if trim == 0, and duration
+will also be preserved if there is no trimming to be done. Offset and
+offset end will be preserved / updated.
 
 After calling this function the caller does not own a reference to
 @buffer anymore.</doc>
@@ -3549,7 +3555,7 @@ used</doc>
         </parameters>
       </method>
       <method name="get_audio_info" c:identifier="gst_audio_decoder_get_audio_info">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="none">
           <doc xml:space="preserve">a #GstAudioInfo describing the input audio format</doc>
           <type name="AudioInfo" c:type="GstAudioInfo*"/>
         </return-value>
@@ -4795,7 +4801,7 @@ used</doc>
         </parameters>
       </method>
       <method name="get_audio_info" c:identifier="gst_audio_encoder_get_audio_info">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="none">
           <doc xml:space="preserve">a #GstAudioInfo describing the input audio format</doc>
           <type name="AudioInfo" c:type="GstAudioInfo*"/>
         </return-value>
@@ -5856,8 +5862,9 @@ exists with the given parameters.</doc>
           </parameter>
         </parameters>
       </function>
-      <function name="fill_silence" c:identifier="gst_audio_format_fill_silence">
+      <function name="fill_silence" c:identifier="gst_audio_format_fill_silence" deprecated="1" deprecated-version="1.20">
         <doc xml:space="preserve">Fill @length bytes in @dest with silence samples for @info.</doc>
+        <doc-deprecated xml:space="preserve">Use gst_audio_format_info_fill_silence() instead.</doc-deprecated>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -5989,6 +5996,29 @@ string is not a known format.</doc>
           <type name="gpointer" c:type="gpointer"/>
         </array>
       </field>
+      <method name="fill_silence" c:identifier="gst_audio_format_info_fill_silence" version="1.20">
+        <doc xml:space="preserve">Fill @length bytes in @dest with silence samples for @info.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="info" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstAudioFormatInfo</doc>
+            <type name="AudioFormatInfo" c:type="const GstAudioFormatInfo*"/>
+          </instance-parameter>
+          <parameter name="dest" transfer-ownership="none">
+            <doc xml:space="preserve">a destination
+  to fill</doc>
+            <array length="1" zero-terminated="0" c:type="gpointer">
+              <type name="guint8"/>
+            </array>
+          </parameter>
+          <parameter name="length" transfer-ownership="none">
+            <doc xml:space="preserve">the length to fill</doc>
+            <type name="gsize" c:type="gsize"/>
+          </parameter>
+        </parameters>
+      </method>
     </record>
     <callback name="AudioFormatPack" c:type="GstAudioFormatPack">
       <doc xml:space="preserve">Packs @length samples from @src to the data array in format @info.
@@ -6167,35 +6197,6 @@ or gst_audio_info_copy().</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="from_caps" c:identifier="gst_audio_info_from_caps">
-        <doc xml:space="preserve">Parse @caps and update @info.</doc>
-        <return-value transfer-ownership="none">
-          <doc xml:space="preserve">TRUE if @caps could be parsed</doc>
-          <type name="gboolean" c:type="gboolean"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="info" transfer-ownership="none">
-            <doc xml:space="preserve">a #GstAudioInfo</doc>
-            <type name="AudioInfo" c:type="GstAudioInfo*"/>
-          </instance-parameter>
-          <parameter name="caps" transfer-ownership="none">
-            <doc xml:space="preserve">a #GstCaps</doc>
-            <type name="Gst.Caps" c:type="const GstCaps*"/>
-          </parameter>
-        </parameters>
-      </method>
-      <method name="init" c:identifier="gst_audio_info_init">
-        <doc xml:space="preserve">Initialize @info with default values.</doc>
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="info" transfer-ownership="none">
-            <doc xml:space="preserve">a #GstAudioInfo</doc>
-            <type name="AudioInfo" c:type="GstAudioInfo*"/>
-          </instance-parameter>
-        </parameters>
-      </method>
       <method name="is_equal" c:identifier="gst_audio_info_is_equal" version="1.2">
         <doc xml:space="preserve">Compares two #GstAudioInfo and returns whether they are equal or not</doc>
         <return-value transfer-ownership="none">
@@ -6259,6 +6260,35 @@ Note: This initializes @info first, no values are preserved.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <function name="from_caps" c:identifier="gst_audio_info_from_caps">
+        <doc xml:space="preserve">Parse @caps and update @info.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">TRUE if @caps could be parsed</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <parameter name="info" direction="out" caller-allocates="1" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstAudioInfo</doc>
+            <type name="AudioInfo" c:type="GstAudioInfo*"/>
+          </parameter>
+          <parameter name="caps" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstCaps</doc>
+            <type name="Gst.Caps" c:type="const GstCaps*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="init" c:identifier="gst_audio_info_init">
+        <doc xml:space="preserve">Initialize @info with default values.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="info" direction="out" caller-allocates="1" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstAudioInfo</doc>
+            <type name="AudioInfo" c:type="GstAudioInfo*"/>
+          </parameter>
+        </parameters>
+      </function>
     </record>
     <enumeration name="AudioLayout" glib:type-name="GstAudioLayout" glib:get-type="gst_audio_layout_get_type" c:type="GstAudioLayout">
       <doc xml:space="preserve">Layout of the audio samples for the different channels.</doc>
@@ -6269,6 +6299,28 @@ Note: This initializes @info first, no values are preserved.</doc>
         <doc xml:space="preserve">non-interleaved audio</doc>
       </member>
     </enumeration>
+    <record name="AudioLevelMeta" c:type="GstAudioLevelMeta" version="1.20">
+      <doc xml:space="preserve">Meta containing Audio Level Indication: https://tools.ietf.org/html/rfc6464</doc>
+      <field name="meta" writable="1">
+        <doc xml:space="preserve">parent #GstMeta</doc>
+        <type name="Gst.Meta" c:type="GstMeta"/>
+      </field>
+      <field name="level" writable="1">
+        <doc xml:space="preserve">the -dBov from 0-127 (127 is silence).</doc>
+        <type name="guint8" c:type="guint8"/>
+      </field>
+      <field name="voice_activity" writable="1">
+        <doc xml:space="preserve">whether the buffer contains voice activity</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </field>
+      <function name="get_info" c:identifier="gst_audio_level_meta_get_info" version="1.20">
+        <doc xml:space="preserve">Return the #GstMetaInfo associated with #GstAudioLevelMeta.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">a #GstMetaInfo</doc>
+          <type name="Gst.MetaInfo" c:type="const GstMetaInfo*"/>
+        </return-value>
+      </function>
+    </record>
     <record name="AudioMeta" c:type="GstAudioMeta" version="1.16">
       <doc xml:space="preserve">#GstAudioDownmixMeta defines an audio downmix matrix to be send along with
 audio buffers. These functions in this module help to create and attach the
@@ -8647,7 +8699,7 @@ or gst_audio_stream_align_copy().</doc>
         <parameters>
           <instance-parameter name="align" transfer-ownership="none">
             <doc xml:space="preserve">a #GstAudioStreamAlign</doc>
-            <type name="AudioStreamAlign" c:type="GstAudioStreamAlign*"/>
+            <type name="AudioStreamAlign" c:type="const GstAudioStreamAlign*"/>
           </instance-parameter>
         </parameters>
       </method>
@@ -8660,7 +8712,7 @@ or gst_audio_stream_align_copy().</doc>
         <parameters>
           <instance-parameter name="align" transfer-ownership="none">
             <doc xml:space="preserve">a #GstAudioStreamAlign</doc>
-            <type name="AudioStreamAlign" c:type="GstAudioStreamAlign*"/>
+            <type name="AudioStreamAlign" c:type="const GstAudioStreamAlign*"/>
           </instance-parameter>
         </parameters>
       </method>
@@ -8673,7 +8725,7 @@ or gst_audio_stream_align_copy().</doc>
         <parameters>
           <instance-parameter name="align" transfer-ownership="none">
             <doc xml:space="preserve">a #GstAudioStreamAlign</doc>
-            <type name="AudioStreamAlign" c:type="GstAudioStreamAlign*"/>
+            <type name="AudioStreamAlign" c:type="const GstAudioStreamAlign*"/>
           </instance-parameter>
         </parameters>
       </method>
@@ -8687,7 +8739,7 @@ discontinuity was detected.</doc>
         <parameters>
           <instance-parameter name="align" transfer-ownership="none">
             <doc xml:space="preserve">a #GstAudioStreamAlign</doc>
-            <type name="AudioStreamAlign" c:type="GstAudioStreamAlign*"/>
+            <type name="AudioStreamAlign" c:type="const GstAudioStreamAlign*"/>
           </instance-parameter>
         </parameters>
       </method>
@@ -8701,7 +8753,7 @@ timestamp after the discontinuity.</doc>
         <parameters>
           <instance-parameter name="align" transfer-ownership="none">
             <doc xml:space="preserve">a #GstAudioStreamAlign</doc>
-            <type name="AudioStreamAlign" c:type="GstAudioStreamAlign*"/>
+            <type name="AudioStreamAlign" c:type="const GstAudioStreamAlign*"/>
           </instance-parameter>
         </parameters>
       </method>
@@ -9176,6 +9228,54 @@ number of channels.</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="audio_buffer_map" c:identifier="gst_audio_buffer_map" moved-to="AudioBuffer.map" version="1.16">
+      <doc xml:space="preserve">Maps an audio @gstbuffer so that it can be read or written and stores the
+result of the map operation in @buffer.
+
+This is especially useful when the @gstbuffer is in non-interleaved (planar)
+layout, in which case this function will use the information in the
+@gstbuffer's attached #GstAudioMeta in order to map each channel in a
+separate "plane" in #GstAudioBuffer. If a #GstAudioMeta is not attached
+on the @gstbuffer, then it must be in interleaved layout.
+
+If a #GstAudioMeta is attached, then the #GstAudioInfo on the meta is checked
+against @info. Normally, they should be equal, but in case they are not,
+a g_critical will be printed and the #GstAudioInfo from the meta will be
+used.
+
+In non-interleaved buffers, it is possible to have each channel on a separate
+#GstMemory. In this case, each memory will be mapped separately to avoid
+copying their contents in a larger memory area. Do note though that it is
+not supported to have a single channel spanning over two or more different
+#GstMemory objects. Although the map operation will likely succeed in this
+case, it will be highly sub-optimal and it is recommended to merge all the
+memories in the buffer before calling this function.
+
+Note: The actual #GstBuffer is not ref'ed, but it is required to stay valid
+as long as it's mapped.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE if the map operation succeeded or %FALSE on failure</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="buffer" direction="out" caller-allocates="1" transfer-ownership="none">
+          <doc xml:space="preserve">pointer to a #GstAudioBuffer</doc>
+          <type name="AudioBuffer" c:type="GstAudioBuffer*"/>
+        </parameter>
+        <parameter name="info" transfer-ownership="none">
+          <doc xml:space="preserve">the audio properties of the buffer</doc>
+          <type name="AudioInfo" c:type="const GstAudioInfo*"/>
+        </parameter>
+        <parameter name="gstbuffer" transfer-ownership="none">
+          <doc xml:space="preserve">the #GstBuffer to be mapped</doc>
+          <type name="Gst.Buffer" c:type="GstBuffer*"/>
+        </parameter>
+        <parameter name="flags" transfer-ownership="none">
+          <doc xml:space="preserve">the access mode for the memory</doc>
+          <type name="Gst.MapFlags" c:type="GstMapFlags"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="audio_buffer_reorder_channels" c:identifier="gst_audio_buffer_reorder_channels" moved-to="AudioBuffer.reorder_channels">
       <doc xml:space="preserve">Reorders @buffer from the channel positions @from to the channel
 positions @to. @from and @to must contain the same number of
@@ -9216,6 +9316,12 @@ positions and the same positions, only in a different order.
       <doc xml:space="preserve">Truncate the buffer to finally have @samples number of samples, removing
 the necessary amount of samples from the end and @trim number of samples
 from the beginning.
+
+This function does not know the audio rate, therefore the caller is
+responsible for re-setting the correct timestamp and duration to the
+buffer. However, timestamp will be preserved if trim == 0, and duration
+will also be preserved if there is no trimming to be done. Offset and
+offset end will be preserved / updated.
 
 After calling this function the caller does not own a reference to
 @buffer anymore.</doc>
@@ -9503,8 +9609,9 @@ exists with the given parameters.</doc>
         </parameter>
       </parameters>
     </function>
-    <function name="audio_format_fill_silence" c:identifier="gst_audio_format_fill_silence" moved-to="AudioFormat.fill_silence">
+    <function name="audio_format_fill_silence" c:identifier="gst_audio_format_fill_silence" moved-to="AudioFormat.fill_silence" deprecated="1" deprecated-version="1.20">
       <doc xml:space="preserve">Fill @length bytes in @dest with silence samples for @info.</doc>
+      <doc-deprecated xml:space="preserve">Use gst_audio_format_info_fill_silence() instead.</doc-deprecated>
       <return-value transfer-ownership="none">
         <type name="none" c:type="void"/>
       </return-value>
@@ -9677,6 +9784,49 @@ otherwise.</doc>
           <type name="gint" c:type="gint"/>
         </parameter>
       </parameters>
+    </function>
+    <function name="audio_info_from_caps" c:identifier="gst_audio_info_from_caps" moved-to="AudioInfo.from_caps">
+      <doc xml:space="preserve">Parse @caps and update @info.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">TRUE if @caps could be parsed</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="info" direction="out" caller-allocates="1" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstAudioInfo</doc>
+          <type name="AudioInfo" c:type="GstAudioInfo*"/>
+        </parameter>
+        <parameter name="caps" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstCaps</doc>
+          <type name="Gst.Caps" c:type="const GstCaps*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="audio_info_init" c:identifier="gst_audio_info_init" moved-to="AudioInfo.init">
+      <doc xml:space="preserve">Initialize @info with default values.</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="info" direction="out" caller-allocates="1" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstAudioInfo</doc>
+          <type name="AudioInfo" c:type="GstAudioInfo*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="audio_level_meta_api_get_type" c:identifier="gst_audio_level_meta_api_get_type" version="1.20">
+      <doc xml:space="preserve">Return the #GType associated with #GstAudioLevelMeta.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">a #GType</doc>
+        <type name="GType" c:type="GType"/>
+      </return-value>
+    </function>
+    <function name="audio_level_meta_get_info" c:identifier="gst_audio_level_meta_get_info" moved-to="AudioLevelMeta.get_info" version="1.20">
+      <doc xml:space="preserve">Return the #GstMetaInfo associated with #GstAudioLevelMeta.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">a #GstMetaInfo</doc>
+        <type name="Gst.MetaInfo" c:type="const GstMetaInfo*"/>
+      </return-value>
     </function>
     <function name="audio_make_raw_caps" c:identifier="gst_audio_make_raw_caps" version="1.18">
       <doc xml:space="preserve">Return a generic raw audio caps for formats defined in @formats.
@@ -9932,6 +10082,27 @@ of the results.</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="buffer_add_audio_level_meta" c:identifier="gst_buffer_add_audio_level_meta" version="1.20">
+      <doc xml:space="preserve">Attaches audio level information to @buffer. (RFC 6464)</doc>
+      <return-value transfer-ownership="none" nullable="1">
+        <doc xml:space="preserve">the #GstAudioLevelMeta on @buffer.</doc>
+        <type name="AudioLevelMeta" c:type="GstAudioLevelMeta*"/>
+      </return-value>
+      <parameters>
+        <parameter name="buffer" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstBuffer</doc>
+          <type name="Gst.Buffer" c:type="GstBuffer*"/>
+        </parameter>
+        <parameter name="level" transfer-ownership="none">
+          <doc xml:space="preserve">the -dBov from 0-127 (127 is silence).</doc>
+          <type name="guint8" c:type="guint8"/>
+        </parameter>
+        <parameter name="voice_activity" transfer-ownership="none">
+          <doc xml:space="preserve">whether the buffer contains voice activity.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="buffer_add_audio_meta" c:identifier="gst_buffer_add_audio_meta" version="1.16">
       <doc xml:space="preserve">Allocates and attaches a #GstAudioMeta on @buffer, which must be writable
 for that purpose. The fields of the #GstAudioMeta are directly populated
@@ -10010,6 +10181,20 @@ channel positions.</doc>
         <parameter name="to_channels" transfer-ownership="none">
           <doc xml:space="preserve">The number of channels of the destination</doc>
           <type name="gint" c:type="gint"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="buffer_get_audio_level_meta" c:identifier="gst_buffer_get_audio_level_meta" version="1.20">
+      <doc xml:space="preserve">Find the #GstAudioLevelMeta on @buffer.</doc>
+      <return-value transfer-ownership="none" nullable="1">
+        <doc xml:space="preserve">the #GstAudioLevelMeta or %NULL when
+there is no such metadata on @buffer.</doc>
+        <type name="AudioLevelMeta" c:type="GstAudioLevelMeta*"/>
+      </return-value>
+      <parameters>
+        <parameter name="buffer" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstBuffer</doc>
+          <type name="Gst.Buffer" c:type="GstBuffer*"/>
         </parameter>
       </parameters>
     </function>
