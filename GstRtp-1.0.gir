@@ -4223,7 +4223,9 @@ information given in the input @buffer.</doc>
           </parameter>
           <parameter name="data" transfer-ownership="none">
             <doc xml:space="preserve">location to read the rtp header extension from</doc>
-            <type name="guint8" c:type="const guint8*"/>
+            <array length="2" zero-terminated="0" c:type="const guint8*">
+              <type name="guint8" c:type="guint8"/>
+            </array>
           </parameter>
           <parameter name="size" transfer-ownership="none">
             <doc xml:space="preserve">size of @data</doc>
@@ -4342,7 +4344,9 @@ from gst_rtp_header_extension_get_max_size().</doc>
           </parameter>
           <parameter name="data" transfer-ownership="none">
             <doc xml:space="preserve">location to write the rtp header extension into</doc>
-            <type name="guint8" c:type="guint8*"/>
+            <array length="4" zero-terminated="0" c:type="guint8*">
+              <type name="guint8" c:type="guint8"/>
+            </array>
           </parameter>
           <parameter name="size" transfer-ownership="none">
             <doc xml:space="preserve">size of @data</doc>
@@ -4438,7 +4442,9 @@ information given in the input @buffer.</doc>
           </parameter>
           <parameter name="data" transfer-ownership="none">
             <doc xml:space="preserve">location to read the rtp header extension from</doc>
-            <type name="guint8" c:type="const guint8*"/>
+            <array length="2" zero-terminated="0" c:type="const guint8*">
+              <type name="guint8" c:type="guint8"/>
+            </array>
           </parameter>
           <parameter name="size" transfer-ownership="none">
             <doc xml:space="preserve">size of @data</doc>
@@ -4652,7 +4658,9 @@ from gst_rtp_header_extension_get_max_size().</doc>
           </parameter>
           <parameter name="data" transfer-ownership="none">
             <doc xml:space="preserve">location to write the rtp header extension into</doc>
-            <type name="guint8" c:type="guint8*"/>
+            <array length="4" zero-terminated="0" c:type="guint8*">
+              <type name="guint8" c:type="guint8"/>
+            </array>
           </parameter>
           <parameter name="size" transfer-ownership="none">
             <doc xml:space="preserve">size of @data</doc>
@@ -4663,13 +4671,6 @@ from gst_rtp_header_extension_get_max_size().</doc>
       <field name="parent">
         <doc xml:space="preserve">the parent #GObject</doc>
         <type name="Gst.Element" c:type="GstElement"/>
-      </field>
-      <field name="ext_id">
-        <doc xml:space="preserve">the configured extension id</doc>
-        <type name="guint" c:type="guint"/>
-      </field>
-      <field name="wants_update_non_rtp_src_caps">
-        <type name="gboolean" c:type="gboolean"/>
       </field>
       <field name="_gst_reserved" readable="0" private="1">
         <array zero-terminated="0" fixed-size="4">
@@ -4741,7 +4742,9 @@ from gst_rtp_header_extension_get_max_size().</doc>
             </parameter>
             <parameter name="data" transfer-ownership="none">
               <doc xml:space="preserve">location to write the rtp header extension into</doc>
-              <type name="guint8" c:type="guint8*"/>
+              <array length="5" zero-terminated="0" c:type="guint8*">
+                <type name="guint8" c:type="guint8"/>
+              </array>
             </parameter>
             <parameter name="size" transfer-ownership="none">
               <doc xml:space="preserve">size of @data</doc>
@@ -4768,7 +4771,9 @@ from gst_rtp_header_extension_get_max_size().</doc>
             </parameter>
             <parameter name="data" transfer-ownership="none">
               <doc xml:space="preserve">location to read the rtp header extension from</doc>
-              <type name="guint8" c:type="const guint8*"/>
+              <array length="3" zero-terminated="0" c:type="const guint8*">
+                <type name="guint8" c:type="guint8"/>
+              </array>
             </parameter>
             <parameter name="size" transfer-ownership="none">
               <doc xml:space="preserve">size of @data</doc>

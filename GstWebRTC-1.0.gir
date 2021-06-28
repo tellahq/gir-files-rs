@@ -98,18 +98,6 @@ and/or use gtk-doc annotations.  -->
         </parameter>
       </parameters>
     </function-macro>
-    <function-macro name="WEBRTC_DATA_CHANNEL_LOCK" c:identifier="GST_WEBRTC_DATA_CHANNEL_LOCK" introspectable="0">
-      <parameters>
-        <parameter name="channel">
-        </parameter>
-      </parameters>
-    </function-macro>
-    <function-macro name="WEBRTC_DATA_CHANNEL_UNLOCK" c:identifier="GST_WEBRTC_DATA_CHANNEL_UNLOCK" introspectable="0">
-      <parameters>
-        <parameter name="channel">
-        </parameter>
-      </parameters>
-    </function-macro>
     <function-macro name="WEBRTC_DTLS_TRANSPORT" c:identifier="GST_WEBRTC_DTLS_TRANSPORT" introspectable="0">
       <parameters>
         <parameter name="obj">
@@ -231,29 +219,6 @@ for more information.</doc>
       </member>
     </enumeration>
     <class name="WebRTCDTLSTransport" c:symbol-prefix="webrtc_dtls_transport" c:type="GstWebRTCDTLSTransport" parent="Gst.Object" glib:type-name="GstWebRTCDTLSTransport" glib:get-type="gst_webrtc_dtls_transport_get_type" glib:type-struct="WebRTCDTLSTransportClass">
-      <constructor name="new" c:identifier="gst_webrtc_dtls_transport_new">
-        <return-value transfer-ownership="none">
-          <type name="WebRTCDTLSTransport" c:type="GstWebRTCDTLSTransport*"/>
-        </return-value>
-        <parameters>
-          <parameter name="session_id" transfer-ownership="none">
-            <type name="guint" c:type="guint"/>
-          </parameter>
-        </parameters>
-      </constructor>
-      <method name="set_transport" c:identifier="gst_webrtc_dtls_transport_set_transport">
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="transport" transfer-ownership="none">
-            <type name="WebRTCDTLSTransport" c:type="GstWebRTCDTLSTransport*"/>
-          </instance-parameter>
-          <parameter name="ice" transfer-ownership="none">
-            <type name="WebRTCICETransport" c:type="GstWebRTCICETransport*"/>
-          </parameter>
-        </parameters>
-      </method>
       <property name="certificate" writable="1" transfer-ownership="none">
         <type name="utf8" c:type="gchar*"/>
       </property>
@@ -272,43 +237,8 @@ for more information.</doc>
       <property name="transport" transfer-ownership="none">
         <type name="WebRTCICETransport"/>
       </property>
-      <field name="parent">
-        <type name="Gst.Object" c:type="GstObject"/>
-      </field>
-      <field name="transport">
-        <type name="WebRTCICETransport" c:type="GstWebRTCICETransport*"/>
-      </field>
-      <field name="state">
-        <type name="WebRTCDTLSTransportState" c:type="GstWebRTCDTLSTransportState"/>
-      </field>
-      <field name="client">
-        <type name="gboolean" c:type="gboolean"/>
-      </field>
-      <field name="session_id">
-        <type name="guint" c:type="guint"/>
-      </field>
-      <field name="dtlssrtpenc">
-        <type name="Gst.Element" c:type="GstElement*"/>
-      </field>
-      <field name="dtlssrtpdec">
-        <type name="Gst.Element" c:type="GstElement*"/>
-      </field>
-      <field name="_padding">
-        <array zero-terminated="0" fixed-size="4">
-          <type name="gpointer" c:type="gpointer"/>
-        </array>
-      </field>
     </class>
-    <record name="WebRTCDTLSTransportClass" c:type="GstWebRTCDTLSTransportClass" glib:is-gtype-struct-for="WebRTCDTLSTransport">
-      <field name="parent_class">
-        <type name="Gst.ObjectClass" c:type="GstObjectClass"/>
-      </field>
-      <field name="_padding">
-        <array zero-terminated="0" fixed-size="4">
-          <type name="gpointer" c:type="gpointer"/>
-        </array>
-      </field>
-    </record>
+    <record name="WebRTCDTLSTransportClass" c:type="GstWebRTCDTLSTransportClass" disguised="1" glib:is-gtype-struct-for="WebRTCDTLSTransport"/>
     <enumeration name="WebRTCDTLSTransportState" glib:type-name="GstWebRTCDTLSTransportState" glib:get-type="gst_webrtc_dtls_transport_state_get_type" c:type="GstWebRTCDTLSTransportState">
       <member name="new" value="0" c:identifier="GST_WEBRTC_DTLS_TRANSPORT_STATE_NEW" glib:nick="new">
         <doc xml:space="preserve">new</doc>
@@ -326,137 +256,9 @@ for more information.</doc>
         <doc xml:space="preserve">connected</doc>
       </member>
     </enumeration>
-    <class name="WebRTCDataChannel" c:symbol-prefix="webrtc_data_channel" c:type="GstWebRTCDataChannel" version="1.18" parent="GObject.Object" abstract="1" glib:type-name="GstWebRTCDataChannel" glib:get-type="gst_webrtc_data_channel_get_type" glib:type-struct="WebRTCDataChannelClass">
-      <virtual-method name="close" invoker="close">
-        <doc xml:space="preserve">Close the @channel.</doc>
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="channel" transfer-ownership="none">
-            <doc xml:space="preserve">a #GstWebRTCDataChannel</doc>
-            <type name="WebRTCDataChannel" c:type="GstWebRTCDataChannel*"/>
-          </instance-parameter>
-        </parameters>
-      </virtual-method>
-      <virtual-method name="send_data" invoker="send_data">
-        <doc xml:space="preserve">Send @data as a data message over @channel.</doc>
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="channel" transfer-ownership="none">
-            <doc xml:space="preserve">a #GstWebRTCDataChannel</doc>
-            <type name="WebRTCDataChannel" c:type="GstWebRTCDataChannel*"/>
-          </instance-parameter>
-          <parameter name="data" transfer-ownership="none" nullable="1" allow-none="1">
-            <doc xml:space="preserve">a #GBytes or %NULL</doc>
-            <type name="GLib.Bytes" c:type="GBytes*"/>
-          </parameter>
-        </parameters>
-      </virtual-method>
-      <virtual-method name="send_string" invoker="send_string">
-        <doc xml:space="preserve">Send @str as a string message over @channel.</doc>
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="channel" transfer-ownership="none">
-            <doc xml:space="preserve">a #GstWebRTCDataChannel</doc>
-            <type name="WebRTCDataChannel" c:type="GstWebRTCDataChannel*"/>
-          </instance-parameter>
-          <parameter name="str" transfer-ownership="none" nullable="1" allow-none="1">
-            <doc xml:space="preserve">a string or %NULL</doc>
-            <type name="utf8" c:type="const gchar*"/>
-          </parameter>
-        </parameters>
-      </virtual-method>
+    <class name="WebRTCDataChannel" c:symbol-prefix="webrtc_data_channel" c:type="GstWebRTCDataChannel" parent="GObject.Object" abstract="1" glib:type-name="GstWebRTCDataChannel" glib:get-type="gst_webrtc_data_channel_get_type" glib:type-struct="WebRTCDataChannelClass">
       <method name="close" c:identifier="gst_webrtc_data_channel_close">
         <doc xml:space="preserve">Close the @channel.</doc>
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="channel" transfer-ownership="none">
-            <doc xml:space="preserve">a #GstWebRTCDataChannel</doc>
-            <type name="WebRTCDataChannel" c:type="GstWebRTCDataChannel*"/>
-          </instance-parameter>
-        </parameters>
-      </method>
-      <method name="on_buffered_amount_low" c:identifier="gst_webrtc_data_channel_on_buffered_amount_low">
-        <doc xml:space="preserve">Signal that the data channel reached a low buffered amount. Should only be used by subclasses.</doc>
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="channel" transfer-ownership="none">
-            <doc xml:space="preserve">a #GstWebRTCDataChannel</doc>
-            <type name="WebRTCDataChannel" c:type="GstWebRTCDataChannel*"/>
-          </instance-parameter>
-        </parameters>
-      </method>
-      <method name="on_close" c:identifier="gst_webrtc_data_channel_on_close">
-        <doc xml:space="preserve">Signal that the data channel was closed. Should only be used by subclasses.</doc>
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="channel" transfer-ownership="none">
-            <doc xml:space="preserve">a #GstWebRTCDataChannel</doc>
-            <type name="WebRTCDataChannel" c:type="GstWebRTCDataChannel*"/>
-          </instance-parameter>
-        </parameters>
-      </method>
-      <method name="on_error" c:identifier="gst_webrtc_data_channel_on_error">
-        <doc xml:space="preserve">Signal that the data channel had an error. Should only be used by subclasses.</doc>
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="channel" transfer-ownership="none">
-            <doc xml:space="preserve">a #GstWebRTCDataChannel</doc>
-            <type name="WebRTCDataChannel" c:type="GstWebRTCDataChannel*"/>
-          </instance-parameter>
-          <parameter name="error" transfer-ownership="full">
-            <doc xml:space="preserve">a #GError</doc>
-            <type name="GLib.Error" c:type="GError*"/>
-          </parameter>
-        </parameters>
-      </method>
-      <method name="on_message_data" c:identifier="gst_webrtc_data_channel_on_message_data">
-        <doc xml:space="preserve">Signal that the data channel received a data message. Should only be used by subclasses.</doc>
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="channel" transfer-ownership="none">
-            <doc xml:space="preserve">a #GstWebRTCDataChannel</doc>
-            <type name="WebRTCDataChannel" c:type="GstWebRTCDataChannel*"/>
-          </instance-parameter>
-          <parameter name="data" transfer-ownership="none" nullable="1" allow-none="1">
-            <doc xml:space="preserve">a #GBytes or %NULL</doc>
-            <type name="GLib.Bytes" c:type="GBytes*"/>
-          </parameter>
-        </parameters>
-      </method>
-      <method name="on_message_string" c:identifier="gst_webrtc_data_channel_on_message_string">
-        <doc xml:space="preserve">Signal that the data channel received a string message. Should only be used by subclasses.</doc>
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="channel" transfer-ownership="none">
-            <doc xml:space="preserve">a #GstWebRTCDataChannel</doc>
-            <type name="WebRTCDataChannel" c:type="GstWebRTCDataChannel*"/>
-          </instance-parameter>
-          <parameter name="str" transfer-ownership="none" nullable="1" allow-none="1">
-            <doc xml:space="preserve">a string or %NULL</doc>
-            <type name="utf8" c:type="const gchar*"/>
-          </parameter>
-        </parameters>
-      </method>
-      <method name="on_open" c:identifier="gst_webrtc_data_channel_on_open">
-        <doc xml:space="preserve">Signal that the data channel was opened. Should only be used by subclasses.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -532,50 +334,6 @@ for more information.</doc>
       <property name="ready-state" transfer-ownership="none">
         <type name="WebRTCDataChannelState"/>
       </property>
-      <field name="parent">
-        <type name="GObject.Object" c:type="GObject"/>
-      </field>
-      <field name="lock">
-        <type name="GLib.Mutex" c:type="GMutex"/>
-      </field>
-      <field name="label">
-        <type name="utf8" c:type="gchar*"/>
-      </field>
-      <field name="ordered">
-        <type name="gboolean" c:type="gboolean"/>
-      </field>
-      <field name="max_packet_lifetime">
-        <type name="guint" c:type="guint"/>
-      </field>
-      <field name="max_retransmits">
-        <type name="guint" c:type="guint"/>
-      </field>
-      <field name="protocol">
-        <type name="utf8" c:type="gchar*"/>
-      </field>
-      <field name="negotiated">
-        <type name="gboolean" c:type="gboolean"/>
-      </field>
-      <field name="id">
-        <type name="gint" c:type="gint"/>
-      </field>
-      <field name="priority">
-        <type name="WebRTCPriorityType" c:type="GstWebRTCPriorityType"/>
-      </field>
-      <field name="ready_state">
-        <type name="WebRTCDataChannelState" c:type="GstWebRTCDataChannelState"/>
-      </field>
-      <field name="buffered_amount">
-        <type name="guint64" c:type="guint64"/>
-      </field>
-      <field name="buffered_amount_low_threshold">
-        <type name="guint64" c:type="guint64"/>
-      </field>
-      <field name="_padding">
-        <array zero-terminated="0" fixed-size="4">
-          <type name="gpointer" c:type="gpointer"/>
-        </array>
-      </field>
       <glib:signal name="close" when="last" action="1">
         <doc xml:space="preserve">Close the data channel</doc>
         <return-value transfer-ownership="none">
@@ -653,63 +411,7 @@ for more information.</doc>
         </parameters>
       </glib:signal>
     </class>
-    <record name="WebRTCDataChannelClass" c:type="GstWebRTCDataChannelClass" glib:is-gtype-struct-for="WebRTCDataChannel" version="1.18">
-      <field name="parent_class">
-        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
-      </field>
-      <field name="send_data">
-        <callback name="send_data">
-          <return-value transfer-ownership="none">
-            <type name="none" c:type="void"/>
-          </return-value>
-          <parameters>
-            <parameter name="channel" transfer-ownership="none">
-              <doc xml:space="preserve">a #GstWebRTCDataChannel</doc>
-              <type name="WebRTCDataChannel" c:type="GstWebRTCDataChannel*"/>
-            </parameter>
-            <parameter name="data" transfer-ownership="none" nullable="1" allow-none="1">
-              <doc xml:space="preserve">a #GBytes or %NULL</doc>
-              <type name="GLib.Bytes" c:type="GBytes*"/>
-            </parameter>
-          </parameters>
-        </callback>
-      </field>
-      <field name="send_string">
-        <callback name="send_string">
-          <return-value transfer-ownership="none">
-            <type name="none" c:type="void"/>
-          </return-value>
-          <parameters>
-            <parameter name="channel" transfer-ownership="none">
-              <doc xml:space="preserve">a #GstWebRTCDataChannel</doc>
-              <type name="WebRTCDataChannel" c:type="GstWebRTCDataChannel*"/>
-            </parameter>
-            <parameter name="str" transfer-ownership="none" nullable="1" allow-none="1">
-              <doc xml:space="preserve">a string or %NULL</doc>
-              <type name="utf8" c:type="const gchar*"/>
-            </parameter>
-          </parameters>
-        </callback>
-      </field>
-      <field name="close">
-        <callback name="close">
-          <return-value transfer-ownership="none">
-            <type name="none" c:type="void"/>
-          </return-value>
-          <parameters>
-            <parameter name="channel" transfer-ownership="none">
-              <doc xml:space="preserve">a #GstWebRTCDataChannel</doc>
-              <type name="WebRTCDataChannel" c:type="GstWebRTCDataChannel*"/>
-            </parameter>
-          </parameters>
-        </callback>
-      </field>
-      <field name="_padding">
-        <array zero-terminated="0" fixed-size="4">
-          <type name="gpointer" c:type="gpointer"/>
-        </array>
-      </field>
-    </record>
+    <record name="WebRTCDataChannelClass" c:type="GstWebRTCDataChannelClass" disguised="1" glib:is-gtype-struct-for="WebRTCDataChannel"/>
     <enumeration name="WebRTCDataChannelState" version="1.16" glib:type-name="GstWebRTCDataChannelState" glib:get-type="gst_webrtc_data_channel_state_get_type" c:type="GstWebRTCDataChannelState">
       <doc xml:space="preserve">See &lt;http://w3c.github.io/webrtc-pc/#dom-rtcdatachannelstate&gt;</doc>
       <member name="new" value="0" c:identifier="GST_WEBRTC_DATA_CHANNEL_STATE_NEW" glib:nick="new">
@@ -789,71 +491,6 @@ for more information.</doc>
       </member>
     </enumeration>
     <class name="WebRTCICETransport" c:symbol-prefix="webrtc_ice_transport" c:type="GstWebRTCICETransport" parent="Gst.Object" abstract="1" glib:type-name="GstWebRTCICETransport" glib:get-type="gst_webrtc_ice_transport_get_type" glib:type-struct="WebRTCICETransportClass">
-      <virtual-method name="gather_candidates">
-        <return-value transfer-ownership="none">
-          <type name="gboolean" c:type="gboolean"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="transport" transfer-ownership="none">
-            <type name="WebRTCICETransport" c:type="GstWebRTCICETransport*"/>
-          </instance-parameter>
-        </parameters>
-      </virtual-method>
-      <method name="connection_state_change" c:identifier="gst_webrtc_ice_transport_connection_state_change">
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="ice" transfer-ownership="none">
-            <type name="WebRTCICETransport" c:type="GstWebRTCICETransport*"/>
-          </instance-parameter>
-          <parameter name="new_state" transfer-ownership="none">
-            <type name="WebRTCICEConnectionState" c:type="GstWebRTCICEConnectionState"/>
-          </parameter>
-        </parameters>
-      </method>
-      <method name="gathering_state_change" c:identifier="gst_webrtc_ice_transport_gathering_state_change">
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="ice" transfer-ownership="none">
-            <type name="WebRTCICETransport" c:type="GstWebRTCICETransport*"/>
-          </instance-parameter>
-          <parameter name="new_state" transfer-ownership="none">
-            <type name="WebRTCICEGatheringState" c:type="GstWebRTCICEGatheringState"/>
-          </parameter>
-        </parameters>
-      </method>
-      <method name="new_candidate" c:identifier="gst_webrtc_ice_transport_new_candidate">
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="ice" transfer-ownership="none">
-            <type name="WebRTCICETransport" c:type="GstWebRTCICETransport*"/>
-          </instance-parameter>
-          <parameter name="stream_id" transfer-ownership="none">
-            <type name="guint" c:type="guint"/>
-          </parameter>
-          <parameter name="component" transfer-ownership="none">
-            <type name="WebRTCICEComponent" c:type="GstWebRTCICEComponent"/>
-          </parameter>
-          <parameter name="attr" transfer-ownership="none">
-            <type name="utf8" c:type="gchar*"/>
-          </parameter>
-        </parameters>
-      </method>
-      <method name="selected_pair_change" c:identifier="gst_webrtc_ice_transport_selected_pair_change">
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="ice" transfer-ownership="none">
-            <type name="WebRTCICETransport" c:type="GstWebRTCICETransport*"/>
-          </instance-parameter>
-        </parameters>
-      </method>
       <property name="component" writable="1" construct-only="1" transfer-ownership="none">
         <type name="WebRTCICEComponent"/>
       </property>
@@ -863,32 +500,6 @@ for more information.</doc>
       <property name="state" transfer-ownership="none">
         <type name="WebRTCICEConnectionState"/>
       </property>
-      <field name="parent">
-        <type name="Gst.Object" c:type="GstObject"/>
-      </field>
-      <field name="role">
-        <type name="WebRTCICERole" c:type="GstWebRTCICERole"/>
-      </field>
-      <field name="component">
-        <type name="WebRTCICEComponent" c:type="GstWebRTCICEComponent"/>
-      </field>
-      <field name="state">
-        <type name="WebRTCICEConnectionState" c:type="GstWebRTCICEConnectionState"/>
-      </field>
-      <field name="gathering_state">
-        <type name="WebRTCICEGatheringState" c:type="GstWebRTCICEGatheringState"/>
-      </field>
-      <field name="src">
-        <type name="Gst.Element" c:type="GstElement*"/>
-      </field>
-      <field name="sink">
-        <type name="Gst.Element" c:type="GstElement*"/>
-      </field>
-      <field name="_padding">
-        <array zero-terminated="0" fixed-size="4">
-          <type name="gpointer" c:type="gpointer"/>
-        </array>
-      </field>
       <glib:signal name="on-new-candidate" when="last">
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -905,28 +516,7 @@ for more information.</doc>
         </return-value>
       </glib:signal>
     </class>
-    <record name="WebRTCICETransportClass" c:type="GstWebRTCICETransportClass" glib:is-gtype-struct-for="WebRTCICETransport">
-      <field name="parent_class">
-        <type name="Gst.ObjectClass" c:type="GstObjectClass"/>
-      </field>
-      <field name="gather_candidates">
-        <callback name="gather_candidates">
-          <return-value transfer-ownership="none">
-            <type name="gboolean" c:type="gboolean"/>
-          </return-value>
-          <parameters>
-            <parameter name="transport" transfer-ownership="none">
-              <type name="WebRTCICETransport" c:type="GstWebRTCICETransport*"/>
-            </parameter>
-          </parameters>
-        </callback>
-      </field>
-      <field name="_padding">
-        <array zero-terminated="0" fixed-size="4">
-          <type name="gpointer" c:type="gpointer"/>
-        </array>
-      </field>
-    </record>
+    <record name="WebRTCICETransportClass" c:type="GstWebRTCICETransportClass" disguised="1" glib:is-gtype-struct-for="WebRTCICETransport"/>
     <enumeration name="WebRTCICETransportPolicy" version="1.16" glib:type-name="GstWebRTCICETransportPolicy" glib:get-type="gst_webrtc_ice_transport_policy_get_type" c:type="GstWebRTCICETransportPolicy">
       <doc xml:space="preserve">See https://tools.ietf.org/html/draft-ietf-rtcweb-jsep-24#section-4.1.1
 for more information.</doc>
@@ -985,51 +575,14 @@ for more information.</doc>
         <doc xml:space="preserve">high</doc>
       </member>
     </enumeration>
-    <class name="WebRTCRTPReceiver" c:symbol-prefix="webrtc_rtp_receiver" c:type="GstWebRTCRTPReceiver" version="1.16" parent="Gst.Object" glib:type-name="GstWebRTCRTPReceiver" glib:get-type="gst_webrtc_rtp_receiver_get_type" glib:type-struct="WebRTCRTPReceiverClass">
-      <doc xml:space="preserve">An object to track the receiving aspect of the stream
-
-Mostly matches the WebRTC RTCRtpReceiver interface.</doc>
-      <constructor name="new" c:identifier="gst_webrtc_rtp_receiver_new">
-        <return-value transfer-ownership="none">
-          <type name="WebRTCRTPReceiver" c:type="GstWebRTCRTPReceiver*"/>
-        </return-value>
-      </constructor>
+    <class name="WebRTCRTPReceiver" c:symbol-prefix="webrtc_rtp_receiver" c:type="GstWebRTCRTPReceiver" parent="Gst.Object" glib:type-name="GstWebRTCRTPReceiver" glib:get-type="gst_webrtc_rtp_receiver_get_type" glib:type-struct="WebRTCRTPReceiverClass">
       <property name="transport" version="1.20" transfer-ownership="none">
         <doc xml:space="preserve">The DTLS transport for this receiver</doc>
         <type name="WebRTCDTLSTransport"/>
       </property>
-      <field name="parent">
-        <type name="Gst.Object" c:type="GstObject"/>
-      </field>
-      <field name="transport">
-        <doc xml:space="preserve">The transport for RTP packets</doc>
-        <type name="WebRTCDTLSTransport" c:type="GstWebRTCDTLSTransport*"/>
-      </field>
-      <field name="_padding">
-        <array zero-terminated="0" fixed-size="4">
-          <type name="gpointer" c:type="gpointer"/>
-        </array>
-      </field>
     </class>
-    <record name="WebRTCRTPReceiverClass" c:type="GstWebRTCRTPReceiverClass" glib:is-gtype-struct-for="WebRTCRTPReceiver">
-      <field name="parent_class">
-        <type name="Gst.ObjectClass" c:type="GstObjectClass"/>
-      </field>
-      <field name="_padding">
-        <array zero-terminated="0" fixed-size="4">
-          <type name="gpointer" c:type="gpointer"/>
-        </array>
-      </field>
-    </record>
-    <class name="WebRTCRTPSender" c:symbol-prefix="webrtc_rtp_sender" c:type="GstWebRTCRTPSender" version="1.16" parent="Gst.Object" glib:type-name="GstWebRTCRTPSender" glib:get-type="gst_webrtc_rtp_sender_get_type" glib:type-struct="WebRTCRTPSenderClass">
-      <doc xml:space="preserve">An object to track the sending aspect of the stream
-
-Mostly matches the WebRTC RTCRtpSender interface.</doc>
-      <constructor name="new" c:identifier="gst_webrtc_rtp_sender_new">
-        <return-value transfer-ownership="none">
-          <type name="WebRTCRTPSender" c:type="GstWebRTCRTPSender*"/>
-        </return-value>
-      </constructor>
+    <record name="WebRTCRTPReceiverClass" c:type="GstWebRTCRTPReceiverClass" disguised="1" glib:is-gtype-struct-for="WebRTCRTPReceiver"/>
+    <class name="WebRTCRTPSender" c:symbol-prefix="webrtc_rtp_sender" c:type="GstWebRTCRTPSender" parent="Gst.Object" glib:type-name="GstWebRTCRTPSender" glib:get-type="gst_webrtc_rtp_sender_get_type" glib:type-struct="WebRTCRTPSenderClass">
       <method name="set_priority" c:identifier="gst_webrtc_rtp_sender_set_priority" version="1.20">
         <doc xml:space="preserve">Sets the content of the IPv4 Type of Service (ToS), also known as DSCP
 (Differentiated Services Code Point).
@@ -1056,41 +609,9 @@ This also sets the Traffic Class field of IPv6.</doc>
         <doc xml:space="preserve">The DTLS transport for this sender</doc>
         <type name="WebRTCDTLSTransport"/>
       </property>
-      <field name="parent">
-        <type name="Gst.Object" c:type="GstObject"/>
-      </field>
-      <field name="transport">
-        <doc xml:space="preserve">The transport for RTP packets</doc>
-        <type name="WebRTCDTLSTransport" c:type="GstWebRTCDTLSTransport*"/>
-      </field>
-      <field name="send_encodings">
-        <doc xml:space="preserve">Unused</doc>
-        <array name="GLib.Array" c:type="GArray*">
-          <type name="gpointer" c:type="gpointer"/>
-        </array>
-      </field>
-      <field name="priority" version="1.20">
-        <doc xml:space="preserve">The priority of the stream</doc>
-        <type name="WebRTCPriorityType" c:type="GstWebRTCPriorityType"/>
-      </field>
-      <field name="_padding">
-        <array zero-terminated="0" fixed-size="4">
-          <type name="gpointer" c:type="gpointer"/>
-        </array>
-      </field>
     </class>
-    <record name="WebRTCRTPSenderClass" c:type="GstWebRTCRTPSenderClass" glib:is-gtype-struct-for="WebRTCRTPSender">
-      <field name="parent_class">
-        <type name="Gst.ObjectClass" c:type="GstObjectClass"/>
-      </field>
-      <field name="_padding">
-        <array zero-terminated="0" fixed-size="4">
-          <type name="gpointer" c:type="gpointer"/>
-        </array>
-      </field>
-    </record>
-    <class name="WebRTCRTPTransceiver" c:symbol-prefix="webrtc_rtp_transceiver" c:type="GstWebRTCRTPTransceiver" version="1.16" parent="Gst.Object" abstract="1" glib:type-name="GstWebRTCRTPTransceiver" glib:get-type="gst_webrtc_rtp_transceiver_get_type" glib:type-struct="WebRTCRTPTransceiverClass">
-      <doc xml:space="preserve">Mostly matches the WebRTC RTCRtpTransceiver interface.</doc>
+    <record name="WebRTCRTPSenderClass" c:type="GstWebRTCRTPSenderClass" disguised="1" glib:is-gtype-struct-for="WebRTCRTPSender"/>
+    <class name="WebRTCRTPTransceiver" c:symbol-prefix="webrtc_rtp_transceiver" c:type="GstWebRTCRTPTransceiver" parent="Gst.Object" abstract="1" glib:type-name="GstWebRTCRTPTransceiver" glib:get-type="gst_webrtc_rtp_transceiver_get_type" glib:type-struct="WebRTCRTPTransceiverClass">
       <property name="codec-preferences" version="1.20" writable="1" transfer-ownership="none">
         <doc xml:space="preserve">Caps representing the codec preferences.</doc>
         <type name="Gst.Caps"/>
@@ -1128,70 +649,8 @@ answer.</doc>
       <property name="sender" writable="1" construct-only="1" transfer-ownership="none">
         <type name="WebRTCRTPSender"/>
       </property>
-      <field name="parent">
-        <type name="Gst.Object" c:type="GstObject"/>
-      </field>
-      <field name="mline">
-        <doc xml:space="preserve">the mline number this transceiver corresponds to</doc>
-        <type name="guint" c:type="guint"/>
-      </field>
-      <field name="mid">
-        <doc xml:space="preserve">The media ID of the m-line associated with this
-transceiver. This association is established, when possible,
-whenever either a local or remote description is applied. This
-field is NULL if neither a local or remote description has been
-applied, or if its associated m-line is rejected by either a remote
-offer or any answer.</doc>
-        <type name="utf8" c:type="gchar*"/>
-      </field>
-      <field name="stopped">
-        <doc xml:space="preserve">Indicates whether or not sending and receiving using the paired
-#GstWebRTCRTPSender and #GstWebRTCRTPReceiver has been permanently disabled,
-either due to SDP offer/answer</doc>
-        <type name="gboolean" c:type="gboolean"/>
-      </field>
-      <field name="sender">
-        <doc xml:space="preserve">The #GstWebRTCRTPSender object responsible sending  data to the
-remote peer</doc>
-        <type name="WebRTCRTPSender" c:type="GstWebRTCRTPSender*"/>
-      </field>
-      <field name="receiver">
-        <doc xml:space="preserve">The #GstWebRTCRTPReceiver object responsible for receiver data from
-the remote peer.</doc>
-        <type name="WebRTCRTPReceiver" c:type="GstWebRTCRTPReceiver*"/>
-      </field>
-      <field name="direction">
-        <doc xml:space="preserve">The transceiver's desired direction.</doc>
-        <type name="WebRTCRTPTransceiverDirection" c:type="GstWebRTCRTPTransceiverDirection"/>
-      </field>
-      <field name="current_direction">
-        <doc xml:space="preserve">The transceiver's current direction (read-only)</doc>
-        <type name="WebRTCRTPTransceiverDirection" c:type="GstWebRTCRTPTransceiverDirection"/>
-      </field>
-      <field name="codec_preferences">
-        <doc xml:space="preserve">A caps representing the codec preferences (read-only)</doc>
-        <type name="Gst.Caps" c:type="GstCaps*"/>
-      </field>
-      <field name="kind" version="1.20">
-        <doc xml:space="preserve">Type of media</doc>
-        <type name="WebRTCKind" c:type="GstWebRTCKind"/>
-      </field>
-      <field name="_padding">
-        <array zero-terminated="0" fixed-size="4">
-          <type name="gpointer" c:type="gpointer"/>
-        </array>
-      </field>
     </class>
-    <record name="WebRTCRTPTransceiverClass" c:type="GstWebRTCRTPTransceiverClass" glib:is-gtype-struct-for="WebRTCRTPTransceiver">
-      <field name="parent_class">
-        <type name="Gst.ObjectClass" c:type="GstObjectClass"/>
-      </field>
-      <field name="_padding">
-        <array zero-terminated="0" fixed-size="4">
-          <type name="gpointer" c:type="gpointer"/>
-        </array>
-      </field>
-    </record>
+    <record name="WebRTCRTPTransceiverClass" c:type="GstWebRTCRTPTransceiverClass" disguised="1" glib:is-gtype-struct-for="WebRTCRTPTransceiver"/>
     <enumeration name="WebRTCRTPTransceiverDirection" glib:type-name="GstWebRTCRTPTransceiverDirection" glib:get-type="gst_webrtc_rtp_transceiver_direction_get_type" c:type="GstWebRTCRTPTransceiverDirection">
       <member name="none" value="0" c:identifier="GST_WEBRTC_RTP_TRANSCEIVER_DIRECTION_NONE" glib:nick="none">
         <doc xml:space="preserve">none</doc>
