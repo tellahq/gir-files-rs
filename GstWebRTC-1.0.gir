@@ -256,7 +256,7 @@ for more information.</doc>
         <doc xml:space="preserve">connected</doc>
       </member>
     </enumeration>
-    <class name="WebRTCDataChannel" c:symbol-prefix="webrtc_data_channel" c:type="GstWebRTCDataChannel" parent="GObject.Object" abstract="1" glib:type-name="GstWebRTCDataChannel" glib:get-type="gst_webrtc_data_channel_get_type" glib:type-struct="WebRTCDataChannelClass">
+    <class name="WebRTCDataChannel" c:symbol-prefix="webrtc_data_channel" c:type="GstWebRTCDataChannel" version="1.18" parent="GObject.Object" abstract="1" glib:type-name="GstWebRTCDataChannel" glib:get-type="gst_webrtc_data_channel_get_type" glib:type-struct="WebRTCDataChannelClass">
       <method name="close" c:identifier="gst_webrtc_data_channel_close">
         <doc xml:space="preserve">Close the @channel.</doc>
         <return-value transfer-ownership="none">
@@ -576,6 +576,9 @@ for more information.</doc>
       </member>
     </enumeration>
     <class name="WebRTCRTPReceiver" c:symbol-prefix="webrtc_rtp_receiver" c:type="GstWebRTCRTPReceiver" parent="Gst.Object" glib:type-name="GstWebRTCRTPReceiver" glib:get-type="gst_webrtc_rtp_receiver_get_type" glib:type-struct="WebRTCRTPReceiverClass">
+      <doc xml:space="preserve">An object to track the receiving aspect of the stream
+
+Mostly matches the WebRTC RTCRtpReceiver interface.</doc>
       <property name="transport" version="1.20" transfer-ownership="none">
         <doc xml:space="preserve">The DTLS transport for this receiver</doc>
         <type name="WebRTCDTLSTransport"/>
@@ -583,6 +586,9 @@ for more information.</doc>
     </class>
     <record name="WebRTCRTPReceiverClass" c:type="GstWebRTCRTPReceiverClass" disguised="1" glib:is-gtype-struct-for="WebRTCRTPReceiver"/>
     <class name="WebRTCRTPSender" c:symbol-prefix="webrtc_rtp_sender" c:type="GstWebRTCRTPSender" parent="Gst.Object" glib:type-name="GstWebRTCRTPSender" glib:get-type="gst_webrtc_rtp_sender_get_type" glib:type-struct="WebRTCRTPSenderClass">
+      <doc xml:space="preserve">An object to track the sending aspect of the stream
+
+Mostly matches the WebRTC RTCRtpSender interface.</doc>
       <method name="set_priority" c:identifier="gst_webrtc_rtp_sender_set_priority" version="1.20">
         <doc xml:space="preserve">Sets the content of the IPv4 Type of Service (ToS), also known as DSCP
 (Differentiated Services Code Point).
@@ -612,6 +618,7 @@ This also sets the Traffic Class field of IPv6.</doc>
     </class>
     <record name="WebRTCRTPSenderClass" c:type="GstWebRTCRTPSenderClass" disguised="1" glib:is-gtype-struct-for="WebRTCRTPSender"/>
     <class name="WebRTCRTPTransceiver" c:symbol-prefix="webrtc_rtp_transceiver" c:type="GstWebRTCRTPTransceiver" parent="Gst.Object" abstract="1" glib:type-name="GstWebRTCRTPTransceiver" glib:get-type="gst_webrtc_rtp_transceiver_get_type" glib:type-struct="WebRTCRTPTransceiverClass">
+      <doc xml:space="preserve">Mostly matches the WebRTC RTCRtpTransceiver interface.</doc>
       <property name="codec-preferences" version="1.20" writable="1" transfer-ownership="none">
         <doc xml:space="preserve">Caps representing the codec preferences.</doc>
         <type name="Gst.Caps"/>
