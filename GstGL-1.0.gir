@@ -8210,6 +8210,15 @@ require this to be called with a valid handle before drawing can commence.</doc>
           </parameter>
         </parameters>
       </glib:signal>
+      <glib:signal name="window-handle-changed" when="last" version="1.20">
+        <doc xml:space="preserve">Will be emitted when the window handle has been set into the native
+implementation, but before the context is re-activated. By using this
+signal, elements can refresh associated resource without relying on
+direct handle comparision.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+      </glib:signal>
     </class>
     <callback name="GLWindowCB" c:type="GstGLWindowCB">
       <return-value transfer-ownership="none">

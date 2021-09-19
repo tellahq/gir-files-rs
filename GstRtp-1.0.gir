@@ -1892,6 +1892,27 @@ is set as zero, @lost_packets or @dup_packets will be zero.</doc>
       <member name="priv" value="8" c:identifier="GST_RTCP_SDES_PRIV" glib:nick="priv">
         <doc xml:space="preserve">Private extensions</doc>
       </member>
+      <member name="h323_caddr" value="9" c:identifier="GST_RTCP_SDES_H323_CADDR" version="1.20" glib:nick="h323-caddr">
+        <doc xml:space="preserve">H.323 callable address</doc>
+      </member>
+      <member name="apsi" value="10" c:identifier="GST_RTCP_SDES_APSI" version="1.20" glib:nick="apsi">
+        <doc xml:space="preserve">Application Specific Identifier (RFC6776)</doc>
+      </member>
+      <member name="rgrp" value="11" c:identifier="GST_RTCP_SDES_RGRP" version="1.20" glib:nick="rgrp">
+        <doc xml:space="preserve">Reporting Group Identifier (RFC8861)</doc>
+      </member>
+      <member name="rtp_stream_id" value="12" c:identifier="GST_RTCP_SDES_RTP_STREAM_ID" version="1.20" glib:nick="rtp-stream-id">
+        <doc xml:space="preserve">RtpStreamId SDES item (RFC8852).</doc>
+      </member>
+      <member name="repaired_rtp_stream_id" value="13" c:identifier="GST_RTCP_SDES_REPAIRED_RTP_STREAM_ID" version="1.20" glib:nick="repaired-rtp-stream-id">
+        <doc xml:space="preserve">RepairedRtpStreamId SDES item (RFC8852).</doc>
+      </member>
+      <member name="ccid" value="14" c:identifier="GST_RTCP_SDES_CCID" version="1.20" glib:nick="ccid">
+        <doc xml:space="preserve">CLUE CaptId (RFC8849)</doc>
+      </member>
+      <member name="mid" value="15" c:identifier="GST_RTCP_SDES_MID" version="1.20" glib:nick="mid">
+        <doc xml:space="preserve">MID SDES item (RFC8843).</doc>
+      </member>
     </enumeration>
     <enumeration name="RTCPType" glib:type-name="GstRTCPType" glib:get-type="gst_rtcp_type_get_type" c:type="GstRTCPType">
       <doc xml:space="preserve">Different RTCP packet types.</doc>
@@ -3629,6 +3650,23 @@ NOTE: This function does not work correctly.</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="remove_extension_data" c:identifier="gst_rtp_buffer_remove_extension_data" version="1.20">
+        <doc xml:space="preserve">Unsets the extension bit of the RTP buffer and removes the extension header
+and data.
+
+If the RTP buffer has no header extension data, the action has no effect.
+The RTP buffer must be mapped READWRITE only once and the underlying
+GstBuffer must be writable.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="rtp" transfer-ownership="none">
+            <doc xml:space="preserve">the RTP packet</doc>
+            <type name="RTPBuffer" c:type="GstRTPBuffer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="set_csrc" c:identifier="gst_rtp_buffer_set_csrc">
         <doc xml:space="preserve">Modify the CSRC at index @idx in @buffer to @csrc.</doc>
         <return-value transfer-ownership="none">
@@ -4322,7 +4360,7 @@ the @input_meta.  @data will be sized to be at least the value returned
 from gst_rtp_header_extension_get_max_size().</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the size of the data written, &lt; 0 on failure</doc>
-          <type name="gsize" c:type="gsize"/>
+          <type name="gssize" c:type="gssize"/>
         </return-value>
         <parameters>
           <instance-parameter name="ext" transfer-ownership="none">
@@ -4636,7 +4674,7 @@ the @input_meta.  @data will be sized to be at least the value returned
 from gst_rtp_header_extension_get_max_size().</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the size of the data written, &lt; 0 on failure</doc>
-          <type name="gsize" c:type="gsize"/>
+          <type name="gssize" c:type="gssize"/>
         </return-value>
         <parameters>
           <instance-parameter name="ext" transfer-ownership="none">
@@ -4720,7 +4758,7 @@ from gst_rtp_header_extension_get_max_size().</doc>
         <callback name="write">
           <return-value transfer-ownership="none">
             <doc xml:space="preserve">the size of the data written, &lt; 0 on failure</doc>
-            <type name="gsize" c:type="gsize"/>
+            <type name="gssize" c:type="gssize"/>
           </return-value>
           <parameters>
             <parameter name="ext" transfer-ownership="none">

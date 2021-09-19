@@ -80,6 +80,18 @@ and/or use gtk-doc annotations.  -->
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="IS_WEBRTC_SCTP_TRANSPORT" c:identifier="GST_IS_WEBRTC_SCTP_TRANSPORT" introspectable="0">
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_WEBRTC_SCTP_TRANSPORT_CLASS" c:identifier="GST_IS_WEBRTC_SCTP_TRANSPORT_CLASS" introspectable="0">
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="WEBRTC_DATA_CHANNEL" c:identifier="GST_WEBRTC_DATA_CHANNEL" introspectable="0">
       <parameters>
         <parameter name="obj">
@@ -183,6 +195,24 @@ and/or use gtk-doc annotations.  -->
       </parameters>
     </function-macro>
     <function-macro name="WEBRTC_RTP_TRANSCEIVER_GET_CLASS" c:identifier="GST_WEBRTC_RTP_TRANSCEIVER_GET_CLASS" introspectable="0">
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="WEBRTC_SCTP_TRANSPORT" c:identifier="GST_WEBRTC_SCTP_TRANSPORT" introspectable="0">
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="WEBRTC_SCTP_TRANSPORT_CLASS" c:identifier="GST_WEBRTC_SCTP_TRANSPORT_CLASS" introspectable="0">
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="WEBRTC_SCTP_TRANSPORT_GET_CLASS" c:identifier="GST_WEBRTC_SCTP_TRANSPORT_GET_CLASS" introspectable="0">
       <parameters>
         <parameter name="obj">
         </parameter>
@@ -675,6 +705,21 @@ answer.</doc>
         <doc xml:space="preserve">sendrecv</doc>
       </member>
     </enumeration>
+    <class name="WebRTCSCTPTransport" c:symbol-prefix="webrtc_sctp_transport" c:type="GstWebRTCSCTPTransport" parent="Gst.Object" abstract="1" glib:type-name="GstWebRTCSCTPTransport" glib:get-type="gst_webrtc_sctp_transport_get_type" glib:type-struct="WebRTCSCTPTransportClass">
+      <property name="max-channels" transfer-ownership="none">
+        <type name="guint" c:type="guint"/>
+      </property>
+      <property name="max-message-size" transfer-ownership="none">
+        <type name="guint64" c:type="guint64"/>
+      </property>
+      <property name="state" transfer-ownership="none">
+        <type name="WebRTCSCTPTransportState"/>
+      </property>
+      <property name="transport" transfer-ownership="none">
+        <type name="WebRTCDTLSTransport"/>
+      </property>
+    </class>
+    <record name="WebRTCSCTPTransportClass" c:type="GstWebRTCSCTPTransportClass" disguised="1" glib:is-gtype-struct-for="WebRTCSCTPTransport"/>
     <enumeration name="WebRTCSCTPTransportState" version="1.16" glib:type-name="GstWebRTCSCTPTransportState" glib:get-type="gst_webrtc_sctp_transport_state_get_type" c:type="GstWebRTCSCTPTransportState">
       <doc xml:space="preserve">See &lt;http://w3c.github.io/webrtc-pc/#dom-rtcsctptransportstate&gt;</doc>
       <member name="new" value="0" c:identifier="GST_WEBRTC_SCTP_TRANSPORT_STATE_NEW" glib:nick="new">

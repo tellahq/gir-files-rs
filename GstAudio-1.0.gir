@@ -1221,6 +1221,10 @@ See #GstAudioAggregator for more details.</doc>
           </instance-parameter>
         </parameters>
       </virtual-method>
+      <property name="qos-messages" version="1.20" writable="1" transfer-ownership="none">
+        <doc xml:space="preserve">Emit QoS messages when dropping buffers.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
       <field name="parent">
         <type name="GstBase.AggregatorPad" c:type="GstAggregatorPad"/>
       </field>

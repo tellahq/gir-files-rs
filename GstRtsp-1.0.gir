@@ -258,6 +258,20 @@ is set to non-flushing mode again.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="get_ignore_x_server_reply" c:identifier="gst_rtsp_connection_get_ignore_x_server_reply" version="1.20">
+        <doc xml:space="preserve">Get the ignore_x_server_reply value.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">returns %TRUE if the x-server-ip-address header reply will be
+         ignored, else returns %FALSE</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="conn" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstRTSPConnection</doc>
+            <type name="RTSPConnection" c:type="const GstRTSPConnection*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="get_ip" c:identifier="gst_rtsp_connection_get_ip">
         <doc xml:space="preserve">Retrieve the IP address of the other end of @conn.</doc>
         <return-value transfer-ownership="none">
@@ -858,6 +872,24 @@ automatic handling of setting up an HTTP tunnel.</doc>
           </instance-parameter>
           <parameter name="enable" transfer-ownership="none">
             <doc xml:space="preserve">%TRUE to enable manual HTTP mode</doc>
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_ignore_x_server_reply" c:identifier="gst_rtsp_connection_set_ignore_x_server_reply" version="1.20">
+        <doc xml:space="preserve">Set whether to ignore the x-server-ip-address header reply or not. If the
+header is ignored, the original address will be used instead.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="conn" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstRTSPConnection</doc>
+            <type name="RTSPConnection" c:type="GstRTSPConnection*"/>
+          </instance-parameter>
+          <parameter name="ignore" transfer-ownership="none">
+            <doc xml:space="preserve">%TRUE to ignore the x-server-ip-address header reply or %FALSE to
+         comply with it (%FALSE is the default).</doc>
             <type name="gboolean" c:type="gboolean"/>
           </parameter>
         </parameters>

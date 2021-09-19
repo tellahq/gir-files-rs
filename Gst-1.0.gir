@@ -16249,6 +16249,79 @@ if unable to create element</doc>
           </parameter>
         </parameters>
       </function>
+      <function name="make_full" c:identifier="gst_element_factory_make_full" version="1.20" introspectable="0">
+        <doc xml:space="preserve">Create a new element of the type defined by the given element factory.
+The supplied list of properties, will be passed at object construction.</doc>
+        <return-value transfer-ownership="none" nullable="1">
+          <doc xml:space="preserve">new #GstElement or %NULL
+if unable to create element</doc>
+          <type name="Element" c:type="GstElement*"/>
+        </return-value>
+        <parameters>
+          <parameter name="factoryname" transfer-ownership="none">
+            <doc xml:space="preserve">a named factory to instantiate</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="first" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">name of first property</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="..." transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">%NULL terminated list of properties</doc>
+            <varargs/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="make_valist" c:identifier="gst_element_factory_make_valist" version="1.20" introspectable="0">
+        <doc xml:space="preserve">Create a new element of the type defined by the given element factory.
+The supplied list of properties, will be passed at object construction.</doc>
+        <return-value transfer-ownership="none" nullable="1">
+          <doc xml:space="preserve">new #GstElement or %NULL
+if unable to create element</doc>
+          <type name="Element" c:type="GstElement*"/>
+        </return-value>
+        <parameters>
+          <parameter name="factoryname" transfer-ownership="none">
+            <doc xml:space="preserve">a named factory to instantiate</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="first" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">name of first property</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="properties" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">list of properties</doc>
+            <type name="va_list" c:type="va_list"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="make_with_properties" c:identifier="gst_element_factory_make_with_properties" version="1.20">
+        <doc xml:space="preserve">Create a new element of the type defined by the given elementfactory.
+The supplied list of properties, will be passed at object construction.</doc>
+        <return-value transfer-ownership="none" nullable="1">
+          <doc xml:space="preserve">new #GstElement or %NULL
+    if the element couldn't be created</doc>
+          <type name="Element" c:type="GstElement*"/>
+        </return-value>
+        <parameters>
+          <parameter name="factoryname" transfer-ownership="none">
+            <doc xml:space="preserve">a named factory to instantiate</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="n" transfer-ownership="none">
+            <doc xml:space="preserve">count of properties</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="names" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">array of properties names</doc>
+            <type name="utf8" c:type="const gchar**"/>
+          </parameter>
+          <parameter name="values" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">array of associated properties values</doc>
+            <type name="GObject.Value" c:type="const GValue*"/>
+          </parameter>
+        </parameters>
+      </function>
       <method name="can_sink_all_caps" c:identifier="gst_element_factory_can_sink_all_caps">
         <doc xml:space="preserve">Checks if the factory can sink all possible capabilities.</doc>
         <return-value transfer-ownership="none">
@@ -16335,6 +16408,79 @@ their first argument.</doc>
             <doc xml:space="preserve">name of new element, or %NULL to automatically create
    a unique name</doc>
             <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="create_full" c:identifier="gst_element_factory_create_full" version="1.20" introspectable="0">
+        <doc xml:space="preserve">Create a new element of the type defined by the given elementfactory.
+The supplied list of properties, will be passed at object construction.</doc>
+        <return-value transfer-ownership="none" nullable="1">
+          <doc xml:space="preserve">new #GstElement or %NULL
+    if the element couldn't be created</doc>
+          <type name="Element" c:type="GstElement*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="factory" transfer-ownership="none">
+            <doc xml:space="preserve">factory to instantiate</doc>
+            <type name="ElementFactory" c:type="GstElementFactory*"/>
+          </instance-parameter>
+          <parameter name="first" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">name of the first property</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="..." transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">%NULL terminated list of properties</doc>
+            <varargs/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="create_valist" c:identifier="gst_element_factory_create_valist" version="1.20" introspectable="0">
+        <doc xml:space="preserve">Create a new element of the type defined by the given elementfactory.
+The supplied list of properties, will be passed at object construction.</doc>
+        <return-value transfer-ownership="none" nullable="1">
+          <doc xml:space="preserve">new #GstElement or %NULL
+    if the element couldn't be created</doc>
+          <type name="Element" c:type="GstElement*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="factory" transfer-ownership="none">
+            <doc xml:space="preserve">factory to instantiate</doc>
+            <type name="ElementFactory" c:type="GstElementFactory*"/>
+          </instance-parameter>
+          <parameter name="first" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">name of the first property</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="properties" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">list of properties</doc>
+            <type name="va_list" c:type="va_list"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="create_with_properties" c:identifier="gst_element_factory_create_with_properties" version="1.20">
+        <doc xml:space="preserve">Create a new element of the type defined by the given elementfactory.
+The supplied list of properties, will be passed at object construction.</doc>
+        <return-value transfer-ownership="none" nullable="1">
+          <doc xml:space="preserve">new #GstElement or %NULL
+    if the element couldn't be created</doc>
+          <type name="Element" c:type="GstElement*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="factory" transfer-ownership="none">
+            <doc xml:space="preserve">factory to instantiate</doc>
+            <type name="ElementFactory" c:type="GstElementFactory*"/>
+          </instance-parameter>
+          <parameter name="n" transfer-ownership="none">
+            <doc xml:space="preserve">count of properties</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="names" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">array of properties names</doc>
+            <type name="utf8" c:type="const gchar**"/>
+          </parameter>
+          <parameter name="values" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">array of associated properties values</doc>
+            <type name="GObject.Value" c:type="const GValue*"/>
           </parameter>
         </parameters>
       </method>

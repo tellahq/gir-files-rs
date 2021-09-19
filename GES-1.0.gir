@@ -4803,6 +4803,14 @@ assets (string).</doc>
         <type name="GObject.ObjectClass" c:type="GObjectClass"/>
       </field>
     </record>
+    <bitfield name="MarkerFlags" version="1.20" glib:type-name="GESMarkerFlags" glib:get-type="ges_marker_flags_get_type" c:type="GESMarkerFlags">
+      <member name="none" value="0" c:identifier="GES_MARKER_FLAG_NONE" glib:nick="none">
+        <doc xml:space="preserve">Marker does not serve any special purpose.</doc>
+      </member>
+      <member name="snappable" value="1" c:identifier="GES_MARKER_FLAG_SNAPPABLE" glib:nick="snappable">
+        <doc xml:space="preserve">Marker can be a snapping target.</doc>
+      </member>
+    </bitfield>
     <class name="MarkerList" c:symbol-prefix="marker_list" c:type="GESMarkerList" version="1.18" parent="GObject.Object" glib:type-name="GESMarkerList" glib:get-type="ges_marker_list_get_type" glib:type-struct="MarkerListClass">
       <doc xml:space="preserve">A #GESMarker can be colored by setting the #GES_META_MARKER_COLOR meta.</doc>
       <constructor name="new" c:identifier="ges_marker_list_new" version="1.18">
@@ -4890,6 +4898,10 @@ marker by 1.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <property name="flags" version="1.20" writable="1" construct="1" transfer-ownership="none">
+        <doc xml:space="preserve">Flags indicating how markers on the list should be treated.</doc>
+        <type name="MarkerFlags"/>
+      </property>
       <glib:signal name="marker-added" when="first" version="1.18">
         <doc xml:space="preserve">Will be emitted after the marker was added to the marker-list.</doc>
         <return-value transfer-ownership="none">
@@ -8599,6 +8611,23 @@ needed to be committed.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="freeze_commit" c:identifier="ges_timeline_freeze_commit" version="1.20">
+        <doc xml:space="preserve">Freezes the timeline from being committed. This is usually needed while the
+timeline is being rendered to ensure that not change to the timeline are
+taken into account during that moment. Once the rendering is done, you
+should call #ges_timeline_thaw_commit so that comiting becomes possible
+again and any call to `commit()` that happened during the rendering is
+actually taken into account.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="timeline" transfer-ownership="none">
+            <doc xml:space="preserve">The #GESTimeline</doc>
+            <type name="Timeline" c:type="GESTimeline*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="get_auto_transition" c:identifier="ges_timeline_get_auto_transition">
         <doc xml:space="preserve">Gets #GESTimeline:auto-transition for the timeline.</doc>
         <return-value transfer-ownership="none">
@@ -8996,6 +9025,20 @@ current element positions within the timeline.</doc>
             <doc xml:space="preserve">The snapping distance to use (in nanoseconds)</doc>
             <type name="Gst.ClockTime" c:type="GstClockTime"/>
           </parameter>
+        </parameters>
+      </method>
+      <method name="thaw_commit" c:identifier="ges_timeline_thaw_commit" version="1.20">
+        <doc xml:space="preserve">Thaw the timeline so that comiting becomes possible
+again and any call to `commit()` that happened during the rendering is
+actually taken into account.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="timeline" transfer-ownership="none">
+            <doc xml:space="preserve">The #GESTimeline</doc>
+            <type name="Timeline" c:type="GESTimeline*"/>
+          </instance-parameter>
         </parameters>
       </method>
       <property name="auto-transition" writable="1" transfer-ownership="none">

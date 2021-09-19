@@ -2636,6 +2636,36 @@ in debugging.</doc>
 Actual releases have 0, GIT versions have 1, prerelease versions have 2-...</doc>
       <type name="gint" c:type="gint"/>
     </constant>
+    <bitfield name="PbUtilsCapsDescriptionFlags" version="1.20" glib:type-name="GstPbUtilsCapsDescriptionFlags" glib:get-type="gst_pb_utils_caps_description_flags_get_type" c:type="GstPbUtilsCapsDescriptionFlags">
+      <doc xml:space="preserve">Flags that are returned by gst_pb_utils_get_caps_description_flags() and
+describe the format of the caps.</doc>
+      <member name="container" value="1" c:identifier="GST_PBUTILS_CAPS_DESCRIPTION_FLAG_CONTAINER" glib:nick="container">
+        <doc xml:space="preserve">Caps describe a container format.</doc>
+      </member>
+      <member name="audio" value="2" c:identifier="GST_PBUTILS_CAPS_DESCRIPTION_FLAG_AUDIO" glib:nick="audio">
+        <doc xml:space="preserve">Caps describe an audio format, or a
+    container format that can store audio.</doc>
+      </member>
+      <member name="video" value="4" c:identifier="GST_PBUTILS_CAPS_DESCRIPTION_FLAG_VIDEO" glib:nick="video">
+        <doc xml:space="preserve">Caps describe an video format, or a
+    container format that can store video.</doc>
+      </member>
+      <member name="image" value="8" c:identifier="GST_PBUTILS_CAPS_DESCRIPTION_FLAG_IMAGE" glib:nick="image">
+        <doc xml:space="preserve">Caps describe an image format, or a
+    container format that can store image.</doc>
+      </member>
+      <member name="subtitle" value="16" c:identifier="GST_PBUTILS_CAPS_DESCRIPTION_FLAG_SUBTITLE" glib:nick="subtitle">
+        <doc xml:space="preserve">Caps describe an subtitle format, or a
+    container format that can store subtitles.</doc>
+      </member>
+      <member name="tag" value="32" c:identifier="GST_PBUTILS_CAPS_DESCRIPTION_FLAG_TAG" glib:nick="tag">
+        <doc xml:space="preserve">Container format is a tags container.</doc>
+      </member>
+      <member name="generic" value="64" c:identifier="GST_PBUTILS_CAPS_DESCRIPTION_FLAG_GENERIC" glib:nick="generic">
+        <doc xml:space="preserve">Container format can store any kind of
+    stream type.</doc>
+      </member>
+    </bitfield>
     <function name="codec_utils_aac_caps_set_level_and_profile" c:identifier="gst_codec_utils_aac_caps_set_level_and_profile">
       <doc xml:space="preserve">Sets the level and profile on @caps if it can be determined from
 @audio_config. See gst_codec_utils_aac_get_level() and
@@ -2795,6 +2825,24 @@ rate.</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="codec_utils_caps_get_mime_codec" c:identifier="gst_codec_utils_caps_get_mime_codec" version="1.20">
+      <doc xml:space="preserve">Converts @caps to a RFC 6381 compatible codec string if possible.
+
+Useful for providing the 'codecs' field inside the 'Content-Type' HTTP
+header for containerized formats, such as mp4 or matroska.
+
+Registered codecs can be found at http://mp4ra.org/#/codecs</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">a RFC 6381 compatible codec string or %NULL</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </return-value>
+      <parameters>
+        <parameter name="caps" transfer-ownership="none">
+          <doc xml:space="preserve">A #GstCaps to convert to mime codec</doc>
+          <type name="Gst.Caps" c:type="GstCaps*"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="codec_utils_h264_caps_set_level_and_profile" c:identifier="gst_codec_utils_h264_caps_set_level_and_profile">
       <doc xml:space="preserve">Sets the level and profile in @caps if it can be determined from @sps. See
 gst_codec_utils_h264_get_level() and gst_codec_utils_h264_get_profile()
@@ -2883,6 +2931,39 @@ byte.
         <parameter name="len" transfer-ownership="none">
           <doc xml:space="preserve">Length of the data available in @sps.</doc>
           <type name="guint" c:type="guint"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="codec_utils_h264_get_profile_flags_level" c:identifier="gst_codec_utils_h264_get_profile_flags_level" version="1.20">
+      <doc xml:space="preserve">Parses profile, flags, and level from a H264 AVCC extradata/sequence_header.
+These are most commonly retrieved from a video/x-h264 caps with a codec_data
+buffer.
+The format of H264 AVCC extradata/sequence_header is documented in the
+ITU-T H.264 specification section 7.3.2.1.1 as well as in ISO/IEC 14496-15
+section 5.3.3.1.2.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE on success, %FALSE on failure</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="codecs_data" transfer-ownership="none">
+          <type name="guint8" c:type="const guint8*"/>
+        </parameter>
+        <parameter name="len" transfer-ownership="none">
+          <doc xml:space="preserve">lenth of @codec_data</doc>
+          <type name="guint" c:type="guint"/>
+        </parameter>
+        <parameter name="profile" transfer-ownership="none">
+          <doc xml:space="preserve">return location for h264 profile_idc or %NULL</doc>
+          <type name="guint8" c:type="guint8*"/>
+        </parameter>
+        <parameter name="flags" transfer-ownership="none">
+          <doc xml:space="preserve">return location for h264 constraint set flags or %NULL</doc>
+          <type name="guint8" c:type="guint8*"/>
+        </parameter>
+        <parameter name="level" transfer-ownership="none">
+          <doc xml:space="preserve">return location h264 level_idc or %NULL</doc>
+          <type name="guint8" c:type="guint8*"/>
         </parameter>
       </parameters>
     </function>
@@ -4355,6 +4436,21 @@ function is mainly for use in plugins.</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="pb_utils_get_caps_description_flags" c:identifier="gst_pb_utils_get_caps_description_flags" version="1.20">
+      <doc xml:space="preserve">Returns flags that describe the format of the caps if known. No flags are
+set for unknown caps.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">#GstPbUtilsCapsDescriptionFlags that describe @caps, or no flags
+         if the caps are unknown.</doc>
+        <type name="PbUtilsCapsDescriptionFlags" c:type="GstPbUtilsCapsDescriptionFlags"/>
+      </return-value>
+      <parameters>
+        <parameter name="caps" transfer-ownership="none">
+          <doc xml:space="preserve">the (fixed) #GstCaps for which flags are requested</doc>
+          <type name="Gst.Caps" c:type="const GstCaps*"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="pb_utils_get_codec_description" c:identifier="gst_pb_utils_get_codec_description">
       <doc xml:space="preserve">Returns a localised (as far as this is possible) string describing the
 media format specified in @caps, for use in error dialogs or other messages
@@ -4430,6 +4526,20 @@ a missing feature from a missing-plugin message.</doc>
       <parameters>
         <parameter name="caps" transfer-ownership="none">
           <doc xml:space="preserve">the (fixed) #GstCaps for which an encoder description is needed</doc>
+          <type name="Gst.Caps" c:type="const GstCaps*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="pb_utils_get_file_extension_from_caps" c:identifier="gst_pb_utils_get_file_extension_from_caps" version="1.20">
+      <doc xml:space="preserve">Returns a possible file extension for the given caps, if known.</doc>
+      <return-value transfer-ownership="full" nullable="1">
+        <doc xml:space="preserve">a newly-allocated file extension string, or NULL on error. Free
+         string with g_free() when not needed any longer.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </return-value>
+      <parameters>
+        <parameter name="caps" transfer-ownership="none">
+          <doc xml:space="preserve">the (fixed) #GstCaps for which a file extension is needed</doc>
           <type name="Gst.Caps" c:type="const GstCaps*"/>
         </parameter>
       </parameters>

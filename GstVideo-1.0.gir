@@ -4523,17 +4523,20 @@ encoded form.</doc>
       </field>
       <union name="abidata" c:type="abidata">
         <record name="ABI" c:type="ABI">
-          <field name="ts" writable="1">
+          <field name="ts" readable="0" private="1">
             <type name="Gst.ClockTime" c:type="GstClockTime"/>
           </field>
-          <field name="ts2" writable="1">
+          <field name="ts2" readable="0" private="1">
             <type name="Gst.ClockTime" c:type="GstClockTime"/>
           </field>
-          <field name="num_subframes" writable="1">
+          <field name="num_subframes" readable="0" private="1">
+            <type name="guint" c:type="guint"/>
+          </field>
+          <field name="subframes_processed" readable="0" private="1">
             <type name="guint" c:type="guint"/>
           </field>
         </record>
-        <field name="padding" writable="1">
+        <field name="padding" readable="0" private="1">
           <array zero-terminated="0" fixed-size="20">
             <type name="gpointer" c:type="gpointer"/>
           </array>
@@ -4653,8 +4656,16 @@ gst_video_encoder_set_output_state() methods.</doc>
     negotiation. Since: 1.10</doc>
         <type name="Gst.Caps" c:type="GstCaps*"/>
       </field>
+      <field name="mastering_display_info" version="1.20" writable="1">
+        <doc xml:space="preserve">Mastering display color volume information (HDR metadata) for the stream.</doc>
+        <type name="VideoMasteringDisplayInfo" c:type="GstVideoMasteringDisplayInfo*"/>
+      </field>
+      <field name="content_light_level" version="1.20" writable="1">
+        <doc xml:space="preserve">Content light level information for the stream.</doc>
+        <type name="VideoContentLightLevel" c:type="GstVideoContentLightLevel*"/>
+      </field>
       <field name="padding" readable="0" private="1">
-        <array zero-terminated="0" fixed-size="19">
+        <array zero-terminated="0" fixed-size="17">
           <type name="gpointer" c:type="gpointer"/>
         </array>
       </field>
@@ -5392,14 +5403,29 @@ follows:
 
   * Each input frame is provided in turn to the subclass' @handle_frame
     callback.
-    The ownership of the frame is given to the @handle_frame callback.
+  * When the subclass enables the subframe mode with `gst_video_decoder_set_subframe_mode`,
+    the base class will provide to the subclass the same input frame with
+    different input buffers to the subclass @handle_frame
+    callback. During this call, the subclass needs to take
+    ownership of the input_buffer as @GstVideoCodecFrame.input_buffer
+    will have been changed before the next subframe buffer is received.
+    The subclass will call `gst_video_decoder_have_last_subframe`
+    when a new input frame can be created by the base class.
+    Every subframe will share the same @GstVideoCodecFrame.output_buffer
+    to write the decoding result. The subclass is responsible to protect
+    its access.
 
   * If codec processing results in decoded data, the subclass should call
-    @gst_video_decoder_finish_frame to have decoded data pushed.
-    downstream. Otherwise, the subclass must call
-    @gst_video_decoder_drop_frame, to allow the base class to do timestamp
-    and offset tracking, and possibly to requeue the frame for a later
-    attempt in the case of reverse playback.
+    @gst_video_decoder_finish_frame to have decoded data pushed
+    downstream. In subframe mode
+    the subclass should call @gst_video_decoder_finish_subframe until the
+    last subframe where it should call @gst_video_decoder_finish_frame.
+    The subclass can detect the last subframe using GST_VIDEO_BUFFER_FLAG_MARKER
+    on buffers or using its own logic to collect the subframes.
+    In case of decoding failure, the subclass must call
+    @gst_video_decoder_drop_frame or @gst_video_decoder_drop_subframe,
+    to allow the base class to do timestamp and offset tracking, and possibly
+    to requeue the frame for a later attempt in the case of reverse playback.
 
 ## Shutdown phase
 
@@ -5537,9 +5563,11 @@ The bare minimum that a functional subclass needs to implement is:
         </return-value>
         <parameters>
           <instance-parameter name="decoder" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstVideoDecoder</doc>
             <type name="VideoDecoder" c:type="GstVideoDecoder*"/>
           </instance-parameter>
-          <parameter name="frame" transfer-ownership="none">
+          <parameter name="frame" transfer-ownership="full">
+            <doc xml:space="preserve">The frame to handle</doc>
             <type name="VideoCodecFrame" c:type="GstVideoCodecFrame*"/>
           </parameter>
         </parameters>
@@ -5812,6 +5840,25 @@ In any case, the frame is considered finished and released.</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="drop_subframe" c:identifier="gst_video_decoder_drop_subframe" version="1.20">
+        <doc xml:space="preserve">Drops input data.
+The frame is not considered finished until the whole frame
+is finished or dropped by the subclass.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">a #GstFlowReturn, usually GST_FLOW_OK.</doc>
+          <type name="Gst.FlowReturn" c:type="GstFlowReturn"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="dec" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoDecoder</doc>
+            <type name="VideoDecoder" c:type="GstVideoDecoder*"/>
+          </instance-parameter>
+          <parameter name="frame" transfer-ownership="full">
+            <doc xml:space="preserve">the #GstVideoCodecFrame</doc>
+            <type name="VideoCodecFrame" c:type="GstVideoCodecFrame*"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="finish_frame" c:identifier="gst_video_decoder_finish_frame">
         <doc xml:space="preserve">@frame should have a valid decoded data buffer, whose metadata fields
 are then appropriately set according to frame data and pushed downstream.
@@ -5832,6 +5879,26 @@ of the buffer.</doc>
           </instance-parameter>
           <parameter name="frame" transfer-ownership="full">
             <doc xml:space="preserve">a decoded #GstVideoCodecFrame</doc>
+            <type name="VideoCodecFrame" c:type="GstVideoCodecFrame*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="finish_subframe" c:identifier="gst_video_decoder_finish_subframe" version="1.20">
+        <doc xml:space="preserve">Indicate that a subframe has been finished to be decoded
+by the subclass. This method should be called for all subframes
+except the last subframe where @gst_video_decoder_finish_frame
+should be called instead.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">a #GstFlowReturn, usually GST_FLOW_OK.</doc>
+          <type name="Gst.FlowReturn" c:type="GstFlowReturn"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="decoder" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoDecoder</doc>
+            <type name="VideoDecoder" c:type="GstVideoDecoder*"/>
+          </instance-parameter>
+          <parameter name="frame" transfer-ownership="full">
+            <doc xml:space="preserve">the #GstVideoCodecFrame</doc>
             <type name="VideoCodecFrame" c:type="GstVideoCodecFrame*"/>
           </parameter>
         </parameters>
@@ -5916,6 +5983,24 @@ by the decoder; free it after use it</doc>
             <doc xml:space="preserve">a #GstVideoDecoder</doc>
             <type name="VideoDecoder" c:type="GstVideoDecoder*"/>
           </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_input_subframe_index" c:identifier="gst_video_decoder_get_input_subframe_index" version="1.20">
+        <doc xml:space="preserve">Queries the number of the last subframe received by
+the decoder baseclass in the @frame.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the current subframe index received in subframe mode, 1 otherwise.</doc>
+          <type name="guint" c:type="guint"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="decoder" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoDecoder</doc>
+            <type name="VideoDecoder" c:type="GstVideoDecoder*"/>
+          </instance-parameter>
+          <parameter name="frame" transfer-ownership="none">
+            <doc xml:space="preserve">the #GstVideoCodecFrame to update</doc>
+            <type name="VideoCodecFrame" c:type="GstVideoCodecFrame*"/>
+          </parameter>
         </parameters>
       </method>
       <method name="get_latency" c:identifier="gst_video_decoder_get_latency">
@@ -6054,6 +6139,24 @@ by calling gst_video_decoder_add_to_frame().</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="get_processed_subframe_index" c:identifier="gst_video_decoder_get_processed_subframe_index" version="1.20">
+        <doc xml:space="preserve">Queries the number of subframes in the frame processed by
+the decoder baseclass.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the current subframe processed received in subframe mode.</doc>
+          <type name="guint" c:type="guint"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="decoder" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoDecoder</doc>
+            <type name="VideoDecoder" c:type="GstVideoDecoder*"/>
+          </instance-parameter>
+          <parameter name="frame" transfer-ownership="none">
+            <doc xml:space="preserve">the #GstVideoCodecFrame to update</doc>
+            <type name="VideoCodecFrame" c:type="GstVideoCodecFrame*"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="get_qos_proportion" c:identifier="gst_video_decoder_get_qos_proportion" version="1.0.3">
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The current QoS proportion.</doc>
@@ -6063,6 +6166,21 @@ by calling gst_video_decoder_add_to_frame().</doc>
           <instance-parameter name="decoder" transfer-ownership="none">
             <doc xml:space="preserve">a #GstVideoDecoder
     current QoS proportion, or %NULL</doc>
+            <type name="VideoDecoder" c:type="GstVideoDecoder*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_subframe_mode" c:identifier="gst_video_decoder_get_subframe_mode" version="1.20">
+        <doc xml:space="preserve">Queries whether input data is considered as subframes or not by the
+base class. If FALSE, each input buffer will be considered as a full
+frame.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">TRUE if input data is considered as sub frames.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="decoder" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoDecoder</doc>
             <type name="VideoDecoder" c:type="GstVideoDecoder*"/>
           </instance-parameter>
         </parameters>
@@ -6079,6 +6197,26 @@ metadata and passes it along for further processing, i.e. @handle_frame.</doc>
             <doc xml:space="preserve">a #GstVideoDecoder</doc>
             <type name="VideoDecoder" c:type="GstVideoDecoder*"/>
           </instance-parameter>
+        </parameters>
+      </method>
+      <method name="have_last_subframe" c:identifier="gst_video_decoder_have_last_subframe" version="1.20">
+        <doc xml:space="preserve">Indicates that the last subframe has been processed by the decoder
+in @frame. This will release the current frame in video decoder
+allowing to receive new frames from upstream elements. This method
+must be called in the subclass @handle_frame callback.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">a #GstFlowReturn, usually GST_FLOW_OK.</doc>
+          <type name="Gst.FlowReturn" c:type="GstFlowReturn"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="decoder" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoDecoder</doc>
+            <type name="VideoDecoder" c:type="GstVideoDecoder*"/>
+          </instance-parameter>
+          <parameter name="frame" transfer-ownership="none">
+            <doc xml:space="preserve">the #GstVideoCodecFrame to update</doc>
+            <type name="VideoCodecFrame" c:type="GstVideoCodecFrame*"/>
+          </parameter>
         </parameters>
       </method>
       <method name="merge_tags" c:identifier="gst_video_decoder_merge_tags">
@@ -6402,6 +6540,36 @@ input is packetized, then the @parse method will not be called.</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="set_subframe_mode" c:identifier="gst_video_decoder_set_subframe_mode" version="1.20">
+        <doc xml:space="preserve">If this is set to TRUE, it informs the base class that the subclass
+can receive the data at a granularity lower than one frame.
+
+Note that in this mode, the subclass has two options. It can either
+require the presence of a GST_VIDEO_BUFFER_FLAG_MARKER to mark the
+end of a frame. Or it can operate in such a way that it will decode
+a single frame at a time. In this second case, every buffer that
+arrives to the element is considered part of the same frame until
+gst_video_decoder_finish_frame() is called.
+
+In either case, the same #GstVideoCodecFrame will be passed to the
+GstVideoDecoderClass:handle_frame vmethod repeatedly with a
+different GstVideoCodecFrame:input_buffer every time until the end of the
+frame has been signaled using either method.
+This method must be called during the decoder subclass @set_format call.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="decoder" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoDecoder</doc>
+            <type name="VideoDecoder" c:type="GstVideoDecoder*"/>
+          </instance-parameter>
+          <parameter name="subframe_mode" transfer-ownership="none">
+            <doc xml:space="preserve">whether the input data should be considered as subframes.</doc>
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="set_use_default_pad_acceptcaps" c:identifier="gst_video_decoder_set_use_default_pad_acceptcaps" version="1.6">
         <doc xml:space="preserve">Lets #GstVideoDecoder sub-classes decide if they want the sink pad
 to use the default pad query handler to reply to accept-caps queries.
@@ -6602,9 +6770,11 @@ and likely as well.  If non-packetized input is supported or expected,
           </return-value>
           <parameters>
             <parameter name="decoder" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstVideoDecoder</doc>
               <type name="VideoDecoder" c:type="GstVideoDecoder*"/>
             </parameter>
-            <parameter name="frame" transfer-ownership="none">
+            <parameter name="frame" transfer-ownership="full">
+              <doc xml:space="preserve">The frame to handle</doc>
               <type name="VideoCodecFrame" c:type="GstVideoCodecFrame*"/>
             </parameter>
           </parameters>
@@ -11266,14 +11436,16 @@ on top of the video, and for surface buffers it can just attach them to
 the buffer and let the sink render the overlays.</doc>
       <constructor name="new" c:identifier="gst_video_overlay_composition_new">
         <doc xml:space="preserve">Creates a new video overlay composition object to hold one or more
-overlay rectangles.</doc>
+overlay rectangles.
+
+Note that since 1.20 this allows to pass %NULL for @rectangle.</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">a new #GstVideoOverlayComposition. Unref with
     gst_video_overlay_composition_unref() when no longer needed.</doc>
           <type name="VideoOverlayComposition" c:type="GstVideoOverlayComposition*"/>
         </return-value>
         <parameters>
-          <parameter name="rectangle" transfer-ownership="none">
+          <parameter name="rectangle" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">a #GstVideoOverlayRectangle to add to the
     composition</doc>
             <type name="VideoOverlayRectangle" c:type="GstVideoOverlayRectangle*"/>
@@ -12396,10 +12568,8 @@ on the @method and @in_size/@out_size.</doc>
 GstVideoSink will configure the default base sink to drop frames that
 arrive later than 20ms as this is considered the default threshold for
 observing out-of-sync frames.</doc>
-      <function name="center_rect" c:identifier="gst_video_sink_center_rect">
-        <doc xml:space="preserve">Takes @src rectangle and position it at the center of @dst rectangle with or
-without @scaling. It handles clipping if the @src rectangle is bigger than
-the @dst one and @scaling is set to FALSE.</doc>
+      <function name="center_rect" c:identifier="gst_video_sink_center_rect" deprecated="1" deprecated-version="1.20">
+        <doc-deprecated xml:space="preserve">Use gst_video_center_rect() instead.</doc-deprecated>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -12412,7 +12582,7 @@ the @dst one and @scaling is set to FALSE.</doc>
             <doc xml:space="preserve">the #GstVideoRectangle describing the destination area</doc>
             <type name="VideoRectangle" c:type="GstVideoRectangle"/>
           </parameter>
-          <parameter name="result" transfer-ownership="none">
+          <parameter name="result" direction="out" caller-allocates="1" transfer-ownership="none">
             <doc xml:space="preserve">a pointer to a #GstVideoRectangle which will receive the result area</doc>
             <type name="VideoRectangle" c:type="GstVideoRectangle*"/>
           </parameter>
@@ -14812,6 +14982,32 @@ type, or %GST_VIDEO_CAPTION_TYPE_UNKNOWN.</doc>
         <parameter name="type" transfer-ownership="none">
           <doc xml:space="preserve">#GstVideoCaptionType</doc>
           <type name="VideoCaptionType" c:type="GstVideoCaptionType"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="video_center_rect" c:identifier="gst_video_center_rect" version="1.20">
+      <doc xml:space="preserve">Takes @src rectangle and position it at the center of @dst rectangle with or
+without @scaling. It handles clipping if the @src rectangle is bigger than
+the @dst one and @scaling is set to FALSE.</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="src" transfer-ownership="none">
+          <doc xml:space="preserve">a pointer to #GstVideoRectangle describing the source area</doc>
+          <type name="VideoRectangle" c:type="const GstVideoRectangle*"/>
+        </parameter>
+        <parameter name="dst" transfer-ownership="none">
+          <doc xml:space="preserve">a pointer to #GstVideoRectangle describing the destination area</doc>
+          <type name="VideoRectangle" c:type="const GstVideoRectangle*"/>
+        </parameter>
+        <parameter name="result" direction="out" caller-allocates="1" transfer-ownership="none">
+          <doc xml:space="preserve">a pointer to a #GstVideoRectangle which will receive the result area</doc>
+          <type name="VideoRectangle" c:type="GstVideoRectangle*"/>
+        </parameter>
+        <parameter name="scaling" transfer-ownership="none">
+          <doc xml:space="preserve">a #gboolean indicating if scaling should be applied or not</doc>
+          <type name="gboolean" c:type="gboolean"/>
         </parameter>
       </parameters>
     </function>
