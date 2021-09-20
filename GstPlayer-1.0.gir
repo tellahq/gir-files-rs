@@ -335,7 +335,7 @@ performed.</doc>
       <function name="config_get_user_agent" c:identifier="gst_player_config_get_user_agent" version="1.10">
         <doc xml:space="preserve">Return the user agent which has been configured using
 gst_player_config_set_user_agent() if any.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the configured agent, or %NULL</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
@@ -399,7 +399,7 @@ or RTSP streams.</doc>
             <doc xml:space="preserve">a #GstPlayer configuration</doc>
             <type name="Gst.Structure" c:type="GstStructure*"/>
           </parameter>
-          <parameter name="agent" transfer-ownership="none">
+          <parameter name="agent" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">the string to use as user agent</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
@@ -522,7 +522,7 @@ gst_structure_free() after usage or gst_player_set_config().</doc>
       </method>
       <method name="get_current_audio_track" c:identifier="gst_player_get_current_audio_track">
         <doc xml:space="preserve">A Function to get current audio #GstPlayerAudioInfo instance.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">current audio track.
 
 The caller should free it with g_object_unref()</doc>
@@ -537,7 +537,7 @@ The caller should free it with g_object_unref()</doc>
       </method>
       <method name="get_current_subtitle_track" c:identifier="gst_player_get_current_subtitle_track">
         <doc xml:space="preserve">A Function to get current subtitle #GstPlayerSubtitleInfo instance.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">current subtitle track.
 
 The caller should free it with g_object_unref()</doc>
@@ -552,7 +552,7 @@ The caller should free it with g_object_unref()</doc>
       </method>
       <method name="get_current_video_track" c:identifier="gst_player_get_current_video_track">
         <doc xml:space="preserve">A Function to get current video #GstPlayerVideoInfo instance.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">current video track.
 
 The caller should free it with g_object_unref()</doc>
@@ -566,8 +566,9 @@ The caller should free it with g_object_unref()</doc>
         </parameters>
       </method>
       <method name="get_current_visualization" c:identifier="gst_player_get_current_visualization">
-        <return-value transfer-ownership="full">
-          <doc xml:space="preserve">Name of the currently enabled visualization.
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">Name of the currently enabled
+  visualization.
   g_free() after usage.</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
@@ -594,7 +595,7 @@ nanoseconds.</doc>
       </method>
       <method name="get_media_info" c:identifier="gst_player_get_media_info">
         <doc xml:space="preserve">A Function to get the current media info #GstPlayerMediaInfo instance.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">media info instance.
 
 The caller should free it with g_object_unref()</doc>
@@ -686,7 +687,7 @@ currently-playing stream.</doc>
       </method>
       <method name="get_subtitle_uri" c:identifier="gst_player_get_subtitle_uri">
         <doc xml:space="preserve">current subtitle URI</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">URI of the current external subtitle.
   g_free() after usage.</doc>
           <type name="utf8" c:type="gchar*"/>
@@ -713,7 +714,7 @@ currently-playing stream.</doc>
       </method>
       <method name="get_uri" c:identifier="gst_player_get_uri">
         <doc xml:space="preserve">Gets the URI of the currently-playing stream.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a string containing the URI of the
 currently-playing stream. g_free() after usage.</doc>
           <type name="utf8" c:type="gchar*"/>
@@ -732,7 +733,7 @@ Currently supported settings are:
 - width, height of type G_TYPE_INT
 - pixel-aspect-ratio of type GST_TYPE_FRACTION
  Except for GST_PLAYER_THUMBNAIL_RAW_NATIVE format, if no config is set, pixel-aspect-ratio would be 1/1</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">Current video snapshot sample or %NULL on failure</doc>
           <type name="Gst.Sample" c:type="GstSample*"/>
         </return-value>
@@ -1027,7 +1028,7 @@ rendered.</doc>
             <doc xml:space="preserve">#GstPlayer instance</doc>
             <type name="Player" c:type="GstPlayer*"/>
           </instance-parameter>
-          <parameter name="uri" transfer-ownership="none">
+          <parameter name="uri" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">subtitle URI</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
@@ -1059,7 +1060,7 @@ rendered.</doc>
             <doc xml:space="preserve">#GstPlayer instance</doc>
             <type name="Player" c:type="GstPlayer*"/>
           </instance-parameter>
-          <parameter name="uri" transfer-ownership="none">
+          <parameter name="uri" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">next URI to play.</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
@@ -1110,7 +1111,7 @@ Sets the video track @stream_index.</doc>
             <doc xml:space="preserve">#GstPlayer instance</doc>
             <type name="Player" c:type="GstPlayer*"/>
           </instance-parameter>
-          <parameter name="name" transfer-ownership="none">
+          <parameter name="name" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">visualization element obtained from
 #gst_player_visualizations_get()</doc>
             <type name="utf8" c:type="const gchar*"/>
@@ -1343,7 +1344,7 @@ in the stream.</doc>
       <doc xml:space="preserve">#GstPlayerStreamInfo specific to audio streams.</doc>
       <method name="get_bitrate" c:identifier="gst_player_audio_info_get_bitrate">
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">the audio bitrate in #GstPlayerAudioInfo.</doc>
+          <doc xml:space="preserve">the audio bitrate in #GstPlayerAudioInfo or -1 if unknown.</doc>
           <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
@@ -1355,7 +1356,8 @@ in the stream.</doc>
       </method>
       <method name="get_channels" c:identifier="gst_player_audio_info_get_channels">
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">the number of audio channels in #GstPlayerAudioInfo.</doc>
+          <doc xml:space="preserve">the number of audio channels in #GstPlayerAudioInfo or 0 if
+unknown.</doc>
           <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
@@ -1366,7 +1368,7 @@ in the stream.</doc>
         </parameters>
       </method>
       <method name="get_language" c:identifier="gst_player_audio_info_get_language">
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the language of the stream, or NULL if unknown.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
@@ -1379,7 +1381,7 @@ in the stream.</doc>
       </method>
       <method name="get_max_bitrate" c:identifier="gst_player_audio_info_get_max_bitrate">
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">the audio maximum bitrate in #GstPlayerAudioInfo.</doc>
+          <doc xml:space="preserve">the audio maximum bitrate in #GstPlayerAudioInfo or -1 if unknown.</doc>
           <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
@@ -1391,7 +1393,7 @@ in the stream.</doc>
       </method>
       <method name="get_sample_rate" c:identifier="gst_player_audio_info_get_sample_rate">
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">the audio sample rate in #GstPlayerAudioInfo.</doc>
+          <doc xml:space="preserve">the audio sample rate in #GstPlayerAudioInfo or 0 if unknown.</doc>
           <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
@@ -1495,8 +1497,8 @@ matching #GstPlayerAudioInfo.</doc>
         </parameters>
       </method>
       <method name="get_container_format" c:identifier="gst_player_media_info_get_container_format">
-        <return-value transfer-ownership="none">
-          <doc xml:space="preserve">the container format.</doc>
+        <return-value transfer-ownership="none" nullable="1">
+          <doc xml:space="preserve">the container format or %NULL if unknown.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
         <parameters>
@@ -1508,7 +1510,7 @@ matching #GstPlayerAudioInfo.</doc>
       </method>
       <method name="get_duration" c:identifier="gst_player_media_info_get_duration">
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">duration of the media.</doc>
+          <doc xml:space="preserve">duration of the media or %GST_CLOCK_TIME_NONE if unknown.</doc>
           <type name="Gst.ClockTime" c:type="GstClockTime"/>
         </return-value>
         <parameters>
@@ -1521,8 +1523,8 @@ matching #GstPlayerAudioInfo.</doc>
       <method name="get_image_sample" c:identifier="gst_player_media_info_get_image_sample">
         <doc xml:space="preserve">Function to get the image (or preview-image) stored in taglist.
 Application can use `gst_sample_*_()` API's to get caps, buffer etc.</doc>
-        <return-value transfer-ownership="none">
-          <doc xml:space="preserve">GstSample or NULL.</doc>
+        <return-value transfer-ownership="none" nullable="1">
+          <doc xml:space="preserve">GstSample or %NULL.</doc>
           <type name="Gst.Sample" c:type="GstSample*"/>
         </return-value>
         <parameters>
@@ -1534,7 +1536,7 @@ Application can use `gst_sample_*_()` API's to get caps, buffer etc.</doc>
       </method>
       <method name="get_number_of_audio_streams" c:identifier="gst_player_media_info_get_number_of_audio_streams" version="1.12">
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">number of audio streams.</doc>
+          <doc xml:space="preserve">number of audio streams or 0 if unknown.</doc>
           <type name="guint" c:type="guint"/>
         </return-value>
         <parameters>
@@ -1546,7 +1548,7 @@ Application can use `gst_sample_*_()` API's to get caps, buffer etc.</doc>
       </method>
       <method name="get_number_of_streams" c:identifier="gst_player_media_info_get_number_of_streams" version="1.12">
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">number of total streams.</doc>
+          <doc xml:space="preserve">number of total streams or 0 if unknown.</doc>
           <type name="guint" c:type="guint"/>
         </return-value>
         <parameters>
@@ -1558,7 +1560,7 @@ Application can use `gst_sample_*_()` API's to get caps, buffer etc.</doc>
       </method>
       <method name="get_number_of_subtitle_streams" c:identifier="gst_player_media_info_get_number_of_subtitle_streams" version="1.12">
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">number of subtitle streams.</doc>
+          <doc xml:space="preserve">number of subtitle streams or 0 if unknown.</doc>
           <type name="guint" c:type="guint"/>
         </return-value>
         <parameters>
@@ -1570,7 +1572,7 @@ Application can use `gst_sample_*_()` API's to get caps, buffer etc.</doc>
       </method>
       <method name="get_number_of_video_streams" c:identifier="gst_player_media_info_get_number_of_video_streams" version="1.12">
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">number of video streams.</doc>
+          <doc xml:space="preserve">number of video streams or 0 if unknown.</doc>
           <type name="guint" c:type="guint"/>
         </return-value>
         <parameters>
@@ -1611,7 +1613,7 @@ matching #GstPlayerSubtitleInfo.</doc>
         </parameters>
       </method>
       <method name="get_tags" c:identifier="gst_player_media_info_get_tags">
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the tags contained in media info.</doc>
           <type name="Gst.TagList" c:type="GstTagList*"/>
         </return-value>
@@ -1623,8 +1625,8 @@ matching #GstPlayerSubtitleInfo.</doc>
         </parameters>
       </method>
       <method name="get_title" c:identifier="gst_player_media_info_get_title">
-        <return-value transfer-ownership="none">
-          <doc xml:space="preserve">the media title.</doc>
+        <return-value transfer-ownership="none" nullable="1">
+          <doc xml:space="preserve">the media title or %NULL if unknown.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
         <parameters>
@@ -1795,7 +1797,7 @@ stream.</doc>
 the stream type, one can find more media-specific information in
 #GstPlayerVideoInfo, #GstPlayerAudioInfo, #GstPlayerSubtitleInfo.</doc>
       <method name="get_caps" c:identifier="gst_player_stream_info_get_caps">
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the #GstCaps of the stream.</doc>
           <type name="Gst.Caps" c:type="GstCaps*"/>
         </return-value>
@@ -1808,8 +1810,8 @@ the stream type, one can find more media-specific information in
       </method>
       <method name="get_codec" c:identifier="gst_player_stream_info_get_codec">
         <doc xml:space="preserve">A string describing codec used in #GstPlayerStreamInfo.</doc>
-        <return-value transfer-ownership="none">
-          <doc xml:space="preserve">codec string or NULL on unknown.</doc>
+        <return-value transfer-ownership="none" nullable="1">
+          <doc xml:space="preserve">codec string or %NULL on unknown.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
         <parameters>
@@ -1820,7 +1822,8 @@ the stream type, one can find more media-specific information in
         </parameters>
       </method>
       <method name="get_index" c:identifier="gst_player_stream_info_get_index">
-        <doc xml:space="preserve">Function to get stream index from #GstPlayerStreamInfo instance.</doc>
+        <doc xml:space="preserve">Function to get stream index from #GstPlayerStreamInfo instance or -1 if
+unknown.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the stream index of this stream.</doc>
           <type name="gint" c:type="gint"/>
@@ -1847,7 +1850,7 @@ of the given @info (ex: "audio", "video", "subtitle")</doc>
         </parameters>
       </method>
       <method name="get_tags" c:identifier="gst_player_stream_info_get_tags">
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the tags contained in this stream.</doc>
           <type name="Gst.TagList" c:type="GstTagList*"/>
         </return-value>
@@ -1863,8 +1866,8 @@ of the given @info (ex: "audio", "video", "subtitle")</doc>
     <class name="PlayerSubtitleInfo" c:symbol-prefix="player_subtitle_info" c:type="GstPlayerSubtitleInfo" parent="PlayerStreamInfo" glib:type-name="GstPlayerSubtitleInfo" glib:get-type="gst_player_subtitle_info_get_type" glib:type-struct="PlayerSubtitleInfoClass">
       <doc xml:space="preserve">#GstPlayerStreamInfo specific to subtitle streams.</doc>
       <method name="get_language" c:identifier="gst_player_subtitle_info_get_language">
-        <return-value transfer-ownership="none">
-          <doc xml:space="preserve">the language of the stream, or NULL if unknown.</doc>
+        <return-value transfer-ownership="none" nullable="1">
+          <doc xml:space="preserve">the language of the stream, or %NULL if unknown.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
         <parameters>
@@ -1880,7 +1883,8 @@ of the given @info (ex: "audio", "video", "subtitle")</doc>
       <doc xml:space="preserve">#GstPlayerStreamInfo specific to video streams.</doc>
       <method name="get_bitrate" c:identifier="gst_player_video_info_get_bitrate">
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">the current bitrate of video in #GstPlayerVideoInfo.</doc>
+          <doc xml:space="preserve">the current bitrate of video in #GstPlayerVideoInfo or -1 if
+unknown.</doc>
           <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
@@ -1911,7 +1915,7 @@ of the given @info (ex: "audio", "video", "subtitle")</doc>
       </method>
       <method name="get_height" c:identifier="gst_player_video_info_get_height">
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">the height of video in #GstPlayerVideoInfo.</doc>
+          <doc xml:space="preserve">the height of video in #GstPlayerVideoInfo or -1 if unknown.</doc>
           <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
@@ -1923,7 +1927,8 @@ of the given @info (ex: "audio", "video", "subtitle")</doc>
       </method>
       <method name="get_max_bitrate" c:identifier="gst_player_video_info_get_max_bitrate">
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">the maximum bitrate of video in #GstPlayerVideoInfo.</doc>
+          <doc xml:space="preserve">the maximum bitrate of video in #GstPlayerVideoInfo or -1 if
+unknown.</doc>
           <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
@@ -1955,7 +1960,7 @@ of the given @info (ex: "audio", "video", "subtitle")</doc>
       </method>
       <method name="get_width" c:identifier="gst_player_video_info_get_width">
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">the width of video in #GstPlayerVideoInfo.</doc>
+          <doc xml:space="preserve">the width of video in #GstPlayerVideoInfo or -1 if unknown.</doc>
           <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
