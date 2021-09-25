@@ -2174,11 +2174,11 @@ from it can potentialy create #GESTrackElement for.</doc>
             <doc xml:space="preserve">The object from which to retrieve the natural framerate</doc>
             <type name="ClipAsset" c:type="GESClipAsset*"/>
           </instance-parameter>
-          <parameter name="framerate_n" transfer-ownership="none">
+          <parameter name="framerate_n" direction="out" caller-allocates="0" transfer-ownership="full">
             <doc xml:space="preserve">The framerate numerator</doc>
             <type name="gint" c:type="gint*"/>
           </parameter>
-          <parameter name="framerate_d" transfer-ownership="none">
+          <parameter name="framerate_d" direction="out" caller-allocates="0" transfer-ownership="full">
             <doc xml:space="preserve">The framerate denominator</doc>
             <type name="gint" c:type="gint*"/>
           </parameter>
@@ -2217,11 +2217,11 @@ natural frame rate.</doc>
             <doc xml:space="preserve">The object from which to retrieve the natural framerate</doc>
             <type name="ClipAsset" c:type="GESClipAsset*"/>
           </instance-parameter>
-          <parameter name="framerate_n" transfer-ownership="none">
+          <parameter name="framerate_n" direction="out" caller-allocates="0" transfer-ownership="full">
             <doc xml:space="preserve">The framerate numerator</doc>
             <type name="gint" c:type="gint*"/>
           </parameter>
-          <parameter name="framerate_d" transfer-ownership="none">
+          <parameter name="framerate_d" direction="out" caller-allocates="0" transfer-ownership="full">
             <doc xml:space="preserve">The framerate denominator</doc>
             <type name="gint" c:type="gint*"/>
           </parameter>
@@ -2288,11 +2288,11 @@ a layer</doc>
               <doc xml:space="preserve">The object from which to retrieve the natural framerate</doc>
               <type name="ClipAsset" c:type="GESClipAsset*"/>
             </parameter>
-            <parameter name="framerate_n" transfer-ownership="none">
+            <parameter name="framerate_n" direction="out" caller-allocates="0" transfer-ownership="full">
               <doc xml:space="preserve">The framerate numerator</doc>
               <type name="gint" c:type="gint*"/>
             </parameter>
-            <parameter name="framerate_d" transfer-ownership="none">
+            <parameter name="framerate_d" direction="out" caller-allocates="0" transfer-ownership="full">
               <doc xml:space="preserve">The framerate denominator</doc>
               <type name="gint" c:type="gint*"/>
             </parameter>
@@ -2342,16 +2342,23 @@ default implementation</doc>
     <record name="ClipPrivate" c:type="GESClipPrivate" disguised="1"/>
     <class name="CommandLineFormatter" c:symbol-prefix="command_line_formatter" c:type="GESCommandLineFormatter" parent="Formatter" glib:type-name="GESCommandLineFormatter" glib:get-type="ges_command_line_formatter_get_type" glib:type-struct="CommandLineFormatterClass">
       <implements name="Extractable"/>
-      <function name="get_help" c:identifier="ges_command_line_formatter_get_help">
+      <function name="get_help" c:identifier="ges_command_line_formatter_get_help" version="1.10">
+        <doc xml:space="preserve">Creates a help string based on @commands.
+
+Result: (transfer full): A help string.</doc>
         <return-value transfer-ownership="full">
           <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
           <parameter name="nargs" transfer-ownership="none">
+            <doc xml:space="preserve">Number of commands in @commands</doc>
             <type name="gint" c:type="gint"/>
           </parameter>
           <parameter name="commands" transfer-ownership="none">
-            <type name="utf8" c:type="gchar**"/>
+            <doc xml:space="preserve">Commands</doc>
+            <array length="0" zero-terminated="0" c:type="gchar**">
+              <type name="utf8" c:type="gchar*"/>
+            </array>
           </parameter>
         </parameters>
       </function>
@@ -3328,11 +3335,11 @@ The asset ID of an effect clip is in the form:
           <type name="EffectClip" c:type="GESEffectClip*"/>
         </return-value>
         <parameters>
-          <parameter name="video_bin_description" transfer-ownership="none">
+          <parameter name="video_bin_description" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">The gst-launch like bin description of the effect</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
-          <parameter name="audio_bin_description" transfer-ownership="none">
+          <parameter name="audio_bin_description" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">The gst-launch like bin description of the effect</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
@@ -5019,12 +5026,12 @@ ges_meta_container_register_static_meta().</doc>
             <doc xml:space="preserve">The key for the @container field to check</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
-          <parameter name="flags" direction="out" caller-allocates="0" transfer-ownership="full" nullable="1">
+          <parameter name="flags" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
             <doc xml:space="preserve">A destination to get the registered flags of
 the field, or %NULL to ignore</doc>
             <type name="MetaFlag" c:type="GESMetaFlag*"/>
           </parameter>
-          <parameter name="type" direction="out" caller-allocates="0" transfer-ownership="full" nullable="1">
+          <parameter name="type" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
             <doc xml:space="preserve">A destination to get the registered type of
 the field, or %NULL to ignore</doc>
             <type name="GType" c:type="GType*"/>
@@ -13540,11 +13547,11 @@ property of the track element.</doc>
             <doc xml:space="preserve">A #GESAsset</doc>
             <type name="TrackElementAsset" c:type="GESTrackElementAsset*"/>
           </instance-parameter>
-          <parameter name="framerate_n" transfer-ownership="none">
+          <parameter name="framerate_n" direction="out" caller-allocates="0" transfer-ownership="full">
             <doc xml:space="preserve">The framerate numerator</doc>
             <type name="gint" c:type="gint*"/>
           </parameter>
-          <parameter name="framerate_d" transfer-ownership="none">
+          <parameter name="framerate_d" direction="out" caller-allocates="0" transfer-ownership="full">
             <doc xml:space="preserve">The framerate denominator</doc>
             <type name="gint" c:type="gint*"/>
           </parameter>
@@ -13560,11 +13567,11 @@ property of the track element.</doc>
             <doc xml:space="preserve">A #GESAsset</doc>
             <type name="TrackElementAsset" c:type="GESTrackElementAsset*"/>
           </instance-parameter>
-          <parameter name="framerate_n" transfer-ownership="none">
+          <parameter name="framerate_n" direction="out" caller-allocates="0" transfer-ownership="full">
             <doc xml:space="preserve">The framerate numerator</doc>
             <type name="gint" c:type="gint*"/>
           </parameter>
-          <parameter name="framerate_d" transfer-ownership="none">
+          <parameter name="framerate_d" direction="out" caller-allocates="0" transfer-ownership="full">
             <doc xml:space="preserve">The framerate denominator</doc>
             <type name="gint" c:type="gint*"/>
           </parameter>
@@ -13631,11 +13638,11 @@ should get into</doc>
               <doc xml:space="preserve">A #GESAsset</doc>
               <type name="TrackElementAsset" c:type="GESTrackElementAsset*"/>
             </parameter>
-            <parameter name="framerate_n" transfer-ownership="none">
+            <parameter name="framerate_n" direction="out" caller-allocates="0" transfer-ownership="full">
               <doc xml:space="preserve">The framerate numerator</doc>
               <type name="gint" c:type="gint*"/>
             </parameter>
-            <parameter name="framerate_d" transfer-ownership="none">
+            <parameter name="framerate_d" direction="out" caller-allocates="0" transfer-ownership="full">
               <doc xml:space="preserve">The framerate denominator</doc>
               <type name="gint" c:type="gint*"/>
             </parameter>
