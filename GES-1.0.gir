@@ -373,7 +373,7 @@ error occurred.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_extractable_type" c:identifier="ges_asset_get_extractable_type">
+      <method name="get_extractable_type" c:identifier="ges_asset_get_extractable_type" glib:get-property="extractable-type">
         <doc xml:space="preserve">Gets the #GESAsset:extractable-type of the asset.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The extractable type of @self.</doc>
@@ -386,7 +386,7 @@ error occurred.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_id" c:identifier="ges_asset_get_id">
+      <method name="get_id" c:identifier="ges_asset_get_id" glib:get-property="id">
         <doc xml:space="preserve">Gets the #GESAsset:id of the asset.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The ID of @self.</doc>
@@ -399,7 +399,7 @@ error occurred.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_proxy" c:identifier="ges_asset_get_proxy">
+      <method name="get_proxy" c:identifier="ges_asset_get_proxy" glib:get-property="proxy">
         <doc xml:space="preserve">Gets the default #GESAsset:proxy of the asset.</doc>
         <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The default proxy of @asset.</doc>
@@ -412,7 +412,7 @@ error occurred.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_proxy_target" c:identifier="ges_asset_get_proxy_target">
+      <method name="get_proxy_target" c:identifier="ges_asset_get_proxy_target" glib:get-property="proxy-target">
         <doc xml:space="preserve">Gets the #GESAsset:proxy-target of the asset.
 
 Note that the proxy target may have loaded with an error, so you should
@@ -447,7 +447,7 @@ that @asset has.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="set_proxy" c:identifier="ges_asset_set_proxy">
+      <method name="set_proxy" c:identifier="ges_asset_set_proxy" glib:set-property="proxy">
         <doc xml:space="preserve">Sets the #GESAsset:proxy for the asset.
 
 If @proxy is among the existing proxies of the asset (see
@@ -500,11 +500,11 @@ list.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="extractable-type" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="extractable-type" writable="1" construct-only="1" transfer-ownership="none" getter="get_extractable_type">
         <doc xml:space="preserve">The #GESExtractable object type that can be extracted from the asset.</doc>
         <type name="GType" c:type="GType"/>
       </property>
-      <property name="id" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="id" writable="1" construct-only="1" transfer-ownership="none" getter="get_id">
         <doc xml:space="preserve">The ID of the asset. This should be unique amongst all assets with
 the same #GESAsset:extractable-type. Depending on the associated
 #GESExtractable implementation, this id may convey some information
@@ -516,7 +516,7 @@ of the extractable type to see whether they differ from the
 default behaviour.</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="proxy" writable="1" transfer-ownership="none">
+      <property name="proxy" writable="1" transfer-ownership="none" setter="set_proxy" getter="get_proxy">
         <doc xml:space="preserve">The default proxy for this asset, or %NULL if it has no proxy. A
 proxy will act as a substitute for the original asset when the
 original is requested (see ges_asset_request()).
@@ -525,7 +525,7 @@ Setting this property will not usually remove the existing proxy, but
 will replace it as the default (see ges_asset_set_proxy()).</doc>
         <type name="Asset"/>
       </property>
-      <property name="proxy-target" transfer-ownership="none">
+      <property name="proxy-target" transfer-ownership="none" getter="get_proxy_target">
         <doc xml:space="preserve">The asset that this asset is a proxy for, or %NULL if it is not a
 proxy for another asset.
 
@@ -1665,7 +1665,7 @@ match any type</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="get_duration_limit" c:identifier="ges_clip_get_duration_limit" version="1.18">
+      <method name="get_duration_limit" c:identifier="ges_clip_get_duration_limit" glib:get-property="duration-limit" version="1.18">
         <doc xml:space="preserve">Gets the #GESClip:duration-limit of the clip.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The duration-limit of @clip.</doc>
@@ -1738,7 +1738,7 @@ be performed.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="get_layer" c:identifier="ges_clip_get_layer">
+      <method name="get_layer" c:identifier="ges_clip_get_layer" glib:get-property="layer">
         <doc xml:space="preserve">Gets the #GESClip:layer of the clip.</doc>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">The layer @clip is in, or %NULL if
@@ -1752,7 +1752,7 @@ be performed.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_supported_formats" c:identifier="ges_clip_get_supported_formats">
+      <method name="get_supported_formats" c:identifier="ges_clip_get_supported_formats" glib:get-property="supported-formats">
         <doc xml:space="preserve">Gets the #GESClip:supported-formats of the clip.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The #GESTrackType-s supported by @clip.</doc>
@@ -1969,7 +1969,7 @@ would not be able to adapt itself once the effect is removed.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_supported_formats" c:identifier="ges_clip_set_supported_formats">
+      <method name="set_supported_formats" c:identifier="ges_clip_set_supported_formats" glib:set-property="supported-formats">
         <doc xml:space="preserve">Sets the #GESClip:supported-formats of the clip. This should normally
 only be called by subclasses, which should be responsible for updating
 its value, rather than the user.</doc>
@@ -2112,7 +2112,7 @@ the start and end of the clip</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="duration-limit" version="1.18" transfer-ownership="none">
+      <property name="duration-limit" version="1.18" transfer-ownership="none" getter="get_duration_limit">
         <doc xml:space="preserve">The maximum #GESTimelineElement:duration that can be *currently* set
 for the clip, taking into account the #GESTimelineElement:in-point,
 #GESTimelineElement:max-duration, #GESTrackElement:active, and
@@ -2129,7 +2129,7 @@ variables, its #GESTimelineElement:duration will be set to the new
 limit.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="layer" transfer-ownership="none">
+      <property name="layer" transfer-ownership="none" getter="get_layer">
         <doc xml:space="preserve">The layer this clip lies in.
 
 If you want to connect to this property's #GObject::notify signal,
@@ -2137,7 +2137,7 @@ you should connect to it with g_signal_connect_after() since the
 signal emission may be stopped internally.</doc>
         <type name="Layer"/>
       </property>
-      <property name="supported-formats" writable="1" construct="1" transfer-ownership="none">
+      <property name="supported-formats" writable="1" construct="1" transfer-ownership="none" setter="set_supported_formats" getter="get_supported_formats">
         <doc xml:space="preserve">The #GESTrackType-s that the clip supports, which it can create
 #GESTrackElement-s for. Note that this can be a combination of
 #GESTrackType flags to indicate support for several
@@ -2227,7 +2227,7 @@ natural frame rate.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="get_supported_formats" c:identifier="ges_clip_asset_get_supported_formats">
+      <method name="get_supported_formats" c:identifier="ges_clip_asset_get_supported_formats" glib:get-property="supported-formats">
         <doc xml:space="preserve">Gets track types for which objects extracted from @self can create #GESTrackElement</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The track types on which @self will create TrackElement when added to
@@ -2241,7 +2241,7 @@ a layer</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="set_supported_formats" c:identifier="ges_clip_asset_set_supported_formats">
+      <method name="set_supported_formats" c:identifier="ges_clip_asset_set_supported_formats" glib:set-property="supported-formats">
         <doc xml:space="preserve">Sets track types for which objects extracted from @self can create #GESTrackElement</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -2257,7 +2257,7 @@ a layer</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="supported-formats" writable="1" construct="1" transfer-ownership="none">
+      <property name="supported-formats" writable="1" construct="1" transfer-ownership="none" setter="set_supported_formats" getter="get_supported_formats">
         <doc xml:space="preserve">The formats supported by the asset.</doc>
         <type name="TrackType"/>
       </property>
@@ -2362,7 +2362,7 @@ Result: (transfer full): A help string.</doc>
           </parameter>
         </parameters>
       </function>
-      <function name="get_timeline_uri" c:identifier="ges_command_line_formatter_get_timeline_uri" version="1.20">
+      <function name="get_timeline_uri" c:identifier="ges_command_line_formatter_get_timeline_uri" version="1.10">
         <return-value transfer-ownership="full">
           <type name="utf8" c:type="gchar*"/>
         </return-value>
@@ -2979,13 +2979,13 @@ if no track elements are created or an error occurred.</doc>
     </function-macro>
     <enumeration name="Edge" glib:type-name="GESEdge" glib:get-type="ges_edge_get_type" c:type="GESEdge">
       <doc xml:space="preserve">The edges of an object contain in a #GESTimeline or #GESTrack</doc>
-      <member name="start" value="0" c:identifier="GES_EDGE_START" glib:nick="start">
+      <member name="start" value="0" c:identifier="GES_EDGE_START" glib:nick="start" glib:name="GES_EDGE_START">
         <doc xml:space="preserve">Represents the start of an object.</doc>
       </member>
-      <member name="end" value="1" c:identifier="GES_EDGE_END" glib:nick="end">
+      <member name="end" value="1" c:identifier="GES_EDGE_END" glib:nick="end" glib:name="GES_EDGE_END">
         <doc xml:space="preserve">Represents the end of an object.</doc>
       </member>
-      <member name="none" value="2" c:identifier="GES_EDGE_NONE" glib:nick="none">
+      <member name="none" value="2" c:identifier="GES_EDGE_NONE" glib:nick="none" glib:name="GES_EDGE_NONE">
         <doc xml:space="preserve">Represent the fact we are not working with any edge of an
   object.</doc>
       </member>
@@ -3099,7 +3099,7 @@ by the same amount such that the snapped edges will touch.
 You can also find more explanation about the behaviour of those modes at:
 [trim, ripple and roll](http://pitivi.org/manual/trimming.html)
 and [clip management](http://pitivi.org/manual/usingclips.html).</doc>
-      <member name="normal" value="0" c:identifier="GES_EDIT_MODE_NORMAL" glib:nick="normal">
+      <member name="normal" value="0" c:identifier="GES_EDIT_MODE_NORMAL" glib:nick="normal" glib:name="GES_EDIT_MODE_NORMAL">
         <doc xml:space="preserve">The element is edited the normal way (default).
  If acting on the element as a whole (#GES_EDGE_NONE), this will MOVE
  the element by MOVING its toplevel. When acting on the start of the
@@ -3110,7 +3110,7 @@ and [clip management](http://pitivi.org/manual/usingclips.html).</doc>
  of the element (#GES_EDGE_END), this will END-TRIM the element,
  leaving its toplevel unchanged.</doc>
       </member>
-      <member name="ripple" value="1" c:identifier="GES_EDIT_MODE_RIPPLE" glib:nick="ripple">
+      <member name="ripple" value="1" c:identifier="GES_EDIT_MODE_RIPPLE" glib:nick="ripple" glib:name="GES_EDIT_MODE_RIPPLE">
         <doc xml:space="preserve">The element is edited in ripple mode: moving
  itself as well as later elements, keeping their relative times. This
  edits the element the same as #GES_EDIT_MODE_NORMAL. In addition, if
@@ -3124,7 +3124,7 @@ and [clip management](http://pitivi.org/manual/usingclips.html).</doc>
  edited element. These additional elements will also be shifted by
  the same shift in layers as the edited element.</doc>
       </member>
-      <member name="roll" value="2" c:identifier="GES_EDIT_MODE_ROLL" glib:nick="roll">
+      <member name="roll" value="2" c:identifier="GES_EDIT_MODE_ROLL" glib:nick="roll" glib:name="GES_EDIT_MODE_ROLL">
         <doc xml:space="preserve">The element is edited in roll mode: swapping its
  content for its neighbour's, or vis versa, in the timeline output.
  This edits the element the same as #GES_EDIT_MODE_TRIM. In addition,
@@ -3142,13 +3142,13 @@ and [clip management](http://pitivi.org/manual/usingclips.html).</doc>
  whole (#GES_EDGE_NONE) is not defined. The element can not shift
  layers under this mode.</doc>
       </member>
-      <member name="trim" value="3" c:identifier="GES_EDIT_MODE_TRIM" glib:nick="trim">
+      <member name="trim" value="3" c:identifier="GES_EDIT_MODE_TRIM" glib:nick="trim" glib:name="GES_EDIT_MODE_TRIM">
         <doc xml:space="preserve">The element is edited in trim mode. When acting
  on the start of the element, this will START-TRIM it. When acting on
  the end of the element, this will END-TRIM it. Acting on the element
  as a whole (#GES_EDGE_NONE) is not defined.</doc>
       </member>
-      <member name="slide" value="4" c:identifier="GES_EDIT_MODE_SLIDE" glib:nick="slide">
+      <member name="slide" value="4" c:identifier="GES_EDIT_MODE_SLIDE" glib:nick="slide" glib:name="GES_EDIT_MODE_SLIDE">
         <doc xml:space="preserve">The element is edited in slide mode (not yet
  implemented): moving the element replacing or consuming content on
  each end. When acting on the element as a whole, this will MOVE the
@@ -4389,7 +4389,7 @@ ges_layer_set_active_for_tracks().</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="get_auto_transition" c:identifier="ges_layer_get_auto_transition">
+      <method name="get_auto_transition" c:identifier="ges_layer_get_auto_transition" glib:get-property="auto-transition">
         <doc xml:space="preserve">Gets the #GESLayer:auto-transition of the layer.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">%TRUE if transitions are automatically added to @layer.</doc>
@@ -4457,7 +4457,7 @@ be the end time of the final clip).</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_priority" c:identifier="ges_layer_get_priority">
+      <method name="get_priority" c:identifier="ges_layer_get_priority" glib:get-property="priority">
         <doc xml:space="preserve">Get the priority of the layer. When inside a timeline, this is its
 index in the timeline. See ges_timeline_move_layer().</doc>
         <return-value transfer-ownership="none">
@@ -4553,7 +4553,7 @@ in the @layer's timeline</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_auto_transition" c:identifier="ges_layer_set_auto_transition">
+      <method name="set_auto_transition" c:identifier="ges_layer_set_auto_transition" glib:set-property="auto-transition">
         <doc xml:space="preserve">Sets #GESLayer:auto-transition for the layer. Use
 ges_timeline_set_auto_transition() if you want all layers within a
 #GESTimeline to have #GESLayer:auto-transition set to %TRUE. Use this
@@ -4575,7 +4575,7 @@ the layer</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_priority" c:identifier="ges_layer_set_priority" deprecated="1" deprecated-version="1.16.0">
+      <method name="set_priority" c:identifier="ges_layer_set_priority" glib:set-property="priority" deprecated="1" deprecated-version="1.16.0">
         <doc xml:space="preserve">Sets the layer to the given priority. See #GESLayer:priority.</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_move_layer instead. This deprecation means
 that you will not need to handle layer priorities at all yourself, GES
@@ -4607,7 +4607,7 @@ will make sure there is never 'gaps' between layer priorities.</doc-deprecated>
           </parameter>
         </parameters>
       </method>
-      <property name="auto-transition" writable="1" transfer-ownership="none">
+      <property name="auto-transition" writable="1" transfer-ownership="none" setter="set_auto_transition" getter="get_auto_transition">
         <doc xml:space="preserve">Whether to automatically create a #GESTransitionClip whenever two
 #GESSource-s that both belong to a #GESClip in the layer overlap.
 See #GESTimeline for what counts as an overlap.
@@ -4617,7 +4617,7 @@ When a layer is added to a #GESTimeline, if this property is left as
 will be set to %TRUE as well.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="priority" deprecated="1" deprecated-version="1.16.0" writable="1" transfer-ownership="none">
+      <property name="priority" deprecated="1" deprecated-version="1.16.0" writable="1" transfer-ownership="none" setter="set_priority" getter="get_priority">
         <doc xml:space="preserve">The priority of the layer in the #GESTimeline. 0 is the highest
 priority. Conceptually, a timeline is a stack of layers,
 and the priority of the layer represents its position in the stack. Two
@@ -4811,10 +4811,10 @@ assets (string).</doc>
       </field>
     </record>
     <bitfield name="MarkerFlags" version="1.20" glib:type-name="GESMarkerFlags" glib:get-type="ges_marker_flags_get_type" c:type="GESMarkerFlags">
-      <member name="none" value="0" c:identifier="GES_MARKER_FLAG_NONE" glib:nick="none">
+      <member name="none" value="0" c:identifier="GES_MARKER_FLAG_NONE" glib:nick="none" glib:name="GES_MARKER_FLAG_NONE">
         <doc xml:space="preserve">Marker does not serve any special purpose.</doc>
       </member>
-      <member name="snappable" value="1" c:identifier="GES_MARKER_FLAG_SNAPPABLE" glib:nick="snappable">
+      <member name="snappable" value="1" c:identifier="GES_MARKER_FLAG_SNAPPABLE" glib:nick="snappable" glib:name="GES_MARKER_FLAG_SNAPPABLE">
         <doc xml:space="preserve">Marker can be a snapping target.</doc>
       </member>
     </bitfield>
@@ -6032,13 +6032,13 @@ the latter case, @value will be %NULL.</doc>
       </field>
     </record>
     <bitfield name="MetaFlag" glib:type-name="GESMetaFlag" glib:get-type="ges_meta_flag_get_type" c:type="GESMetaFlag">
-      <member name="readable" value="1" c:identifier="GES_META_READABLE" glib:nick="readable">
+      <member name="readable" value="1" c:identifier="GES_META_READABLE" glib:nick="readable" glib:name="GES_META_READABLE">
         <doc xml:space="preserve">The metadata is readable</doc>
       </member>
-      <member name="writable" value="2" c:identifier="GES_META_WRITABLE" glib:nick="writable">
+      <member name="writable" value="2" c:identifier="GES_META_WRITABLE" glib:nick="writable" glib:name="GES_META_WRITABLE">
         <doc xml:space="preserve">The metadata is writable</doc>
       </member>
-      <member name="readwrite" value="3" c:identifier="GES_META_READ_WRITE" glib:nick="readwrite">
+      <member name="readwrite" value="3" c:identifier="GES_META_READ_WRITE" glib:nick="readwrite" glib:name="GES_META_READ_WRITE">
         <doc xml:space="preserve">The metadata is readable and writable</doc>
       </member>
     </bitfield>
@@ -6241,7 +6241,7 @@ ges_pipeline_set_render_settings().</doc>
           <type name="Pipeline" c:type="GESPipeline*"/>
         </return-value>
       </constructor>
-      <method name="get_mode" c:identifier="ges_pipeline_get_mode">
+      <method name="get_mode" c:identifier="ges_pipeline_get_mode" glib:get-property="mode">
         <doc xml:space="preserve">Gets the #GESPipeline:mode of the pipeline.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The current mode of @pipeline.</doc>
@@ -6399,7 +6399,7 @@ native size</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_mode" c:identifier="ges_pipeline_set_mode">
+      <method name="set_mode" c:identifier="ges_pipeline_set_mode" glib:set-property="mode">
         <doc xml:space="preserve">Sets the #GESPipeline:mode of the pipeline.
 
 Note that the pipeline will be set to #GST_STATE_NULL during this call to
@@ -6451,7 +6451,7 @@ result to</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_timeline" c:identifier="ges_pipeline_set_timeline">
+      <method name="set_timeline" c:identifier="ges_pipeline_set_timeline" glib:set-property="timeline">
         <doc xml:space="preserve">Takes the given timeline and sets it as the #GESPipeline:timeline for
 the pipeline.
 
@@ -6484,14 +6484,14 @@ immediately before the #GESPipeline:audio-sink. This exposes the
 #playsink:audio-sink property of the internal #playsink.</doc>
         <type name="Gst.Element"/>
       </property>
-      <property name="mode" writable="1" transfer-ownership="none">
+      <property name="mode" writable="1" transfer-ownership="none" setter="set_mode" getter="get_mode">
         <doc xml:space="preserve">The pipeline's mode. In preview mode (for audio or video, or both)
 the pipeline can display the timeline's content to an end user. In
 rendering mode the pipeline can encode the timeline's content and
 save it to a file.</doc>
         <type name="PipelineFlags"/>
       </property>
-      <property name="timeline" writable="1" transfer-ownership="none">
+      <property name="timeline" writable="1" transfer-ownership="none" setter="set_timeline">
         <doc xml:space="preserve">The timeline used by this pipeline, whose content it will play and
 render, or %NULL if the pipeline does not yet have a timeline.
 
@@ -6535,24 +6535,24 @@ immediately before the #GESPipeline:video-sink. This exposes the
     </record>
     <bitfield name="PipelineFlags" glib:type-name="GESPipelineFlags" glib:get-type="ges_pipeline_flags_get_type" c:type="GESPipelineFlags">
       <doc xml:space="preserve">The various modes a #GESPipeline can be configured to.</doc>
-      <member name="audio_preview" value="1" c:identifier="GES_PIPELINE_MODE_PREVIEW_AUDIO" glib:nick="audio_preview">
+      <member name="audio_preview" value="1" c:identifier="GES_PIPELINE_MODE_PREVIEW_AUDIO" glib:nick="audio_preview" glib:name="GES_PIPELINE_MODE_PREVIEW_AUDIO">
         <doc xml:space="preserve">Output the #GESPipeline:timeline's
 audio to the soundcard</doc>
       </member>
-      <member name="video_preview" value="2" c:identifier="GES_PIPELINE_MODE_PREVIEW_VIDEO" glib:nick="video_preview">
+      <member name="video_preview" value="2" c:identifier="GES_PIPELINE_MODE_PREVIEW_VIDEO" glib:nick="video_preview" glib:name="GES_PIPELINE_MODE_PREVIEW_VIDEO">
         <doc xml:space="preserve">Output the #GESPipeline:timeline's
 video to the screen</doc>
       </member>
-      <member name="full_preview" value="3" c:identifier="GES_PIPELINE_MODE_PREVIEW" glib:nick="full_preview">
+      <member name="full_preview" value="3" c:identifier="GES_PIPELINE_MODE_PREVIEW" glib:nick="full_preview" glib:name="GES_PIPELINE_MODE_PREVIEW">
         <doc xml:space="preserve">Output both the #GESPipeline:timeline's
 audio and video to the soundcard and screen (default)</doc>
       </member>
-      <member name="render" value="4" c:identifier="GES_PIPELINE_MODE_RENDER" glib:nick="render">
+      <member name="render" value="4" c:identifier="GES_PIPELINE_MODE_RENDER" glib:nick="render" glib:name="GES_PIPELINE_MODE_RENDER">
         <doc xml:space="preserve">Render the #GESPipeline:timeline with
 forced decoding (the underlying #encodebin has its
 #encodebin:avoid-reencoding property set to %FALSE)</doc>
       </member>
-      <member name="smart_render" value="8" c:identifier="GES_PIPELINE_MODE_SMART_RENDER" glib:nick="smart_render">
+      <member name="smart_render" value="8" c:identifier="GES_PIPELINE_MODE_SMART_RENDER" glib:nick="smart_render" glib:name="GES_PIPELINE_MODE_SMART_RENDER">
         <doc xml:space="preserve">Render the #GESPipeline:timeline,
 avoiding decoding/reencoding (the underlying #encodebin has its
 #encodebin:avoid-reencoding property set to %TRUE).
@@ -6898,7 +6898,7 @@ and thus can not be used</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_uri" c:identifier="ges_project_get_uri">
+      <method name="get_uri" c:identifier="ges_project_get_uri" glib:get-property="uri">
         <doc xml:space="preserve">Retrieve the uri that is currently set on @project</doc>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a newly allocated string representing uri.</doc>
@@ -7019,7 +7019,7 @@ as defined in #ges_find_formatter_for_uri</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="uri" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="uri" writable="1" construct-only="1" transfer-ownership="none" getter="get_uri">
         <type name="utf8" c:type="gchar*"/>
       </property>
       <field name="parent">
@@ -7591,7 +7591,7 @@ or %NULL if there was an error.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_volume" c:identifier="ges_test_clip_get_volume">
+      <method name="get_volume" c:identifier="ges_test_clip_get_volume" glib:get-property="volume">
         <doc xml:space="preserve">Get the volume of the test audio signal applied on @self.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The volume of the test audio signal applied on @self.</doc>
@@ -7604,7 +7604,7 @@ or %NULL if there was an error.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_vpattern" c:identifier="ges_test_clip_get_vpattern">
+      <method name="get_vpattern" c:identifier="ges_test_clip_get_vpattern" glib:get-property="vpattern">
         <doc xml:space="preserve">Get the #GESVideoTestPattern which is applied on @self.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The #GESVideoTestPattern which is applied on @self.</doc>
@@ -7646,7 +7646,7 @@ or %NULL if there was an error.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_mute" c:identifier="ges_test_clip_set_mute">
+      <method name="set_mute" c:identifier="ges_test_clip_set_mute" glib:set-property="mute">
         <doc xml:space="preserve">Sets whether the audio track of this clip is muted or not.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -7662,7 +7662,7 @@ or %NULL if there was an error.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_volume" c:identifier="ges_test_clip_set_volume">
+      <method name="set_volume" c:identifier="ges_test_clip_set_volume" glib:set-property="volume">
         <doc xml:space="preserve">Sets the volume of the test audio signal.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -7678,7 +7678,7 @@ or %NULL if there was an error.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_vpattern" c:identifier="ges_test_clip_set_vpattern">
+      <method name="set_vpattern" c:identifier="ges_test_clip_set_vpattern" glib:set-property="vpattern">
         <doc xml:space="preserve">Sets which video pattern to display on @self.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -7698,15 +7698,15 @@ or %NULL if there was an error.</doc>
         <doc xml:space="preserve">The frequency to generate for audio track elements.</doc>
         <type name="gdouble" c:type="gdouble"/>
       </property>
-      <property name="mute" writable="1" construct="1" transfer-ownership="none">
+      <property name="mute" writable="1" construct="1" transfer-ownership="none" setter="set_mute">
         <doc xml:space="preserve">Whether the sound will be played or not.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="volume" writable="1" construct="1" transfer-ownership="none">
+      <property name="volume" writable="1" construct="1" transfer-ownership="none" setter="set_volume" getter="get_volume">
         <doc xml:space="preserve">The volume for the audio track elements.</doc>
         <type name="gdouble" c:type="gdouble"/>
       </property>
-      <property name="vpattern" writable="1" construct="1" transfer-ownership="none">
+      <property name="vpattern" writable="1" construct="1" transfer-ownership="none" setter="set_vpattern" getter="get_vpattern">
         <doc xml:space="preserve">Video pattern to display in video track elements.</doc>
         <type name="VideoTestPattern"/>
       </property>
@@ -7735,19 +7735,19 @@ or %NULL if there was an error.</doc>
     <record name="TestClipPrivate" c:type="GESTestClipPrivate" disguised="1"/>
     <enumeration name="TextHAlign" glib:type-name="GESTextHAlign" glib:get-type="ges_text_halign_get_type" c:type="GESTextHAlign">
       <doc xml:space="preserve">Horizontal alignment of the text.</doc>
-      <member name="left" value="0" c:identifier="GES_TEXT_HALIGN_LEFT" glib:nick="left">
+      <member name="left" value="0" c:identifier="GES_TEXT_HALIGN_LEFT" glib:nick="left" glib:name="GES_TEXT_HALIGN_LEFT">
         <doc xml:space="preserve">align text left</doc>
       </member>
-      <member name="center" value="1" c:identifier="GES_TEXT_HALIGN_CENTER" glib:nick="center">
+      <member name="center" value="1" c:identifier="GES_TEXT_HALIGN_CENTER" glib:nick="center" glib:name="GES_TEXT_HALIGN_CENTER">
         <doc xml:space="preserve">align text center</doc>
       </member>
-      <member name="right" value="2" c:identifier="GES_TEXT_HALIGN_RIGHT" glib:nick="right">
+      <member name="right" value="2" c:identifier="GES_TEXT_HALIGN_RIGHT" glib:nick="right" glib:name="GES_TEXT_HALIGN_RIGHT">
         <doc xml:space="preserve">align text right</doc>
       </member>
-      <member name="position" value="4" c:identifier="GES_TEXT_HALIGN_POSITION" glib:nick="position">
+      <member name="position" value="4" c:identifier="GES_TEXT_HALIGN_POSITION" glib:nick="position" glib:name="GES_TEXT_HALIGN_POSITION">
         <doc xml:space="preserve">align text on xpos position</doc>
       </member>
-      <member name="absolute" value="5" c:identifier="GES_TEXT_HALIGN_ABSOLUTE" glib:nick="absolute">
+      <member name="absolute" value="5" c:identifier="GES_TEXT_HALIGN_ABSOLUTE" glib:nick="absolute" glib:name="GES_TEXT_HALIGN_ABSOLUTE">
       </member>
     </enumeration>
     <class name="TextOverlay" c:symbol-prefix="text_overlay" c:type="GESTextOverlay" parent="Operation" glib:type-name="GESTextOverlay" glib:get-type="ges_text_overlay_get_type" glib:type-struct="TextOverlayClass">
@@ -8004,7 +8004,7 @@ of the text render by @self.</doc>
           <type name="TextOverlayClip" c:type="GESTextOverlayClip*"/>
         </return-value>
       </constructor>
-      <method name="get_color" c:identifier="ges_text_overlay_clip_get_color">
+      <method name="get_color" c:identifier="ges_text_overlay_clip_get_color" glib:get-property="color">
         <doc xml:space="preserve">Get the color used by @source.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The color used by @source.</doc>
@@ -8017,7 +8017,7 @@ of the text render by @self.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_font_desc" c:identifier="ges_text_overlay_clip_get_font_desc">
+      <method name="get_font_desc" c:identifier="ges_text_overlay_clip_get_font_desc" glib:get-property="font-desc">
         <doc xml:space="preserve">Get the pango font description used by @self.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The pango font description used by @self.</doc>
@@ -8030,7 +8030,7 @@ of the text render by @self.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_halignment" c:identifier="ges_text_overlay_clip_get_halignment">
+      <method name="get_halignment" c:identifier="ges_text_overlay_clip_get_halignment" glib:get-property="halignment">
         <doc xml:space="preserve">Get the horizontal aligment used by @self.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The horizontal aligment used by @self.</doc>
@@ -8043,7 +8043,7 @@ of the text render by @self.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_text" c:identifier="ges_text_overlay_clip_get_text">
+      <method name="get_text" c:identifier="ges_text_overlay_clip_get_text" glib:get-property="text">
         <doc xml:space="preserve">Get the text currently set on @self.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The text currently set on @self.</doc>
@@ -8056,7 +8056,7 @@ of the text render by @self.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_valignment" c:identifier="ges_text_overlay_clip_get_valignment">
+      <method name="get_valignment" c:identifier="ges_text_overlay_clip_get_valignment" glib:get-property="valignment">
         <doc xml:space="preserve">Get the vertical aligment used by @self.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The vertical aligment used by @self.</doc>
@@ -8069,7 +8069,7 @@ of the text render by @self.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_xpos" c:identifier="ges_text_overlay_clip_get_xpos">
+      <method name="get_xpos" c:identifier="ges_text_overlay_clip_get_xpos" glib:get-property="xpos">
         <doc xml:space="preserve">Get the horizontal position used by @source.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The horizontal position used by @source.</doc>
@@ -8082,7 +8082,7 @@ of the text render by @self.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_ypos" c:identifier="ges_text_overlay_clip_get_ypos">
+      <method name="get_ypos" c:identifier="ges_text_overlay_clip_get_ypos" glib:get-property="ypos">
         <doc xml:space="preserve">Get the vertical position used by @source.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The vertical position used by @source.</doc>
@@ -8095,7 +8095,7 @@ of the text render by @self.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="set_color" c:identifier="ges_text_overlay_clip_set_color">
+      <method name="set_color" c:identifier="ges_text_overlay_clip_set_color" glib:set-property="color">
         <doc xml:space="preserve">Sets the color of the text.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -8111,7 +8111,7 @@ of the text render by @self.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_font_desc" c:identifier="ges_text_overlay_clip_set_font_desc">
+      <method name="set_font_desc" c:identifier="ges_text_overlay_clip_set_font_desc" glib:set-property="font-desc">
         <doc xml:space="preserve">Sets the pango font description of the text</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -8143,7 +8143,7 @@ of the text render by @self.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_text" c:identifier="ges_text_overlay_clip_set_text">
+      <method name="set_text" c:identifier="ges_text_overlay_clip_set_text" glib:set-property="text">
         <doc xml:space="preserve">Sets the text this clip will render.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -8176,7 +8176,7 @@ made.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_xpos" c:identifier="ges_text_overlay_clip_set_xpos">
+      <method name="set_xpos" c:identifier="ges_text_overlay_clip_set_xpos" glib:set-property="xpos">
         <doc xml:space="preserve">Sets the horizontal position of the text.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -8192,7 +8192,7 @@ made.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_ypos" c:identifier="ges_text_overlay_clip_set_ypos">
+      <method name="set_ypos" c:identifier="ges_text_overlay_clip_set_ypos" glib:set-property="ypos">
         <doc xml:space="preserve">Sets the vertical position of the text.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -8208,31 +8208,31 @@ made.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="color" writable="1" construct="1" transfer-ownership="none">
+      <property name="color" writable="1" construct="1" transfer-ownership="none" setter="set_color" getter="get_color">
         <doc xml:space="preserve">The color of the text</doc>
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="font-desc" writable="1" construct="1" transfer-ownership="none">
+      <property name="font-desc" writable="1" construct="1" transfer-ownership="none" setter="set_font_desc" getter="get_font_desc">
         <doc xml:space="preserve">Pango font description string</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="halignment" writable="1" construct="1" transfer-ownership="none">
+      <property name="halignment" writable="1" construct="1" transfer-ownership="none" getter="get_halignment">
         <doc xml:space="preserve">Horizontal alignment of the text</doc>
         <type name="TextHAlign"/>
       </property>
-      <property name="text" writable="1" construct="1" transfer-ownership="none">
+      <property name="text" writable="1" construct="1" transfer-ownership="none" setter="set_text" getter="get_text">
         <doc xml:space="preserve">The text to diplay</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="valignment" writable="1" construct="1" transfer-ownership="none">
+      <property name="valignment" writable="1" construct="1" transfer-ownership="none" getter="get_valignment">
         <doc xml:space="preserve">Vertical alignent of the text</doc>
         <type name="TextVAlign"/>
       </property>
-      <property name="xpos" writable="1" construct="1" transfer-ownership="none">
+      <property name="xpos" writable="1" construct="1" transfer-ownership="none" setter="set_xpos" getter="get_xpos">
         <doc xml:space="preserve">The horizontal position of the text</doc>
         <type name="gdouble" c:type="gdouble"/>
       </property>
-      <property name="ypos" writable="1" construct="1" transfer-ownership="none">
+      <property name="ypos" writable="1" construct="1" transfer-ownership="none" setter="set_ypos" getter="get_ypos">
         <doc xml:space="preserve">The vertical position of the text</doc>
         <type name="gdouble" c:type="gdouble"/>
       </property>
@@ -8262,22 +8262,22 @@ made.</doc>
     <record name="TextOverlayPrivate" c:type="GESTextOverlayPrivate" disguised="1"/>
     <enumeration name="TextVAlign" glib:type-name="GESTextVAlign" glib:get-type="ges_text_valign_get_type" c:type="GESTextVAlign">
       <doc xml:space="preserve">Vertical alignment of the text.</doc>
-      <member name="baseline" value="0" c:identifier="GES_TEXT_VALIGN_BASELINE" glib:nick="baseline">
+      <member name="baseline" value="0" c:identifier="GES_TEXT_VALIGN_BASELINE" glib:nick="baseline" glib:name="GES_TEXT_VALIGN_BASELINE">
         <doc xml:space="preserve">draw text on the baseline</doc>
       </member>
-      <member name="bottom" value="1" c:identifier="GES_TEXT_VALIGN_BOTTOM" glib:nick="bottom">
+      <member name="bottom" value="1" c:identifier="GES_TEXT_VALIGN_BOTTOM" glib:nick="bottom" glib:name="GES_TEXT_VALIGN_BOTTOM">
         <doc xml:space="preserve">draw text on the bottom</doc>
       </member>
-      <member name="top" value="2" c:identifier="GES_TEXT_VALIGN_TOP" glib:nick="top">
+      <member name="top" value="2" c:identifier="GES_TEXT_VALIGN_TOP" glib:nick="top" glib:name="GES_TEXT_VALIGN_TOP">
         <doc xml:space="preserve">draw text on top</doc>
       </member>
-      <member name="position" value="3" c:identifier="GES_TEXT_VALIGN_POSITION" glib:nick="position">
+      <member name="position" value="3" c:identifier="GES_TEXT_VALIGN_POSITION" glib:nick="position" glib:name="GES_TEXT_VALIGN_POSITION">
         <doc xml:space="preserve">draw text on ypos position</doc>
       </member>
-      <member name="center" value="4" c:identifier="GES_TEXT_VALIGN_CENTER" glib:nick="center">
+      <member name="center" value="4" c:identifier="GES_TEXT_VALIGN_CENTER" glib:nick="center" glib:name="GES_TEXT_VALIGN_CENTER">
         <doc xml:space="preserve">draw text on the center</doc>
       </member>
-      <member name="absolute" value="5" c:identifier="GES_TEXT_VALIGN_ABSOLUTE" glib:nick="absolute">
+      <member name="absolute" value="5" c:identifier="GES_TEXT_VALIGN_ABSOLUTE" glib:nick="absolute" glib:name="GES_TEXT_VALIGN_ABSOLUTE">
       </member>
     </enumeration>
     <class name="Timeline" c:symbol-prefix="timeline" c:type="GESTimeline" parent="Gst.Bin" glib:type-name="GESTimeline" glib:get-type="ges_timeline_get_type" glib:type-struct="TimelineClass">
@@ -8635,7 +8635,7 @@ actually taken into account.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_auto_transition" c:identifier="ges_timeline_get_auto_transition">
+      <method name="get_auto_transition" c:identifier="ges_timeline_get_auto_transition" glib:get-property="auto-transition">
         <doc xml:space="preserve">Gets #GESTimeline:auto-transition for the timeline.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The auto-transition of @self.</doc>
@@ -8648,7 +8648,7 @@ actually taken into account.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_duration" c:identifier="ges_timeline_get_duration">
+      <method name="get_duration" c:identifier="ges_timeline_get_duration" glib:get-property="duration">
         <doc xml:space="preserve">Get the current #GESTimeline:duration of the timeline</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The current duration of @timeline.</doc>
@@ -8791,7 +8791,7 @@ or %NULL if there is an error.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="get_snapping_distance" c:identifier="ges_timeline_get_snapping_distance">
+      <method name="get_snapping_distance" c:identifier="ges_timeline_get_snapping_distance" glib:get-property="snapping-distance">
         <doc xml:space="preserve">Gets the #GESTimeline:snapping-distance for the timeline.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The snapping distance (in nanoseconds) of @timeline.</doc>
@@ -8996,7 +8996,7 @@ loaded from, before defaulting to the formatter with highest rank.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_auto_transition" c:identifier="ges_timeline_set_auto_transition">
+      <method name="set_auto_transition" c:identifier="ges_timeline_set_auto_transition" glib:set-property="auto-transition">
         <doc xml:space="preserve">Sets #GESTimeline:auto-transition for the timeline. This will also set
 the corresponding #GESLayer:auto-transition for all of the timeline's
 layers to the same value. See ges_layer_set_auto_transition() if you
@@ -9016,7 +9016,7 @@ to @timeline's layers</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_snapping_distance" c:identifier="ges_timeline_set_snapping_distance">
+      <method name="set_snapping_distance" c:identifier="ges_timeline_set_snapping_distance" glib:set-property="snapping-distance">
         <doc xml:space="preserve">Sets #GESTimeline:snapping-distance for the timeline. This new value
 will only effect future snappings and will not be used to snap the
 current element positions within the timeline.</doc>
@@ -9048,20 +9048,20 @@ actually taken into account.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <property name="auto-transition" writable="1" transfer-ownership="none">
+      <property name="auto-transition" writable="1" transfer-ownership="none" setter="set_auto_transition" getter="get_auto_transition">
         <doc xml:space="preserve">Whether to automatically create a transition whenever two
 #GESSource-s overlap in a track of the timeline. See
 #GESLayer:auto-transition if you want this to only happen in some
 layers.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="duration" transfer-ownership="none">
+      <property name="duration" transfer-ownership="none" getter="get_duration">
         <doc xml:space="preserve">The current duration (in nanoseconds) of the timeline. A timeline
 'starts' at time 0, so this is the maximum end time of all of its
 #GESTimelineElement-s.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="snapping-distance" writable="1" transfer-ownership="none">
+      <property name="snapping-distance" writable="1" transfer-ownership="none" setter="set_snapping_distance" getter="get_snapping_distance">
         <doc xml:space="preserve">The distance (in nanoseconds) at which a #GESTimelineElement being
 moved within the timeline should snap one of its #GESSource-s with
 another #GESSource-s edge. See #GESEditMode for which edges can
@@ -10212,7 +10212,7 @@ optionally by more name/return location pairs, followed by %NULL</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="get_duration" c:identifier="ges_timeline_element_get_duration">
+      <method name="get_duration" c:identifier="ges_timeline_element_get_duration" glib:get-property="duration">
         <doc xml:space="preserve">Gets the #GESTimelineElement:duration for the element.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The duration of @self (in nanoseconds).</doc>
@@ -10255,7 +10255,7 @@ layer.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_max_duration" c:identifier="ges_timeline_element_get_max_duration">
+      <method name="get_max_duration" c:identifier="ges_timeline_element_get_max_duration" glib:get-property="max-duration">
         <doc xml:space="preserve">Gets the #GESTimelineElement:max-duration for the element.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The max-duration of @self (in nanoseconds).</doc>
@@ -10268,7 +10268,7 @@ layer.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_name" c:identifier="ges_timeline_element_get_name">
+      <method name="get_name" c:identifier="ges_timeline_element_get_name" glib:get-property="name">
         <doc xml:space="preserve">Gets the #GESTimelineElement:name for the element.</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">The name of @self.</doc>
@@ -10312,7 +10312,7 @@ not the case.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="get_parent" c:identifier="ges_timeline_element_get_parent">
+      <method name="get_parent" c:identifier="ges_timeline_element_get_parent" glib:get-property="parent">
         <doc xml:space="preserve">Gets the #GESTimelineElement:parent for the element.</doc>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">The parent of @self, or %NULL if
@@ -10326,7 +10326,7 @@ not the case.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_priority" c:identifier="ges_timeline_element_get_priority">
+      <method name="get_priority" c:identifier="ges_timeline_element_get_priority" glib:get-property="priority">
         <doc xml:space="preserve">Gets the #GESTimelineElement:priority for the element.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The priority of @self.</doc>
@@ -10339,7 +10339,7 @@ not the case.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_start" c:identifier="ges_timeline_element_get_start">
+      <method name="get_start" c:identifier="ges_timeline_element_get_start" glib:get-property="start">
         <doc xml:space="preserve">Gets the #GESTimelineElement:start for the element.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The start of @self (in nanoseconds).</doc>
@@ -10352,7 +10352,7 @@ not the case.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_timeline" c:identifier="ges_timeline_element_get_timeline">
+      <method name="get_timeline" c:identifier="ges_timeline_element_get_timeline" glib:get-property="timeline">
         <doc xml:space="preserve">Gets the #GESTimelineElement:timeline for the element.</doc>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">The timeline of @self, or %NULL
@@ -10715,7 +10715,7 @@ name/value pairs, followed by %NULL</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_duration" c:identifier="ges_timeline_element_set_duration">
+      <method name="set_duration" c:identifier="ges_timeline_element_set_duration" glib:set-property="duration">
         <doc xml:space="preserve">Sets #GESTimelineElement:duration for the element.
 
 Whilst the element is part of a #GESTimeline, this is the same as
@@ -10760,7 +10760,7 @@ this method will fail.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_max_duration" c:identifier="ges_timeline_element_set_max_duration">
+      <method name="set_max_duration" c:identifier="ges_timeline_element_set_max_duration" glib:set-property="max-duration">
         <doc xml:space="preserve">Sets #GESTimelineElement:max-duration for the element. If the new
 maximum duration is below the current #GESTimelineElement:in-point of
 the element, this method will fail.</doc>
@@ -10779,7 +10779,7 @@ the element, this method will fail.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_name" c:identifier="ges_timeline_element_set_name">
+      <method name="set_name" c:identifier="ges_timeline_element_set_name" glib:set-property="name">
         <doc xml:space="preserve">Sets the #GESTimelineElement:name for the element. If %NULL is given
 for @name, then the library will instead generate a new name based on
 the type name of the element, such as the name "uriclip3" for a
@@ -10812,7 +10812,7 @@ guaranteed.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_parent" c:identifier="ges_timeline_element_set_parent">
+      <method name="set_parent" c:identifier="ges_timeline_element_set_parent" glib:set-property="parent">
         <doc xml:space="preserve">Sets the #GESTimelineElement:parent for the element.
 
 This is used internally and you should normally not call this. A
@@ -10841,7 +10841,7 @@ If @parent is not %NULL, you must ensure it already has a
           </parameter>
         </parameters>
       </method>
-      <method name="set_priority" c:identifier="ges_timeline_element_set_priority" deprecated="1" deprecated-version="1.10">
+      <method name="set_priority" c:identifier="ges_timeline_element_set_priority" glib:set-property="priority" deprecated="1" deprecated-version="1.10">
         <doc xml:space="preserve">Sets the priority of the element within the containing layer.</doc>
         <doc-deprecated xml:space="preserve">All priority management is done by GES itself now.
 To set #GESEffect priorities #ges_clip_set_top_effect_index should
@@ -10861,7 +10861,7 @@ be used.</doc-deprecated>
           </parameter>
         </parameters>
       </method>
-      <method name="set_start" c:identifier="ges_timeline_element_set_start">
+      <method name="set_start" c:identifier="ges_timeline_element_set_start" glib:set-property="start">
         <doc xml:space="preserve">Sets #GESTimelineElement:start for the element. If the element has a
 parent, this will also move its siblings with the same shift.
 
@@ -10886,7 +10886,7 @@ would place the timeline in an unsupported configuration.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_timeline" c:identifier="ges_timeline_element_set_timeline">
+      <method name="set_timeline" c:identifier="ges_timeline_element_set_timeline" glib:set-property="timeline">
         <doc xml:space="preserve">Sets the #GESTimelineElement:timeline of the element.
 
 This is used internally and you should normally not call this. A
@@ -10935,7 +10935,7 @@ See ges_timeline_element_edit() with #GES_EDIT_MODE_TRIM and
           </parameter>
         </parameters>
       </method>
-      <property name="duration" writable="1" transfer-ownership="none">
+      <property name="duration" writable="1" transfer-ownership="none" setter="set_duration" getter="get_duration">
         <doc xml:space="preserve">The duration that the element is in effect for in the timeline (a
 time difference in nanoseconds using the time coordinates of the
 timeline). For example, for a source element, this would determine
@@ -10960,7 +10960,7 @@ For elements that have no internal content, this should be kept
 as 0.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="max-duration" writable="1" construct="1" transfer-ownership="none">
+      <property name="max-duration" writable="1" construct="1" transfer-ownership="none" setter="set_max_duration" getter="get_max_duration">
         <doc xml:space="preserve">The full duration of internal content that is available (a time
 difference in nanoseconds using the time coordinates of the internal
 content).
@@ -10977,15 +10977,15 @@ For elements that have no internal content, or whose content is
 indefinite, this should be kept as #GST_CLOCK_TIME_NONE.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="name" writable="1" construct="1" transfer-ownership="none">
+      <property name="name" writable="1" construct="1" transfer-ownership="none" setter="set_name" getter="get_name">
         <doc xml:space="preserve">The name of the element. This should be unique within its timeline.</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="parent" writable="1" transfer-ownership="none">
+      <property name="parent" writable="1" transfer-ownership="none" setter="set_parent" getter="get_parent">
         <doc xml:space="preserve">The parent container of the element.</doc>
         <type name="TimelineElement"/>
       </property>
-      <property name="priority" deprecated="1" deprecated-version="1.10" writable="1" transfer-ownership="none">
+      <property name="priority" deprecated="1" deprecated-version="1.10" writable="1" transfer-ownership="none" setter="set_priority" getter="get_priority">
         <doc xml:space="preserve">The priority of the element.</doc>
         <doc-deprecated xml:space="preserve">Priority management is now done by GES itself.</doc-deprecated>
         <type name="guint" c:type="guint"/>
@@ -10994,7 +10994,7 @@ indefinite, this should be kept as #GST_CLOCK_TIME_NONE.</doc>
         <doc xml:space="preserve">Whether the element should be serialized.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="start" writable="1" transfer-ownership="none">
+      <property name="start" writable="1" transfer-ownership="none" setter="set_start" getter="get_start">
         <doc xml:space="preserve">The starting position of the element in the timeline (in nanoseconds
 and in the time coordinates of the timeline). For example, for a
 source element, this would determine the time at which it should
@@ -11003,7 +11003,7 @@ would determine the time at which it should start applying its effect
 to any source content.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="timeline" writable="1" transfer-ownership="none">
+      <property name="timeline" writable="1" transfer-ownership="none" setter="set_timeline" getter="get_timeline">
         <doc xml:space="preserve">The timeline that the element lies within.</doc>
         <type name="Timeline"/>
       </property>
@@ -11532,7 +11532,7 @@ See #GESTitleSource for more information about exposed properties</doc-deprecate
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_font_desc" c:identifier="ges_title_clip_get_font_desc" deprecated="1" deprecated-version="1.6">
+      <method name="get_font_desc" c:identifier="ges_title_clip_get_font_desc" glib:get-property="font-desc" deprecated="1" deprecated-version="1.6">
         <doc xml:space="preserve">Get the pango font description used by @self.</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_get_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
@@ -11547,7 +11547,7 @@ See #GESTitleSource for more information about exposed properties</doc-deprecate
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_halignment" c:identifier="ges_title_clip_get_halignment" deprecated="1" deprecated-version="1.6">
+      <method name="get_halignment" c:identifier="ges_title_clip_get_halignment" glib:get-property="halignment" deprecated="1" deprecated-version="1.6">
         <doc xml:space="preserve">Get the horizontal aligment used by @self.</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_get_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
@@ -11562,7 +11562,7 @@ See #GESTitleSource for more information about exposed properties</doc-deprecate
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_text" c:identifier="ges_title_clip_get_text" deprecated="1" deprecated-version="1.6">
+      <method name="get_text" c:identifier="ges_title_clip_get_text" glib:get-property="text" deprecated="1" deprecated-version="1.6">
         <doc xml:space="preserve">Get the text currently set on @self.</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_get_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
@@ -11592,7 +11592,7 @@ See #GESTitleSource for more information about exposed properties</doc-deprecate
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_valignment" c:identifier="ges_title_clip_get_valignment" deprecated="1" deprecated-version="1.6">
+      <method name="get_valignment" c:identifier="ges_title_clip_get_valignment" glib:get-property="valignment" deprecated="1" deprecated-version="1.6">
         <doc xml:space="preserve">Get the vertical aligment used by @self.</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_get_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
@@ -11607,7 +11607,7 @@ See #GESTitleSource for more information about exposed properties</doc-deprecate
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_xpos" c:identifier="ges_title_clip_get_xpos" deprecated="1" deprecated-version="1.6">
+      <method name="get_xpos" c:identifier="ges_title_clip_get_xpos" glib:get-property="xpos" deprecated="1" deprecated-version="1.6">
         <doc xml:space="preserve">Get the horizontal position used by @self.</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_get_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
@@ -11622,7 +11622,7 @@ See #GESTitleSource for more information about exposed properties</doc-deprecate
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_ypos" c:identifier="ges_title_clip_get_ypos" deprecated="1" deprecated-version="1.6">
+      <method name="get_ypos" c:identifier="ges_title_clip_get_ypos" glib:get-property="ypos" deprecated="1" deprecated-version="1.6">
         <doc xml:space="preserve">Get the vertical position used by @self.</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_get_children_property instead</doc-deprecated>
         <return-value transfer-ownership="none">
@@ -11636,7 +11636,7 @@ See #GESTitleSource for more information about exposed properties</doc-deprecate
           </instance-parameter>
         </parameters>
       </method>
-      <method name="set_background" c:identifier="ges_title_clip_set_background" deprecated="1" deprecated-version="1.6">
+      <method name="set_background" c:identifier="ges_title_clip_set_background" glib:set-property="background" deprecated="1" deprecated-version="1.6">
         <doc xml:space="preserve">Sets the background of the text.</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
@@ -11654,7 +11654,7 @@ See #GESTitleSource for more information about exposed properties</doc-deprecate
           </parameter>
         </parameters>
       </method>
-      <method name="set_color" c:identifier="ges_title_clip_set_color" deprecated="1" deprecated-version="1.6">
+      <method name="set_color" c:identifier="ges_title_clip_set_color" glib:set-property="color" deprecated="1" deprecated-version="1.6">
         <doc xml:space="preserve">Sets the color of the text.</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
@@ -11672,7 +11672,7 @@ See #GESTitleSource for more information about exposed properties</doc-deprecate
           </parameter>
         </parameters>
       </method>
-      <method name="set_font_desc" c:identifier="ges_title_clip_set_font_desc" deprecated="1" deprecated-version="1.6">
+      <method name="set_font_desc" c:identifier="ges_title_clip_set_font_desc" glib:set-property="font-desc" deprecated="1" deprecated-version="1.6">
         <doc xml:space="preserve">Sets the pango font description of the text.</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
@@ -11690,7 +11690,7 @@ See #GESTitleSource for more information about exposed properties</doc-deprecate
           </parameter>
         </parameters>
       </method>
-      <method name="set_halignment" c:identifier="ges_title_clip_set_halignment" deprecated="1" deprecated-version="1.6">
+      <method name="set_halignment" c:identifier="ges_title_clip_set_halignment" glib:set-property="halignment" deprecated="1" deprecated-version="1.6">
         <doc xml:space="preserve">Sets the horizontal aligment of the text.</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
@@ -11708,7 +11708,7 @@ See #GESTitleSource for more information about exposed properties</doc-deprecate
           </parameter>
         </parameters>
       </method>
-      <method name="set_text" c:identifier="ges_title_clip_set_text" deprecated="1" deprecated-version="1.6">
+      <method name="set_text" c:identifier="ges_title_clip_set_text" glib:set-property="text" deprecated="1" deprecated-version="1.6">
         <doc xml:space="preserve">Sets the text this clip will render.</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
@@ -11727,7 +11727,7 @@ made.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_valignment" c:identifier="ges_title_clip_set_valignment" deprecated="1" deprecated-version="1.6">
+      <method name="set_valignment" c:identifier="ges_title_clip_set_valignment" glib:set-property="valignment" deprecated="1" deprecated-version="1.6">
         <doc xml:space="preserve">Sets the vertical aligment of the text.</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
@@ -11745,7 +11745,7 @@ See #GESTitleSource for more information about exposed properties</doc-deprecate
           </parameter>
         </parameters>
       </method>
-      <method name="set_xpos" c:identifier="ges_title_clip_set_xpos" deprecated="1" deprecated-version="1.6">
+      <method name="set_xpos" c:identifier="ges_title_clip_set_xpos" glib:set-property="xpos" deprecated="1" deprecated-version="1.6">
         <doc xml:space="preserve">Sets the horizontal position of the text.</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
@@ -11763,7 +11763,7 @@ See #GESTitleSource for more information about exposed properties</doc-deprecate
           </parameter>
         </parameters>
       </method>
-      <method name="set_ypos" c:identifier="ges_title_clip_set_ypos" deprecated="1" deprecated-version="1.6">
+      <method name="set_ypos" c:identifier="ges_title_clip_set_ypos" glib:set-property="ypos" deprecated="1" deprecated-version="1.6">
         <doc xml:space="preserve">Sets the vertical position of the text.</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
@@ -11781,56 +11781,56 @@ See #GESTitleSource for more information about exposed properties</doc-deprecate
           </parameter>
         </parameters>
       </method>
-      <property name="background" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none">
+      <property name="background" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_background">
         <doc xml:space="preserve">The background of the text</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties or
 #ges_timeline_element_get_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="color" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none">
+      <property name="color" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_color">
         <doc xml:space="preserve">The color of the text</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties or
 #ges_timeline_element_get_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="font-desc" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none">
+      <property name="font-desc" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_font_desc" getter="get_font_desc">
         <doc xml:space="preserve">Pango font description string</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties or
 #ges_timeline_element_get_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="halignment" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none">
+      <property name="halignment" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_halignment" getter="get_halignment">
         <doc xml:space="preserve">Horizontal alignment of the text</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties or
 #ges_timeline_element_get_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
         <type name="TextHAlign"/>
       </property>
-      <property name="text" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none">
+      <property name="text" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_text" getter="get_text">
         <doc xml:space="preserve">The text to diplay</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties or
 #ges_timeline_element_get_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="valignment" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none">
+      <property name="valignment" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_valignment" getter="get_valignment">
         <doc xml:space="preserve">Vertical alignent of the text</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties or
 #ges_timeline_element_get_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
         <type name="TextVAlign"/>
       </property>
-      <property name="xpos" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none">
+      <property name="xpos" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_xpos" getter="get_xpos">
         <doc xml:space="preserve">The horizontal position of the text</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties or
 #ges_timeline_element_get_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
         <type name="gdouble" c:type="gdouble"/>
       </property>
-      <property name="ypos" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none">
+      <property name="ypos" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_ypos" getter="get_ypos">
         <doc xml:space="preserve">The vertical position of the text</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties or
 #ges_timeline_element_get_children_properties instead.
@@ -12262,7 +12262,7 @@ needed to be committed.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_caps" c:identifier="ges_track_get_caps">
+      <method name="get_caps" c:identifier="ges_track_get_caps" glib:get-property="caps">
         <doc xml:space="preserve">Get the #GESTrack:caps of the track.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The caps of @track.</doc>
@@ -12293,7 +12293,7 @@ all the #GESTrackElement-s in @track.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_mixing" c:identifier="ges_track_get_mixing">
+      <method name="get_mixing" c:identifier="ges_track_get_mixing" glib:get-property="mixing">
         <doc xml:space="preserve">Gets the #GESTrack:mixing of the track.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">Whether @track is mixing.</doc>
@@ -12306,7 +12306,7 @@ all the #GESTrackElement-s in @track.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_restriction_caps" c:identifier="ges_track_get_restriction_caps" version="1.18">
+      <method name="get_restriction_caps" c:identifier="ges_track_get_restriction_caps" glib:get-property="restriction-caps" version="1.18">
         <doc xml:space="preserve">Gets the #GESTrack:restriction-caps of the track.</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">The restriction-caps of @track.</doc>
@@ -12393,7 +12393,7 @@ function already set appropriately.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_mixing" c:identifier="ges_track_set_mixing">
+      <method name="set_mixing" c:identifier="ges_track_set_mixing" glib:set-property="mixing">
         <doc xml:space="preserve">Sets the #GESTrack:mixing for the track.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -12409,7 +12409,7 @@ function already set appropriately.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_restriction_caps" c:identifier="ges_track_set_restriction_caps">
+      <method name="set_restriction_caps" c:identifier="ges_track_set_restriction_caps" glib:set-property="restriction-caps">
         <doc xml:space="preserve">Sets the #GESTrack:restriction-caps for the track.
 
 &gt; **NOTE**: Restriction caps are **not** taken into account when
@@ -12479,7 +12479,7 @@ width=400".</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="caps" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="caps" writable="1" construct-only="1" transfer-ownership="none" getter="get_caps">
         <doc xml:space="preserve">The capabilities used to choose the output of the #GESTrack's
 elements. Internally, this is used to select output streams when
 several may be available, by determining whether its #GstPad is
@@ -12509,7 +12509,7 @@ Default value: O</doc>
         <doc xml:space="preserve">The #nlecomposition:id of the underlying #nlecomposition.</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="mixing" writable="1" construct="1" transfer-ownership="none">
+      <property name="mixing" writable="1" construct="1" transfer-ownership="none" setter="set_mixing" getter="get_mixing">
         <doc xml:space="preserve">Whether the track should support the mixing of #GESLayer data, such
 as composing the video data of each layer (when part of the video
 data is transparent, the next layer will become visible) or adding
@@ -12517,7 +12517,7 @@ together the audio data. As such, for audio and video tracks, you'll
 likely want to keep this set to %TRUE.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="restriction-caps" writable="1" transfer-ownership="none">
+      <property name="restriction-caps" writable="1" transfer-ownership="none" setter="set_restriction_caps" getter="get_restriction_caps">
         <doc xml:space="preserve">The capabilities that specifies the final output format of the
 #GESTrack. For example, for a video track, it would specify the
 height, width, framerate and other properties of the stream.
@@ -12877,7 +12877,7 @@ for @trackelement.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_auto_clamp_control_sources" c:identifier="ges_track_element_get_auto_clamp_control_sources" version="1.18">
+      <method name="get_auto_clamp_control_sources" c:identifier="ges_track_element_get_auto_clamp_control_sources" glib:get-property="auto-clamp-control-sources" version="1.18">
         <doc xml:space="preserve">Gets #GESTrackElement:auto-clamp-control-sources.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">Whether the control sources for the child properties of
@@ -13056,7 +13056,7 @@ nleobject that @object wraps.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_track" c:identifier="ges_track_element_get_track">
+      <method name="get_track" c:identifier="ges_track_element_get_track" glib:get-property="track">
         <doc xml:space="preserve">Get the #GESTrackElement:track for the element.</doc>
         <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The track that @object belongs to,
@@ -13070,7 +13070,7 @@ or %NULL if it does not belong to a track.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_track_type" c:identifier="ges_track_element_get_track_type">
+      <method name="get_track_type" c:identifier="ges_track_element_get_track_type" glib:get-property="track-type">
         <doc xml:space="preserve">Gets the #GESTrackElement:track-type for the element.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The track-type of @object.</doc>
@@ -13216,7 +13216,7 @@ binding from</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_active" c:identifier="ges_track_element_set_active">
+      <method name="set_active" c:identifier="ges_track_element_set_active" glib:set-property="active">
         <doc xml:space="preserve">Sets #GESTrackElement:active for the element.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">%TRUE if the property was *toggled*.</doc>
@@ -13233,7 +13233,7 @@ binding from</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_auto_clamp_control_sources" c:identifier="ges_track_element_set_auto_clamp_control_sources" version="1.18">
+      <method name="set_auto_clamp_control_sources" c:identifier="ges_track_element_set_auto_clamp_control_sources" glib:set-property="auto-clamp-control-sources" version="1.18">
         <doc xml:space="preserve">Sets #GESTrackElement:auto-clamp-control-sources. If set to %TRUE, this
 will immediately clamp all the control sources.</doc>
         <return-value transfer-ownership="none">
@@ -13383,7 +13383,7 @@ gst_direct_control_binding_new_absolute() instead.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_has_internal_source" c:identifier="ges_track_element_set_has_internal_source" version="1.18">
+      <method name="set_has_internal_source" c:identifier="ges_track_element_set_has_internal_source" glib:set-property="has-internal-source" version="1.18">
         <doc xml:space="preserve">Sets #GESTrackElement:has-internal-source for the element. If this is
 set to %FALSE, this method will also set the
 #GESTimelineElement:in-point of the element to 0 and its
@@ -13405,7 +13405,7 @@ set to %FALSE, this method will also set the
           </parameter>
         </parameters>
       </method>
-      <method name="set_track_type" c:identifier="ges_track_element_set_track_type">
+      <method name="set_track_type" c:identifier="ges_track_element_set_track_type" glib:set-property="track-type">
         <doc xml:space="preserve">Sets the #GESTrackElement:track-type for the element.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -13421,13 +13421,13 @@ set to %FALSE, this method will also set the
           </parameter>
         </parameters>
       </method>
-      <property name="active" writable="1" transfer-ownership="none">
+      <property name="active" writable="1" transfer-ownership="none" setter="set_active">
         <doc xml:space="preserve">Whether the effect of the element should be applied in its
 #GESTrackElement:track. If set to %FALSE, it will not be used in
 the output of the track.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="auto-clamp-control-sources" version="1.18" writable="1" transfer-ownership="none">
+      <property name="auto-clamp-control-sources" version="1.18" writable="1" transfer-ownership="none" setter="set_auto_clamp_control_sources" getter="get_auto_clamp_control_sources">
         <doc xml:space="preserve">Whether the control sources on the element (see
 ges_track_element_set_control_source()) will be automatically
 updated whenever the #GESTimelineElement:in-point or out-point of the
@@ -13439,7 +13439,7 @@ per control source.
 Default value: %TRUE</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="has-internal-source" version="1.18" writable="1" transfer-ownership="none">
+      <property name="has-internal-source" version="1.18" writable="1" transfer-ownership="none" setter="set_has_internal_source">
         <doc xml:space="preserve">This property is used to determine whether the 'internal time'
 properties of the element have any meaning. In particular, unless
 this is set to %TRUE, the #GESTimelineElement:in-point and
@@ -13476,12 +13476,12 @@ content and manipulate the timing of their data streams (time
 effects).</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="track" transfer-ownership="none">
+      <property name="track" transfer-ownership="none" getter="get_track">
         <doc xml:space="preserve">The track that this element belongs to, or %NULL if it does not
 belong to a track.</doc>
         <type name="Track"/>
       </property>
-      <property name="track-type" writable="1" construct="1" transfer-ownership="none">
+      <property name="track-type" writable="1" construct="1" transfer-ownership="none" setter="set_track_type" getter="get_track_type">
         <doc xml:space="preserve">The track type of the element, which determines the type of track the
 element can be added to (see #GESTrack:track-type). This should
 correspond to the type of data that the element can produce or
@@ -13577,7 +13577,7 @@ property of the track element.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="get_track_type" c:identifier="ges_track_element_asset_get_track_type">
+      <method name="get_track_type" c:identifier="ges_track_element_asset_get_track_type" glib:get-property="track-type">
         <doc xml:space="preserve">Get the GESAssetTrackType the #GESTrackElement extracted from @self
 should get into</doc>
         <return-value transfer-ownership="none">
@@ -13591,7 +13591,7 @@ should get into</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="set_track_type" c:identifier="ges_track_element_asset_set_track_type">
+      <method name="set_track_type" c:identifier="ges_track_element_asset_set_track_type" glib:set-property="track-type">
         <doc xml:space="preserve">Set the #GESTrackType the #GESTrackElement extracted from @self
 should get into</doc>
         <return-value transfer-ownership="none">
@@ -13608,7 +13608,7 @@ should get into</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="track-type" writable="1" construct="1" transfer-ownership="none">
+      <property name="track-type" writable="1" construct="1" transfer-ownership="none" setter="set_track_type" getter="get_track_type">
         <type name="TrackType"/>
       </property>
       <field name="parent">
@@ -13795,19 +13795,19 @@ the user of the #GESTrack must set the type to @GES_TRACK_TYPE_CUSTOM.
 
 @GES_TRACK_TYPE_UNKNOWN is for internal purposes and should not be used
 by users</doc>
-      <member name="unknown" value="1" c:identifier="GES_TRACK_TYPE_UNKNOWN" glib:nick="unknown">
+      <member name="unknown" value="1" c:identifier="GES_TRACK_TYPE_UNKNOWN" glib:nick="unknown" glib:name="GES_TRACK_TYPE_UNKNOWN">
         <doc xml:space="preserve">A track of unknown type (i.e. invalid)</doc>
       </member>
-      <member name="audio" value="2" c:identifier="GES_TRACK_TYPE_AUDIO" glib:nick="audio">
+      <member name="audio" value="2" c:identifier="GES_TRACK_TYPE_AUDIO" glib:nick="audio" glib:name="GES_TRACK_TYPE_AUDIO">
         <doc xml:space="preserve">An audio track</doc>
       </member>
-      <member name="video" value="4" c:identifier="GES_TRACK_TYPE_VIDEO" glib:nick="video">
+      <member name="video" value="4" c:identifier="GES_TRACK_TYPE_VIDEO" glib:nick="video" glib:name="GES_TRACK_TYPE_VIDEO">
         <doc xml:space="preserve">A video track</doc>
       </member>
-      <member name="text" value="8" c:identifier="GES_TRACK_TYPE_TEXT" glib:nick="text">
+      <member name="text" value="8" c:identifier="GES_TRACK_TYPE_TEXT" glib:nick="text" glib:name="GES_TRACK_TYPE_TEXT">
         <doc xml:space="preserve">A text (subtitle) track</doc>
       </member>
-      <member name="custom" value="16" c:identifier="GES_TRACK_TYPE_CUSTOM" glib:nick="custom">
+      <member name="custom" value="16" c:identifier="GES_TRACK_TYPE_CUSTOM" glib:nick="custom" glib:name="GES_TRACK_TYPE_CUSTOM">
         <doc xml:space="preserve">A custom-content track</doc>
       </member>
       <function name="name" c:identifier="ges_track_type_name">
@@ -13947,7 +13947,7 @@ the URI points to a file of some type.</doc>
           </parameter>
         </parameters>
       </constructor>
-      <method name="get_uri" c:identifier="ges_uri_clip_get_uri">
+      <method name="get_uri" c:identifier="ges_uri_clip_get_uri" glib:get-property="uri">
         <doc xml:space="preserve">Get the location of the resource.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The location of the resource.</doc>
@@ -13986,7 +13986,7 @@ the URI points to a file of some type.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="set_is_image" c:identifier="ges_uri_clip_set_is_image">
+      <method name="set_is_image" c:identifier="ges_uri_clip_set_is_image" glib:set-property="is-image">
         <doc xml:space="preserve">Sets whether the clip is a still image or not.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -14002,7 +14002,7 @@ the URI points to a file of some type.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_mute" c:identifier="ges_uri_clip_set_mute">
+      <method name="set_mute" c:identifier="ges_uri_clip_set_mute" glib:set-property="mute">
         <doc xml:space="preserve">Sets whether the audio track of this clip is muted or not.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -14018,19 +14018,19 @@ the URI points to a file of some type.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="is-image" writable="1" construct="1" transfer-ownership="none">
+      <property name="is-image" writable="1" construct="1" transfer-ownership="none" setter="set_is_image">
         <doc xml:space="preserve">Whether this uri clip represents a still image or not. This must be set
 before create_track_elements is called.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="mute" writable="1" construct="1" transfer-ownership="none">
+      <property name="mute" writable="1" construct="1" transfer-ownership="none" setter="set_mute">
         <doc xml:space="preserve">Whether the sound will be played or not.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
       <property name="supported-formats" writable="1" construct="1" transfer-ownership="none">
         <type name="TrackType"/>
       </property>
-      <property name="uri" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="uri" writable="1" construct-only="1" transfer-ownership="none" getter="get_uri">
         <doc xml:space="preserve">The location of the file/resource to use.</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
@@ -14130,7 +14130,7 @@ You can also use multi file uris for #GESMultiFileSource.</doc>
           </parameter>
         </parameters>
       </function>
-      <method name="get_duration" c:identifier="ges_uri_clip_asset_get_duration">
+      <method name="get_duration" c:identifier="ges_uri_clip_asset_get_duration" glib:get-property="duration">
         <doc xml:space="preserve">Gets duration of the file represented by @self</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The duration of @self</doc>
@@ -14201,7 +14201,7 @@ are different as those can be extended 'infinitely'.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <property name="duration" writable="1" transfer-ownership="none">
+      <property name="duration" writable="1" transfer-ownership="none" getter="get_duration">
         <doc xml:space="preserve">The duration (in nanoseconds) of the media file</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
@@ -14373,7 +14373,7 @@ contains one frame)</doc>
     <constant name="VERSION_MAJOR" value="1" c:type="GES_VERSION_MAJOR">
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="VERSION_MICRO" value="1" c:type="GES_VERSION_MICRO">
+    <constant name="VERSION_MICRO" value="2" c:type="GES_VERSION_MICRO">
       <type name="gint" c:type="gint"/>
     </constant>
     <constant name="VERSION_MINOR" value="19" c:type="GES_VERSION_MINOR">
@@ -14506,277 +14506,277 @@ account.</doc>
     </record>
     <record name="VideoSourcePrivate" c:type="GESVideoSourcePrivate" disguised="1"/>
     <enumeration name="VideoStandardTransitionType" glib:type-name="GESVideoStandardTransitionType" glib:get-type="ges_video_standard_transition_type_get_type" c:type="GESVideoStandardTransitionType">
-      <member name="none" value="0" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_NONE" glib:nick="none">
+      <member name="none" value="0" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_NONE" glib:nick="none" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_NONE">
         <doc xml:space="preserve">Transition type has not been set,</doc>
       </member>
-      <member name="bar_wipe_lr" value="1" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BAR_WIPE_LR" glib:nick="bar-wipe-lr">
+      <member name="bar_wipe_lr" value="1" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BAR_WIPE_LR" glib:nick="bar-wipe-lr" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_BAR_WIPE_LR">
         <doc xml:space="preserve">A bar moves from left to right,</doc>
       </member>
-      <member name="bar_wipe_tb" value="2" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BAR_WIPE_TB" glib:nick="bar-wipe-tb">
+      <member name="bar_wipe_tb" value="2" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BAR_WIPE_TB" glib:nick="bar-wipe-tb" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_BAR_WIPE_TB">
         <doc xml:space="preserve">A bar moves from top to bottom,</doc>
       </member>
-      <member name="box_wipe_tl" value="3" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_TL" glib:nick="box-wipe-tl">
+      <member name="box_wipe_tl" value="3" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_TL" glib:nick="box-wipe-tl" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_TL">
         <doc xml:space="preserve">A box expands from the upper-left corner to the lower-right corner,</doc>
       </member>
-      <member name="box_wipe_tr" value="4" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_TR" glib:nick="box-wipe-tr">
+      <member name="box_wipe_tr" value="4" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_TR" glib:nick="box-wipe-tr" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_TR">
         <doc xml:space="preserve">A box expands from the upper-right corner to the lower-left corner,</doc>
       </member>
-      <member name="box_wipe_br" value="5" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_BR" glib:nick="box-wipe-br">
+      <member name="box_wipe_br" value="5" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_BR" glib:nick="box-wipe-br" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_BR">
         <doc xml:space="preserve">A box expands from the lower-right corner to the upper-left corner,</doc>
       </member>
-      <member name="box_wipe_bl" value="6" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_BL" glib:nick="box-wipe-bl">
+      <member name="box_wipe_bl" value="6" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_BL" glib:nick="box-wipe-bl" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_BL">
         <doc xml:space="preserve">A box expands from the lower-left corner to the upper-right corner,</doc>
       </member>
-      <member name="four_box_wipe_ci" value="7" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_FOUR_BOX_WIPE_CI" glib:nick="four-box-wipe-ci">
+      <member name="four_box_wipe_ci" value="7" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_FOUR_BOX_WIPE_CI" glib:nick="four-box-wipe-ci" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_FOUR_BOX_WIPE_CI">
         <doc xml:space="preserve">A box shape expands from each of the four corners toward the center,</doc>
       </member>
-      <member name="four_box_wipe_co" value="8" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_FOUR_BOX_WIPE_CO" glib:nick="four-box-wipe-co">
+      <member name="four_box_wipe_co" value="8" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_FOUR_BOX_WIPE_CO" glib:nick="four-box-wipe-co" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_FOUR_BOX_WIPE_CO">
         <doc xml:space="preserve">A box shape expands from the center of each quadrant toward the corners of each quadrant,</doc>
       </member>
-      <member name="barndoor_v" value="21" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNDOOR_V" glib:nick="barndoor-v">
+      <member name="barndoor_v" value="21" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNDOOR_V" glib:nick="barndoor-v" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNDOOR_V">
         <doc xml:space="preserve">A central, vertical line splits and expands toward the left and right edges,</doc>
       </member>
-      <member name="barndoor_h" value="22" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNDOOR_H" glib:nick="barndoor-h">
+      <member name="barndoor_h" value="22" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNDOOR_H" glib:nick="barndoor-h" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNDOOR_H">
         <doc xml:space="preserve">A central, horizontal line splits and expands toward the top and bottom edges,</doc>
       </member>
-      <member name="box_wipe_tc" value="23" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_TC" glib:nick="box-wipe-tc">
+      <member name="box_wipe_tc" value="23" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_TC" glib:nick="box-wipe-tc" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_TC">
         <doc xml:space="preserve">A box expands from the top edge's midpoint to the bottom corners,</doc>
       </member>
-      <member name="box_wipe_rc" value="24" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_RC" glib:nick="box-wipe-rc">
+      <member name="box_wipe_rc" value="24" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_RC" glib:nick="box-wipe-rc" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_RC">
         <doc xml:space="preserve">A box expands from the right edge's midpoint to the left corners,</doc>
       </member>
-      <member name="box_wipe_bc" value="25" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_BC" glib:nick="box-wipe-bc">
+      <member name="box_wipe_bc" value="25" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_BC" glib:nick="box-wipe-bc" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_BC">
         <doc xml:space="preserve">A box expands from the bottom edge's midpoint to the top corners,</doc>
       </member>
-      <member name="box_wipe_lc" value="26" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_LC" glib:nick="box-wipe-lc">
+      <member name="box_wipe_lc" value="26" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_LC" glib:nick="box-wipe-lc" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOX_WIPE_LC">
         <doc xml:space="preserve">A box expands from the left edge's midpoint to the right corners,</doc>
       </member>
-      <member name="diagonal_tl" value="41" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DIAGONAL_TL" glib:nick="diagonal-tl">
+      <member name="diagonal_tl" value="41" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DIAGONAL_TL" glib:nick="diagonal-tl" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_DIAGONAL_TL">
         <doc xml:space="preserve">A diagonal line moves from the upper-left corner to the lower-right corner,</doc>
       </member>
-      <member name="diagonal_tr" value="42" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DIAGONAL_TR" glib:nick="diagonal-tr">
+      <member name="diagonal_tr" value="42" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DIAGONAL_TR" glib:nick="diagonal-tr" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_DIAGONAL_TR">
         <doc xml:space="preserve">A diagonal line moves from the upper right corner to the lower-left corner,</doc>
       </member>
-      <member name="bowtie_v" value="43" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOWTIE_V" glib:nick="bowtie-v">
+      <member name="bowtie_v" value="43" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOWTIE_V" glib:nick="bowtie-v" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOWTIE_V">
         <doc xml:space="preserve">Two wedge shapes slide in from the top and bottom edges toward the center,</doc>
       </member>
-      <member name="bowtie_h" value="44" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOWTIE_H" glib:nick="bowtie-h">
+      <member name="bowtie_h" value="44" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOWTIE_H" glib:nick="bowtie-h" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_BOWTIE_H">
         <doc xml:space="preserve">Two wedge shapes slide in from the left and right edges toward the center,</doc>
       </member>
-      <member name="barndoor_dbl" value="45" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNDOOR_DBL" glib:nick="barndoor-dbl">
+      <member name="barndoor_dbl" value="45" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNDOOR_DBL" glib:nick="barndoor-dbl" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNDOOR_DBL">
         <doc xml:space="preserve">A diagonal line from the lower-left to upper-right corners splits and expands toward the opposite corners,</doc>
       </member>
-      <member name="barndoor_dtl" value="46" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNDOOR_DTL" glib:nick="barndoor-dtl">
+      <member name="barndoor_dtl" value="46" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNDOOR_DTL" glib:nick="barndoor-dtl" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNDOOR_DTL">
         <doc xml:space="preserve">A diagonal line from upper-left to lower-right corners splits and expands toward the opposite corners,</doc>
       </member>
-      <member name="misc_diagonal_dbd" value="47" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_MISC_DIAGONAL_DBD" glib:nick="misc-diagonal-dbd">
+      <member name="misc_diagonal_dbd" value="47" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_MISC_DIAGONAL_DBD" glib:nick="misc-diagonal-dbd" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_MISC_DIAGONAL_DBD">
         <doc xml:space="preserve">Four wedge shapes split from the center and retract toward the four edges,</doc>
       </member>
-      <member name="misc_diagonal_dd" value="48" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_MISC_DIAGONAL_DD" glib:nick="misc-diagonal-dd">
+      <member name="misc_diagonal_dd" value="48" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_MISC_DIAGONAL_DD" glib:nick="misc-diagonal-dd" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_MISC_DIAGONAL_DD">
         <doc xml:space="preserve">A diamond connecting the four edge midpoints simultaneously contracts toward the center and expands toward the edges,</doc>
       </member>
-      <member name="vee_d" value="61" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_VEE_D" glib:nick="vee-d">
+      <member name="vee_d" value="61" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_VEE_D" glib:nick="vee-d" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_VEE_D">
         <doc xml:space="preserve">A wedge shape moves from top to bottom,</doc>
       </member>
-      <member name="vee_l" value="62" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_VEE_L" glib:nick="vee-l">
+      <member name="vee_l" value="62" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_VEE_L" glib:nick="vee-l" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_VEE_L">
         <doc xml:space="preserve">A wedge shape moves from right to left,</doc>
       </member>
-      <member name="vee_u" value="63" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_VEE_U" glib:nick="vee-u">
+      <member name="vee_u" value="63" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_VEE_U" glib:nick="vee-u" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_VEE_U">
         <doc xml:space="preserve">A wedge shape moves from bottom to top,</doc>
       </member>
-      <member name="vee_r" value="64" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_VEE_R" glib:nick="vee-r">
+      <member name="vee_r" value="64" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_VEE_R" glib:nick="vee-r" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_VEE_R">
         <doc xml:space="preserve">A wedge shape moves from left to right,</doc>
       </member>
-      <member name="barnvee_d" value="65" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNVEE_D" glib:nick="barnvee-d">
+      <member name="barnvee_d" value="65" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNVEE_D" glib:nick="barnvee-d" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNVEE_D">
         <doc xml:space="preserve">A 'V' shape extending from the bottom edge's midpoint to the opposite corners contracts toward the center and expands toward the edges,</doc>
       </member>
-      <member name="barnvee_l" value="66" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNVEE_L" glib:nick="barnvee-l">
+      <member name="barnvee_l" value="66" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNVEE_L" glib:nick="barnvee-l" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNVEE_L">
         <doc xml:space="preserve">A 'V' shape extending from the left edge's midpoint to the opposite corners contracts toward the center and expands toward the edges,</doc>
       </member>
-      <member name="barnvee_u" value="67" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNVEE_U" glib:nick="barnvee-u">
+      <member name="barnvee_u" value="67" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNVEE_U" glib:nick="barnvee-u" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNVEE_U">
         <doc xml:space="preserve">A 'V' shape extending from the top edge's midpoint to the opposite corners contracts toward the center and expands toward the edges,</doc>
       </member>
-      <member name="barnvee_r" value="68" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNVEE_R" glib:nick="barnvee-r">
+      <member name="barnvee_r" value="68" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNVEE_R" glib:nick="barnvee-r" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_BARNVEE_R">
         <doc xml:space="preserve">A 'V' shape extending from the right edge's midpoint to the opposite corners contracts toward the center and expands toward the edges,</doc>
       </member>
-      <member name="iris_rect" value="101" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_IRIS_RECT" glib:nick="iris-rect">
+      <member name="iris_rect" value="101" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_IRIS_RECT" glib:nick="iris-rect" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_IRIS_RECT">
         <doc xml:space="preserve">A rectangle expands from the center.,</doc>
       </member>
-      <member name="clock_cw12" value="201" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_CLOCK_CW12" glib:nick="clock-cw12">
+      <member name="clock_cw12" value="201" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_CLOCK_CW12" glib:nick="clock-cw12" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_CLOCK_CW12">
         <doc xml:space="preserve">A radial hand sweeps clockwise from the twelve o'clock position,</doc>
       </member>
-      <member name="clock_cw3" value="202" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_CLOCK_CW3" glib:nick="clock-cw3">
+      <member name="clock_cw3" value="202" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_CLOCK_CW3" glib:nick="clock-cw3" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_CLOCK_CW3">
         <doc xml:space="preserve">A radial hand sweeps clockwise from the three o'clock position,</doc>
       </member>
-      <member name="clock_cw6" value="203" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_CLOCK_CW6" glib:nick="clock-cw6">
+      <member name="clock_cw6" value="203" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_CLOCK_CW6" glib:nick="clock-cw6" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_CLOCK_CW6">
         <doc xml:space="preserve">A radial hand sweeps clockwise from the six o'clock position,</doc>
       </member>
-      <member name="clock_cw9" value="204" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_CLOCK_CW9" glib:nick="clock-cw9">
+      <member name="clock_cw9" value="204" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_CLOCK_CW9" glib:nick="clock-cw9" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_CLOCK_CW9">
         <doc xml:space="preserve">A radial hand sweeps clockwise from the nine o'clock position,</doc>
       </member>
-      <member name="pinwheel_tbv" value="205" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_PINWHEEL_TBV" glib:nick="pinwheel-tbv">
+      <member name="pinwheel_tbv" value="205" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_PINWHEEL_TBV" glib:nick="pinwheel-tbv" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_PINWHEEL_TBV">
         <doc xml:space="preserve">Two radial hands sweep clockwise from the twelve and six o'clock positions,</doc>
       </member>
-      <member name="pinwheel_tbh" value="206" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_PINWHEEL_TBH" glib:nick="pinwheel-tbh">
+      <member name="pinwheel_tbh" value="206" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_PINWHEEL_TBH" glib:nick="pinwheel-tbh" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_PINWHEEL_TBH">
         <doc xml:space="preserve">Two radial hands sweep clockwise from the nine and three o'clock positions,</doc>
       </member>
-      <member name="pinwheel_fb" value="207" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_PINWHEEL_FB" glib:nick="pinwheel-fb">
+      <member name="pinwheel_fb" value="207" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_PINWHEEL_FB" glib:nick="pinwheel-fb" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_PINWHEEL_FB">
         <doc xml:space="preserve">Four radial hands sweep clockwise,</doc>
       </member>
-      <member name="fan_ct" value="211" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_FAN_CT" glib:nick="fan-ct">
+      <member name="fan_ct" value="211" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_FAN_CT" glib:nick="fan-ct" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_FAN_CT">
         <doc xml:space="preserve">A fan unfolds from the top edge, the fan axis at the center,</doc>
       </member>
-      <member name="fan_cr" value="212" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_FAN_CR" glib:nick="fan-cr">
+      <member name="fan_cr" value="212" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_FAN_CR" glib:nick="fan-cr" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_FAN_CR">
         <doc xml:space="preserve">A fan unfolds from the right edge, the fan axis at the center,</doc>
       </member>
-      <member name="doublefan_fov" value="213" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLEFAN_FOV" glib:nick="doublefan-fov">
+      <member name="doublefan_fov" value="213" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLEFAN_FOV" glib:nick="doublefan-fov" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLEFAN_FOV">
         <doc xml:space="preserve">Two fans, their axes at the center, unfold from the top and bottom,</doc>
       </member>
-      <member name="doublefan_foh" value="214" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLEFAN_FOH" glib:nick="doublefan-foh">
+      <member name="doublefan_foh" value="214" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLEFAN_FOH" glib:nick="doublefan-foh" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLEFAN_FOH">
         <doc xml:space="preserve">Two fans, their axes at the center, unfold from the left and right,</doc>
       </member>
-      <member name="singlesweep_cwt" value="221" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWT" glib:nick="singlesweep-cwt">
+      <member name="singlesweep_cwt" value="221" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWT" glib:nick="singlesweep-cwt" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWT">
         <doc xml:space="preserve">A radial hand sweeps clockwise from the top edge's midpoint,</doc>
       </member>
-      <member name="singlesweep_cwr" value="222" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWR" glib:nick="singlesweep-cwr">
+      <member name="singlesweep_cwr" value="222" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWR" glib:nick="singlesweep-cwr" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWR">
         <doc xml:space="preserve">A radial hand sweeps clockwise from the right edge's midpoint,</doc>
       </member>
-      <member name="singlesweep_cwb" value="223" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWB" glib:nick="singlesweep-cwb">
+      <member name="singlesweep_cwb" value="223" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWB" glib:nick="singlesweep-cwb" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWB">
         <doc xml:space="preserve">A radial hand sweeps clockwise from the bottom edge's midpoint,</doc>
       </member>
-      <member name="singlesweep_cwl" value="224" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWL" glib:nick="singlesweep-cwl">
+      <member name="singlesweep_cwl" value="224" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWL" glib:nick="singlesweep-cwl" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWL">
         <doc xml:space="preserve">A radial hand sweeps clockwise from the left edge's midpoint,</doc>
       </member>
-      <member name="doublesweep_pv" value="225" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLESWEEP_PV" glib:nick="doublesweep-pv">
+      <member name="doublesweep_pv" value="225" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLESWEEP_PV" glib:nick="doublesweep-pv" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLESWEEP_PV">
         <doc xml:space="preserve">Two radial hands sweep clockwise and counter-clockwise from the top and bottom edges' midpoints,</doc>
       </member>
-      <member name="doublesweep_pd" value="226" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLESWEEP_PD" glib:nick="doublesweep-pd">
+      <member name="doublesweep_pd" value="226" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLESWEEP_PD" glib:nick="doublesweep-pd" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLESWEEP_PD">
         <doc xml:space="preserve">Two radial hands sweep clockwise and counter-clockwise from the left and right edges' midpoints,</doc>
       </member>
-      <member name="doublesweep_ov" value="227" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLESWEEP_OV" glib:nick="doublesweep-ov">
+      <member name="doublesweep_ov" value="227" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLESWEEP_OV" glib:nick="doublesweep-ov" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLESWEEP_OV">
         <doc xml:space="preserve">Two radial hands attached at the top and bottom edges' midpoints sweep from right to left,</doc>
       </member>
-      <member name="doublesweep_oh" value="228" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLESWEEP_OH" glib:nick="doublesweep-oh">
+      <member name="doublesweep_oh" value="228" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLESWEEP_OH" glib:nick="doublesweep-oh" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLESWEEP_OH">
         <doc xml:space="preserve">Two radial hands attached at the left and right edges' midpoints sweep from top to bottom,</doc>
       </member>
-      <member name="fan_t" value="231" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_FAN_T" glib:nick="fan-t">
+      <member name="fan_t" value="231" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_FAN_T" glib:nick="fan-t" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_FAN_T">
         <doc xml:space="preserve">A fan unfolds from the bottom, the fan axis at the top edge's midpoint,</doc>
       </member>
-      <member name="fan_r" value="232" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_FAN_R" glib:nick="fan-r">
+      <member name="fan_r" value="232" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_FAN_R" glib:nick="fan-r" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_FAN_R">
         <doc xml:space="preserve">A fan unfolds from the left, the fan axis at the right edge's midpoint,</doc>
       </member>
-      <member name="fan_b" value="233" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_FAN_B" glib:nick="fan-b">
+      <member name="fan_b" value="233" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_FAN_B" glib:nick="fan-b" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_FAN_B">
         <doc xml:space="preserve">A fan unfolds from the top, the fan axis at the bottom edge's midpoint,</doc>
       </member>
-      <member name="fan_l" value="234" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_FAN_L" glib:nick="fan-l">
+      <member name="fan_l" value="234" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_FAN_L" glib:nick="fan-l" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_FAN_L">
         <doc xml:space="preserve">A fan unfolds from the right, the fan axis at the left edge's midpoint,</doc>
       </member>
-      <member name="doublefan_fiv" value="235" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLEFAN_FIV" glib:nick="doublefan-fiv">
+      <member name="doublefan_fiv" value="235" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLEFAN_FIV" glib:nick="doublefan-fiv" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLEFAN_FIV">
         <doc xml:space="preserve">Two fans, their axes at the top and bottom, unfold from the center,</doc>
       </member>
-      <member name="doublefan_fih" value="236" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLEFAN_FIH" glib:nick="doublefan-fih">
+      <member name="doublefan_fih" value="236" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLEFAN_FIH" glib:nick="doublefan-fih" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLEFAN_FIH">
         <doc xml:space="preserve">Two fans, their axes at the left and right, unfold from the center,</doc>
       </member>
-      <member name="singlesweep_cwtl" value="241" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWTL" glib:nick="singlesweep-cwtl">
+      <member name="singlesweep_cwtl" value="241" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWTL" glib:nick="singlesweep-cwtl" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWTL">
         <doc xml:space="preserve">A radial hand sweeps clockwise from the upper-left corner,</doc>
       </member>
-      <member name="singlesweep_cwbl" value="242" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWBL" glib:nick="singlesweep-cwbl">
+      <member name="singlesweep_cwbl" value="242" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWBL" glib:nick="singlesweep-cwbl" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWBL">
         <doc xml:space="preserve">A radial hand sweeps counter-clockwise from the lower-left corner.,</doc>
       </member>
-      <member name="singlesweep_cwbr" value="243" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWBR" glib:nick="singlesweep-cwbr">
+      <member name="singlesweep_cwbr" value="243" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWBR" glib:nick="singlesweep-cwbr" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWBR">
         <doc xml:space="preserve">A radial hand sweeps clockwise from the lower-right corner,</doc>
       </member>
-      <member name="singlesweep_cwtr" value="244" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWTR" glib:nick="singlesweep-cwtr">
+      <member name="singlesweep_cwtr" value="244" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWTR" glib:nick="singlesweep-cwtr" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_SINGLESWEEP_CWTR">
         <doc xml:space="preserve">A radial hand sweeps counter-clockwise from the upper-right corner,</doc>
       </member>
-      <member name="doublesweep_pdtl" value="245" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLESWEEP_PDTL" glib:nick="doublesweep-pdtl">
+      <member name="doublesweep_pdtl" value="245" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLESWEEP_PDTL" glib:nick="doublesweep-pdtl" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLESWEEP_PDTL">
         <doc xml:space="preserve">Two radial hands attached at the upper-left and lower-right corners sweep down and up,</doc>
       </member>
-      <member name="doublesweep_pdbl" value="246" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLESWEEP_PDBL" glib:nick="doublesweep-pdbl">
+      <member name="doublesweep_pdbl" value="246" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLESWEEP_PDBL" glib:nick="doublesweep-pdbl" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_DOUBLESWEEP_PDBL">
         <doc xml:space="preserve">Two radial hands attached at the lower-left and upper-right corners sweep down and up,</doc>
       </member>
-      <member name="saloondoor_t" value="251" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SALOONDOOR_T" glib:nick="saloondoor-t">
+      <member name="saloondoor_t" value="251" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SALOONDOOR_T" glib:nick="saloondoor-t" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_SALOONDOOR_T">
         <doc xml:space="preserve">Two radial hands attached at the upper-left and upper-right corners sweep down,</doc>
       </member>
-      <member name="saloondoor_l" value="252" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SALOONDOOR_L" glib:nick="saloondoor-l">
+      <member name="saloondoor_l" value="252" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SALOONDOOR_L" glib:nick="saloondoor-l" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_SALOONDOOR_L">
         <doc xml:space="preserve">Two radial hands attached at the upper-left and lower-left corners sweep to the right,</doc>
       </member>
-      <member name="saloondoor_b" value="253" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SALOONDOOR_B" glib:nick="saloondoor-b">
+      <member name="saloondoor_b" value="253" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SALOONDOOR_B" glib:nick="saloondoor-b" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_SALOONDOOR_B">
         <doc xml:space="preserve">Two radial hands attached at the lower-left and lower-right corners sweep up,</doc>
       </member>
-      <member name="saloondoor_r" value="254" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SALOONDOOR_R" glib:nick="saloondoor-r">
+      <member name="saloondoor_r" value="254" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_SALOONDOOR_R" glib:nick="saloondoor-r" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_SALOONDOOR_R">
         <doc xml:space="preserve">Two radial hands attached at the upper-right and lower-right corners sweep to the left,</doc>
       </member>
-      <member name="windshield_r" value="261" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_WINDSHIELD_R" glib:nick="windshield-r">
+      <member name="windshield_r" value="261" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_WINDSHIELD_R" glib:nick="windshield-r" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_WINDSHIELD_R">
         <doc xml:space="preserve">Two radial hands attached at the midpoints of the top and bottom halves sweep from right to left,</doc>
       </member>
-      <member name="windshield_u" value="262" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_WINDSHIELD_U" glib:nick="windshield-u">
+      <member name="windshield_u" value="262" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_WINDSHIELD_U" glib:nick="windshield-u" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_WINDSHIELD_U">
         <doc xml:space="preserve">Two radial hands attached at the midpoints of the left and right halves sweep from top to bottom,</doc>
       </member>
-      <member name="windshield_v" value="263" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_WINDSHIELD_V" glib:nick="windshield-v">
+      <member name="windshield_v" value="263" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_WINDSHIELD_V" glib:nick="windshield-v" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_WINDSHIELD_V">
         <doc xml:space="preserve">Two sets of radial hands attached at the midpoints of the top and bottom halves sweep from top to bottom and bottom to top,</doc>
       </member>
-      <member name="windshield_h" value="264" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_WINDSHIELD_H" glib:nick="windshield-h">
+      <member name="windshield_h" value="264" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_WINDSHIELD_H" glib:nick="windshield-h" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_WINDSHIELD_H">
         <doc xml:space="preserve">Two sets of radial hands attached at the midpoints of the left and right halves sweep from left to right and right to left,</doc>
       </member>
-      <member name="crossfade" value="512" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_CROSSFADE" glib:nick="crossfade">
+      <member name="crossfade" value="512" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_CROSSFADE" glib:nick="crossfade" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_CROSSFADE">
         <doc xml:space="preserve">Crossfade</doc>
       </member>
     </enumeration>
     <enumeration name="VideoTestPattern" glib:type-name="GESVideoTestPattern" glib:get-type="ges_video_test_pattern_get_type" c:type="GESVideoTestPattern">
       <doc xml:space="preserve">The test pattern to produce</doc>
-      <member name="smpte" value="0" c:identifier="GES_VIDEO_TEST_PATTERN_SMPTE" glib:nick="smpte">
+      <member name="smpte" value="0" c:identifier="GES_VIDEO_TEST_PATTERN_SMPTE" glib:nick="smpte" glib:name="GES_VIDEO_TEST_PATTERN_SMPTE">
         <doc xml:space="preserve">A standard SMPTE test pattern</doc>
       </member>
-      <member name="snow" value="1" c:identifier="GES_VIDEO_TEST_PATTERN_SNOW" glib:nick="snow">
+      <member name="snow" value="1" c:identifier="GES_VIDEO_TEST_PATTERN_SNOW" glib:nick="snow" glib:name="GES_VIDEO_TEST_PATTERN_SNOW">
         <doc xml:space="preserve">Random noise</doc>
       </member>
-      <member name="black" value="2" c:identifier="GES_VIDEO_TEST_PATTERN_BLACK" glib:nick="black">
+      <member name="black" value="2" c:identifier="GES_VIDEO_TEST_PATTERN_BLACK" glib:nick="black" glib:name="GES_VIDEO_TEST_PATTERN_BLACK">
         <doc xml:space="preserve">A black image</doc>
       </member>
-      <member name="white" value="3" c:identifier="GES_VIDEO_TEST_PATTERN_WHITE" glib:nick="white">
+      <member name="white" value="3" c:identifier="GES_VIDEO_TEST_PATTERN_WHITE" glib:nick="white" glib:name="GES_VIDEO_TEST_PATTERN_WHITE">
         <doc xml:space="preserve">A white image</doc>
       </member>
-      <member name="red" value="4" c:identifier="GES_VIDEO_TEST_PATTERN_RED" glib:nick="red">
+      <member name="red" value="4" c:identifier="GES_VIDEO_TEST_PATTERN_RED" glib:nick="red" glib:name="GES_VIDEO_TEST_PATTERN_RED">
         <doc xml:space="preserve">A red image</doc>
       </member>
-      <member name="green" value="5" c:identifier="GES_VIDEO_TEST_PATTERN_GREEN" glib:nick="green">
+      <member name="green" value="5" c:identifier="GES_VIDEO_TEST_PATTERN_GREEN" glib:nick="green" glib:name="GES_VIDEO_TEST_PATTERN_GREEN">
         <doc xml:space="preserve">A green image</doc>
       </member>
-      <member name="blue" value="6" c:identifier="GES_VIDEO_TEST_PATTERN_BLUE" glib:nick="blue">
+      <member name="blue" value="6" c:identifier="GES_VIDEO_TEST_PATTERN_BLUE" glib:nick="blue" glib:name="GES_VIDEO_TEST_PATTERN_BLUE">
         <doc xml:space="preserve">A blue image</doc>
       </member>
-      <member name="checkers_1" value="7" c:identifier="GES_VIDEO_TEST_PATTERN_CHECKERS1" glib:nick="checkers-1">
+      <member name="checkers_1" value="7" c:identifier="GES_VIDEO_TEST_PATTERN_CHECKERS1" glib:nick="checkers-1" glib:name="GES_VIDEO_TEST_PATTERN_CHECKERS1">
         <doc xml:space="preserve">Checkers pattern (1px)</doc>
       </member>
-      <member name="checkers_2" value="8" c:identifier="GES_VIDEO_TEST_PATTERN_CHECKERS2" glib:nick="checkers-2">
+      <member name="checkers_2" value="8" c:identifier="GES_VIDEO_TEST_PATTERN_CHECKERS2" glib:nick="checkers-2" glib:name="GES_VIDEO_TEST_PATTERN_CHECKERS2">
         <doc xml:space="preserve">Checkers pattern (2px)</doc>
       </member>
-      <member name="checkers_4" value="9" c:identifier="GES_VIDEO_TEST_PATTERN_CHECKERS4" glib:nick="checkers-4">
+      <member name="checkers_4" value="9" c:identifier="GES_VIDEO_TEST_PATTERN_CHECKERS4" glib:nick="checkers-4" glib:name="GES_VIDEO_TEST_PATTERN_CHECKERS4">
         <doc xml:space="preserve">Checkers pattern (4px)</doc>
       </member>
-      <member name="checkers_8" value="10" c:identifier="GES_VIDEO_TEST_PATTERN_CHECKERS8" glib:nick="checkers-8">
+      <member name="checkers_8" value="10" c:identifier="GES_VIDEO_TEST_PATTERN_CHECKERS8" glib:nick="checkers-8" glib:name="GES_VIDEO_TEST_PATTERN_CHECKERS8">
         <doc xml:space="preserve">Checkers pattern (8px)</doc>
       </member>
-      <member name="circular" value="11" c:identifier="GES_VIDEO_TEST_PATTERN_CIRCULAR" glib:nick="circular">
+      <member name="circular" value="11" c:identifier="GES_VIDEO_TEST_PATTERN_CIRCULAR" glib:nick="circular" glib:name="GES_VIDEO_TEST_PATTERN_CIRCULAR">
         <doc xml:space="preserve">Circular pattern</doc>
       </member>
-      <member name="blink" value="12" c:identifier="GES_VIDEO_TEST_PATTERN_BLINK" glib:nick="blink">
+      <member name="blink" value="12" c:identifier="GES_VIDEO_TEST_PATTERN_BLINK" glib:nick="blink" glib:name="GES_VIDEO_TEST_PATTERN_BLINK">
         <doc xml:space="preserve">Alternate between black and white</doc>
       </member>
-      <member name="smpte75" value="13" c:identifier="GES_VIDEO_TEST_PATTERN_SMPTE75" glib:nick="smpte75">
+      <member name="smpte75" value="13" c:identifier="GES_VIDEO_TEST_PATTERN_SMPTE75" glib:nick="smpte75" glib:name="GES_VIDEO_TEST_PATTERN_SMPTE75">
         <doc xml:space="preserve">SMPTE test pattern (75% color bars)</doc>
       </member>
-      <member name="zone_plate" value="14" c:identifier="GES_VIDEO_TEST_ZONE_PLATE" glib:nick="zone-plate">
+      <member name="zone_plate" value="14" c:identifier="GES_VIDEO_TEST_ZONE_PLATE" glib:nick="zone-plate" glib:name="GES_VIDEO_TEST_ZONE_PLATE">
         <doc xml:space="preserve">Zone plate</doc>
       </member>
-      <member name="gamut" value="15" c:identifier="GES_VIDEO_TEST_GAMUT" glib:nick="gamut">
+      <member name="gamut" value="15" c:identifier="GES_VIDEO_TEST_GAMUT" glib:nick="gamut" glib:name="GES_VIDEO_TEST_GAMUT">
         <doc xml:space="preserve">Gamut checkers</doc>
       </member>
-      <member name="chroma_zone_plate" value="16" c:identifier="GES_VIDEO_TEST_CHROMA_ZONE_PLATE" glib:nick="chroma-zone-plate">
+      <member name="chroma_zone_plate" value="16" c:identifier="GES_VIDEO_TEST_CHROMA_ZONE_PLATE" glib:nick="chroma-zone-plate" glib:name="GES_VIDEO_TEST_CHROMA_ZONE_PLATE">
         <doc xml:space="preserve">Chroma zone plate</doc>
       </member>
-      <member name="solid_color" value="17" c:identifier="GES_VIDEO_TEST_PATTERN_SOLID" glib:nick="solid-color">
+      <member name="solid_color" value="17" c:identifier="GES_VIDEO_TEST_PATTERN_SOLID" glib:nick="solid-color" glib:name="GES_VIDEO_TEST_PATTERN_SOLID">
         <doc xml:space="preserve">Solid color</doc>
       </member>
     </enumeration>
@@ -14905,7 +14905,7 @@ modify these fields, or add additional ones.</doc>
           <type name="VideoTransition" c:type="GESVideoTransition*"/>
         </return-value>
       </constructor>
-      <method name="get_border" c:identifier="ges_video_transition_get_border" deprecated="1" deprecated-version="1.20">
+      <method name="get_border" c:identifier="ges_video_transition_get_border" glib:get-property="border" deprecated="1" deprecated-version="1.20">
         <doc xml:space="preserve">Get the border property of @self, this value represents
 the border width of the transition.</doc>
         <doc-deprecated xml:space="preserve">Use ges_timeline_element_get_child_property instead.</doc-deprecated>
@@ -14921,7 +14921,7 @@ the border width of the transition.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_transition_type" c:identifier="ges_video_transition_get_transition_type">
+      <method name="get_transition_type" c:identifier="ges_video_transition_get_transition_type" glib:get-property="transition-type">
         <doc xml:space="preserve">Get the transition type used by @trans.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The transition type used by @trans.</doc>
@@ -14949,7 +14949,7 @@ the direction of the transition.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="set_border" c:identifier="ges_video_transition_set_border" deprecated="1" deprecated-version="1.20">
+      <method name="set_border" c:identifier="ges_video_transition_set_border" glib:set-property="border" deprecated="1" deprecated-version="1.20">
         <doc xml:space="preserve">Set the border property of @self, this value represents
 the border width of the transition. In case this value does
 not make sense for the current transition type, it is cached
@@ -14989,7 +14989,7 @@ for later use.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_transition_type" c:identifier="ges_video_transition_set_transition_type">
+      <method name="set_transition_type" c:identifier="ges_video_transition_set_transition_type" glib:set-property="transition-type">
         <doc xml:space="preserve">Sets the transition being used to @type.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">%TRUE if the transition type was properly changed, else %FALSE.</doc>
@@ -15006,7 +15006,7 @@ for later use.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="border" writable="1" transfer-ownership="none">
+      <property name="border" writable="1" transfer-ownership="none" setter="set_border" getter="get_border">
         <doc xml:space="preserve">This value represents the border width of the transition.</doc>
         <type name="guint" c:type="guint"/>
       </property>
@@ -15015,7 +15015,7 @@ for later use.</doc>
         <doc-deprecated xml:space="preserve">Use ges_timeline_element_[sg]et_child_property instead.</doc-deprecated>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="transition-type" writable="1" transfer-ownership="none">
+      <property name="transition-type" writable="1" transfer-ownership="none" setter="set_transition_type" getter="get_transition_type">
         <type name="VideoStandardTransitionType"/>
       </property>
       <field name="parent">

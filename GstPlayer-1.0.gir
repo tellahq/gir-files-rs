@@ -473,7 +473,7 @@ matching #GstPlayerVideoInfo.</doc>
           </array>
         </return-value>
       </function>
-      <method name="get_audio_video_offset" c:identifier="gst_player_get_audio_video_offset" version="1.10">
+      <method name="get_audio_video_offset" c:identifier="gst_player_get_audio_video_offset" glib:get-property="audio-video-offset" version="1.10">
         <doc xml:space="preserve">Retrieve the current value of audio-video-offset property</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The current value of audio-video-offset in nanoseconds</doc>
@@ -520,7 +520,7 @@ gst_structure_free() after usage or gst_player_set_config().</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_current_audio_track" c:identifier="gst_player_get_current_audio_track">
+      <method name="get_current_audio_track" c:identifier="gst_player_get_current_audio_track" glib:get-property="current-audio-track">
         <doc xml:space="preserve">A Function to get current audio #GstPlayerAudioInfo instance.</doc>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">current audio track.
@@ -535,7 +535,7 @@ The caller should free it with g_object_unref()</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_current_subtitle_track" c:identifier="gst_player_get_current_subtitle_track">
+      <method name="get_current_subtitle_track" c:identifier="gst_player_get_current_subtitle_track" glib:get-property="current-subtitle-track">
         <doc xml:space="preserve">A Function to get current subtitle #GstPlayerSubtitleInfo instance.</doc>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">current subtitle track.
@@ -550,7 +550,7 @@ The caller should free it with g_object_unref()</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_current_video_track" c:identifier="gst_player_get_current_video_track">
+      <method name="get_current_video_track" c:identifier="gst_player_get_current_video_track" glib:get-property="current-video-track">
         <doc xml:space="preserve">A Function to get current video #GstPlayerVideoInfo instance.</doc>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">current video track.
@@ -579,7 +579,7 @@ The caller should free it with g_object_unref()</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_duration" c:identifier="gst_player_get_duration">
+      <method name="get_duration" c:identifier="gst_player_get_duration" glib:get-property="duration">
         <doc xml:space="preserve">Retrieves the duration of the media stream that self represents.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the duration of the currently-playing media stream, in
@@ -593,7 +593,7 @@ nanoseconds.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_media_info" c:identifier="gst_player_get_media_info">
+      <method name="get_media_info" c:identifier="gst_player_get_media_info" glib:get-property="media-info">
         <doc xml:space="preserve">A Function to get the current media info #GstPlayerMediaInfo instance.</doc>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">media info instance.
@@ -634,7 +634,7 @@ The caller should free it with g_object_unref()</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_mute" c:identifier="gst_player_get_mute">
+      <method name="get_mute" c:identifier="gst_player_get_mute" glib:get-property="mute">
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">%TRUE if the currently-playing stream is muted.</doc>
           <type name="gboolean" c:type="gboolean"/>
@@ -646,7 +646,7 @@ The caller should free it with g_object_unref()</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_pipeline" c:identifier="gst_player_get_pipeline">
+      <method name="get_pipeline" c:identifier="gst_player_get_pipeline" glib:get-property="pipeline">
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">The internal playbin instance.
 
@@ -660,7 +660,7 @@ The caller should free it with g_object_unref()</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_position" c:identifier="gst_player_get_position">
+      <method name="get_position" c:identifier="gst_player_get_position" glib:get-property="position">
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the absolute position time, in nanoseconds, of the
 currently-playing stream.</doc>
@@ -673,7 +673,7 @@ currently-playing stream.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_rate" c:identifier="gst_player_get_rate">
+      <method name="get_rate" c:identifier="gst_player_get_rate" glib:get-property="rate">
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">current playback rate</doc>
           <type name="gdouble" c:type="gdouble"/>
@@ -699,7 +699,7 @@ currently-playing stream.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_subtitle_video_offset" c:identifier="gst_player_get_subtitle_video_offset" version="1.16">
+      <method name="get_subtitle_video_offset" c:identifier="gst_player_get_subtitle_video_offset" glib:get-property="subtitle-video-offset" version="1.16">
         <doc xml:space="preserve">Retrieve the current value of subtitle-video-offset property</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The current value of subtitle-video-offset in nanoseconds</doc>
@@ -712,7 +712,7 @@ currently-playing stream.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_uri" c:identifier="gst_player_get_uri">
+      <method name="get_uri" c:identifier="gst_player_get_uri" glib:get-property="uri">
         <doc xml:space="preserve">Gets the URI of the currently-playing stream.</doc>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a string containing the URI of the
@@ -752,7 +752,7 @@ Currently supported settings are:
           </parameter>
         </parameters>
       </method>
-      <method name="get_volume" c:identifier="gst_player_get_volume">
+      <method name="get_volume" c:identifier="gst_player_get_volume" glib:get-property="volume">
         <doc xml:space="preserve">Returns the current volume level, as a percentage between 0 and 1.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the volume as percentage between 0 and 1.</doc>
@@ -854,7 +854,7 @@ Sets the audio track @stream_idex.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_audio_video_offset" c:identifier="gst_player_set_audio_video_offset" version="1.10">
+      <method name="set_audio_video_offset" c:identifier="gst_player_set_audio_video_offset" glib:set-property="audio-video-offset" version="1.10">
         <doc xml:space="preserve">Sets audio-video-offset property by value of @offset</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -950,7 +950,7 @@ value.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_mute" c:identifier="gst_player_set_mute">
+      <method name="set_mute" c:identifier="gst_player_set_mute" glib:set-property="mute">
         <doc xml:space="preserve">%TRUE if the currently-playing stream should be muted.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -966,7 +966,7 @@ value.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_rate" c:identifier="gst_player_set_rate">
+      <method name="set_rate" c:identifier="gst_player_set_rate" glib:set-property="rate">
         <doc xml:space="preserve">Playback at specified rate</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -1034,7 +1034,7 @@ rendered.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_subtitle_video_offset" c:identifier="gst_player_set_subtitle_video_offset" version="1.16">
+      <method name="set_subtitle_video_offset" c:identifier="gst_player_set_subtitle_video_offset" glib:set-property="subtitle-video-offset" version="1.16">
         <doc xml:space="preserve">Sets subtitle-video-offset property by value of @offset</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -1050,7 +1050,7 @@ rendered.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_uri" c:identifier="gst_player_set_uri">
+      <method name="set_uri" c:identifier="gst_player_set_uri" glib:set-property="uri">
         <doc xml:space="preserve">Sets the next URI to play.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -1134,7 +1134,7 @@ Sets the video track @stream_index.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_volume" c:identifier="gst_player_set_volume">
+      <method name="set_volume" c:identifier="gst_player_set_volume" glib:set-property="volume">
         <doc xml:space="preserve">Sets the volume level of the stream as a percentage between 0 and 1.
 
 This volume is a linear factor. For showing the volume in a GUI it
@@ -1167,46 +1167,46 @@ in the stream.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <property name="audio-video-offset" writable="1" transfer-ownership="none">
+      <property name="audio-video-offset" writable="1" transfer-ownership="none" setter="set_audio_video_offset" getter="get_audio_video_offset">
         <type name="gint64" c:type="gint64"/>
       </property>
-      <property name="current-audio-track" transfer-ownership="none">
+      <property name="current-audio-track" transfer-ownership="none" getter="get_current_audio_track">
         <type name="PlayerAudioInfo"/>
       </property>
-      <property name="current-subtitle-track" transfer-ownership="none">
+      <property name="current-subtitle-track" transfer-ownership="none" getter="get_current_subtitle_track">
         <type name="PlayerSubtitleInfo"/>
       </property>
-      <property name="current-video-track" transfer-ownership="none">
+      <property name="current-video-track" transfer-ownership="none" getter="get_current_video_track">
         <type name="PlayerVideoInfo"/>
       </property>
-      <property name="duration" transfer-ownership="none">
+      <property name="duration" transfer-ownership="none" getter="get_duration">
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="media-info" transfer-ownership="none">
+      <property name="media-info" transfer-ownership="none" getter="get_media_info">
         <type name="PlayerMediaInfo"/>
       </property>
-      <property name="mute" writable="1" transfer-ownership="none">
+      <property name="mute" writable="1" transfer-ownership="none" setter="set_mute" getter="get_mute">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="pipeline" transfer-ownership="none">
+      <property name="pipeline" transfer-ownership="none" getter="get_pipeline">
         <type name="Gst.Element"/>
       </property>
-      <property name="position" transfer-ownership="none">
+      <property name="position" transfer-ownership="none" getter="get_position">
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="rate" writable="1" transfer-ownership="none">
+      <property name="rate" writable="1" transfer-ownership="none" setter="set_rate" getter="get_rate">
         <type name="gdouble" c:type="gdouble"/>
       </property>
       <property name="signal-dispatcher" readable="0" writable="1" construct-only="1" transfer-ownership="none">
         <type name="PlayerSignalDispatcher"/>
       </property>
-      <property name="subtitle-video-offset" writable="1" transfer-ownership="none">
+      <property name="subtitle-video-offset" writable="1" transfer-ownership="none" setter="set_subtitle_video_offset" getter="get_subtitle_video_offset">
         <type name="gint64" c:type="gint64"/>
       </property>
       <property name="suburi" writable="1" transfer-ownership="none">
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="uri" writable="1" transfer-ownership="none">
+      <property name="uri" writable="1" transfer-ownership="none" setter="set_uri" getter="get_uri">
         <type name="utf8" c:type="gchar*"/>
       </property>
       <property name="video-multiview-flags" writable="1" transfer-ownership="none">
@@ -1218,7 +1218,7 @@ in the stream.</doc>
       <property name="video-renderer" transfer-ownership="none">
         <type name="PlayerVideoRenderer"/>
       </property>
-      <property name="volume" writable="1" transfer-ownership="none">
+      <property name="volume" writable="1" transfer-ownership="none" setter="set_volume" getter="get_volume">
         <type name="gdouble" c:type="gdouble"/>
       </property>
       <glib:signal name="buffering" when="last" no-recurse="1" no-hooks="1">
@@ -1407,17 +1407,17 @@ unknown.</doc>
     <record name="PlayerAudioInfoClass" c:type="GstPlayerAudioInfoClass" disguised="1" glib:is-gtype-struct-for="PlayerAudioInfo"/>
     <record name="PlayerClass" c:type="GstPlayerClass" disguised="1" glib:is-gtype-struct-for="Player"/>
     <enumeration name="PlayerColorBalanceType" glib:type-name="GstPlayerColorBalanceType" glib:get-type="gst_player_color_balance_type_get_type" c:type="GstPlayerColorBalanceType">
-      <member name="hue" value="3" c:identifier="GST_PLAYER_COLOR_BALANCE_HUE" glib:nick="hue">
+      <member name="hue" value="3" c:identifier="GST_PLAYER_COLOR_BALANCE_HUE" glib:nick="hue" glib:name="GST_PLAYER_COLOR_BALANCE_HUE">
         <doc xml:space="preserve">hue or color balance.</doc>
       </member>
-      <member name="brightness" value="0" c:identifier="GST_PLAYER_COLOR_BALANCE_BRIGHTNESS" glib:nick="brightness">
+      <member name="brightness" value="0" c:identifier="GST_PLAYER_COLOR_BALANCE_BRIGHTNESS" glib:nick="brightness" glib:name="GST_PLAYER_COLOR_BALANCE_BRIGHTNESS">
         <doc xml:space="preserve">brightness or black level.</doc>
       </member>
-      <member name="saturation" value="2" c:identifier="GST_PLAYER_COLOR_BALANCE_SATURATION" glib:nick="saturation">
+      <member name="saturation" value="2" c:identifier="GST_PLAYER_COLOR_BALANCE_SATURATION" glib:nick="saturation" glib:name="GST_PLAYER_COLOR_BALANCE_SATURATION">
         <doc xml:space="preserve">color saturation or chroma
 gain.</doc>
       </member>
-      <member name="contrast" value="1" c:identifier="GST_PLAYER_COLOR_BALANCE_CONTRAST" glib:nick="contrast">
+      <member name="contrast" value="1" c:identifier="GST_PLAYER_COLOR_BALANCE_CONTRAST" glib:nick="contrast" glib:name="GST_PLAYER_COLOR_BALANCE_CONTRAST">
         <doc xml:space="preserve">contrast or luma gain.</doc>
       </member>
       <function name="get_name" c:identifier="gst_player_color_balance_type_get_name">
@@ -1436,7 +1436,7 @@ gain.</doc>
       </function>
     </enumeration>
     <enumeration name="PlayerError" glib:type-name="GstPlayerError" glib:get-type="gst_player_error_get_type" c:type="GstPlayerError" glib:error-domain="gst-player-error-quark">
-      <member name="failed" value="0" c:identifier="GST_PLAYER_ERROR_FAILED" glib:nick="failed">
+      <member name="failed" value="0" c:identifier="GST_PLAYER_ERROR_FAILED" glib:nick="failed" glib:name="GST_PLAYER_ERROR_FAILED">
         <doc xml:space="preserve">generic error.</doc>
       </member>
       <function name="get_name" c:identifier="gst_player_error_get_name">
@@ -1765,16 +1765,16 @@ matching #GstPlayerVideoInfo.</doc>
       </member>
     </enumeration>
     <enumeration name="PlayerState" glib:type-name="GstPlayerState" glib:get-type="gst_player_state_get_type" c:type="GstPlayerState">
-      <member name="stopped" value="0" c:identifier="GST_PLAYER_STATE_STOPPED" glib:nick="stopped">
+      <member name="stopped" value="0" c:identifier="GST_PLAYER_STATE_STOPPED" glib:nick="stopped" glib:name="GST_PLAYER_STATE_STOPPED">
         <doc xml:space="preserve">the player is stopped.</doc>
       </member>
-      <member name="buffering" value="1" c:identifier="GST_PLAYER_STATE_BUFFERING" glib:nick="buffering">
+      <member name="buffering" value="1" c:identifier="GST_PLAYER_STATE_BUFFERING" glib:nick="buffering" glib:name="GST_PLAYER_STATE_BUFFERING">
         <doc xml:space="preserve">the player is buffering.</doc>
       </member>
-      <member name="paused" value="2" c:identifier="GST_PLAYER_STATE_PAUSED" glib:nick="paused">
+      <member name="paused" value="2" c:identifier="GST_PLAYER_STATE_PAUSED" glib:nick="paused" glib:name="GST_PLAYER_STATE_PAUSED">
         <doc xml:space="preserve">the player is paused.</doc>
       </member>
-      <member name="playing" value="3" c:identifier="GST_PLAYER_STATE_PLAYING" glib:nick="playing">
+      <member name="playing" value="3" c:identifier="GST_PLAYER_STATE_PLAYING" glib:nick="playing" glib:name="GST_PLAYER_STATE_PLAYING">
         <doc xml:space="preserve">the player is currently playing a
 stream.</doc>
       </member>
@@ -2042,7 +2042,7 @@ for details.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="get_window_handle" c:identifier="gst_player_video_overlay_video_renderer_get_window_handle">
+      <method name="get_window_handle" c:identifier="gst_player_video_overlay_video_renderer_get_window_handle" glib:get-property="window-handle">
         <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The currently set, platform specific window
 handle</doc>
@@ -2092,7 +2092,7 @@ do not support subwindows.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_window_handle" c:identifier="gst_player_video_overlay_video_renderer_set_window_handle">
+      <method name="set_window_handle" c:identifier="gst_player_video_overlay_video_renderer_set_window_handle" glib:set-property="window-handle">
         <doc xml:space="preserve">Sets the platform specific window handle into which the video
 should be rendered</doc>
         <return-value transfer-ownership="none">
@@ -2112,7 +2112,7 @@ should be rendered</doc>
       <property name="video-sink" writable="1" transfer-ownership="none">
         <type name="Gst.Element"/>
       </property>
-      <property name="window-handle" writable="1" construct="1" transfer-ownership="none">
+      <property name="window-handle" writable="1" construct="1" transfer-ownership="none" setter="set_window_handle" getter="get_window_handle">
         <type name="gpointer" c:type="gpointer"/>
       </property>
     </class>

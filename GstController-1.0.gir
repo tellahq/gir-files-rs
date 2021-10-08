@@ -490,17 +490,17 @@ All functions are MT-safe.</doc>
     <record name="InterpolationControlSourcePrivate" c:type="GstInterpolationControlSourcePrivate" disguised="1"/>
     <enumeration name="InterpolationMode" glib:type-name="GstInterpolationMode" glib:get-type="gst_interpolation_mode_get_type" c:type="GstInterpolationMode">
       <doc xml:space="preserve">The various interpolation modes available.</doc>
-      <member name="none" value="0" c:identifier="GST_INTERPOLATION_MODE_NONE" glib:nick="none">
+      <member name="none" value="0" c:identifier="GST_INTERPOLATION_MODE_NONE" glib:nick="none" glib:name="GST_INTERPOLATION_MODE_NONE">
         <doc xml:space="preserve">steps-like interpolation, default</doc>
       </member>
-      <member name="linear" value="1" c:identifier="GST_INTERPOLATION_MODE_LINEAR" glib:nick="linear">
+      <member name="linear" value="1" c:identifier="GST_INTERPOLATION_MODE_LINEAR" glib:nick="linear" glib:name="GST_INTERPOLATION_MODE_LINEAR">
         <doc xml:space="preserve">linear interpolation</doc>
       </member>
-      <member name="cubic" value="2" c:identifier="GST_INTERPOLATION_MODE_CUBIC" glib:nick="cubic">
+      <member name="cubic" value="2" c:identifier="GST_INTERPOLATION_MODE_CUBIC" glib:nick="cubic" glib:name="GST_INTERPOLATION_MODE_CUBIC">
         <doc xml:space="preserve">cubic interpolation (natural), may overshoot
   the min or max values set by the control point, but is more 'curvy'</doc>
       </member>
-      <member name="cubic_monotonic" value="3" c:identifier="GST_INTERPOLATION_MODE_CUBIC_MONOTONIC" glib:nick="cubic-monotonic">
+      <member name="cubic_monotonic" value="3" c:identifier="GST_INTERPOLATION_MODE_CUBIC_MONOTONIC" glib:nick="cubic-monotonic" glib:name="GST_INTERPOLATION_MODE_CUBIC_MONOTONIC">
         <doc xml:space="preserve">monotonic cubic interpolation, will not
   produce any values outside of the min-max range set by the control points
   (Since: 1.8)</doc>
@@ -576,19 +576,19 @@ To get a n nanosecond shift to the left use
     <record name="LFOControlSourcePrivate" c:type="GstLFOControlSourcePrivate" disguised="1"/>
     <enumeration name="LFOWaveform" glib:type-name="GstLFOWaveform" glib:get-type="gst_lfo_waveform_get_type" c:type="GstLFOWaveform">
       <doc xml:space="preserve">The various waveform modes available.</doc>
-      <member name="sine" value="0" c:identifier="GST_LFO_WAVEFORM_SINE" glib:nick="sine">
+      <member name="sine" value="0" c:identifier="GST_LFO_WAVEFORM_SINE" glib:nick="sine" glib:name="GST_LFO_WAVEFORM_SINE">
         <doc xml:space="preserve">sine waveform</doc>
       </member>
-      <member name="square" value="1" c:identifier="GST_LFO_WAVEFORM_SQUARE" glib:nick="square">
+      <member name="square" value="1" c:identifier="GST_LFO_WAVEFORM_SQUARE" glib:nick="square" glib:name="GST_LFO_WAVEFORM_SQUARE">
         <doc xml:space="preserve">square waveform</doc>
       </member>
-      <member name="saw" value="2" c:identifier="GST_LFO_WAVEFORM_SAW" glib:nick="saw">
+      <member name="saw" value="2" c:identifier="GST_LFO_WAVEFORM_SAW" glib:nick="saw" glib:name="GST_LFO_WAVEFORM_SAW">
         <doc xml:space="preserve">saw waveform</doc>
       </member>
-      <member name="reverse_saw" value="3" c:identifier="GST_LFO_WAVEFORM_REVERSE_SAW" glib:nick="reverse-saw">
+      <member name="reverse_saw" value="3" c:identifier="GST_LFO_WAVEFORM_REVERSE_SAW" glib:nick="reverse-saw" glib:name="GST_LFO_WAVEFORM_REVERSE_SAW">
         <doc xml:space="preserve">reverse saw waveform</doc>
       </member>
-      <member name="triangle" value="4" c:identifier="GST_LFO_WAVEFORM_TRIANGLE" glib:nick="triangle">
+      <member name="triangle" value="4" c:identifier="GST_LFO_WAVEFORM_TRIANGLE" glib:nick="triangle" glib:name="GST_LFO_WAVEFORM_TRIANGLE">
         <doc xml:space="preserve">triangle waveform</doc>
       </member>
     </enumeration>

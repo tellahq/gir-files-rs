@@ -1395,7 +1395,7 @@ by @trans; free it after use it</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_latency" c:identifier="gst_aggregator_get_latency">
+      <method name="get_latency" c:identifier="gst_aggregator_get_latency" glib:get-property="latency">
         <doc xml:space="preserve">Retrieves the latency values reported by @self in response to the latency
 query, or %GST_CLOCK_TIME_NONE if there is not live source connected and the element
 will not wait for the clock.
@@ -1485,7 +1485,7 @@ function.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_latency" c:identifier="gst_aggregator_set_latency">
+      <method name="set_latency" c:identifier="gst_aggregator_set_latency" glib:set-property="latency">
         <doc xml:space="preserve">Lets #GstAggregator sub-classes tell the baseclass what their internal
 latency is. Will also post a LATENCY message on the bus so the pipeline
 can reconfigure its global latency.</doc>
@@ -1564,7 +1564,7 @@ if it is used at all.</doc>
         <doc xml:space="preserve">Enables the emission of signals such as #GstAggregator::samples-selected</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="latency" writable="1" transfer-ownership="none">
+      <property name="latency" writable="1" transfer-ownership="none" setter="set_latency" getter="get_latency">
         <type name="guint64" c:type="guint64"/>
       </property>
       <property name="min-upstream-latency" version="1.16" writable="1" transfer-ownership="none">
@@ -2196,14 +2196,14 @@ usage.</doc>
     <record name="AggregatorPadPrivate" c:type="GstAggregatorPadPrivate" disguised="1"/>
     <record name="AggregatorPrivate" c:type="GstAggregatorPrivate" disguised="1"/>
     <enumeration name="AggregatorStartTimeSelection" version="1.18" glib:type-name="GstAggregatorStartTimeSelection" glib:get-type="gst_aggregator_start_time_selection_get_type" c:type="GstAggregatorStartTimeSelection">
-      <member name="zero" value="0" c:identifier="GST_AGGREGATOR_START_TIME_SELECTION_ZERO" glib:nick="zero">
+      <member name="zero" value="0" c:identifier="GST_AGGREGATOR_START_TIME_SELECTION_ZERO" glib:nick="zero" glib:name="GST_AGGREGATOR_START_TIME_SELECTION_ZERO">
         <doc xml:space="preserve">Start at running time 0.</doc>
       </member>
-      <member name="first" value="1" c:identifier="GST_AGGREGATOR_START_TIME_SELECTION_FIRST" glib:nick="first">
+      <member name="first" value="1" c:identifier="GST_AGGREGATOR_START_TIME_SELECTION_FIRST" glib:nick="first" glib:name="GST_AGGREGATOR_START_TIME_SELECTION_FIRST">
         <doc xml:space="preserve">Start at the running time of
 the first buffer that is received.</doc>
       </member>
-      <member name="set" value="2" c:identifier="GST_AGGREGATOR_START_TIME_SELECTION_SET" glib:nick="set">
+      <member name="set" value="2" c:identifier="GST_AGGREGATOR_START_TIME_SELECTION_SET" glib:nick="set" glib:name="GST_AGGREGATOR_START_TIME_SELECTION_SET">
         <doc xml:space="preserve">Start at the running time
 selected by the `start-time` property.</doc>
       </member>
@@ -3955,7 +3955,7 @@ continue. Any other return value should be returned from the render vmethod.</do
           </parameter>
         </parameters>
       </method>
-      <method name="get_blocksize" c:identifier="gst_base_sink_get_blocksize">
+      <method name="get_blocksize" c:identifier="gst_base_sink_get_blocksize" glib:get-property="blocksize">
         <doc xml:space="preserve">Get the number of bytes that the sink will pull when it is operating in pull
 mode.</doc>
         <return-value transfer-ownership="none">
@@ -3984,7 +3984,7 @@ current segment.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_last_sample" c:identifier="gst_base_sink_get_last_sample">
+      <method name="get_last_sample" c:identifier="gst_base_sink_get_last_sample" glib:get-property="last-sample">
         <doc xml:space="preserve">Get the last sample that arrived in the sink and was used for preroll or for
 rendering. This property can be used to generate thumbnails.
 
@@ -4017,7 +4017,7 @@ Free-function: gst_sample_unref</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_max_bitrate" c:identifier="gst_base_sink_get_max_bitrate" version="1.2">
+      <method name="get_max_bitrate" c:identifier="gst_base_sink_get_max_bitrate" glib:get-property="max-bitrate" version="1.2">
         <doc xml:space="preserve">Get the maximum amount of bits per second that the sink will render.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the maximum number of bits per second @sink will render.</doc>
@@ -4030,7 +4030,7 @@ Free-function: gst_sample_unref</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_max_lateness" c:identifier="gst_base_sink_get_max_lateness">
+      <method name="get_max_lateness" c:identifier="gst_base_sink_get_max_lateness" glib:get-property="max-lateness">
         <doc xml:space="preserve">Gets the max lateness value. See gst_base_sink_set_max_lateness() for
 more details.</doc>
         <return-value transfer-ownership="none">
@@ -4046,7 +4046,7 @@ unlimited time.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_processing_deadline" c:identifier="gst_base_sink_get_processing_deadline" version="1.16">
+      <method name="get_processing_deadline" c:identifier="gst_base_sink_get_processing_deadline" glib:get-property="processing-deadline" version="1.16">
         <doc xml:space="preserve">Get the processing deadline of @sink. see
 gst_base_sink_set_processing_deadline() for more information about
 the processing deadline.</doc>
@@ -4061,7 +4061,7 @@ the processing deadline.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_render_delay" c:identifier="gst_base_sink_get_render_delay">
+      <method name="get_render_delay" c:identifier="gst_base_sink_get_render_delay" glib:get-property="render-delay">
         <doc xml:space="preserve">Get the render delay of @sink. see gst_base_sink_set_render_delay() for more
 information about the render delay.</doc>
         <return-value transfer-ownership="none">
@@ -4075,7 +4075,7 @@ information about the render delay.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_stats" c:identifier="gst_base_sink_get_stats" version="1.18">
+      <method name="get_stats" c:identifier="gst_base_sink_get_stats" glib:get-property="stats" version="1.18">
         <doc xml:space="preserve">Return various #GstBaseSink statistics. This function returns a #GstStructure
 with name `application/x-gst-base-sink-stats` with the following fields:
 
@@ -4093,7 +4093,7 @@ with name `application/x-gst-base-sink-stats` with the following fields:
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_sync" c:identifier="gst_base_sink_get_sync">
+      <method name="get_sync" c:identifier="gst_base_sink_get_sync" glib:get-property="sync">
         <doc xml:space="preserve">Checks if @sink is currently configured to synchronize against the
 clock.</doc>
         <return-value transfer-ownership="none">
@@ -4107,7 +4107,7 @@ clock.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_throttle_time" c:identifier="gst_base_sink_get_throttle_time">
+      <method name="get_throttle_time" c:identifier="gst_base_sink_get_throttle_time" glib:get-property="throttle-time">
         <doc xml:space="preserve">Get the time that will be inserted between frames to control the
 maximum buffers per second.</doc>
         <return-value transfer-ownership="none">
@@ -4121,7 +4121,7 @@ maximum buffers per second.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_ts_offset" c:identifier="gst_base_sink_get_ts_offset">
+      <method name="get_ts_offset" c:identifier="gst_base_sink_get_ts_offset" glib:get-property="ts-offset">
         <doc xml:space="preserve">Get the synchronisation offset of @sink.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The synchronisation offset.</doc>
@@ -4234,7 +4234,7 @@ against the clock or when it is dealing with sparse streams.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_blocksize" c:identifier="gst_base_sink_set_blocksize">
+      <method name="set_blocksize" c:identifier="gst_base_sink_set_blocksize" glib:set-property="blocksize">
         <doc xml:space="preserve">Set the number of bytes that the sink will pull when it is operating in pull
 mode.</doc>
         <return-value transfer-ownership="none">
@@ -4284,7 +4284,7 @@ property.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_max_bitrate" c:identifier="gst_base_sink_set_max_bitrate" version="1.2">
+      <method name="set_max_bitrate" c:identifier="gst_base_sink_set_max_bitrate" glib:set-property="max-bitrate" version="1.2">
         <doc xml:space="preserve">Set the maximum amount of bits per second that the sink will render.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -4300,7 +4300,7 @@ property.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_max_lateness" c:identifier="gst_base_sink_set_max_lateness">
+      <method name="set_max_lateness" c:identifier="gst_base_sink_set_max_lateness" glib:set-property="max-lateness">
         <doc xml:space="preserve">Sets the new max lateness value to @max_lateness. This value is
 used to decide if a buffer should be dropped or not based on the
 buffer timestamp and the current clock time. A value of -1 means
@@ -4319,7 +4319,7 @@ an unlimited time.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_processing_deadline" c:identifier="gst_base_sink_set_processing_deadline" version="1.16">
+      <method name="set_processing_deadline" c:identifier="gst_base_sink_set_processing_deadline" glib:set-property="processing-deadline" version="1.16">
         <doc xml:space="preserve">Maximum amount of time (in nanoseconds) that the pipeline can take
 for processing the buffer. This is added to the latency of live
 pipelines.
@@ -4355,7 +4355,7 @@ This function is usually called by subclasses.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_render_delay" c:identifier="gst_base_sink_set_render_delay">
+      <method name="set_render_delay" c:identifier="gst_base_sink_set_render_delay" glib:set-property="render-delay">
         <doc xml:space="preserve">Set the render delay in @sink to @delay. The render delay is the time
 between actual rendering of a buffer and its synchronisation time. Some
 devices might delay media rendering which can be compensated for with this
@@ -4379,7 +4379,7 @@ This function is usually called by subclasses.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_sync" c:identifier="gst_base_sink_set_sync">
+      <method name="set_sync" c:identifier="gst_base_sink_set_sync" glib:set-property="sync">
         <doc xml:space="preserve">Configures @sink to synchronize on the clock or not. When
 @sync is %FALSE, incoming samples will be played as fast as
 possible. If @sync is %TRUE, the timestamps of the incoming
@@ -4399,7 +4399,7 @@ contents.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_throttle_time" c:identifier="gst_base_sink_set_throttle_time">
+      <method name="set_throttle_time" c:identifier="gst_base_sink_set_throttle_time" glib:set-property="throttle-time">
         <doc xml:space="preserve">Set the time that will be inserted between rendered buffers. This
 can be used to control the maximum buffers per second that the sink
 will render.</doc>
@@ -4417,7 +4417,7 @@ will render.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_ts_offset" c:identifier="gst_base_sink_set_ts_offset">
+      <method name="set_ts_offset" c:identifier="gst_base_sink_set_ts_offset" glib:set-property="ts-offset">
         <doc xml:space="preserve">Adjust the synchronisation of @sink with @offset. A negative value will
 render buffers earlier than their timestamp. A positive value will delay
 rendering. This function can be used to fix playback of badly timestamped
@@ -4540,7 +4540,7 @@ Use this option when dealing with sparse streams or when synchronisation is
 not required.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="blocksize" writable="1" transfer-ownership="none">
+      <property name="blocksize" writable="1" transfer-ownership="none" setter="set_blocksize" getter="get_blocksize">
         <doc xml:space="preserve">The amount of bytes to pull when operating in pull mode.</doc>
         <type name="guint" c:type="guint"/>
       </property>
@@ -4551,22 +4551,22 @@ set to %NULL. This can be useful if you need buffers to be released as soon
 as possible, eg. if you're using a buffer pool.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="last-sample" transfer-ownership="none">
+      <property name="last-sample" transfer-ownership="none" getter="get_last_sample">
         <doc xml:space="preserve">The last buffer that arrived in the sink and was used for preroll or for
 rendering. This property can be used to generate thumbnails. This property
 can be %NULL when the sink has not yet received a buffer.</doc>
         <type name="Gst.Sample"/>
       </property>
-      <property name="max-bitrate" version="1.2" writable="1" transfer-ownership="none">
+      <property name="max-bitrate" version="1.2" writable="1" transfer-ownership="none" setter="set_max_bitrate" getter="get_max_bitrate">
         <doc xml:space="preserve">Control the maximum amount of bits that will be rendered per second.
 Setting this property to a value bigger than 0 will make the sink delay
 rendering of the buffers when it would exceed to max-bitrate.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="max-lateness" writable="1" transfer-ownership="none">
+      <property name="max-lateness" writable="1" transfer-ownership="none" setter="set_max_lateness" getter="get_max_lateness">
         <type name="gint64" c:type="gint64"/>
       </property>
-      <property name="processing-deadline" version="1.16" writable="1" transfer-ownership="none">
+      <property name="processing-deadline" version="1.16" writable="1" transfer-ownership="none" setter="set_processing_deadline" getter="get_processing_deadline">
         <doc xml:space="preserve">Maximum amount of time (in nanoseconds) that the pipeline can take
 for processing the buffer. This is added to the latency of live
 pipelines.</doc>
@@ -4575,13 +4575,13 @@ pipelines.</doc>
       <property name="qos" writable="1" transfer-ownership="none">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="render-delay" writable="1" transfer-ownership="none">
+      <property name="render-delay" writable="1" transfer-ownership="none" setter="set_render_delay" getter="get_render_delay">
         <doc xml:space="preserve">The additional delay between synchronisation and actual rendering of the
 media. This property will add additional latency to the device in order to
 make other sinks compensate for the delay.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="stats" version="1.18" transfer-ownership="none">
+      <property name="stats" version="1.18" transfer-ownership="none" getter="get_stats">
         <doc xml:space="preserve">Various #GstBaseSink statistics. This property returns a #GstStructure
 with name `application/x-gst-base-sink-stats` with the following fields:
 
@@ -4590,16 +4590,16 @@ with name `application/x-gst-base-sink-stats` with the following fields:
 - "rendered" G_TYPE_UINT64   Number of rendered frames</doc>
         <type name="Gst.Structure"/>
       </property>
-      <property name="sync" writable="1" transfer-ownership="none">
+      <property name="sync" writable="1" transfer-ownership="none" setter="set_sync" getter="get_sync">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="throttle-time" writable="1" transfer-ownership="none">
+      <property name="throttle-time" writable="1" transfer-ownership="none" setter="set_throttle_time" getter="get_throttle_time">
         <doc xml:space="preserve">The time to insert between buffers. This property can be used to control
 the maximum amount of buffers per second to render. Setting this property
 to a value bigger than 0 will make the sink create THROTTLE QoS events.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="ts-offset" writable="1" transfer-ownership="none">
+      <property name="ts-offset" writable="1" transfer-ownership="none" setter="set_ts_offset" getter="get_ts_offset">
         <doc xml:space="preserve">Controls the final synchronisation, a negative value will render the buffer
 earlier while a positive value delays playback. This property can be
 used to fix synchronisation in bad files.</doc>
@@ -5361,7 +5361,7 @@ used</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="get_blocksize" c:identifier="gst_base_src_get_blocksize">
+      <method name="get_blocksize" c:identifier="gst_base_src_get_blocksize" glib:get-property="blocksize">
         <doc xml:space="preserve">Get the number of bytes that @src will push out with each buffer.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the number of bytes pushed with each buffer.</doc>
@@ -5387,7 +5387,7 @@ by the src; unref it after usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_do_timestamp" c:identifier="gst_base_src_get_do_timestamp">
+      <method name="get_do_timestamp" c:identifier="gst_base_src_get_do_timestamp" glib:get-property="do-timestamp">
         <doc xml:space="preserve">Query if @src timestamps outgoing buffers based on the current running_time.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">%TRUE if the base class will automatically timestamp outgoing buffers.</doc>
@@ -5575,7 +5575,7 @@ returns %GST_FLOW_EOS.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_blocksize" c:identifier="gst_base_src_set_blocksize">
+      <method name="set_blocksize" c:identifier="gst_base_src_set_blocksize" glib:set-property="blocksize">
         <doc xml:space="preserve">Set the number of bytes that @src will push out with each buffer. When
 @blocksize is set to -1, a default length will be used.</doc>
         <return-value transfer-ownership="none">
@@ -5609,7 +5609,7 @@ returns %GST_FLOW_EOS.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_do_timestamp" c:identifier="gst_base_src_set_do_timestamp">
+      <method name="set_do_timestamp" c:identifier="gst_base_src_set_do_timestamp" glib:set-property="do-timestamp">
         <doc xml:space="preserve">Configure @src to automatically timestamp outgoing buffers based on the
 current running_time of the pipeline. This property is mostly useful for live
 sources.</doc>
@@ -5774,10 +5774,10 @@ continue. Any other return value should be returned from the create vmethod.</do
           </instance-parameter>
         </parameters>
       </method>
-      <property name="blocksize" writable="1" transfer-ownership="none">
+      <property name="blocksize" writable="1" transfer-ownership="none" setter="set_blocksize" getter="get_blocksize">
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="do-timestamp" writable="1" transfer-ownership="none">
+      <property name="do-timestamp" writable="1" transfer-ownership="none" setter="set_do_timestamp" getter="get_do_timestamp">
         <type name="gboolean" c:type="gboolean"/>
       </property>
       <property name="num-buffers" writable="1" transfer-ownership="none">

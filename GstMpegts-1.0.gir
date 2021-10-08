@@ -2933,6 +2933,16 @@ Corresponds to table 6 of ETSI EN 300 468 (v1.13.0)</doc>
           <type name="gpointer" c:type="gpointer"/>
         </array>
       </field>
+      <field name="fully_parsed" version="1.20" writable="1">
+        <doc xml:space="preserve">When encrypted, or when encountering an unknown command type,
+we may still want to pass the sit through.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </field>
+      <field name="is_running_time" version="1.20" writable="1">
+        <doc xml:space="preserve">When the SIT was constructed by the application, splice times
+are in running_time and must be translated before packetizing.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </field>
       <constructor name="new" c:identifier="gst_mpegts_scte_sit_new">
         <doc xml:space="preserve">Allocates and initializes a #GstMpegtsSCTESIT.</doc>
         <return-value transfer-ownership="full">
@@ -2955,6 +2965,38 @@ Corresponds to table 6 of ETSI EN 300 468 (v1.13.0)</doc>
       <member name="private" value="255" c:identifier="GST_MTS_SCTE_SPLICE_COMMAND_PRIVATE">
       </member>
     </enumeration>
+    <record name="SCTESpliceComponent" c:type="GstMpegtsSCTESpliceComponent" version="1.20" glib:type-name="GstMpegtsSCTESpliceComponent" glib:get-type="gst_mpegts_scte_splice_component_get_type" c:symbol-prefix="scte_splice_component">
+      <doc xml:space="preserve">Per-PID splice information.</doc>
+      <field name="tag" writable="1">
+        <doc xml:space="preserve">the elementary PID stream containing the Splice Point</doc>
+        <type name="guint8" c:type="guint8"/>
+      </field>
+      <field name="splice_time_specified" writable="1">
+        <doc xml:space="preserve">Whether @splice_time was specified</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </field>
+      <field name="splice_time" writable="1">
+        <doc xml:space="preserve">the presentation time of the signaled splice event</doc>
+        <type name="guint64" c:type="guint64"/>
+      </field>
+      <field name="utc_splice_time" writable="1">
+        <doc xml:space="preserve">The UTC time of the signaled splice event</doc>
+        <type name="guint32" c:type="guint32"/>
+      </field>
+      <constructor name="new" c:identifier="gst_mpegts_scte_splice_component_new" version="1.20">
+        <doc xml:space="preserve">Allocates and initializes a #GstMpegtsSCTESpliceComponent.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A newly allocated #GstMpegtsSCTESpliceComponent</doc>
+          <type name="SCTESpliceComponent" c:type="GstMpegtsSCTESpliceComponent*"/>
+        </return-value>
+        <parameters>
+          <parameter name="tag" transfer-ownership="none">
+            <doc xml:space="preserve">the elementary PID stream identifier</doc>
+            <type name="guint8" c:type="guint8"/>
+          </parameter>
+        </parameters>
+      </constructor>
+    </record>
     <enumeration name="SCTESpliceDescriptor" c:type="GstMpegtsSCTESpliceDescriptor">
       <member name="avail" value="0" c:identifier="GST_MTS_SCTE_DESC_AVAIL">
       </member>
@@ -2994,6 +3036,16 @@ Corresponds to table 6 of ETSI EN 300 468 (v1.13.0)</doc>
       </field>
       <field name="program_splice_time" writable="1">
         <type name="guint64" c:type="guint64"/>
+      </field>
+      <field name="utc_splice_time" version="1.20" writable="1">
+        <doc xml:space="preserve">The UTC time of the signaled splice event</doc>
+        <type name="guint32" c:type="guint32"/>
+      </field>
+      <field name="components" version="1.20" writable="1">
+        <doc xml:space="preserve">Per-PID splice time information</doc>
+        <array name="GLib.PtrArray" c:type="GPtrArray*">
+          <type name="gpointer" c:type="gpointer"/>
+        </array>
       </field>
       <field name="break_duration_auto_return" writable="1">
         <type name="gboolean" c:type="gboolean"/>
@@ -4661,6 +4713,19 @@ a single language</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="event_new_mpegts_section" c:identifier="gst_event_new_mpegts_section" version="1.20">
+      <doc xml:space="preserve">Creates a new #GstEvent for a #GstMpegtsSection.</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">The new custom #GstEvent.</doc>
+        <type name="Gst.Event" c:type="GstEvent*"/>
+      </return-value>
+      <parameters>
+        <parameter name="section" transfer-ownership="none">
+          <doc xml:space="preserve">The #GstMpegtsSection to put in a message</doc>
+          <type name="Section" c:type="GstMpegtsSection*"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="event_parse_mpegts_section" c:identifier="gst_event_parse_mpegts_section">
       <doc xml:space="preserve">Extracts the #GstMpegtsSection contained in the @event #GstEvent</doc>
       <return-value transfer-ownership="full">
@@ -4941,15 +5006,15 @@ immediate as opposed to for the target @splice_time.</doc>
           <type name="guint32" c:type="guint32"/>
         </parameter>
         <parameter name="splice_time" transfer-ownership="none">
-          <doc xml:space="preserve">The PCR time for the splice event</doc>
-          <type name="guint64" c:type="guint64"/>
+          <doc xml:space="preserve">The running time for the splice event</doc>
+          <type name="Gst.ClockTime" c:type="GstClockTime"/>
         </parameter>
       </parameters>
     </function>
     <function name="scte_splice_out_new" c:identifier="gst_mpegts_scte_splice_out_new">
       <doc xml:space="preserve">Allocates and initializes a new "Splice Out" INSERT command
 #GstMpegtsSCTESIT for the given @event_id, @splice_time and
-duration.
+@duration.
 
 If the @splice_time is #G_MAXUINT64 then the event will be
 immediate as opposed to for the target @splice_time.
@@ -4965,12 +5030,12 @@ If the @duration is 0 it won't be specified in the event.</doc>
           <type name="guint32" c:type="guint32"/>
         </parameter>
         <parameter name="splice_time" transfer-ownership="none">
-          <doc xml:space="preserve">The PCR time for the splice event</doc>
-          <type name="guint64" c:type="guint64"/>
+          <doc xml:space="preserve">The running time for the splice event</doc>
+          <type name="Gst.ClockTime" c:type="GstClockTime"/>
         </parameter>
         <parameter name="duration" transfer-ownership="none">
           <doc xml:space="preserve">The optional duration.</doc>
-          <type name="guint64" c:type="guint64"/>
+          <type name="Gst.ClockTime" c:type="GstClockTime"/>
         </parameter>
       </parameters>
     </function>
