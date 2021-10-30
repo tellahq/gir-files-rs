@@ -10545,7 +10545,7 @@ operation of video-sources or operators.</doc>
             <doc xml:space="preserve">A #GstTagList</doc>
             <type name="Gst.TagList" c:type="GstTagList*"/>
           </parameter>
-          <parameter name="method" transfer-ownership="none">
+          <parameter name="method" direction="out" caller-allocates="0" transfer-ownership="full">
             <doc xml:space="preserve">The location where to return the orientation.</doc>
             <type name="VideoOrientationMethod" c:type="GstVideoOrientationMethod*"/>
           </parameter>
@@ -16387,7 +16387,7 @@ the requested mode.</doc>
           <doc xml:space="preserve">A #GstTagList</doc>
           <type name="Gst.TagList" c:type="GstTagList*"/>
         </parameter>
-        <parameter name="method" transfer-ownership="none">
+        <parameter name="method" direction="out" caller-allocates="0" transfer-ownership="full">
           <doc xml:space="preserve">The location where to return the orientation.</doc>
           <type name="VideoOrientationMethod" c:type="GstVideoOrientationMethod*"/>
         </parameter>

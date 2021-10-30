@@ -9723,9 +9723,11 @@ NDC is a left-handed coordinate system
           <doc xml:space="preserve">a #GstVideoAffineTransformationMeta</doc>
           <type name="GstVideo.VideoAffineTransformationMeta" c:type="GstVideoAffineTransformationMeta*"/>
         </parameter>
-        <parameter name="matrix" direction="out" caller-allocates="0" transfer-ownership="full">
+        <parameter name="matrix" direction="out" caller-allocates="1" transfer-ownership="none">
           <doc xml:space="preserve">result of the 4x4 matrix</doc>
-          <type name="gfloat" c:type="gfloat*"/>
+          <array zero-terminated="0" c:type="gfloat*" fixed-size="16">
+            <type name="gfloat" c:type="gfloat"/>
+          </array>
         </parameter>
       </parameters>
     </function>
@@ -9918,7 +9920,7 @@ multiple times.  This must be called before any other GstGLMemory operation.</do
             <type name="gfloat" c:type="gfloat"/>
           </array>
         </parameter>
-        <parameter name="result" direction="out" caller-allocates="0" transfer-ownership="full">
+        <parameter name="result" direction="out" caller-allocates="1" transfer-ownership="none">
           <doc xml:space="preserve">the result of the multiplication</doc>
           <array zero-terminated="0" c:type="gfloat*" fixed-size="16">
             <type name="gfloat" c:type="gfloat"/>
@@ -10043,7 +10045,9 @@ NDC coordinates in @matrix.</doc>
         </parameter>
         <parameter name="matrix" transfer-ownership="none">
           <doc xml:space="preserve">a 4x4 matrix</doc>
-          <type name="gfloat" c:type="const gfloat*"/>
+          <array zero-terminated="0" c:type="const gfloat*" fixed-size="16">
+            <type name="gfloat" c:type="gfloat"/>
+          </array>
         </parameter>
       </parameters>
     </function>
