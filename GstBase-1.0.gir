@@ -1395,6 +1395,17 @@ by @trans; free it after use it</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="get_ignore_inactive_pads" c:identifier="gst_aggregator_get_ignore_inactive_pads" version="1.20">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">whether inactive pads will not be waited on</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="Aggregator" c:type="GstAggregator*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="get_latency" c:identifier="gst_aggregator_get_latency" glib:get-property="latency">
         <doc xml:space="preserve">Retrieves the latency values reported by @self in response to the latency
 query, or %GST_CLOCK_TIME_NONE if there is not live source connected and the element
@@ -1482,6 +1493,26 @@ function.</doc>
           <parameter name="info" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">a #GstStructure containing additional information</doc>
             <type name="Gst.Structure" c:type="GstStructure*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_ignore_inactive_pads" c:identifier="gst_aggregator_set_ignore_inactive_pads" version="1.20">
+        <doc xml:space="preserve">Subclasses should call this when they don't want to time out
+waiting for a pad that hasn't yet received any buffers in live
+mode.
+
+#GstAggregator will still wait once on each newly-added pad, making
+sure upstream has had a fair chance to start up.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="Aggregator" c:type="GstAggregator*"/>
+          </instance-parameter>
+          <parameter name="ignore" transfer-ownership="none">
+            <doc xml:space="preserve">whether inactive pads should not be waited on</doc>
+            <type name="gboolean" c:type="gboolean"/>
           </parameter>
         </parameters>
       </method>
@@ -2083,6 +2114,20 @@ gst_aggregator_pad_pop_buffer().</doc>
       <method name="is_eos" c:identifier="gst_aggregator_pad_is_eos">
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">%TRUE if the pad is EOS, otherwise %FALSE.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="pad" transfer-ownership="none">
+            <doc xml:space="preserve">an aggregator pad</doc>
+            <type name="AggregatorPad" c:type="GstAggregatorPad*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="is_inactive" c:identifier="gst_aggregator_pad_is_inactive" version="1.20">
+        <doc xml:space="preserve">It is only valid to call this method from #GstAggregatorClass::aggregate()</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if the pad is inactive, %FALSE otherwise.
+  See gst_aggregator_ignore_inactive_pads() for more info.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>

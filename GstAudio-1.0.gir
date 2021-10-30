@@ -1082,6 +1082,17 @@ additional information in the info #GstStructure of the returned sample:
       <property name="discont-wait" writable="1" transfer-ownership="none">
         <type name="guint64" c:type="guint64"/>
       </property>
+      <property name="ignore-inactive-pads" version="1.20" writable="1" transfer-ownership="none">
+        <doc xml:space="preserve">Don't wait for inactive pads when live. An inactive pad
+is a pad that hasn't yet received a buffer, but that has
+been waited on at least once.
+
+The purpose of this property is to avoid aggregating on
+timeout when new pads are requested in advance of receiving
+data flow, for example the user may decide to connect it later,
+but wants to configure it already.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
       <property name="output-buffer-duration" writable="1" transfer-ownership="none">
         <type name="guint64" c:type="guint64"/>
       </property>

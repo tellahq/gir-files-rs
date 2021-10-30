@@ -3706,7 +3706,9 @@ GstBuffer must be writable.</doc>
       <method name="set_extension_data" c:identifier="gst_rtp_buffer_set_extension_data">
         <doc xml:space="preserve">Set the extension bit of the rtp buffer and fill in the @bits and @length of the
 extension header. If the existing extension data is not large enough, it will
-be made larger.</doc>
+be made larger.
+
+Will also shorten the extension data from 1.20.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">True if done.</doc>
           <type name="gboolean" c:type="gboolean"/>

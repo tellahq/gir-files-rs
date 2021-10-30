@@ -9707,6 +9707,28 @@ per pixel</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="gl_get_affine_transformation_meta_as_ndc" c:identifier="gst_gl_get_affine_transformation_meta_as_ndc" version="1.20">
+      <doc xml:space="preserve">Retrieves the stored 4x4 affine transformation matrix stored in @meta in
+NDC coordinates. if @meta is NULL, an identity matrix is returned.
+
+NDC is a left-handed coordinate system
+- x - [-1, 1] - +ve X moves right
+- y - [-1, 1] - +ve Y moves up
+- z - [-1, 1] - +ve Z moves into</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="meta" transfer-ownership="none" nullable="1" allow-none="1">
+          <doc xml:space="preserve">a #GstVideoAffineTransformationMeta</doc>
+          <type name="GstVideo.VideoAffineTransformationMeta" c:type="GstVideoAffineTransformationMeta*"/>
+        </parameter>
+        <parameter name="matrix" direction="out" caller-allocates="0" transfer-ownership="full">
+          <doc xml:space="preserve">result of the 4x4 matrix</doc>
+          <type name="gfloat" c:type="gfloat*"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="gl_get_plane_data_size" c:identifier="gst_gl_get_plane_data_size">
       <doc xml:space="preserve">Retrieve the size in bytes of a video plane of data with a certain alignment</doc>
       <return-value transfer-ownership="none">
@@ -9877,6 +9899,33 @@ multiple times.  This must be called before any other GstGLMemory operation.</do
         </parameter>
       </parameters>
     </function>
+    <function name="gl_multiply_matrix4" c:identifier="gst_gl_multiply_matrix4" version="1.20">
+      <doc xml:space="preserve">Multiplies two 4x4 matrices, @a and @b, and stores the result, a
+2-dimensional array of #gfloat, in @result.</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="a" transfer-ownership="none">
+          <doc xml:space="preserve">a 2-dimensional 4x4 array of #gfloat</doc>
+          <array zero-terminated="0" c:type="const gfloat*" fixed-size="16">
+            <type name="gfloat" c:type="gfloat"/>
+          </array>
+        </parameter>
+        <parameter name="b" transfer-ownership="none">
+          <doc xml:space="preserve">another 2-dimensional 4x4 array of #gfloat</doc>
+          <array zero-terminated="0" c:type="const gfloat*" fixed-size="16">
+            <type name="gfloat" c:type="gfloat"/>
+          </array>
+        </parameter>
+        <parameter name="result" direction="out" caller-allocates="0" transfer-ownership="full">
+          <doc xml:space="preserve">the result of the multiplication</doc>
+          <array zero-terminated="0" c:type="gfloat*" fixed-size="16">
+            <type name="gfloat" c:type="gfloat"/>
+          </array>
+        </parameter>
+      </parameters>
+    </function>
     <function name="gl_platform_from_string" c:identifier="gst_gl_platform_from_string" moved-to="GLPlatform.from_string">
       <return-value transfer-ownership="none">
         <doc xml:space="preserve">The #GstGLPlatform represented by @platform_s</doc>
@@ -9980,6 +10029,23 @@ multiple times.  This must be called before any other GstGLRenderbuffer operatio
       <return-value transfer-ownership="none">
         <type name="none" c:type="void"/>
       </return-value>
+    </function>
+    <function name="gl_set_affine_transformation_meta_from_ndc" c:identifier="gst_gl_set_affine_transformation_meta_from_ndc" version="1.20">
+      <doc xml:space="preserve">Set the 4x4 affine transformation matrix stored in @meta from the
+NDC coordinates in @matrix.</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="meta" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstVideoAffineTransformationMeta</doc>
+          <type name="GstVideo.VideoAffineTransformationMeta" c:type="GstVideoAffineTransformationMeta*"/>
+        </parameter>
+        <parameter name="matrix" transfer-ownership="none">
+          <doc xml:space="preserve">a 4x4 matrix</doc>
+          <type name="gfloat" c:type="const gfloat*"/>
+        </parameter>
+      </parameters>
     </function>
     <function name="gl_sized_gl_format_from_gl_format_type" c:identifier="gst_gl_sized_gl_format_from_gl_format_type">
       <return-value transfer-ownership="none">

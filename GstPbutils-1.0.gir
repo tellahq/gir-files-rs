@@ -681,6 +681,19 @@ Free with gst_discoverer_stream_info_list_free() after usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="get_tags" c:identifier="gst_discoverer_container_info_get_tags" version="1.20">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">tags specific to the given container. If you wish to use
+the tags after the life-time of @info, you will need to copy them.</doc>
+          <type name="Gst.TagList" c:type="const GstTagList*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="info" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstDiscovererStreamInfo</doc>
+            <type name="DiscovererContainerInfo" c:type="const GstDiscovererContainerInfo*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
     </class>
     <class name="DiscovererInfo" c:symbol-prefix="discoverer_info" c:type="GstDiscovererInfo" parent="GObject.Object" glib:type-name="GstDiscovererInfo" glib:get-type="gst_discoverer_info_get_type">
       <doc xml:space="preserve">Structure containing the information of a URI analyzed by #GstDiscoverer.</doc>
@@ -897,7 +910,8 @@ gst_discoverer_stream_info_list_free().</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_tags" c:identifier="gst_discoverer_info_get_tags">
+      <method name="get_tags" c:identifier="gst_discoverer_info_get_tags" deprecated="1" deprecated-version="1.20">
+        <doc-deprecated xml:space="preserve">Use gst_discoverer_{container,stream}_info_get_tags() instead.</doc-deprecated>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">all tags contained in the URI. If you wish to use
 the tags after the life-time of @info, you will need to copy them.</doc>
@@ -1112,6 +1126,19 @@ after usage.</doc>
           <doc xml:space="preserve">the stream ID of this stream. If you wish to
 use the stream ID after the life-time of @info you will need to copy it.</doc>
           <type name="utf8" c:type="const gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="info" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstDiscovererStreamInfo</doc>
+            <type name="DiscovererStreamInfo" c:type="GstDiscovererStreamInfo*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_stream_number" c:identifier="gst_discoverer_stream_info_get_stream_number" version="1.20">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the stream number, -1 if no index could be determined. This property
+acts as a unique identifier as a 'int' for the stream.</doc>
+          <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
           <instance-parameter name="info" transfer-ownership="none">
