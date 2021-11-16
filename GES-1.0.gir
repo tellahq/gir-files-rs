@@ -6089,7 +6089,7 @@ information.</doc>
       <property name="uri" writable="1" construct-only="1" transfer-ownership="none">
         <doc xml:space="preserve">The uri of the file/resource to use. You can set a start index,
 a stop index and a sequence pattern.
-The format is &amp;lt;multifile://start:stop\@location-pattern&amp;gt;.
+The format is &lt;multifile://start:stop\@location-pattern&gt;.
 The pattern uses printf string formating.
 
 Example uris:
@@ -14373,7 +14373,7 @@ contains one frame)</doc>
     <constant name="VERSION_MAJOR" value="1" c:type="GES_VERSION_MAJOR">
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="VERSION_MICRO" value="2" c:type="GES_VERSION_MICRO">
+    <constant name="VERSION_MICRO" value="3" c:type="GES_VERSION_MICRO">
       <type name="gint" c:type="gint"/>
     </constant>
     <constant name="VERSION_MINOR" value="19" c:type="GES_VERSION_MINOR">

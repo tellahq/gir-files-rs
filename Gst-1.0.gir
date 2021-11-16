@@ -16139,12 +16139,12 @@ The following code example shows you how to create a GstFileSrc element.
 
 ## Using an element factory
 |[&lt;!-- language="C" --&gt;
-  #include &amp;lt;gst/gst.h&amp;gt;
+  #include &lt;gst/gst.h&gt;
 
   GstElement *src;
   GstElementFactory *srcfactory;
 
-  gst_init (&amp;amp;argc, &amp;amp;argv);
+  gst_init (&amp;argc, &amp;argv);
 
   srcfactory = gst_element_factory_find ("filesrc");
   g_return_if_fail (srcfactory != NULL);
@@ -19635,10 +19635,10 @@ The basic use pattern of an iterator is as follows:
   GValue item = G_VALUE_INIT;
   done = FALSE;
   while (!done) {
-    switch (gst_iterator_next (it, &amp;amp;item)) {
+    switch (gst_iterator_next (it, &amp;item)) {
       case GST_ITERATOR_OK:
         ...get/use/change item here...
-        g_value_reset (&amp;amp;item);
+        g_value_reset (&amp;item);
         break;
       case GST_ITERATOR_RESYNC:
         ...rollback changes to items...
@@ -19653,7 +19653,7 @@ The basic use pattern of an iterator is as follows:
         break;
     }
   }
-  g_value_unset (&amp;amp;item);
+  g_value_unset (&amp;item);
   gst_iterator_free (it);
 ]|</doc>
       <field name="copy" writable="1">
@@ -22787,7 +22787,7 @@ Typical usage of this function might be:
       GError *err = NULL;
       gchar *dbg_info = NULL;
 
-      gst_message_parse_error (msg, &amp;amp;err, &amp;amp;dbg_info);
+      gst_message_parse_error (msg, &amp;err, &amp;dbg_info);
       g_printerr ("ERROR from element %s: %s\n",
           GST_OBJECT_NAME (msg-&gt;src), err-&gt;message);
       g_printerr ("Debugging info: %s\n", (dbg_info) ? dbg_info : "none");
@@ -23239,7 +23239,7 @@ Typical usage of this function might be:
     case GST_MESSAGE_STATE_CHANGED: {
       GstState old_state, new_state;
 
-      gst_message_parse_state_changed (msg, &amp;amp;old_state, &amp;amp;new_state, NULL);
+      gst_message_parse_state_changed (msg, &amp;old_state, &amp;new_state, NULL);
       g_print ("Element %s changed state from %s to %s.\n",
           GST_OBJECT_NAME (msg-&gt;src),
           gst_element_state_get_name (old_state),
@@ -23451,7 +23451,7 @@ Typical usage of this function might be:
     case GST_MESSAGE_TAG: {
       GstTagList *tags = NULL;
 
-      gst_message_parse_tag (msg, &amp;amp;tags);
+      gst_message_parse_tag (msg, &amp;tags);
       g_print ("Got tags from element %s\n", GST_OBJECT_NAME (msg-&gt;src));
       handle_tags (tags);
       gst_tag_list_unref (tags);
@@ -29895,7 +29895,7 @@ The following code example shows the code to create a pad from a padtemplate.
   my_method (void)
   {
     GstPad *pad;
-    pad = gst_pad_new_from_static_template (&amp;amp;my_template, "sink");
+    pad = gst_pad_new_from_static_template (&amp;my_template, "sink");
     ...
   }
 ]|
@@ -29908,7 +29908,7 @@ element class, this is usually done in the class_init of the class:
   {
     GstElementClass *gstelement_class = GST_ELEMENT_CLASS (klass);
 
-    gst_element_class_add_static_pad_template (gstelement_class, &amp;amp;my_template);
+    gst_element_class_add_static_pad_template (gstelement_class, &amp;my_template);
   }
 ]|</doc>
       <constructor name="new" c:identifier="gst_pad_template_new">
@@ -33109,7 +33109,7 @@ The following example shows how to query the duration of a pipeline:
   res = gst_element_query (pipeline, query);
   if (res) {
     gint64 duration;
-    gst_query_parse_duration (query, NULL, &amp;amp;duration);
+    gst_query_parse_duration (query, NULL, &amp;duration);
     g_print ("duration = %"GST_TIME_FORMAT, GST_TIME_ARGS (duration));
   } else {
     g_print ("duration query failed...");
@@ -44324,7 +44324,7 @@ that though.
   my_peek (gpointer data, gint64 offset, guint size)
   {
     MyTypeFind *find = (MyTypeFind *) data;
-    if (offset &amp;gt;= 0 &amp;amp;&amp;amp; offset + size &amp;lt;= find-&gt;size) {
+    if (offset &gt;= 0 &amp;&amp; offset + size &lt;= find-&gt;size) {
       return find-&gt;data + offset;
     }
     return NULL;
@@ -44333,9 +44333,9 @@ that though.
   my_suggest (gpointer data, guint probability, GstCaps *caps)
   {
     MyTypeFind *find = (MyTypeFind *) data;
-    if (probability &amp;gt; find-&gt;probability) {
+    if (probability &gt; find-&gt;probability) {
       find-&gt;probability = probability;
-      gst_caps_replace (&amp;amp;find-&gt;caps, caps);
+      gst_caps_replace (&amp;find-&gt;caps, caps);
     }
   }
   static GstCaps *
@@ -44343,12 +44343,12 @@ that though.
   {
     GList *walk, *type_list;
     MyTypeFind find = {data, size, 0, NULL};
-    GstTypeFind gst_find = {my_peek, my_suggest, &amp;amp;find, };
+    GstTypeFind gst_find = {my_peek, my_suggest, &amp;find, };
     walk = type_list = gst_type_find_factory_get_list ();
     while (walk) {
       GstTypeFindFactory *factory = GST_TYPE_FIND_FACTORY (walk-&gt;data);
       walk = g_list_next (walk)
-      gst_type_find_factory_call_function (factory, &amp;amp;gst_find);
+      gst_type_find_factory_call_function (factory, &amp;gst_find);
     }
     g_list_free (type_list);
     return find.caps;
@@ -45822,7 +45822,7 @@ determine a order for the two provided values.</doc>
       <doc xml:space="preserve">The major version of GStreamer at compile time:</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="VERSION_MICRO" value="2" c:type="GST_VERSION_MICRO">
+    <constant name="VERSION_MICRO" value="3" c:type="GST_VERSION_MICRO">
       <doc xml:space="preserve">The micro version of GStreamer at compile time:</doc>
       <type name="gint" c:type="gint"/>
     </constant>
@@ -47189,6 +47189,43 @@ would write out.</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="debug_log_literal" c:identifier="gst_debug_log_literal" version="1.20">
+      <doc xml:space="preserve">Logs the given message using the currently registered debugging handlers.</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="category" transfer-ownership="none">
+          <doc xml:space="preserve">category to log</doc>
+          <type name="DebugCategory" c:type="GstDebugCategory*"/>
+        </parameter>
+        <parameter name="level" transfer-ownership="none">
+          <doc xml:space="preserve">level of the message is in</doc>
+          <type name="DebugLevel" c:type="GstDebugLevel"/>
+        </parameter>
+        <parameter name="file" transfer-ownership="none">
+          <doc xml:space="preserve">the file that emitted the message, usually the __FILE__ identifier</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="function" transfer-ownership="none">
+          <doc xml:space="preserve">the function that emitted the message</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="line" transfer-ownership="none">
+          <doc xml:space="preserve">the line from that the message was emitted, usually __LINE__</doc>
+          <type name="gint" c:type="gint"/>
+        </parameter>
+        <parameter name="object" transfer-ownership="none" nullable="1" allow-none="1">
+          <doc xml:space="preserve">the object this message relates to,
+    or %NULL if none</doc>
+          <type name="GObject.Object" c:type="GObject*"/>
+        </parameter>
+        <parameter name="message_string" transfer-ownership="none">
+          <doc xml:space="preserve">a message string</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="debug_log_valist" c:identifier="gst_debug_log_valist" introspectable="0">
       <doc xml:space="preserve">Logs the given message using the currently registered debugging handlers.</doc>
       <return-value transfer-ownership="none">
@@ -47881,7 +47918,7 @@ int
 main (int argc, char *argv[])
 {
  GOptionEntry options[] = {
-  {"tags", 't', 0, G_OPTION_ARG_NONE, &amp;amp;tags,
+  {"tags", 't', 0, G_OPTION_ARG_NONE, &amp;tags,
       N_("Output tags (also known as metadata)"), NULL},
   {NULL}
  };
@@ -48031,7 +48068,7 @@ So don't take addresses of these functions or use other tricks.
 If you must do that for some reason, there is still an option.
 If the debugging
 subsystem was compiled out, GST_DISABLE_GST_DEBUG is defined in
-&amp;lt;gst/gst.h&amp;gt;,
+&lt;gst/gst.h&gt;,
 so you can check that before doing your trick.
 Disabling the debugging subsystem will give you a slight (read: unnoticeable)
 speed increase and will reduce the size of your compiled code. The GStreamer

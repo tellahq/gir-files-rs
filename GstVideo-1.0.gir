@@ -2153,7 +2153,7 @@ return to upstream/caller (indicating either GST_FLOW_ERROR or GST_FLOW_OK).</do
         </parameter>
       </parameters>
     </function-macro>
-    <constant name="VIDEO_FORMATS_ALL" value="{ AYUV64, ARGB64, ARGB64_BE, RGBA64_BE, BGRA64_BE, ABGR64_BE, ARGB64_LE, RGBA64_LE, BGRA64_LE, ABGR64_LE, GBRA_12BE, GBRA_12LE, Y412_BE, Y412_LE, A444_10BE, GBRA_10BE, A444_10LE, GBRA_10LE, A422_10BE, A422_10LE, A420_10BE, A420_10LE, Y410, RGB10A2_LE, BGR10A2_LE, GBRA, ABGR, VUYA, BGRA, AYUV, ARGB, RGBA, A420, AV12, Y444_16BE, Y444_16LE, v216, P016_BE, P016_LE, Y444_12BE, GBR_12BE, Y444_12LE, GBR_12LE, I422_12BE, I422_12LE, Y212_BE, Y212_LE, I420_12BE, I420_12LE, P012_BE, P012_LE, Y444_10BE, GBR_10BE, Y444_10LE, GBR_10LE, r210, I422_10BE, I422_10LE, NV16_10LE32, Y210, v210, UYVP, I420_10BE, I420_10LE, P010_10BE, P010_10LE, NV12_10LE32, NV12_10LE40, Y444, RGBP, GBR, BGRP, NV24, xBGR, BGRx, xRGB, RGBx, BGR, IYU2, v308, RGB, Y42B, NV61, NV16, VYUY, UYVY, YVYU, YUY2, I420, YV12, NV21, NV12, NV12_64Z32, NV12_4L4, NV12_32L32, Y41B, IYU1, YVU9, YUV9, RGB16, BGR16, RGB15, BGR15, RGB8P, GRAY16_BE, GRAY16_LE, GRAY10_LE32, GRAY8 }" c:type="GST_VIDEO_FORMATS_ALL">
+    <constant name="VIDEO_FORMATS_ALL" value="{ ABGR64_BE, BGRA64_BE, AYUV64, ARGB64_BE, ARGB64, RGBA64_BE, ABGR64_LE, BGRA64_LE, ARGB64_LE, RGBA64_LE, GBRA_12BE, GBRA_12LE, Y412_BE, Y412_LE, A444_10BE, GBRA_10BE, A444_10LE, GBRA_10LE, A422_10BE, A422_10LE, A420_10BE, A420_10LE, Y410, RGB10A2_LE, BGR10A2_LE, GBRA, ABGR, VUYA, BGRA, AYUV, ARGB, RGBA, A420, AV12, Y444_16BE, Y444_16LE, v216, P016_BE, P016_LE, Y444_12BE, GBR_12BE, Y444_12LE, GBR_12LE, I422_12BE, I422_12LE, Y212_BE, Y212_LE, I420_12BE, I420_12LE, P012_BE, P012_LE, Y444_10BE, GBR_10BE, Y444_10LE, GBR_10LE, r210, I422_10BE, I422_10LE, NV16_10LE32, Y210, v210, UYVP, I420_10BE, I420_10LE, P010_10BE, P010_10LE, NV12_10LE32, NV12_10LE40, Y444, RGBP, GBR, BGRP, NV24, xBGR, BGRx, xRGB, RGBx, BGR, IYU2, v308, RGB, Y42B, NV61, NV16, VYUY, UYVY, YVYU, YUY2, I420, YV12, NV21, NV12, NV12_64Z32, NV12_4L4, NV12_32L32, Y41B, IYU1, YVU9, YUV9, RGB16, BGR16, RGB15, BGR15, RGB8P, GRAY16_BE, GRAY16_LE, GRAY10_LE32, GRAY8 }" c:type="GST_VIDEO_FORMATS_ALL">
       <doc xml:space="preserve">List of all video formats, for use in template caps strings.
 
 Formats are sorted by decreasing "quality", using these criteria by priority:
@@ -9274,7 +9274,7 @@ to get to the pixels.
   GstVideoFrame vframe;
   ...
   // set RGB pixels to black one at a time
-  if (gst_video_frame_map (&amp;amp;vframe, video_info, video_buffer, GST_MAP_WRITE)) {
+  if (gst_video_frame_map (&amp;vframe, video_info, video_buffer, GST_MAP_WRITE)) {
     guint8 *pixels = GST_VIDEO_FRAME_PLANE_DATA (vframe, 0);
     guint stride = GST_VIDEO_FRAME_PLANE_STRIDE (vframe, 0);
     guint pixel_stride = GST_VIDEO_FRAME_COMP_PSTRIDE (vframe, 0);
@@ -9287,7 +9287,7 @@ to get to the pixels.
       }
     }
 
-    gst_video_frame_unmap (&amp;amp;vframe);
+    gst_video_frame_unmap (&amp;vframe);
   }
   ...
 ]|
@@ -11112,13 +11112,13 @@ used in the callback).
 ## GstVideoOverlay and Gtk+
 
 |[
-#include &amp;lt;gst/video/videooverlay.h&amp;gt;
-#include &amp;lt;gtk/gtk.h&amp;gt;
+#include &lt;gst/video/videooverlay.h&gt;
+#include &lt;gtk/gtk.h&gt;
 #ifdef GDK_WINDOWING_X11
-#include &amp;lt;gdk/gdkx.h&amp;gt;  // for GDK_WINDOW_XID
+#include &lt;gdk/gdkx.h&gt;  // for GDK_WINDOW_XID
 #endif
 #ifdef GDK_WINDOWING_WIN32
-#include &amp;lt;gdk/gdkwin32.h&amp;gt;  // for GDK_WINDOW_HWND
+#include &lt;gdk/gdkwin32.h&gt;  // for GDK_WINDOW_HWND
 #endif
 ...
 static guintptr video_window_handle = 0;
@@ -15971,7 +15971,7 @@ to get to the pixels.
   GstVideoFrame vframe;
   ...
   // set RGB pixels to black one at a time
-  if (gst_video_frame_map (&amp;amp;vframe, video_info, video_buffer, GST_MAP_WRITE)) {
+  if (gst_video_frame_map (&amp;vframe, video_info, video_buffer, GST_MAP_WRITE)) {
     guint8 *pixels = GST_VIDEO_FRAME_PLANE_DATA (vframe, 0);
     guint stride = GST_VIDEO_FRAME_PLANE_STRIDE (vframe, 0);
     guint pixel_stride = GST_VIDEO_FRAME_COMP_PSTRIDE (vframe, 0);
@@ -15984,7 +15984,7 @@ to get to the pixels.
       }
     }
 
-    gst_video_frame_unmap (&amp;amp;vframe);
+    gst_video_frame_unmap (&amp;vframe);
   }
   ...
 ]|
