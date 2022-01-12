@@ -2745,6 +2745,16 @@ Things that subclass need to take care of:
         </parameters>
       </virtual-method>
       <virtual-method name="handle_frame">
+        <doc xml:space="preserve">Parses the input data into valid frames as defined by subclass
+which should be passed to gst_base_parse_finish_frame().
+The frame's input buffer is guaranteed writable,
+whereas the input frame ownership is held by caller
+(so subclass should make a copy if it needs to hang on).
+Input buffer (data) is provided by baseclass with as much
+metadata set as possible by baseclass according to upstream
+information and/or subclass settings,
+though subclass may still set buffer timestamp and duration
+if desired.</doc>
         <return-value transfer-ownership="none">
           <type name="Gst.FlowReturn" c:type="GstFlowReturn"/>
         </return-value>
@@ -2755,7 +2765,7 @@ Things that subclass need to take care of:
           <parameter name="frame" transfer-ownership="none">
             <type name="BaseParseFrame" c:type="GstBaseParseFrame*"/>
           </parameter>
-          <parameter name="skipsize" transfer-ownership="none">
+          <parameter name="skipsize" direction="out" caller-allocates="0" transfer-ownership="full">
             <type name="gint" c:type="gint*"/>
           </parameter>
         </parameters>
@@ -3344,7 +3354,7 @@ needed. At minimum @handle_frame needs to be overridden.</doc>
             <parameter name="frame" transfer-ownership="none">
               <type name="BaseParseFrame" c:type="GstBaseParseFrame*"/>
             </parameter>
-            <parameter name="skipsize" transfer-ownership="none">
+            <parameter name="skipsize" direction="out" caller-allocates="0" transfer-ownership="full">
               <type name="gint" c:type="gint*"/>
             </parameter>
           </parameters>
@@ -5109,27 +5119,8 @@ After the EOS has been sent to the element, the application should wait for
 an EOS message to be posted on the pipeline's bus. Once this EOS message is
 received, it may safely shut down the entire pipeline.</doc>
       <virtual-method name="alloc">
-        <return-value transfer-ownership="none">
-          <type name="Gst.FlowReturn" c:type="GstFlowReturn"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="src" transfer-ownership="none">
-            <type name="BaseSrc" c:type="GstBaseSrc*"/>
-          </instance-parameter>
-          <parameter name="offset" transfer-ownership="none">
-            <type name="guint64" c:type="guint64"/>
-          </parameter>
-          <parameter name="size" transfer-ownership="none">
-            <type name="guint" c:type="guint"/>
-          </parameter>
-          <parameter name="buf" transfer-ownership="none">
-            <type name="Gst.Buffer" c:type="GstBuffer**"/>
-          </parameter>
-        </parameters>
-      </virtual-method>
-      <virtual-method name="create">
-        <doc xml:space="preserve">Ask the subclass to create a buffer with @offset and @size, the default
-implementation will call alloc and fill.</doc>
+        <doc xml:space="preserve">Ask the subclass to allocate an output buffer with @offset and @size, the default
+implementation will use the negotiated allocator.</doc>
         <return-value transfer-ownership="none">
           <type name="Gst.FlowReturn" c:type="GstFlowReturn"/>
         </return-value>
@@ -5144,6 +5135,27 @@ implementation will call alloc and fill.</doc>
             <type name="guint" c:type="guint"/>
           </parameter>
           <parameter name="buf" direction="out" caller-allocates="0" transfer-ownership="full">
+            <type name="Gst.Buffer" c:type="GstBuffer**"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="create">
+        <doc xml:space="preserve">Ask the subclass to create a buffer with @offset and @size, the default
+implementation will call alloc if no allocated @buf is provided and then call fill.</doc>
+        <return-value transfer-ownership="none">
+          <type name="Gst.FlowReturn" c:type="GstFlowReturn"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="src" transfer-ownership="none">
+            <type name="BaseSrc" c:type="GstBaseSrc*"/>
+          </instance-parameter>
+          <parameter name="offset" transfer-ownership="none">
+            <type name="guint64" c:type="guint64"/>
+          </parameter>
+          <parameter name="size" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="buf" direction="inout" caller-allocates="0" transfer-ownership="full">
             <type name="Gst.Buffer" c:type="GstBuffer**"/>
           </parameter>
         </parameters>
@@ -5234,14 +5246,17 @@ implementation will call alloc and fill.</doc>
         </parameters>
       </virtual-method>
       <virtual-method name="get_size">
+        <doc xml:space="preserve">Get the total size of the resource in the format set by
+gst_base_src_set_format().</doc>
         <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if the size is available and has been set.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="src" transfer-ownership="none">
             <type name="BaseSrc" c:type="GstBaseSrc*"/>
           </instance-parameter>
-          <parameter name="size" transfer-ownership="none">
+          <parameter name="size" direction="out" caller-allocates="0" transfer-ownership="full">
             <type name="guint64" c:type="guint64*"/>
           </parameter>
         </parameters>
@@ -6024,13 +6039,14 @@ buffers.</doc>
       <field name="get_size">
         <callback name="get_size">
           <return-value transfer-ownership="none">
+            <doc xml:space="preserve">%TRUE if the size is available and has been set.</doc>
             <type name="gboolean" c:type="gboolean"/>
           </return-value>
           <parameters>
             <parameter name="src" transfer-ownership="none">
               <type name="BaseSrc" c:type="GstBaseSrc*"/>
             </parameter>
-            <parameter name="size" transfer-ownership="none">
+            <parameter name="size" direction="out" caller-allocates="0" transfer-ownership="full">
               <type name="guint64" c:type="guint64*"/>
             </parameter>
           </parameters>
@@ -6150,7 +6166,7 @@ buffers.</doc>
             <parameter name="size" transfer-ownership="none">
               <type name="guint" c:type="guint"/>
             </parameter>
-            <parameter name="buf" direction="out" caller-allocates="0" transfer-ownership="full">
+            <parameter name="buf" direction="inout" caller-allocates="0" transfer-ownership="full">
               <type name="Gst.Buffer" c:type="GstBuffer**"/>
             </parameter>
           </parameters>
@@ -6171,7 +6187,7 @@ buffers.</doc>
             <parameter name="size" transfer-ownership="none">
               <type name="guint" c:type="guint"/>
             </parameter>
-            <parameter name="buf" transfer-ownership="none">
+            <parameter name="buf" direction="out" caller-allocates="0" transfer-ownership="full">
               <type name="Gst.Buffer" c:type="GstBuffer**"/>
             </parameter>
           </parameters>
@@ -7849,7 +7865,9 @@ Free-function: g_free</doc>
         <doc xml:space="preserve">Get written data pointer</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">data pointer</doc>
-          <type name="guint8" c:type="guint8*"/>
+          <array zero-terminated="0" c:type="guint8*">
+            <type name="guint8" c:type="guint8"/>
+          </array>
         </return-value>
         <parameters>
           <instance-parameter name="bitwriter" transfer-ownership="none">
@@ -8039,7 +8057,9 @@ Free-function: g_free</doc>
           </instance-parameter>
           <parameter name="data" transfer-ownership="none">
             <doc xml:space="preserve">pointer of data to write</doc>
-            <type name="guint8" c:type="const guint8*"/>
+            <array zero-terminated="0" c:type="const guint8*">
+              <type name="guint8" c:type="guint8"/>
+            </array>
           </parameter>
           <parameter name="nbytes" transfer-ownership="none">
             <doc xml:space="preserve">number of bytes to write</doc>
@@ -8128,7 +8148,9 @@ Free-function: gst_bit_writer_free</doc>
         <parameters>
           <parameter name="data" transfer-ownership="none">
             <doc xml:space="preserve">Memory area for writing</doc>
-            <type name="guint8" c:type="guint8*"/>
+            <array length="1" zero-terminated="0" c:type="guint8*">
+              <type name="guint8" c:type="guint8"/>
+            </array>
           </parameter>
           <parameter name="size" transfer-ownership="none">
             <doc xml:space="preserve">Size of @data in bytes</doc>
@@ -12143,6 +12165,7 @@ addition to the ::create method.
 Seeking, flushing, scheduling and sync is all handled by this
 base class.</doc>
       <virtual-method name="alloc">
+        <doc xml:space="preserve">Allocate memory for a buffer.</doc>
         <return-value transfer-ownership="none">
           <type name="Gst.FlowReturn" c:type="GstFlowReturn"/>
         </return-value>
@@ -12150,12 +12173,14 @@ base class.</doc>
           <instance-parameter name="src" transfer-ownership="none">
             <type name="PushSrc" c:type="GstPushSrc*"/>
           </instance-parameter>
-          <parameter name="buf" transfer-ownership="none">
+          <parameter name="buf" direction="out" caller-allocates="0" transfer-ownership="full">
             <type name="Gst.Buffer" c:type="GstBuffer**"/>
           </parameter>
         </parameters>
       </virtual-method>
       <virtual-method name="create">
+        <doc xml:space="preserve">Ask the subclass to create a buffer, the default implementation will call alloc if
+no allocated @buf is provided and then call fill.</doc>
         <return-value transfer-ownership="none">
           <type name="Gst.FlowReturn" c:type="GstFlowReturn"/>
         </return-value>
@@ -12163,7 +12188,7 @@ base class.</doc>
           <instance-parameter name="src" transfer-ownership="none">
             <type name="PushSrc" c:type="GstPushSrc*"/>
           </instance-parameter>
-          <parameter name="buf" transfer-ownership="none">
+          <parameter name="buf" direction="inout" caller-allocates="0" transfer-ownership="full">
             <type name="Gst.Buffer" c:type="GstBuffer**"/>
           </parameter>
         </parameters>
@@ -12207,7 +12232,7 @@ buffers.</doc>
             <parameter name="src" transfer-ownership="none">
               <type name="PushSrc" c:type="GstPushSrc*"/>
             </parameter>
-            <parameter name="buf" transfer-ownership="none">
+            <parameter name="buf" direction="inout" caller-allocates="0" transfer-ownership="full">
               <type name="Gst.Buffer" c:type="GstBuffer**"/>
             </parameter>
           </parameters>
@@ -12222,7 +12247,7 @@ buffers.</doc>
             <parameter name="src" transfer-ownership="none">
               <type name="PushSrc" c:type="GstPushSrc*"/>
             </parameter>
-            <parameter name="buf" transfer-ownership="none">
+            <parameter name="buf" direction="out" caller-allocates="0" transfer-ownership="full">
               <type name="Gst.Buffer" c:type="GstBuffer**"/>
             </parameter>
           </parameters>
@@ -12674,7 +12699,9 @@ Free-function: gst_bit_writer_free</doc>
       <parameters>
         <parameter name="data" transfer-ownership="none">
           <doc xml:space="preserve">Memory area for writing</doc>
-          <type name="guint8" c:type="guint8*"/>
+          <array length="1" zero-terminated="0" c:type="guint8*">
+            <type name="guint8" c:type="guint8"/>
+          </array>
         </parameter>
         <parameter name="size" transfer-ownership="none">
           <doc xml:space="preserve">Size of @data in bytes</doc>

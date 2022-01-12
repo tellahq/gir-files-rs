@@ -13328,6 +13328,34 @@ could be created</doc>
           </parameter>
         </parameters>
       </function>
+      <function name="type_set_skip_documentation" c:identifier="gst_element_type_set_skip_documentation" version="1.20">
+        <doc xml:space="preserve">Marks @type as "documentation should be skipped".
+Can be useful for dynamically registered element to be excluded from
+plugin documentation system.
+
+Example:
+```c
+GType my_type;
+GTypeInfo my_type_info;
+
+// Fill "my_type_info"
+...
+
+my_type = g_type_register_static (GST_TYPE_MY_ELEMENT, "my-type-name",
+   &amp;my_type_info, 0);
+gst_element_type_set_skip_documentation (my_type);
+gst_element_register (plugin, "my-plugin-feature-name", rank, my_type);
+```</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="type" transfer-ownership="none">
+            <doc xml:space="preserve">a #GType of element</doc>
+            <type name="GType" c:type="GType"/>
+          </parameter>
+        </parameters>
+      </function>
       <virtual-method name="change_state" invoker="change_state">
         <doc xml:space="preserve">Perform @transition on @element.
 
@@ -16314,11 +16342,15 @@ The supplied list of properties, will be passed at object construction.</doc>
           </parameter>
           <parameter name="names" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">array of properties names</doc>
-            <type name="utf8" c:type="const gchar**"/>
+            <array length="1" zero-terminated="0" c:type="const gchar**">
+              <type name="utf8" c:type="gchar*"/>
+            </array>
           </parameter>
           <parameter name="values" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">array of associated properties values</doc>
-            <type name="GObject.Value" c:type="const GValue*"/>
+            <array length="1" zero-terminated="0" c:type="const GValue*">
+              <type name="GObject.Value" c:type="GValue"/>
+            </array>
           </parameter>
         </parameters>
       </function>
@@ -16476,11 +16508,15 @@ The supplied list of properties, will be passed at object construction.</doc>
           </parameter>
           <parameter name="names" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">array of properties names</doc>
-            <type name="utf8" c:type="const gchar**"/>
+            <array length="0" zero-terminated="0" c:type="const gchar**">
+              <type name="utf8" c:type="gchar*"/>
+            </array>
           </parameter>
           <parameter name="values" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">array of associated properties values</doc>
-            <type name="GObject.Value" c:type="const GValue*"/>
+            <array length="0" zero-terminated="0" c:type="const GValue*">
+              <type name="GObject.Value" c:type="GValue"/>
+            </array>
           </parameter>
         </parameters>
       </method>
@@ -16544,6 +16580,20 @@ metadata. Free with g_strfreev() when no longer needed.</doc>
         <parameters>
           <instance-parameter name="factory" transfer-ownership="none">
             <doc xml:space="preserve">a #GstElementFactory</doc>
+            <type name="ElementFactory" c:type="GstElementFactory*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_skip_documentation" c:identifier="gst_element_factory_get_skip_documentation" version="1.20">
+        <doc xml:space="preserve">Queries whether registered element managed by @factory needs to
+be excluded from documentation system or not.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if documentation should be skipped</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="factory" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstElementFactory to query documentation skip</doc>
             <type name="ElementFactory" c:type="GstElementFactory*"/>
           </instance-parameter>
         </parameters>
