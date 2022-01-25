@@ -2771,7 +2771,7 @@ most significant bit of the first byte:
     next 24 bits define the actual sample frequency, and subsequent
     fields are appropriately shifted).
   * Bit 9:12 contains the channel configuration</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">The level as a const string and %NULL if the level could not be
 determined.</doc>
         <type name="utf8" c:type="const gchar*"/>
@@ -2795,7 +2795,7 @@ determined.</doc>
       <doc xml:space="preserve">Returns the profile of the given AAC stream as a string. The profile is
 normally determined using the AudioObjectType field which is in the first
 5 bits of @audio_config</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">The profile as a const string and %NULL if the profile could not be
 determined.</doc>
         <type name="utf8" c:type="const gchar*"/>
@@ -2859,7 +2859,7 @@ Useful for providing the 'codecs' field inside the 'Content-Type' HTTP
 header for containerized formats, such as mp4 or matroska.
 
 Registered codecs can be found at http://mp4ra.org/#/codecs</doc>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">a RFC 6381 compatible codec string or %NULL</doc>
         <type name="utf8" c:type="gchar*"/>
       </return-value>
@@ -2899,7 +2899,7 @@ for more details on the parameters.</doc>
       <doc xml:space="preserve">Converts the level indication (level_idc) in the stream's
 sequence parameter set into a string. The SPS is expected to have the
 same format as for gst_codec_utils_h264_get_profile().</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">The level as a const string, or %NULL if there is an error.</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>
@@ -2944,7 +2944,7 @@ byte.
 * Bit 12    - constraint_set3_flag
 * Bit 13:15 - Reserved
 * Bit 16:24 - Level indication</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">The profile as a const string, or %NULL if there is an error.</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>
@@ -3029,7 +3029,7 @@ for more details on the parameters.</doc>
       <doc xml:space="preserve">Converts the level indication (general_level_idc) in the stream's
 profile_tier_level structure into a string. The profiel_tier_level is
 expected to have the same format as for gst_codec_utils_h264_get_profile().</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">The level as a const string, or %NULL if there is an error.</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>
@@ -3077,7 +3077,7 @@ with bit 0 being the most significant bit of the first byte.
 * Bit 43    - general_frame_only_constraint_flag
 * Bit 44:87 - See below
 * Bit 88:95 - general_level_idc</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">The profile as a const string, or %NULL if there is an error.</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>
@@ -3099,7 +3099,7 @@ with bit 0 being the most significant bit of the first byte.
       <doc xml:space="preserve">Converts the tier indication (general_tier_flag) in the stream's
 profile_tier_level structure into a string. The profile_tier_level
 is expected to have the same format as for gst_codec_utils_h264_get_profile().</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">The tier as a const string, or %NULL if there is an error.</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>
@@ -3149,7 +3149,7 @@ parameters.</doc>
 a string. @vis_obj_seq is expected to be the data following the visual
 object sequence start code. Only the first byte
 (profile_and_level_indication) is used.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">The level as a const string, or NULL if there is an error.</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>
@@ -3172,7 +3172,7 @@ object sequence start code. Only the first byte
 a string. @vis_obj_seq is expected to be the data following the visual
 object sequence start code. Only the first byte
 (profile_and_level_indication) is used.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">The profile as a const string, or NULL if there is an error.</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>

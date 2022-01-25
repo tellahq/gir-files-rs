@@ -6923,9 +6923,7 @@ The last argument must be 0.</doc>
         </parameters>
       </constructor>
       <constructor name="new_single" c:identifier="gst_caps_features_new_single" version="1.20">
-        <doc xml:space="preserve">Creates a new, ANY #GstCapsFeatures. This will be equal
-to any other #GstCapsFeatures but caps with these are
-unfixed.</doc>
+        <doc xml:space="preserve">Creates a new #GstCapsFeatures with a single feature.</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">a new #GstCapsFeatures</doc>
           <type name="CapsFeatures" c:type="GstCapsFeatures*"/>
