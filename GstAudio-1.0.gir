@@ -6154,6 +6154,19 @@ gst_audio_info_init().</doc>
           <type name="AudioInfo" c:type="GstAudioInfo*"/>
         </return-value>
       </constructor>
+      <constructor name="new_from_caps" c:identifier="gst_audio_info_new_from_caps" version="1.20">
+        <doc xml:space="preserve">Parse @caps to generate a #GstAudioInfo.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A #GstAudioInfo, or %NULL if @caps couldn't be parsed</doc>
+          <type name="AudioInfo" c:type="GstAudioInfo*"/>
+        </return-value>
+        <parameters>
+          <parameter name="caps" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstCaps</doc>
+            <type name="Gst.Caps" c:type="const GstCaps*"/>
+          </parameter>
+        </parameters>
+      </constructor>
       <method name="convert" c:identifier="gst_audio_info_convert">
         <doc xml:space="preserve">Converts among various #GstFormat types.  This function handles
 GST_FORMAT_BYTES, GST_FORMAT_TIME, and GST_FORMAT_DEFAULT.  For
