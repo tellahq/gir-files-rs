@@ -10990,34 +10990,34 @@ operation of video-sources or operators.</doc>
     </record>
     <enumeration name="VideoOrientationMethod" version="1.10" glib:type-name="GstVideoOrientationMethod" glib:get-type="gst_video_orientation_method_get_type" c:type="GstVideoOrientationMethod">
       <doc xml:space="preserve">The different video orientation methods.</doc>
-      <member name="identity" value="0" c:identifier="GST_VIDEO_ORIENTATION_IDENTITY" glib:nick="identity" glib:name="Identity (no rotation)">
+      <member name="identity" value="0" c:identifier="GST_VIDEO_ORIENTATION_IDENTITY" glib:nick="identity" glib:name="GST_VIDEO_ORIENTATION_IDENTITY">
         <doc xml:space="preserve">Identity (no rotation)</doc>
       </member>
-      <member name="90r" value="1" c:identifier="GST_VIDEO_ORIENTATION_90R" glib:nick="90r" glib:name="Rotate clockwise 90 degrees">
+      <member name="90r" value="1" c:identifier="GST_VIDEO_ORIENTATION_90R" glib:nick="90r" glib:name="GST_VIDEO_ORIENTATION_90R">
         <doc xml:space="preserve">Rotate clockwise 90 degrees</doc>
       </member>
-      <member name="180" value="2" c:identifier="GST_VIDEO_ORIENTATION_180" glib:nick="180" glib:name="Rotate 180 degrees">
+      <member name="180" value="2" c:identifier="GST_VIDEO_ORIENTATION_180" glib:nick="180" glib:name="GST_VIDEO_ORIENTATION_180">
         <doc xml:space="preserve">Rotate 180 degrees</doc>
       </member>
-      <member name="90l" value="3" c:identifier="GST_VIDEO_ORIENTATION_90L" glib:nick="90l" glib:name="Rotate counter-clockwise 90 degrees">
+      <member name="90l" value="3" c:identifier="GST_VIDEO_ORIENTATION_90L" glib:nick="90l" glib:name="GST_VIDEO_ORIENTATION_90L">
         <doc xml:space="preserve">Rotate counter-clockwise 90 degrees</doc>
       </member>
-      <member name="horiz" value="4" c:identifier="GST_VIDEO_ORIENTATION_HORIZ" glib:nick="horiz" glib:name="Flip horizontally">
+      <member name="horiz" value="4" c:identifier="GST_VIDEO_ORIENTATION_HORIZ" glib:nick="horiz" glib:name="GST_VIDEO_ORIENTATION_HORIZ">
         <doc xml:space="preserve">Flip horizontally</doc>
       </member>
-      <member name="vert" value="5" c:identifier="GST_VIDEO_ORIENTATION_VERT" glib:nick="vert" glib:name="Flip vertically">
+      <member name="vert" value="5" c:identifier="GST_VIDEO_ORIENTATION_VERT" glib:nick="vert" glib:name="GST_VIDEO_ORIENTATION_VERT">
         <doc xml:space="preserve">Flip vertically</doc>
       </member>
-      <member name="ul_lr" value="6" c:identifier="GST_VIDEO_ORIENTATION_UL_LR" glib:nick="ul-lr" glib:name="Flip across upper left/lower right diagonal">
+      <member name="ul_lr" value="6" c:identifier="GST_VIDEO_ORIENTATION_UL_LR" glib:nick="ul-lr" glib:name="GST_VIDEO_ORIENTATION_UL_LR">
         <doc xml:space="preserve">Flip across upper left/lower right diagonal</doc>
       </member>
-      <member name="ur_ll" value="7" c:identifier="GST_VIDEO_ORIENTATION_UR_LL" glib:nick="ur-ll" glib:name="Flip across upper right/lower left diagonal">
+      <member name="ur_ll" value="7" c:identifier="GST_VIDEO_ORIENTATION_UR_LL" glib:nick="ur-ll" glib:name="GST_VIDEO_ORIENTATION_UR_LL">
         <doc xml:space="preserve">Flip across upper right/lower left diagonal</doc>
       </member>
-      <member name="auto" value="8" c:identifier="GST_VIDEO_ORIENTATION_AUTO" glib:nick="auto" glib:name="Select rotate method based on image-orientation tag">
+      <member name="auto" value="8" c:identifier="GST_VIDEO_ORIENTATION_AUTO" glib:nick="auto" glib:name="GST_VIDEO_ORIENTATION_AUTO">
         <doc xml:space="preserve">Select flip method based on image-orientation tag</doc>
       </member>
-      <member name="custom" value="9" c:identifier="GST_VIDEO_ORIENTATION_CUSTOM" glib:nick="custom" glib:name="Current status depends on plugin internal setup">
+      <member name="custom" value="9" c:identifier="GST_VIDEO_ORIENTATION_CUSTOM" glib:nick="custom" glib:name="GST_VIDEO_ORIENTATION_CUSTOM">
         <doc xml:space="preserve">Current status depends on plugin internal setup</doc>
       </member>
     </enumeration>
