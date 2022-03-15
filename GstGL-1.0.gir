@@ -2827,12 +2827,11 @@ API supported by a #GstGLContext.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="find_window" c:identifier="gst_gl_display_find_window" version="1.12">
-        <doc xml:space="preserve">Deprecated for gst_gl_display_retrieve_window().
-
-Execute @compare_func over the list of windows stored by @display.  The
+      <method name="find_window" c:identifier="gst_gl_display_find_window" version="1.12" deprecated="1" deprecated-version="1.18">
+        <doc xml:space="preserve">Execute @compare_func over the list of windows stored by @display.  The
 first argument to @compare_func is the #GstGLWindow being checked and the
 second argument is @data.</doc>
+        <doc-deprecated xml:space="preserve">Use gst_gl_display_retrieve_window() instead.</doc-deprecated>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The first #GstGLWindow that causes a match
          from @compare_func</doc>
@@ -8821,6 +8820,12 @@ e.g. for `CONFIG_ID`: `GST_GL_CONFIG_ATTRIB_NAME (CONFIG_ID)`</doc>
     <constant name="GL_CONTEXT_TYPE_WGL" value="gst.gl.context.WGL" c:type="GST_GL_CONTEXT_TYPE_WGL">
       <type name="utf8" c:type="gchar*"/>
     </constant>
+    <function-macro name="GL_DEPRECATED_FOR" c:identifier="GST_GL_DEPRECATED_FOR" introspectable="0">
+      <parameters>
+        <parameter name="f">
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="GL_DISPLAY" c:identifier="GST_GL_DISPLAY" introspectable="0">
       <parameters>
         <parameter name="obj">

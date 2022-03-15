@@ -723,6 +723,129 @@ custom bus messages for signaling GstNavigation changes.</doc>
           </parameter>
         </parameters>
       </function>
+      <function name="event_new_command" c:identifier="gst_navigation_event_new_command" version="1.22">
+        <doc xml:space="preserve">Create a new navigation event given navigation command..</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a new #GstEvent</doc>
+          <type name="Gst.Event" c:type="GstEvent*"/>
+        </return-value>
+        <parameters>
+          <parameter name="command" transfer-ownership="none">
+            <doc xml:space="preserve">The navigation command to use.</doc>
+            <type name="NavigationCommand" c:type="GstNavigationCommand"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="event_new_key_press" c:identifier="gst_navigation_event_new_key_press" version="1.22">
+        <doc xml:space="preserve">Create a new navigation event for the given key press.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a new #GstEvent</doc>
+          <type name="Gst.Event" c:type="GstEvent*"/>
+        </return-value>
+        <parameters>
+          <parameter name="key" transfer-ownership="none">
+            <doc xml:space="preserve">A string identifying the key press.</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="event_new_key_release" c:identifier="gst_navigation_event_new_key_release" version="1.22">
+        <doc xml:space="preserve">Create a new navigation event for the given key release.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a new #GstEvent</doc>
+          <type name="Gst.Event" c:type="GstEvent*"/>
+        </return-value>
+        <parameters>
+          <parameter name="key" transfer-ownership="none">
+            <doc xml:space="preserve">A string identifying the released key.</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="event_new_mouse_button_press" c:identifier="gst_navigation_event_new_mouse_button_press" version="1.22">
+        <doc xml:space="preserve">Create a new navigation event for the given key mouse button press.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a new #GstEvent</doc>
+          <type name="Gst.Event" c:type="GstEvent*"/>
+        </return-value>
+        <parameters>
+          <parameter name="button" transfer-ownership="none">
+            <doc xml:space="preserve">The number of the pressed mouse button.</doc>
+            <type name="gint" c:type="gint"/>
+          </parameter>
+          <parameter name="x" transfer-ownership="none">
+            <doc xml:space="preserve">The x coordinate of the mouse cursor.</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+          <parameter name="y" transfer-ownership="none">
+            <doc xml:space="preserve">The y coordinate of the mouse cursor.</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="event_new_mouse_button_release" c:identifier="gst_navigation_event_new_mouse_button_release" version="1.22">
+        <doc xml:space="preserve">Create a new navigation event for the given key mouse button release.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a new #GstEvent</doc>
+          <type name="Gst.Event" c:type="GstEvent*"/>
+        </return-value>
+        <parameters>
+          <parameter name="button" transfer-ownership="none">
+            <doc xml:space="preserve">The number of the released mouse button.</doc>
+            <type name="gint" c:type="gint"/>
+          </parameter>
+          <parameter name="x" transfer-ownership="none">
+            <doc xml:space="preserve">The x coordinate of the mouse cursor.</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+          <parameter name="y" transfer-ownership="none">
+            <doc xml:space="preserve">The y coordinate of the mouse cursor.</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="event_new_mouse_move" c:identifier="gst_navigation_event_new_mouse_move" version="1.22">
+        <doc xml:space="preserve">Create a new navigation event for the new mouse location.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a new #GstEvent</doc>
+          <type name="Gst.Event" c:type="GstEvent*"/>
+        </return-value>
+        <parameters>
+          <parameter name="x" transfer-ownership="none">
+            <doc xml:space="preserve">The x coordinate of the mouse cursor.</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+          <parameter name="y" transfer-ownership="none">
+            <doc xml:space="preserve">The y coordinate of the mouse cursor.</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="event_new_mouse_scroll" c:identifier="gst_navigation_event_new_mouse_scroll" version="1.22">
+        <doc xml:space="preserve">Create a new navigation event for the mouse scroll.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a new #GstEvent</doc>
+          <type name="Gst.Event" c:type="GstEvent*"/>
+        </return-value>
+        <parameters>
+          <parameter name="x" transfer-ownership="none">
+            <doc xml:space="preserve">The x coordinate of the mouse cursor.</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+          <parameter name="y" transfer-ownership="none">
+            <doc xml:space="preserve">The y coordinate of the mouse cursor.</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+          <parameter name="delta_x" transfer-ownership="none">
+            <doc xml:space="preserve">The x component of the scroll movement.</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+          <parameter name="delta_y" transfer-ownership="none">
+            <doc xml:space="preserve">The y component of the scroll movement.</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </function>
       <function name="event_parse_command" c:identifier="gst_navigation_event_parse_command">
         <doc xml:space="preserve">Inspect a #GstNavigation command event and retrieve the enum value of the
 associated command.</doc>
@@ -1400,10 +1523,9 @@ event.</doc>
         <doc xml:space="preserve">A navigation command event. Use
 gst_navigation_event_parse_command() to extract the details from the event.</doc>
       </member>
-      <member name="mouse_scroll" value="7" c:identifier="GST_NAVIGATION_EVENT_MOUSE_SCROLL" glib:nick="mouse-scroll" glib:name="GST_NAVIGATION_EVENT_MOUSE_SCROLL">
-        <doc xml:space="preserve">A mouse scroll event. Use
-gst_navigation_event_parse_mouse_scroll_event() to extract the details from
-the event. (Since: 1.18)</doc>
+      <member name="mouse_scroll" value="7" c:identifier="GST_NAVIGATION_EVENT_MOUSE_SCROLL" version="1.18" glib:nick="mouse-scroll" glib:name="GST_NAVIGATION_EVENT_MOUSE_SCROLL">
+        <doc xml:space="preserve">A mouse scroll event. Use gst_navigation_event_parse_mouse_scroll_event()
+to extract the details from the event.</doc>
       </member>
     </enumeration>
     <record name="NavigationInterface" c:type="GstNavigationInterface" glib:is-gtype-struct-for="Navigation">
@@ -2153,7 +2275,7 @@ return to upstream/caller (indicating either GST_FLOW_ERROR or GST_FLOW_OK).</do
         </parameter>
       </parameters>
     </function-macro>
-    <constant name="VIDEO_FORMATS_ALL" value="{ ABGR64_BE, BGRA64_BE, AYUV64, ARGB64_BE, ARGB64, RGBA64_BE, ABGR64_LE, BGRA64_LE, ARGB64_LE, RGBA64_LE, GBRA_12BE, GBRA_12LE, Y412_BE, Y412_LE, A444_10BE, GBRA_10BE, A444_10LE, GBRA_10LE, A422_10BE, A422_10LE, A420_10BE, A420_10LE, Y410, RGB10A2_LE, BGR10A2_LE, GBRA, ABGR, VUYA, BGRA, AYUV, ARGB, RGBA, A420, AV12, Y444_16BE, Y444_16LE, v216, P016_BE, P016_LE, Y444_12BE, GBR_12BE, Y444_12LE, GBR_12LE, I422_12BE, I422_12LE, Y212_BE, Y212_LE, I420_12BE, I420_12LE, P012_BE, P012_LE, Y444_10BE, GBR_10BE, Y444_10LE, GBR_10LE, r210, I422_10BE, I422_10LE, NV16_10LE32, Y210, v210, UYVP, I420_10BE, I420_10LE, P010_10BE, P010_10LE, NV12_10LE32, NV12_10LE40, Y444, RGBP, GBR, BGRP, NV24, xBGR, BGRx, xRGB, RGBx, BGR, IYU2, v308, RGB, Y42B, NV61, NV16, VYUY, UYVY, YVYU, YUY2, I420, YV12, NV21, NV12, NV12_64Z32, NV12_4L4, NV12_32L32, Y41B, IYU1, YVU9, YUV9, RGB16, BGR16, RGB15, BGR15, RGB8P, GRAY16_BE, GRAY16_LE, GRAY10_LE32, GRAY8 }" c:type="GST_VIDEO_FORMATS_ALL">
+    <constant name="VIDEO_FORMATS_ALL" value="{ ABGR64_BE, BGRA64_BE, AYUV64, ARGB64_BE, ARGB64, RGBA64_BE, ABGR64_LE, BGRA64_LE, ARGB64_LE, RGBA64_LE, GBRA_12BE, GBRA_12LE, Y412_BE, Y412_LE, A444_10BE, GBRA_10BE, A444_10LE, GBRA_10LE, A422_10BE, A422_10LE, A420_10BE, A420_10LE, Y410, RGB10A2_LE, BGR10A2_LE, GBRA, ABGR, VUYA, BGRA, AYUV, ARGB, RGBA, A420, AV12, Y444_16BE, Y444_16LE, v216, P016_BE, P016_LE, Y444_12BE, GBR_12BE, Y444_12LE, GBR_12LE, I422_12BE, I422_12LE, Y212_BE, Y212_LE, I420_12BE, I420_12LE, P012_BE, P012_LE, Y444_10BE, GBR_10BE, Y444_10LE, GBR_10LE, r210, I422_10BE, I422_10LE, NV16_10LE32, Y210, v210, UYVP, I420_10BE, I420_10LE, P010_10BE, P010_10LE, NV12_10LE32, NV12_10LE40, Y444, RGBP, GBR, BGRP, NV24, xBGR, BGRx, xRGB, RGBx, BGR, IYU2, v308, RGB, Y42B, NV61, NV16, VYUY, UYVY, YVYU, YUY2, I420, YV12, NV21, NV12, NV12_64Z32, NV12_4L4, NV12_32L32, NV12_16L32S, Y41B, IYU1, YVU9, YUV9, RGB16, BGR16, RGB15, BGR15, RGB8P, GRAY16_BE, GRAY16_LE, GRAY10_LE32, GRAY8 }" c:type="GST_VIDEO_FORMATS_ALL">
       <doc xml:space="preserve">List of all video formats, for use in template caps strings.
 
 Formats are sorted by decreasing "quality", using these criteria by priority:
@@ -2216,6 +2338,16 @@ Formats are sorted by decreasing "quality", using these criteria by priority:
     <function-macro name="VIDEO_FORMAT_INFO_HAS_PALETTE" c:identifier="GST_VIDEO_FORMAT_INFO_HAS_PALETTE" introspectable="0">
       <parameters>
         <parameter name="info">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="VIDEO_FORMAT_INFO_HAS_SUBTILES" c:identifier="GST_VIDEO_FORMAT_INFO_HAS_SUBTILES" version="1.22" introspectable="0">
+      <doc xml:space="preserve">This macro checks if %GST_VIDEO_FORMAT_FLAG_SUBTILES is set. When this
+flag is set, it means that the tile sizes must be scaled as per the
+subsampling.</doc>
+      <parameters>
+        <parameter name="info">
+          <doc xml:space="preserve">a #GstVideoFormatInfo</doc>
         </parameter>
       </parameters>
     </function-macro>
@@ -8744,6 +8876,9 @@ per channel.</doc>
         <doc xml:space="preserve">Reverse RGB with alpha channel first, 16 bits (big endian)
 per channel.</doc>
       </member>
+      <member name="nv12_16l32s" value="110" c:identifier="GST_VIDEO_FORMAT_NV12_16L32S" version="1.22" glib:nick="nv12-16l32s" glib:name="GST_VIDEO_FORMAT_NV12_16L32S">
+        <doc xml:space="preserve">NV12 with 16x32 Y tiles and 16x16 UV tiles.</doc>
+      </member>
       <function name="from_fourcc" c:identifier="gst_video_format_from_fourcc">
         <doc xml:space="preserve">Converts a FOURCC value into the corresponding #GstVideoFormat.
 If the FOURCC cannot be represented by #GstVideoFormat,
@@ -8912,6 +9047,9 @@ the #GstVideoFormat if there is one, or NULL otherwise.</doc>
         <doc xml:space="preserve">The format is tiled, there is tiling information
   in the last plane.</doc>
       </member>
+      <member name="subtiles" value="512" c:identifier="GST_VIDEO_FORMAT_FLAG_SUBTILES" version="1.22" glib:nick="subtiles" glib:name="GST_VIDEO_FORMAT_FLAG_SUBTILES">
+        <doc xml:space="preserve">The tile size varies per plane according to the subsampling.</doc>
+      </member>
     </bitfield>
     <record name="VideoFormatInfo" c:type="GstVideoFormatInfo">
       <doc xml:space="preserve">Information for a video format.</doc>
@@ -9049,6 +9187,28 @@ components are packed in the plane.</doc>
           <parameter name="components" direction="out" caller-allocates="0" transfer-ownership="full">
             <doc xml:space="preserve">array used to store component numbers</doc>
             <type name="gint" c:type="gint*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="extrapolate_stride" c:identifier="gst_video_format_info_extrapolate_stride" version="1.22">
+        <doc xml:space="preserve">Extrapolate @plane stride from the first stride of an image. This helper is
+useful to support legacy API were only one stride is supported.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">The extrapolated stride for @plane</doc>
+          <type name="gint" c:type="gint"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="finfo" transfer-ownership="none">
+            <doc xml:space="preserve">#GstVideoFormatInfo</doc>
+            <type name="VideoFormatInfo" c:type="const GstVideoFormatInfo*"/>
+          </instance-parameter>
+          <parameter name="plane" transfer-ownership="none">
+            <doc xml:space="preserve">a plane number</doc>
+            <type name="gint" c:type="gint"/>
+          </parameter>
+          <parameter name="stride" transfer-ownership="none">
+            <doc xml:space="preserve">The fist plane stride</doc>
+            <type name="gint" c:type="gint"/>
           </parameter>
         </parameters>
       </method>
@@ -14499,6 +14659,129 @@ to automatically add #GstVideoMeta to the buffers.</doc>
         <parameter name="event" transfer-ownership="none">
           <doc xml:space="preserve">A #GstEvent to inspect.</doc>
           <type name="Gst.Event" c:type="GstEvent*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="navigation_event_new_command" c:identifier="gst_navigation_event_new_command" moved-to="Navigation.event_new_command" version="1.22">
+      <doc xml:space="preserve">Create a new navigation event given navigation command..</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">a new #GstEvent</doc>
+        <type name="Gst.Event" c:type="GstEvent*"/>
+      </return-value>
+      <parameters>
+        <parameter name="command" transfer-ownership="none">
+          <doc xml:space="preserve">The navigation command to use.</doc>
+          <type name="NavigationCommand" c:type="GstNavigationCommand"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="navigation_event_new_key_press" c:identifier="gst_navigation_event_new_key_press" moved-to="Navigation.event_new_key_press" version="1.22">
+      <doc xml:space="preserve">Create a new navigation event for the given key press.</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">a new #GstEvent</doc>
+        <type name="Gst.Event" c:type="GstEvent*"/>
+      </return-value>
+      <parameters>
+        <parameter name="key" transfer-ownership="none">
+          <doc xml:space="preserve">A string identifying the key press.</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="navigation_event_new_key_release" c:identifier="gst_navigation_event_new_key_release" moved-to="Navigation.event_new_key_release" version="1.22">
+      <doc xml:space="preserve">Create a new navigation event for the given key release.</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">a new #GstEvent</doc>
+        <type name="Gst.Event" c:type="GstEvent*"/>
+      </return-value>
+      <parameters>
+        <parameter name="key" transfer-ownership="none">
+          <doc xml:space="preserve">A string identifying the released key.</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="navigation_event_new_mouse_button_press" c:identifier="gst_navigation_event_new_mouse_button_press" moved-to="Navigation.event_new_mouse_button_press" version="1.22">
+      <doc xml:space="preserve">Create a new navigation event for the given key mouse button press.</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">a new #GstEvent</doc>
+        <type name="Gst.Event" c:type="GstEvent*"/>
+      </return-value>
+      <parameters>
+        <parameter name="button" transfer-ownership="none">
+          <doc xml:space="preserve">The number of the pressed mouse button.</doc>
+          <type name="gint" c:type="gint"/>
+        </parameter>
+        <parameter name="x" transfer-ownership="none">
+          <doc xml:space="preserve">The x coordinate of the mouse cursor.</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+        <parameter name="y" transfer-ownership="none">
+          <doc xml:space="preserve">The y coordinate of the mouse cursor.</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="navigation_event_new_mouse_button_release" c:identifier="gst_navigation_event_new_mouse_button_release" moved-to="Navigation.event_new_mouse_button_release" version="1.22">
+      <doc xml:space="preserve">Create a new navigation event for the given key mouse button release.</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">a new #GstEvent</doc>
+        <type name="Gst.Event" c:type="GstEvent*"/>
+      </return-value>
+      <parameters>
+        <parameter name="button" transfer-ownership="none">
+          <doc xml:space="preserve">The number of the released mouse button.</doc>
+          <type name="gint" c:type="gint"/>
+        </parameter>
+        <parameter name="x" transfer-ownership="none">
+          <doc xml:space="preserve">The x coordinate of the mouse cursor.</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+        <parameter name="y" transfer-ownership="none">
+          <doc xml:space="preserve">The y coordinate of the mouse cursor.</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="navigation_event_new_mouse_move" c:identifier="gst_navigation_event_new_mouse_move" moved-to="Navigation.event_new_mouse_move" version="1.22">
+      <doc xml:space="preserve">Create a new navigation event for the new mouse location.</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">a new #GstEvent</doc>
+        <type name="Gst.Event" c:type="GstEvent*"/>
+      </return-value>
+      <parameters>
+        <parameter name="x" transfer-ownership="none">
+          <doc xml:space="preserve">The x coordinate of the mouse cursor.</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+        <parameter name="y" transfer-ownership="none">
+          <doc xml:space="preserve">The y coordinate of the mouse cursor.</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="navigation_event_new_mouse_scroll" c:identifier="gst_navigation_event_new_mouse_scroll" moved-to="Navigation.event_new_mouse_scroll" version="1.22">
+      <doc xml:space="preserve">Create a new navigation event for the mouse scroll.</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">a new #GstEvent</doc>
+        <type name="Gst.Event" c:type="GstEvent*"/>
+      </return-value>
+      <parameters>
+        <parameter name="x" transfer-ownership="none">
+          <doc xml:space="preserve">The x coordinate of the mouse cursor.</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+        <parameter name="y" transfer-ownership="none">
+          <doc xml:space="preserve">The y coordinate of the mouse cursor.</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+        <parameter name="delta_x" transfer-ownership="none">
+          <doc xml:space="preserve">The x component of the scroll movement.</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+        <parameter name="delta_y" transfer-ownership="none">
+          <doc xml:space="preserve">The y component of the scroll movement.</doc>
+          <type name="gdouble" c:type="gdouble"/>
         </parameter>
       </parameters>
     </function>

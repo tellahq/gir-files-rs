@@ -3327,7 +3327,9 @@ function to specify which items should be copied.</doc>
       <member name="marker" value="512" c:identifier="GST_BUFFER_FLAG_MARKER" glib:nick="marker" glib:name="GST_BUFFER_FLAG_MARKER">
         <doc xml:space="preserve">the buffer contains a media specific marker. for
                                 video this is the end of a frame boundary, for audio
-                                this is the start of a talkspurt.</doc>
+                                this is the start of a talkspurt. for RTP
+                                packets this matches the marker flag in the
+                                RTP packet header.</doc>
       </member>
       <member name="header" value="1024" c:identifier="GST_BUFFER_FLAG_HEADER" glib:nick="header" glib:name="GST_BUFFER_FLAG_HEADER">
         <doc xml:space="preserve">the buffer contains header information that is
@@ -9195,7 +9197,7 @@ freeing it.</doc>
       </method>
       <method name="writable_structure" c:identifier="gst_context_writable_structure" version="1.2">
         <doc xml:space="preserve">Gets a writable version of the structure.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="none">
           <doc xml:space="preserve">The structure of the context. The structure is still
 owned by the context, which means that you should not free it and
 that the pointer becomes invalid when you free the context.
@@ -17021,7 +17023,8 @@ the time format.</doc>
         <parameters>
           <parameter name="structure" transfer-ownership="full">
             <doc xml:space="preserve">description of the event. The event will take
-    ownership of the structure.</doc>
+    ownership of the structure. See #GstNavigation for more specific
+    constructors.</doc>
             <type name="Structure" c:type="GstStructure*"/>
           </parameter>
         </parameters>
@@ -45874,11 +45877,11 @@ determine a order for the two provided values.</doc>
       <doc xml:space="preserve">The micro version of GStreamer at compile time:</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="VERSION_MINOR" value="20" c:type="GST_VERSION_MINOR">
+    <constant name="VERSION_MINOR" value="21" c:type="GST_VERSION_MINOR">
       <doc xml:space="preserve">The minor version of GStreamer at compile time:</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="VERSION_NANO" value="0" c:type="GST_VERSION_NANO">
+    <constant name="VERSION_NANO" value="1" c:type="GST_VERSION_NANO">
       <doc xml:space="preserve">The nano version of GStreamer at compile time:
 Actual releases have 0, GIT versions have 1, prerelease versions have 2-...</doc>
       <type name="gint" c:type="gint"/>

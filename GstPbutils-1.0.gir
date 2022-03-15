@@ -2654,11 +2654,11 @@ in debugging.</doc>
       <doc xml:space="preserve">The micro version of GStreamer's gst-plugins-base libraries at compile time.</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="PLUGINS_BASE_VERSION_MINOR" value="20" c:type="GST_PLUGINS_BASE_VERSION_MINOR">
+    <constant name="PLUGINS_BASE_VERSION_MINOR" value="21" c:type="GST_PLUGINS_BASE_VERSION_MINOR">
       <doc xml:space="preserve">The minor version of GStreamer's gst-plugins-base libraries at compile time.</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="PLUGINS_BASE_VERSION_NANO" value="0" c:type="GST_PLUGINS_BASE_VERSION_NANO">
+    <constant name="PLUGINS_BASE_VERSION_NANO" value="1" c:type="GST_PLUGINS_BASE_VERSION_NANO">
       <doc xml:space="preserve">The nano version of GStreamer's gst-plugins-base libraries at compile time.
 Actual releases have 0, GIT versions have 1, prerelease versions have 2-...</doc>
       <type name="gint" c:type="gint"/>
@@ -2849,6 +2849,22 @@ rate.</doc>
           <doc xml:space="preserve">Sample rate index as from the AudioSpecificConfig (MPEG-4
          container) or ADTS frame header</doc>
           <type name="guint" c:type="guint"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="codec_utils_caps_from_mime_codec" c:identifier="gst_codec_utils_caps_from_mime_codec" version="1.22">
+      <doc xml:space="preserve">Converts a RFC 6381 compatible codec string to #GstCaps. More than one codec
+string can be present (separated by `,`).
+
+Registered codecs can be found at http://mp4ra.org/#/codecs</doc>
+      <return-value transfer-ownership="full" nullable="1">
+        <doc xml:space="preserve">The corresponding #GstCaps or %NULL</doc>
+        <type name="Gst.Caps" c:type="GstCaps*"/>
+      </return-value>
+      <parameters>
+        <parameter name="codecs_field" transfer-ownership="none">
+          <doc xml:space="preserve">A mime codec string field</doc>
+          <type name="utf8" c:type="const gchar*"/>
         </parameter>
       </parameters>
     </function>

@@ -286,6 +286,12 @@ changing bit depth.
 Default is #GST_AUDIO_DITHER_NONE.</doc>
       <type name="utf8" c:type="gchar*"/>
     </constant>
+    <constant name="AUDIO_CONVERTER_OPT_DITHER_THRESHOLD" value="GstAudioConverter.dither-threshold" c:type="GST_AUDIO_CONVERTER_OPT_DITHER_THRESHOLD" version="1.22">
+      <doc xml:space="preserve">Threshold for the output bit depth at/below which to apply dithering.
+
+Default is 20 bit.</doc>
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
     <constant name="AUDIO_CONVERTER_OPT_MIX_MATRIX" value="GstAudioConverter.mix-matrix" c:type="GST_AUDIO_CONVERTER_OPT_MIX_MATRIX">
       <doc xml:space="preserve">#GST_TYPE_LIST, The channel mapping matrix.
 
