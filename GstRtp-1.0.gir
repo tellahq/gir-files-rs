@@ -3344,17 +3344,17 @@ with @bits, @data and @wordlen unchanged.</doc>
             <doc xml:space="preserve">the RTP packet</doc>
             <type name="RTPBuffer" c:type="GstRTPBuffer*"/>
           </instance-parameter>
-          <parameter name="bits" direction="out" caller-allocates="0" transfer-ownership="full">
+          <parameter name="bits" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
             <doc xml:space="preserve">location for result bits</doc>
             <type name="guint16" c:type="guint16*"/>
           </parameter>
-          <parameter name="data" direction="out" caller-allocates="0" transfer-ownership="none">
+          <parameter name="data" direction="out" caller-allocates="0" transfer-ownership="none" optional="1" allow-none="1">
             <doc xml:space="preserve">location for data</doc>
             <array zero-terminated="0" c:type="gpointer*">
               <type name="guint8"/>
             </array>
           </parameter>
-          <parameter name="wordlen" direction="out" caller-allocates="0" transfer-ownership="full">
+          <parameter name="wordlen" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
             <doc xml:space="preserve">location for length of @data in 32 bits words</doc>
             <type name="guint" c:type="guint*"/>
           </parameter>
@@ -3380,14 +3380,14 @@ return the nth extension with the requested id.</doc>
             <doc xml:space="preserve">Read the nth extension packet with the requested ID</doc>
             <type name="guint" c:type="guint"/>
           </parameter>
-          <parameter name="data" direction="out" caller-allocates="0" transfer-ownership="none">
+          <parameter name="data" direction="out" caller-allocates="0" transfer-ownership="none" optional="1" allow-none="1">
             <doc xml:space="preserve">
   location for data</doc>
             <array length="3" zero-terminated="0" c:type="gpointer*">
               <type name="guint8"/>
             </array>
           </parameter>
-          <parameter name="size" direction="out" caller-allocates="0" transfer-ownership="full">
+          <parameter name="size" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
             <doc xml:space="preserve">the size of the data in bytes</doc>
             <type name="guint" c:type="guint*"/>
           </parameter>
@@ -3405,7 +3405,7 @@ return the nth extension with the requested id.</doc>
             <doc xml:space="preserve">the RTP packet</doc>
             <type name="RTPBuffer" c:type="GstRTPBuffer*"/>
           </instance-parameter>
-          <parameter name="appbits" direction="out" caller-allocates="0" transfer-ownership="full">
+          <parameter name="appbits" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
             <doc xml:space="preserve">Application specific bits</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
@@ -3417,14 +3417,14 @@ return the nth extension with the requested id.</doc>
             <doc xml:space="preserve">Read the nth extension packet with the requested ID</doc>
             <type name="guint" c:type="guint"/>
           </parameter>
-          <parameter name="data" direction="out" caller-allocates="0" transfer-ownership="none">
+          <parameter name="data" direction="out" caller-allocates="0" transfer-ownership="none" optional="1" allow-none="1">
             <doc xml:space="preserve">
   location for data</doc>
             <array length="4" zero-terminated="0" c:type="gpointer*">
               <type name="guint8"/>
             </array>
           </parameter>
-          <parameter name="size" direction="out" caller-allocates="0" transfer-ownership="full">
+          <parameter name="size" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
             <doc xml:space="preserve">the size of the data in bytes</doc>
             <type name="guint" c:type="guint*"/>
           </parameter>

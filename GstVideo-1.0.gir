@@ -3513,7 +3513,7 @@ Zorder for each input stream can be configured on the
           <parameter name="best_info" transfer-ownership="none">
             <type name="VideoInfo" c:type="GstVideoInfo*"/>
           </parameter>
-          <parameter name="at_least_one_alpha" transfer-ownership="none">
+          <parameter name="at_least_one_alpha" direction="out" caller-allocates="0" transfer-ownership="full">
             <type name="gboolean" c:type="gboolean*"/>
           </parameter>
         </parameters>
@@ -3630,7 +3630,7 @@ srcpad caps.</doc>
             <parameter name="best_info" transfer-ownership="none">
               <type name="VideoInfo" c:type="GstVideoInfo*"/>
             </parameter>
-            <parameter name="at_least_one_alpha" transfer-ownership="none">
+            <parameter name="at_least_one_alpha" direction="out" caller-allocates="0" transfer-ownership="full">
               <type name="gboolean" c:type="gboolean*"/>
             </parameter>
           </parameters>
@@ -4457,11 +4457,11 @@ at @offset.</doc>
             <doc xml:space="preserve">a #GstVideoChromaResample</doc>
             <type name="VideoChromaResample" c:type="GstVideoChromaResample*"/>
           </instance-parameter>
-          <parameter name="n_lines" transfer-ownership="none">
+          <parameter name="n_lines" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
             <doc xml:space="preserve">the number of input lines</doc>
             <type name="guint" c:type="guint*"/>
           </parameter>
-          <parameter name="offset" transfer-ownership="none">
+          <parameter name="offset" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
             <doc xml:space="preserve">the first line</doc>
             <type name="gint" c:type="gint*"/>
           </parameter>
@@ -12700,11 +12700,11 @@ Note that for interlaced content, @in_offset needs to be incremented with
             <doc xml:space="preserve">an output offset</doc>
             <type name="guint" c:type="guint"/>
           </parameter>
-          <parameter name="in_offset" transfer-ownership="none">
+          <parameter name="in_offset" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
             <doc xml:space="preserve">result input offset</doc>
             <type name="guint" c:type="guint*"/>
           </parameter>
-          <parameter name="n_taps" transfer-ownership="none">
+          <parameter name="n_taps" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
             <doc xml:space="preserve">result n_taps</doc>
             <type name="guint" c:type="guint*"/>
           </parameter>

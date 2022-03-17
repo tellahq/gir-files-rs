@@ -3335,10 +3335,10 @@ negotiate fails.</doc>
           <parameter name="adapter" transfer-ownership="none">
             <type name="GstBase.Adapter" c:type="GstAdapter*"/>
           </parameter>
-          <parameter name="offset" transfer-ownership="none">
+          <parameter name="offset" direction="out" caller-allocates="0" transfer-ownership="full">
             <type name="gint" c:type="gint*"/>
           </parameter>
-          <parameter name="length" transfer-ownership="none">
+          <parameter name="length" direction="out" caller-allocates="0" transfer-ownership="full">
             <type name="gint" c:type="gint*"/>
           </parameter>
         </parameters>
@@ -4161,10 +4161,10 @@ overridden.</doc>
             <parameter name="adapter" transfer-ownership="none">
               <type name="GstBase.Adapter" c:type="GstAdapter*"/>
             </parameter>
-            <parameter name="offset" transfer-ownership="none">
+            <parameter name="offset" direction="out" caller-allocates="0" transfer-ownership="full">
               <type name="gint" c:type="gint*"/>
             </parameter>
-            <parameter name="length" transfer-ownership="none">
+            <parameter name="length" direction="out" caller-allocates="0" transfer-ownership="full">
               <type name="gint" c:type="gint*"/>
             </parameter>
           </parameters>
@@ -6976,7 +6976,7 @@ with a flush or stop.</doc>
             <doc xml:space="preserve">the #GstAudioRingBuffer to commit</doc>
             <type name="AudioRingBuffer" c:type="GstAudioRingBuffer*"/>
           </instance-parameter>
-          <parameter name="sample" transfer-ownership="none">
+          <parameter name="sample" direction="inout" caller-allocates="0" transfer-ownership="full">
             <doc xml:space="preserve">the sample position of the data</doc>
             <type name="guint64" c:type="guint64*"/>
           </parameter>
@@ -7251,7 +7251,7 @@ with a flush or stop.</doc>
             <doc xml:space="preserve">the #GstAudioRingBuffer to commit</doc>
             <type name="AudioRingBuffer" c:type="GstAudioRingBuffer*"/>
           </instance-parameter>
-          <parameter name="sample" transfer-ownership="none">
+          <parameter name="sample" direction="inout" caller-allocates="0" transfer-ownership="full">
             <doc xml:space="preserve">the sample position of the data</doc>
             <type name="guint64" c:type="guint64*"/>
           </parameter>
@@ -7996,7 +7996,7 @@ with a flush or stop.</doc>
               <doc xml:space="preserve">the #GstAudioRingBuffer to commit</doc>
               <type name="AudioRingBuffer" c:type="GstAudioRingBuffer*"/>
             </parameter>
-            <parameter name="sample" transfer-ownership="none">
+            <parameter name="sample" direction="inout" caller-allocates="0" transfer-ownership="full">
               <doc xml:space="preserve">the sample position of the data</doc>
               <type name="guint64" c:type="guint64*"/>
             </parameter>
@@ -8262,6 +8262,7 @@ together with #GstAudioBaseSink using a default implementation of a
         </parameters>
       </virtual-method>
       <virtual-method name="write">
+        <doc xml:space="preserve">Write samples to the device.</doc>
         <return-value transfer-ownership="none">
           <type name="gint" c:type="gint"/>
         </return-value>
@@ -8269,8 +8270,11 @@ together with #GstAudioBaseSink using a default implementation of a
           <instance-parameter name="sink" transfer-ownership="none">
             <type name="AudioSink" c:type="GstAudioSink*"/>
           </instance-parameter>
-          <parameter name="data" transfer-ownership="none" nullable="1" allow-none="1">
-            <type name="gpointer" c:type="gpointer"/>
+          <parameter name="data" transfer-ownership="none">
+            <doc xml:space="preserve">the sample data</doc>
+            <array length="1" zero-terminated="0" c:type="gpointer">
+              <type name="guint8" c:type="gpointer"/>
+            </array>
           </parameter>
           <parameter name="length" transfer-ownership="none">
             <type name="guint" c:type="guint"/>
@@ -8354,8 +8358,11 @@ together with #GstAudioBaseSink using a default implementation of a
             <parameter name="sink" transfer-ownership="none">
               <type name="AudioSink" c:type="GstAudioSink*"/>
             </parameter>
-            <parameter name="data" transfer-ownership="none" nullable="1" allow-none="1">
-              <type name="gpointer" c:type="gpointer"/>
+            <parameter name="data" transfer-ownership="none">
+              <doc xml:space="preserve">the sample data</doc>
+              <array length="2" zero-terminated="0" c:type="gpointer">
+                <type name="guint8" c:type="gpointer"/>
+              </array>
             </parameter>
             <parameter name="length" transfer-ownership="none">
               <type name="guint" c:type="guint"/>
@@ -8501,6 +8508,7 @@ together with #GstAudioBaseSrc using a default implementation of a
         </parameters>
       </virtual-method>
       <virtual-method name="read">
+        <doc xml:space="preserve">Read samples from the device.</doc>
         <return-value transfer-ownership="none">
           <type name="guint" c:type="guint"/>
         </return-value>
@@ -8508,13 +8516,17 @@ together with #GstAudioBaseSrc using a default implementation of a
           <instance-parameter name="src" transfer-ownership="none">
             <type name="AudioSrc" c:type="GstAudioSrc*"/>
           </instance-parameter>
-          <parameter name="data" transfer-ownership="none" nullable="1" allow-none="1">
-            <type name="gpointer" c:type="gpointer"/>
+          <parameter name="data" transfer-ownership="none">
+            <doc xml:space="preserve">the sample data</doc>
+            <array length="1" zero-terminated="0" c:type="gpointer">
+              <type name="guint8" c:type="gpointer"/>
+            </array>
           </parameter>
           <parameter name="length" transfer-ownership="none">
             <type name="guint" c:type="guint"/>
           </parameter>
-          <parameter name="timestamp" transfer-ownership="none">
+          <parameter name="timestamp" direction="out" caller-allocates="0" transfer-ownership="full">
+            <doc xml:space="preserve">a #GstClockTime</doc>
             <type name="Gst.ClockTime" c:type="GstClockTime*"/>
           </parameter>
         </parameters>
@@ -8618,13 +8630,17 @@ functionality.</doc>
             <parameter name="src" transfer-ownership="none">
               <type name="AudioSrc" c:type="GstAudioSrc*"/>
             </parameter>
-            <parameter name="data" transfer-ownership="none" nullable="1" allow-none="1">
-              <type name="gpointer" c:type="gpointer"/>
+            <parameter name="data" transfer-ownership="none">
+              <doc xml:space="preserve">the sample data</doc>
+              <array length="2" zero-terminated="0" c:type="gpointer">
+                <type name="guint8" c:type="gpointer"/>
+              </array>
             </parameter>
             <parameter name="length" transfer-ownership="none">
               <type name="guint" c:type="guint"/>
             </parameter>
-            <parameter name="timestamp" transfer-ownership="none">
+            <parameter name="timestamp" direction="out" caller-allocates="0" transfer-ownership="full">
+              <doc xml:space="preserve">a #GstClockTime</doc>
               <type name="Gst.ClockTime" c:type="GstClockTime*"/>
             </parameter>
           </parameters>
