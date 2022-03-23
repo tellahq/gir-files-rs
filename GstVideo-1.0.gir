@@ -710,6 +710,29 @@ The main parts of the API are:
 
 The GstNavigation message functions provide functions for creating and parsing
 custom bus messages for signaling GstNavigation changes.</doc>
+      <function name="event_get_coordinates" c:identifier="gst_navigation_event_get_coordinates" version="1.22">
+        <doc xml:space="preserve">Try to retrieve x and y coordinates of a #GstNavigation event.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">A boolean indicating success.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <parameter name="event" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstEvent to inspect.</doc>
+            <type name="Gst.Event" c:type="GstEvent*"/>
+          </parameter>
+          <parameter name="x" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+            <doc xml:space="preserve">Pointer to a gdouble to receive the x coordinate of the
+    navigation event.</doc>
+            <type name="gdouble" c:type="gdouble*"/>
+          </parameter>
+          <parameter name="y" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+            <doc xml:space="preserve">Pointer to a gdouble to receive the y coordinate of the
+    navigation event.</doc>
+            <type name="gdouble" c:type="gdouble*"/>
+          </parameter>
+        </parameters>
+      </function>
       <function name="event_get_type" c:identifier="gst_navigation_event_get_type">
         <doc xml:space="preserve">Inspect a #GstEvent and return the #GstNavigationEventType of the event, or
 #GST_NAVIGATION_EVENT_INVALID if the event is not a #GstNavigation event.</doc>
@@ -846,6 +869,103 @@ custom bus messages for signaling GstNavigation changes.</doc>
           </parameter>
         </parameters>
       </function>
+      <function name="event_new_touch_cancel" c:identifier="gst_navigation_event_new_touch_cancel" version="1.22">
+        <doc xml:space="preserve">Create a new navigation event signalling that all currently active touch
+points are cancelled and should be discarded. For example, under Wayland
+this event might be sent when a swipe passes the threshold to be recognized
+as a gesture by the compositor.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a new #GstEvent</doc>
+          <type name="Gst.Event" c:type="GstEvent*"/>
+        </return-value>
+      </function>
+      <function name="event_new_touch_down" c:identifier="gst_navigation_event_new_touch_down" version="1.22">
+        <doc xml:space="preserve">Create a new navigation event for an added touch point.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a new #GstEvent</doc>
+          <type name="Gst.Event" c:type="GstEvent*"/>
+        </return-value>
+        <parameters>
+          <parameter name="identifier" transfer-ownership="none">
+            <doc xml:space="preserve">A number uniquely identifying this touch point. It must stay
+   unique to this touch point at least until an up event is sent for
+   the same identifier, or all touch points are cancelled.</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="x" transfer-ownership="none">
+            <doc xml:space="preserve">The x coordinate of the new touch point.</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+          <parameter name="y" transfer-ownership="none">
+            <doc xml:space="preserve">The y coordinate of the new touch point.</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+          <parameter name="pressure" transfer-ownership="none">
+            <doc xml:space="preserve">Pressure data of the touch point, from 0.0 to 1.0, or NaN if no
+   data is available.</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="event_new_touch_frame" c:identifier="gst_navigation_event_new_touch_frame" version="1.22">
+        <doc xml:space="preserve">Create a new navigation event signalling the end of a touch frame. Touch
+frames signal that all previous down, motion and up events not followed by
+another touch frame event already should be considered simultaneous.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a new #GstEvent</doc>
+          <type name="Gst.Event" c:type="GstEvent*"/>
+        </return-value>
+      </function>
+      <function name="event_new_touch_motion" c:identifier="gst_navigation_event_new_touch_motion" version="1.22">
+        <doc xml:space="preserve">Create a new navigation event for a moved touch point.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a new #GstEvent</doc>
+          <type name="Gst.Event" c:type="GstEvent*"/>
+        </return-value>
+        <parameters>
+          <parameter name="identifier" transfer-ownership="none">
+            <doc xml:space="preserve">A number uniquely identifying this touch point. It must
+   correlate to exactly one previous touch_start event.</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="x" transfer-ownership="none">
+            <doc xml:space="preserve">The x coordinate of the touch point.</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+          <parameter name="y" transfer-ownership="none">
+            <doc xml:space="preserve">The y coordinate of the touch point.</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+          <parameter name="pressure" transfer-ownership="none">
+            <doc xml:space="preserve">Pressure data of the touch point, from 0.0 to 1.0, or NaN if no
+   data is available.</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="event_new_touch_up" c:identifier="gst_navigation_event_new_touch_up" version="1.22">
+        <doc xml:space="preserve">Create a new navigation event for a removed touch point.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a new #GstEvent</doc>
+          <type name="Gst.Event" c:type="GstEvent*"/>
+        </return-value>
+        <parameters>
+          <parameter name="identifier" transfer-ownership="none">
+            <doc xml:space="preserve">A number uniquely identifying this touch point. It must
+   correlate to exactly one previous down event, but can be reused
+   after sending this event.</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="x" transfer-ownership="none">
+            <doc xml:space="preserve">The x coordinate of the touch point.</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+          <parameter name="y" transfer-ownership="none">
+            <doc xml:space="preserve">The y coordinate of the touch point.</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </function>
       <function name="event_parse_command" c:identifier="gst_navigation_event_parse_command">
         <doc xml:space="preserve">Inspect a #GstNavigation command event and retrieve the enum value of the
 associated command.</doc>
@@ -968,6 +1088,92 @@ of the event.</doc>
             <doc xml:space="preserve">Pointer to a gdouble to receive the delta_y coordinate of the
     mouse movement.</doc>
             <type name="gdouble" c:type="gdouble*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="event_parse_touch_event" c:identifier="gst_navigation_event_parse_touch_event" version="1.22">
+        <doc xml:space="preserve">Retrieve the details of a #GstNavigation touch-down or touch-motion event.
+Determine which type the event is using gst_navigation_event_get_type()
+to retrieve the #GstNavigationEventType.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">TRUE if all details could be extracted, otherwise FALSE.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <parameter name="event" transfer-ownership="none">
+            <doc xml:space="preserve">A #GstEvent to inspect.</doc>
+            <type name="Gst.Event" c:type="GstEvent*"/>
+          </parameter>
+          <parameter name="identifier" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+            <doc xml:space="preserve">Pointer to a guint that will receive the
+    identifier unique to this touch point.</doc>
+            <type name="guint" c:type="guint*"/>
+          </parameter>
+          <parameter name="x" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+            <doc xml:space="preserve">Pointer to a gdouble that will receive the x
+    coordinate of the touch event.</doc>
+            <type name="gdouble" c:type="gdouble*"/>
+          </parameter>
+          <parameter name="y" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+            <doc xml:space="preserve">Pointer to a gdouble that will receive the y
+    coordinate of the touch event.</doc>
+            <type name="gdouble" c:type="gdouble*"/>
+          </parameter>
+          <parameter name="pressure" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+            <doc xml:space="preserve">Pointer to a gdouble that will receive the
+    force of the touch event, in the range from 0.0 to 1.0. If pressure
+    data is not available, NaN will be set instead.</doc>
+            <type name="gdouble" c:type="gdouble*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="event_parse_touch_up_event" c:identifier="gst_navigation_event_parse_touch_up_event" version="1.22">
+        <doc xml:space="preserve">Retrieve the details of a #GstNavigation touch-up event.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">TRUE if all details could be extracted, otherwise FALSE.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <parameter name="event" transfer-ownership="none">
+            <doc xml:space="preserve">A #GstEvent to inspect.</doc>
+            <type name="Gst.Event" c:type="GstEvent*"/>
+          </parameter>
+          <parameter name="identifier" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+            <doc xml:space="preserve">Pointer to a guint that will receive the
+    identifier unique to this touch point.</doc>
+            <type name="guint" c:type="guint*"/>
+          </parameter>
+          <parameter name="x" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+            <doc xml:space="preserve">Pointer to a gdouble that will receive the x
+    coordinate of the touch event.</doc>
+            <type name="gdouble" c:type="gdouble*"/>
+          </parameter>
+          <parameter name="y" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+            <doc xml:space="preserve">Pointer to a gdouble that will receive the y
+    coordinate of the touch event.</doc>
+            <type name="gdouble" c:type="gdouble*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="event_set_coordinates" c:identifier="gst_navigation_event_set_coordinates" version="1.22">
+        <doc xml:space="preserve">Try to set x and y coordinates on a #GstNavigation event. The event must
+be writable.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">A boolean indicating success.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <parameter name="event" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstEvent to modify.</doc>
+            <type name="Gst.Event" c:type="GstEvent*"/>
+          </parameter>
+          <parameter name="x" transfer-ownership="none">
+            <doc xml:space="preserve">The x coordinate to set.</doc>
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+          <parameter name="y" transfer-ownership="none">
+            <doc xml:space="preserve">The y coordinate to set.</doc>
+            <type name="gdouble" c:type="gdouble"/>
           </parameter>
         </parameters>
       </function>
@@ -1288,7 +1494,9 @@ of commands passed must be equal to @n_commands.</doc>
           </parameter>
         </parameters>
       </function>
-      <virtual-method name="send_event" invoker="send_event">
+      <virtual-method name="send_event" invoker="send_event" deprecated="1" deprecated-version="1.22">
+        <doc xml:space="preserve">sending a navigation event.</doc>
+        <doc-deprecated xml:space="preserve">Use #GstNavigationInterface.send_event_simple() instead.</doc-deprecated>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -1298,6 +1506,22 @@ of commands passed must be equal to @n_commands.</doc>
           </instance-parameter>
           <parameter name="structure" transfer-ownership="none">
             <type name="Gst.Structure" c:type="GstStructure*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="send_event_simple" invoker="send_event_simple" version="1.22">
+        <doc xml:space="preserve">Sends an event to the navigation interface.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="navigation" transfer-ownership="none">
+            <doc xml:space="preserve">The navigation interface instance</doc>
+            <type name="Navigation" c:type="GstNavigation*"/>
+          </instance-parameter>
+          <parameter name="event" transfer-ownership="full">
+            <doc xml:space="preserve">The event to send</doc>
+            <type name="Gst.Event" c:type="GstEvent*"/>
           </parameter>
         </parameters>
       </virtual-method>
@@ -1327,6 +1551,22 @@ of commands passed must be equal to @n_commands.</doc>
           </instance-parameter>
           <parameter name="structure" transfer-ownership="none">
             <type name="Gst.Structure" c:type="GstStructure*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="send_event_simple" c:identifier="gst_navigation_send_event_simple" version="1.22">
+        <doc xml:space="preserve">Sends an event to the navigation interface.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="navigation" transfer-ownership="none">
+            <doc xml:space="preserve">The navigation interface instance</doc>
+            <type name="Navigation" c:type="GstNavigation*"/>
+          </instance-parameter>
+          <parameter name="event" transfer-ownership="full">
+            <doc xml:space="preserve">The event to send</doc>
+            <type name="Gst.Event" c:type="GstEvent*"/>
           </parameter>
         </parameters>
       </method>
@@ -1491,7 +1731,8 @@ feature.</doc>
     </enumeration>
     <enumeration name="NavigationEventType" glib:type-name="GstNavigationEventType" glib:get-type="gst_navigation_event_type_get_type" c:type="GstNavigationEventType">
       <doc xml:space="preserve">Enum values for the various events that an element implementing the
-GstNavigation interface might send up the pipeline.</doc>
+GstNavigation interface might send up the pipeline. Touch events have been
+inspired by the libinput API, and have the same meaning here.</doc>
       <member name="invalid" value="0" c:identifier="GST_NAVIGATION_EVENT_INVALID" glib:nick="invalid" glib:name="GST_NAVIGATION_EVENT_INVALID">
         <doc xml:space="preserve">Returned from
 gst_navigation_event_get_type() when the passed event is not a navigation event.</doc>
@@ -1527,6 +1768,29 @@ gst_navigation_event_parse_command() to extract the details from the event.</doc
         <doc xml:space="preserve">A mouse scroll event. Use gst_navigation_event_parse_mouse_scroll_event()
 to extract the details from the event.</doc>
       </member>
+      <member name="touch_down" value="8" c:identifier="GST_NAVIGATION_EVENT_TOUCH_DOWN" version="1.22" glib:nick="touch-down" glib:name="GST_NAVIGATION_EVENT_TOUCH_DOWN">
+        <doc xml:space="preserve">An event describing a new touch point, which will be assigned an identifier
+that is unique to it for the duration of its movement on the screen.
+Use gst_navigation_event_parse_touch_event() to extract the details
+from the event.</doc>
+      </member>
+      <member name="touch_motion" value="9" c:identifier="GST_NAVIGATION_EVENT_TOUCH_MOTION" version="1.22" glib:nick="touch-motion" glib:name="GST_NAVIGATION_EVENT_TOUCH_MOTION">
+        <doc xml:space="preserve">An event describing the movement of an active touch point across
+the screen. Use gst_navigation_event_parse_touch_event() to extract
+the details from the event.</doc>
+      </member>
+      <member name="touch_up" value="10" c:identifier="GST_NAVIGATION_EVENT_TOUCH_UP" version="1.22" glib:nick="touch-up" glib:name="GST_NAVIGATION_EVENT_TOUCH_UP">
+        <doc xml:space="preserve">An event describing a removed touch point. After this event,
+its identifier may be reused for any new touch points.
+Use gst_navigation_event_parse_touch_up_event() to extract the details
+from the event.</doc>
+      </member>
+      <member name="touch_frame" value="11" c:identifier="GST_NAVIGATION_EVENT_TOUCH_FRAME" version="1.22" glib:nick="touch-frame" glib:name="GST_NAVIGATION_EVENT_TOUCH_FRAME">
+        <doc xml:space="preserve">An event signaling the end of a sequence of simultaneous touch events.</doc>
+      </member>
+      <member name="touch_cancel" value="12" c:identifier="GST_NAVIGATION_EVENT_TOUCH_CANCEL" version="1.22" glib:nick="touch-cancel" glib:name="GST_NAVIGATION_EVENT_TOUCH_CANCEL">
+        <doc xml:space="preserve">An event cancelling all currently active touch points.</doc>
+      </member>
     </enumeration>
     <record name="NavigationInterface" c:type="GstNavigationInterface" glib:is-gtype-struct-for="Navigation">
       <doc xml:space="preserve">Navigation interface.</doc>
@@ -1545,6 +1809,23 @@ to extract the details from the event.</doc>
             </parameter>
             <parameter name="structure" transfer-ownership="none">
               <type name="Gst.Structure" c:type="GstStructure*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="send_event_simple">
+        <callback name="send_event_simple">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="navigation" transfer-ownership="none">
+              <doc xml:space="preserve">The navigation interface instance</doc>
+              <type name="Navigation" c:type="GstNavigation*"/>
+            </parameter>
+            <parameter name="event" transfer-ownership="full">
+              <doc xml:space="preserve">The event to send</doc>
+              <type name="Gst.Event" c:type="GstEvent*"/>
             </parameter>
           </parameters>
         </callback>
@@ -2275,7 +2556,7 @@ return to upstream/caller (indicating either GST_FLOW_ERROR or GST_FLOW_OK).</do
         </parameter>
       </parameters>
     </function-macro>
-    <constant name="VIDEO_FORMATS_ALL" value="{ ABGR64_BE, BGRA64_BE, AYUV64, ARGB64_BE, ARGB64, RGBA64_BE, ABGR64_LE, BGRA64_LE, ARGB64_LE, RGBA64_LE, GBRA_12BE, GBRA_12LE, Y412_BE, Y412_LE, A444_10BE, GBRA_10BE, A444_10LE, GBRA_10LE, A422_10BE, A422_10LE, A420_10BE, A420_10LE, Y410, RGB10A2_LE, BGR10A2_LE, GBRA, ABGR, VUYA, BGRA, AYUV, ARGB, RGBA, A420, AV12, Y444_16BE, Y444_16LE, v216, P016_BE, P016_LE, Y444_12BE, GBR_12BE, Y444_12LE, GBR_12LE, I422_12BE, I422_12LE, Y212_BE, Y212_LE, I420_12BE, I420_12LE, P012_BE, P012_LE, Y444_10BE, GBR_10BE, Y444_10LE, GBR_10LE, r210, I422_10BE, I422_10LE, NV16_10LE32, Y210, v210, UYVP, I420_10BE, I420_10LE, P010_10BE, P010_10LE, NV12_10LE32, NV12_10LE40, Y444, RGBP, GBR, BGRP, NV24, xBGR, BGRx, xRGB, RGBx, BGR, IYU2, v308, RGB, Y42B, NV61, NV16, VYUY, UYVY, YVYU, YUY2, I420, YV12, NV21, NV12, NV12_64Z32, NV12_4L4, NV12_32L32, NV12_16L32S, Y41B, IYU1, YVU9, YUV9, RGB16, BGR16, RGB15, BGR15, RGB8P, GRAY16_BE, GRAY16_LE, GRAY10_LE32, GRAY8 }" c:type="GST_VIDEO_FORMATS_ALL">
+    <constant name="VIDEO_FORMATS_ALL" value="{ ABGR64_BE, BGRA64_BE, AYUV64, ARGB64_BE, ARGB64, RGBA64_BE, ABGR64_LE, BGRA64_LE, ARGB64_LE, RGBA64_LE, GBRA_12BE, GBRA_12LE, Y412_BE, Y412_LE, A444_10BE, GBRA_10BE, A444_10LE, GBRA_10LE, A422_10BE, A422_10LE, A420_10BE, A420_10LE, Y410, RGB10A2_LE, BGR10A2_LE, GBRA, ABGR, VUYA, BGRA, AYUV, ARGB, RGBA, A420, AV12, Y444_16BE, Y444_16LE, v216, P016_BE, P016_LE, Y444_12BE, GBR_12BE, Y444_12LE, GBR_12LE, I422_12BE, I422_12LE, Y212_BE, Y212_LE, I420_12BE, I420_12LE, P012_BE, P012_LE, Y444_10BE, GBR_10BE, Y444_10LE, GBR_10LE, r210, I422_10BE, I422_10LE, NV16_10LE32, Y210, v210, UYVP, I420_10BE, I420_10LE, P010_10BE, P010_10LE, NV12_10LE32, NV12_10LE40, NV12_10BE_8L128, Y444, RGBP, GBR, BGRP, NV24, xBGR, BGRx, xRGB, RGBx, BGR, IYU2, v308, RGB, Y42B, NV61, NV16, VYUY, UYVY, YVYU, YUY2, I420, YV12, NV21, NV12, NV12_64Z32, NV12_4L4, NV12_32L32, NV12_16L32S, NV12_8L128, Y41B, IYU1, YVU9, YUV9, RGB16, BGR16, RGB15, BGR15, RGB8P, GRAY16_BE, GRAY16_LE, GRAY10_LE32, GRAY8 }" c:type="GST_VIDEO_FORMATS_ALL">
       <doc xml:space="preserve">List of all video formats, for use in template caps strings.
 
 Formats are sorted by decreasing "quality", using these criteria by priority:
@@ -8879,6 +9160,12 @@ per channel.</doc>
       <member name="nv12_16l32s" value="110" c:identifier="GST_VIDEO_FORMAT_NV12_16L32S" version="1.22" glib:nick="nv12-16l32s" glib:name="GST_VIDEO_FORMAT_NV12_16L32S">
         <doc xml:space="preserve">NV12 with 16x32 Y tiles and 16x16 UV tiles.</doc>
       </member>
+      <member name="nv12_8l128" value="111" c:identifier="GST_VIDEO_FORMAT_NV12_8L128" version="1.22" glib:nick="nv12-8l128" glib:name="GST_VIDEO_FORMAT_NV12_8L128">
+        <doc xml:space="preserve">NV12 with 8x128 tiles in linear order.</doc>
+      </member>
+      <member name="nv12_10be_8l128" value="112" c:identifier="GST_VIDEO_FORMAT_NV12_10BE_8L128" version="1.22" glib:nick="nv12-10be-8l128" glib:name="GST_VIDEO_FORMAT_NV12_10BE_8L128">
+        <doc xml:space="preserve">NV12 10bit big endian with 8x128 tiles in linear order.</doc>
+      </member>
       <function name="from_fourcc" c:identifier="gst_video_format_from_fourcc">
         <doc xml:space="preserve">Converts a FOURCC value into the corresponding #GstVideoFormat.
 If the FOURCC cannot be represented by #GstVideoFormat,
@@ -14649,6 +14936,29 @@ to automatically add #GstVideoMeta to the buffers.</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="navigation_event_get_coordinates" c:identifier="gst_navigation_event_get_coordinates" moved-to="Navigation.event_get_coordinates" version="1.22">
+      <doc xml:space="preserve">Try to retrieve x and y coordinates of a #GstNavigation event.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">A boolean indicating success.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="event" transfer-ownership="none">
+          <doc xml:space="preserve">The #GstEvent to inspect.</doc>
+          <type name="Gst.Event" c:type="GstEvent*"/>
+        </parameter>
+        <parameter name="x" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+          <doc xml:space="preserve">Pointer to a gdouble to receive the x coordinate of the
+    navigation event.</doc>
+          <type name="gdouble" c:type="gdouble*"/>
+        </parameter>
+        <parameter name="y" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+          <doc xml:space="preserve">Pointer to a gdouble to receive the y coordinate of the
+    navigation event.</doc>
+          <type name="gdouble" c:type="gdouble*"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="navigation_event_get_type" c:identifier="gst_navigation_event_get_type" moved-to="Navigation.event_get_type">
       <doc xml:space="preserve">Inspect a #GstEvent and return the #GstNavigationEventType of the event, or
 #GST_NAVIGATION_EVENT_INVALID if the event is not a #GstNavigation event.</doc>
@@ -14785,6 +15095,103 @@ to automatically add #GstVideoMeta to the buffers.</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="navigation_event_new_touch_cancel" c:identifier="gst_navigation_event_new_touch_cancel" moved-to="Navigation.event_new_touch_cancel" version="1.22">
+      <doc xml:space="preserve">Create a new navigation event signalling that all currently active touch
+points are cancelled and should be discarded. For example, under Wayland
+this event might be sent when a swipe passes the threshold to be recognized
+as a gesture by the compositor.</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">a new #GstEvent</doc>
+        <type name="Gst.Event" c:type="GstEvent*"/>
+      </return-value>
+    </function>
+    <function name="navigation_event_new_touch_down" c:identifier="gst_navigation_event_new_touch_down" moved-to="Navigation.event_new_touch_down" version="1.22">
+      <doc xml:space="preserve">Create a new navigation event for an added touch point.</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">a new #GstEvent</doc>
+        <type name="Gst.Event" c:type="GstEvent*"/>
+      </return-value>
+      <parameters>
+        <parameter name="identifier" transfer-ownership="none">
+          <doc xml:space="preserve">A number uniquely identifying this touch point. It must stay
+   unique to this touch point at least until an up event is sent for
+   the same identifier, or all touch points are cancelled.</doc>
+          <type name="guint" c:type="guint"/>
+        </parameter>
+        <parameter name="x" transfer-ownership="none">
+          <doc xml:space="preserve">The x coordinate of the new touch point.</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+        <parameter name="y" transfer-ownership="none">
+          <doc xml:space="preserve">The y coordinate of the new touch point.</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+        <parameter name="pressure" transfer-ownership="none">
+          <doc xml:space="preserve">Pressure data of the touch point, from 0.0 to 1.0, or NaN if no
+   data is available.</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="navigation_event_new_touch_frame" c:identifier="gst_navigation_event_new_touch_frame" moved-to="Navigation.event_new_touch_frame" version="1.22">
+      <doc xml:space="preserve">Create a new navigation event signalling the end of a touch frame. Touch
+frames signal that all previous down, motion and up events not followed by
+another touch frame event already should be considered simultaneous.</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">a new #GstEvent</doc>
+        <type name="Gst.Event" c:type="GstEvent*"/>
+      </return-value>
+    </function>
+    <function name="navigation_event_new_touch_motion" c:identifier="gst_navigation_event_new_touch_motion" moved-to="Navigation.event_new_touch_motion" version="1.22">
+      <doc xml:space="preserve">Create a new navigation event for a moved touch point.</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">a new #GstEvent</doc>
+        <type name="Gst.Event" c:type="GstEvent*"/>
+      </return-value>
+      <parameters>
+        <parameter name="identifier" transfer-ownership="none">
+          <doc xml:space="preserve">A number uniquely identifying this touch point. It must
+   correlate to exactly one previous touch_start event.</doc>
+          <type name="guint" c:type="guint"/>
+        </parameter>
+        <parameter name="x" transfer-ownership="none">
+          <doc xml:space="preserve">The x coordinate of the touch point.</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+        <parameter name="y" transfer-ownership="none">
+          <doc xml:space="preserve">The y coordinate of the touch point.</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+        <parameter name="pressure" transfer-ownership="none">
+          <doc xml:space="preserve">Pressure data of the touch point, from 0.0 to 1.0, or NaN if no
+   data is available.</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="navigation_event_new_touch_up" c:identifier="gst_navigation_event_new_touch_up" moved-to="Navigation.event_new_touch_up" version="1.22">
+      <doc xml:space="preserve">Create a new navigation event for a removed touch point.</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">a new #GstEvent</doc>
+        <type name="Gst.Event" c:type="GstEvent*"/>
+      </return-value>
+      <parameters>
+        <parameter name="identifier" transfer-ownership="none">
+          <doc xml:space="preserve">A number uniquely identifying this touch point. It must
+   correlate to exactly one previous down event, but can be reused
+   after sending this event.</doc>
+          <type name="guint" c:type="guint"/>
+        </parameter>
+        <parameter name="x" transfer-ownership="none">
+          <doc xml:space="preserve">The x coordinate of the touch point.</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+        <parameter name="y" transfer-ownership="none">
+          <doc xml:space="preserve">The y coordinate of the touch point.</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="navigation_event_parse_command" c:identifier="gst_navigation_event_parse_command" moved-to="Navigation.event_parse_command">
       <doc xml:space="preserve">Inspect a #GstNavigation command event and retrieve the enum value of the
 associated command.</doc>
@@ -14907,6 +15314,92 @@ of the event.</doc>
           <doc xml:space="preserve">Pointer to a gdouble to receive the delta_y coordinate of the
     mouse movement.</doc>
           <type name="gdouble" c:type="gdouble*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="navigation_event_parse_touch_event" c:identifier="gst_navigation_event_parse_touch_event" moved-to="Navigation.event_parse_touch_event" version="1.22">
+      <doc xml:space="preserve">Retrieve the details of a #GstNavigation touch-down or touch-motion event.
+Determine which type the event is using gst_navigation_event_get_type()
+to retrieve the #GstNavigationEventType.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">TRUE if all details could be extracted, otherwise FALSE.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="event" transfer-ownership="none">
+          <doc xml:space="preserve">A #GstEvent to inspect.</doc>
+          <type name="Gst.Event" c:type="GstEvent*"/>
+        </parameter>
+        <parameter name="identifier" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+          <doc xml:space="preserve">Pointer to a guint that will receive the
+    identifier unique to this touch point.</doc>
+          <type name="guint" c:type="guint*"/>
+        </parameter>
+        <parameter name="x" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+          <doc xml:space="preserve">Pointer to a gdouble that will receive the x
+    coordinate of the touch event.</doc>
+          <type name="gdouble" c:type="gdouble*"/>
+        </parameter>
+        <parameter name="y" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+          <doc xml:space="preserve">Pointer to a gdouble that will receive the y
+    coordinate of the touch event.</doc>
+          <type name="gdouble" c:type="gdouble*"/>
+        </parameter>
+        <parameter name="pressure" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+          <doc xml:space="preserve">Pointer to a gdouble that will receive the
+    force of the touch event, in the range from 0.0 to 1.0. If pressure
+    data is not available, NaN will be set instead.</doc>
+          <type name="gdouble" c:type="gdouble*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="navigation_event_parse_touch_up_event" c:identifier="gst_navigation_event_parse_touch_up_event" moved-to="Navigation.event_parse_touch_up_event" version="1.22">
+      <doc xml:space="preserve">Retrieve the details of a #GstNavigation touch-up event.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">TRUE if all details could be extracted, otherwise FALSE.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="event" transfer-ownership="none">
+          <doc xml:space="preserve">A #GstEvent to inspect.</doc>
+          <type name="Gst.Event" c:type="GstEvent*"/>
+        </parameter>
+        <parameter name="identifier" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+          <doc xml:space="preserve">Pointer to a guint that will receive the
+    identifier unique to this touch point.</doc>
+          <type name="guint" c:type="guint*"/>
+        </parameter>
+        <parameter name="x" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+          <doc xml:space="preserve">Pointer to a gdouble that will receive the x
+    coordinate of the touch event.</doc>
+          <type name="gdouble" c:type="gdouble*"/>
+        </parameter>
+        <parameter name="y" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+          <doc xml:space="preserve">Pointer to a gdouble that will receive the y
+    coordinate of the touch event.</doc>
+          <type name="gdouble" c:type="gdouble*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="navigation_event_set_coordinates" c:identifier="gst_navigation_event_set_coordinates" moved-to="Navigation.event_set_coordinates" version="1.22">
+      <doc xml:space="preserve">Try to set x and y coordinates on a #GstNavigation event. The event must
+be writable.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">A boolean indicating success.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="event" transfer-ownership="none">
+          <doc xml:space="preserve">The #GstEvent to modify.</doc>
+          <type name="Gst.Event" c:type="GstEvent*"/>
+        </parameter>
+        <parameter name="x" transfer-ownership="none">
+          <doc xml:space="preserve">The x coordinate to set.</doc>
+          <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+        <parameter name="y" transfer-ownership="none">
+          <doc xml:space="preserve">The y coordinate to set.</doc>
+          <type name="gdouble" c:type="gdouble"/>
         </parameter>
       </parameters>
     </function>
