@@ -690,26 +690,29 @@ preferred.</doc>
       </parameters>
     </function-macro>
     <interface name="Navigation" c:symbol-prefix="navigation" c:type="GstNavigation" glib:type-name="GstNavigation" glib:get-type="gst_navigation_get_type" glib:type-struct="NavigationInterface">
-      <doc xml:space="preserve">The Navigation interface is used for creating and injecting navigation related
-events such as mouse button presses, cursor motion and key presses. The associated
-library also provides methods for parsing received events, and for sending and
-receiving navigation related bus events. One main usecase is DVD menu navigation.
+      <doc xml:space="preserve">The Navigation interface is used for creating and injecting navigation
+related events such as mouse button presses, cursor motion and key presses.
+The associated library also provides methods for parsing received events, and
+for sending and receiving navigation related bus events. One main usecase is
+DVD menu navigation.
 
 The main parts of the API are:
 
-* The GstNavigation interface, implemented by elements which provide an application
-  with the ability to create and inject navigation events into the pipeline.
-* GstNavigation event handling API. GstNavigation events are created in response to
-  calls on a GstNavigation interface implementation, and sent in the pipeline. Upstream
-  elements can use the navigation event API functions to parse the contents of received
-  messages.
+* The GstNavigation interface, implemented by elements which provide an
+  application with the ability to create and inject navigation events into
+  the pipeline.
+* GstNavigation event handling API. GstNavigation events are created in
+  response to calls on a GstNavigation interface implementation, and sent in
+  the pipeline. Upstream elements can use the navigation event API functions
+  to parse the contents of received messages.
 
-* GstNavigation message handling API. GstNavigation messages may be sent on the message
-  bus to inform applications of navigation related changes in the pipeline, such as the
-  mouse moving over a clickable region, or the set of available angles changing.
+* GstNavigation message handling API. GstNavigation messages may be sent on
+  the message bus to inform applications of navigation related changes in the
+  pipeline, such as the mouse moving over a clickable region, or the set of
+  available angles changing.
 
-The GstNavigation message functions provide functions for creating and parsing
-custom bus messages for signaling GstNavigation changes.</doc>
+The GstNavigation message functions provide functions for creating and
+parsing custom bus messages for signaling GstNavigation changes.</doc>
       <function name="event_get_coordinates" c:identifier="gst_navigation_event_get_coordinates" version="1.22">
         <doc xml:space="preserve">Try to retrieve x and y coordinates of a #GstNavigation event.</doc>
         <return-value transfer-ownership="none">
@@ -770,6 +773,11 @@ custom bus messages for signaling GstNavigation changes.</doc>
             <doc xml:space="preserve">A string identifying the key press.</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
+          <parameter name="state" transfer-ownership="none">
+            <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+            <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
+          </parameter>
         </parameters>
       </function>
       <function name="event_new_key_release" c:identifier="gst_navigation_event_new_key_release" version="1.22">
@@ -782,6 +790,11 @@ custom bus messages for signaling GstNavigation changes.</doc>
           <parameter name="key" transfer-ownership="none">
             <doc xml:space="preserve">A string identifying the released key.</doc>
             <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="state" transfer-ownership="none">
+            <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+            <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
           </parameter>
         </parameters>
       </function>
@@ -804,6 +817,11 @@ custom bus messages for signaling GstNavigation changes.</doc>
             <doc xml:space="preserve">The y coordinate of the mouse cursor.</doc>
             <type name="gdouble" c:type="gdouble"/>
           </parameter>
+          <parameter name="state" transfer-ownership="none">
+            <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+            <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
+          </parameter>
         </parameters>
       </function>
       <function name="event_new_mouse_button_release" c:identifier="gst_navigation_event_new_mouse_button_release" version="1.22">
@@ -825,6 +843,11 @@ custom bus messages for signaling GstNavigation changes.</doc>
             <doc xml:space="preserve">The y coordinate of the mouse cursor.</doc>
             <type name="gdouble" c:type="gdouble"/>
           </parameter>
+          <parameter name="state" transfer-ownership="none">
+            <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+            <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
+          </parameter>
         </parameters>
       </function>
       <function name="event_new_mouse_move" c:identifier="gst_navigation_event_new_mouse_move" version="1.22">
@@ -841,6 +864,11 @@ custom bus messages for signaling GstNavigation changes.</doc>
           <parameter name="y" transfer-ownership="none">
             <doc xml:space="preserve">The y coordinate of the mouse cursor.</doc>
             <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+          <parameter name="state" transfer-ownership="none">
+            <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+            <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
           </parameter>
         </parameters>
       </function>
@@ -867,6 +895,11 @@ custom bus messages for signaling GstNavigation changes.</doc>
             <doc xml:space="preserve">The y component of the scroll movement.</doc>
             <type name="gdouble" c:type="gdouble"/>
           </parameter>
+          <parameter name="state" transfer-ownership="none">
+            <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+            <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
+          </parameter>
         </parameters>
       </function>
       <function name="event_new_touch_cancel" c:identifier="gst_navigation_event_new_touch_cancel" version="1.22">
@@ -878,6 +911,13 @@ as a gesture by the compositor.</doc>
           <doc xml:space="preserve">a new #GstEvent</doc>
           <type name="Gst.Event" c:type="GstEvent*"/>
         </return-value>
+        <parameters>
+          <parameter name="state" transfer-ownership="none">
+            <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+            <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
+          </parameter>
+        </parameters>
       </function>
       <function name="event_new_touch_down" c:identifier="gst_navigation_event_new_touch_down" version="1.22">
         <doc xml:space="preserve">Create a new navigation event for an added touch point.</doc>
@@ -905,6 +945,11 @@ as a gesture by the compositor.</doc>
    data is available.</doc>
             <type name="gdouble" c:type="gdouble"/>
           </parameter>
+          <parameter name="state" transfer-ownership="none">
+            <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+            <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
+          </parameter>
         </parameters>
       </function>
       <function name="event_new_touch_frame" c:identifier="gst_navigation_event_new_touch_frame" version="1.22">
@@ -915,6 +960,13 @@ another touch frame event already should be considered simultaneous.</doc>
           <doc xml:space="preserve">a new #GstEvent</doc>
           <type name="Gst.Event" c:type="GstEvent*"/>
         </return-value>
+        <parameters>
+          <parameter name="state" transfer-ownership="none">
+            <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+            <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
+          </parameter>
+        </parameters>
       </function>
       <function name="event_new_touch_motion" c:identifier="gst_navigation_event_new_touch_motion" version="1.22">
         <doc xml:space="preserve">Create a new navigation event for a moved touch point.</doc>
@@ -941,6 +993,11 @@ another touch frame event already should be considered simultaneous.</doc>
    data is available.</doc>
             <type name="gdouble" c:type="gdouble"/>
           </parameter>
+          <parameter name="state" transfer-ownership="none">
+            <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+            <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
+          </parameter>
         </parameters>
       </function>
       <function name="event_new_touch_up" c:identifier="gst_navigation_event_new_touch_up" version="1.22">
@@ -964,6 +1021,11 @@ another touch frame event already should be considered simultaneous.</doc>
             <doc xml:space="preserve">The y coordinate of the touch point.</doc>
             <type name="gdouble" c:type="gdouble"/>
           </parameter>
+          <parameter name="state" transfer-ownership="none">
+            <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+            <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
+          </parameter>
         </parameters>
       </function>
       <function name="event_parse_command" c:identifier="gst_navigation_event_parse_command">
@@ -986,6 +1048,10 @@ associated command.</doc>
         </parameters>
       </function>
       <function name="event_parse_key_event" c:identifier="gst_navigation_event_parse_key_event">
+        <doc xml:space="preserve">Note: Modifier keys (as defined in #GstNavigationModifierType)
+[press](GST_NAVIGATION_EVENT_KEY_PRESS) and
+[release](GST_NAVIGATION_KEY_PRESS) events are generated even if those states are
+present on all other related events</doc>
         <return-value transfer-ownership="none">
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -1088,6 +1154,24 @@ of the event.</doc>
             <doc xml:space="preserve">Pointer to a gdouble to receive the delta_y coordinate of the
     mouse movement.</doc>
             <type name="gdouble" c:type="gdouble*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="event_parse_state" c:identifier="gst_navigation_event_parse_state" version="1.22">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">TRUE if the event is a #GstNavigation event with associated
+modifiers state, otherwise FALSE.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <parameter name="event" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstEvent to modify.</doc>
+            <type name="Gst.Event" c:type="GstEvent*"/>
+          </parameter>
+          <parameter name="state" transfer-ownership="none">
+            <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+            <type name="NavigationModifierType" c:type="GstNavigationModifierType*"/>
           </parameter>
         </parameters>
       </function>
@@ -1857,6 +1941,53 @@ disappeared.</doc>
 by any element in the pipeline (Since: 1.6)</doc>
       </member>
     </enumeration>
+    <bitfield name="NavigationModifierType" version="1.22" glib:type-name="GstNavigationModifierType" glib:get-type="gst_navigation_modifier_type_get_type" c:type="GstNavigationModifierType">
+      <doc xml:space="preserve">Flags to indicate the state of modifier keys and mouse buttons
+in events.
+
+Typical modifier keys are Shift, Control, Meta, Super, Hyper, Alt, Compose,
+Apple, CapsLock or ShiftLock.</doc>
+      <member name="none" value="0" c:identifier="GST_NAVIGATION_MODIFIER_NONE" glib:nick="none" glib:name="GST_NAVIGATION_MODIFIER_NONE">
+      </member>
+      <member name="shift_mask" value="1" c:identifier="GST_NAVIGATION_MODIFIER_SHIFT_MASK" glib:nick="shift-mask" glib:name="GST_NAVIGATION_MODIFIER_SHIFT_MASK">
+        <doc xml:space="preserve">the Shift key.</doc>
+      </member>
+      <member name="lock_mask" value="2" c:identifier="GST_NAVIGATION_MODIFIER_LOCK_MASK" glib:nick="lock-mask" glib:name="GST_NAVIGATION_MODIFIER_LOCK_MASK">
+      </member>
+      <member name="control_mask" value="4" c:identifier="GST_NAVIGATION_MODIFIER_CONTROL_MASK" glib:nick="control-mask" glib:name="GST_NAVIGATION_MODIFIER_CONTROL_MASK">
+        <doc xml:space="preserve">the Control key.</doc>
+      </member>
+      <member name="alt_mask" value="8" c:identifier="GST_NAVIGATION_MODIFIER_ALT_MASK" glib:nick="alt-mask" glib:name="GST_NAVIGATION_MODIFIER_ALT_MASK">
+        <doc xml:space="preserve">the fourth modifier key</doc>
+      </member>
+      <member name="button1_mask" value="256" c:identifier="GST_NAVIGATION_MODIFIER_BUTTON1_MASK" glib:nick="button1-mask" glib:name="GST_NAVIGATION_MODIFIER_BUTTON1_MASK">
+        <doc xml:space="preserve">the first mouse button (usually the left button).</doc>
+      </member>
+      <member name="button2_mask" value="512" c:identifier="GST_NAVIGATION_MODIFIER_BUTTON2_MASK" glib:nick="button2-mask" glib:name="GST_NAVIGATION_MODIFIER_BUTTON2_MASK">
+        <doc xml:space="preserve">the second mouse button (usually the right button).</doc>
+      </member>
+      <member name="button3_mask" value="1024" c:identifier="GST_NAVIGATION_MODIFIER_BUTTON3_MASK" glib:nick="button3-mask" glib:name="GST_NAVIGATION_MODIFIER_BUTTON3_MASK">
+        <doc xml:space="preserve">the third mouse button (usually the mouse wheel button or middle button).</doc>
+      </member>
+      <member name="button4_mask" value="2048" c:identifier="GST_NAVIGATION_MODIFIER_BUTTON4_MASK" glib:nick="button4-mask" glib:name="GST_NAVIGATION_MODIFIER_BUTTON4_MASK">
+        <doc xml:space="preserve">the fourth mouse button (typically the "Back" button).</doc>
+      </member>
+      <member name="button5_mask" value="4096" c:identifier="GST_NAVIGATION_MODIFIER_BUTTON5_MASK" glib:nick="button5-mask" glib:name="GST_NAVIGATION_MODIFIER_BUTTON5_MASK">
+        <doc xml:space="preserve">the fifth mouse button (typically the "forward" button).</doc>
+      </member>
+      <member name="super_mask" value="67108864" c:identifier="GST_NAVIGATION_MODIFIER_SUPER_MASK" glib:nick="super-mask" glib:name="GST_NAVIGATION_MODIFIER_SUPER_MASK">
+        <doc xml:space="preserve">the Super modifier</doc>
+      </member>
+      <member name="hyper_mask" value="134217728" c:identifier="GST_NAVIGATION_MODIFIER_HYPER_MASK" glib:nick="hyper-mask" glib:name="GST_NAVIGATION_MODIFIER_HYPER_MASK">
+        <doc xml:space="preserve">the Hyper modifier</doc>
+      </member>
+      <member name="meta_mask" value="268435456" c:identifier="GST_NAVIGATION_MODIFIER_META_MASK" glib:nick="meta-mask" glib:name="GST_NAVIGATION_MODIFIER_META_MASK">
+        <doc xml:space="preserve">the Meta modifier</doc>
+      </member>
+      <member name="mask" value="469769999" c:identifier="GST_NAVIGATION_MODIFIER_MASK" glib:nick="mask" glib:name="GST_NAVIGATION_MODIFIER_MASK">
+        <doc xml:space="preserve">A mask covering all entries in #GdkModifierType.</doc>
+      </member>
+    </bitfield>
     <enumeration name="NavigationQueryType" glib:type-name="GstNavigationQueryType" glib:get-type="gst_navigation_query_type_get_type" c:type="GstNavigationQueryType">
       <doc xml:space="preserve">Types of navigation interface queries.</doc>
       <member name="invalid" value="0" c:identifier="GST_NAVIGATION_QUERY_INVALID" glib:nick="invalid" glib:name="GST_NAVIGATION_QUERY_INVALID">
@@ -2556,7 +2687,7 @@ return to upstream/caller (indicating either GST_FLOW_ERROR or GST_FLOW_OK).</do
         </parameter>
       </parameters>
     </function-macro>
-    <constant name="VIDEO_FORMATS_ALL" value="{ ABGR64_BE, BGRA64_BE, AYUV64, ARGB64_BE, ARGB64, RGBA64_BE, ABGR64_LE, BGRA64_LE, ARGB64_LE, RGBA64_LE, GBRA_12BE, GBRA_12LE, Y412_BE, Y412_LE, A444_10BE, GBRA_10BE, A444_10LE, GBRA_10LE, A422_10BE, A422_10LE, A420_10BE, A420_10LE, Y410, RGB10A2_LE, BGR10A2_LE, GBRA, ABGR, VUYA, BGRA, AYUV, ARGB, RGBA, A420, AV12, Y444_16BE, Y444_16LE, v216, P016_BE, P016_LE, Y444_12BE, GBR_12BE, Y444_12LE, GBR_12LE, I422_12BE, I422_12LE, Y212_BE, Y212_LE, I420_12BE, I420_12LE, P012_BE, P012_LE, Y444_10BE, GBR_10BE, Y444_10LE, GBR_10LE, r210, I422_10BE, I422_10LE, NV16_10LE32, Y210, v210, UYVP, I420_10BE, I420_10LE, P010_10BE, P010_10LE, NV12_10LE32, NV12_10LE40, NV12_10BE_8L128, Y444, RGBP, GBR, BGRP, NV24, xBGR, BGRx, xRGB, RGBx, BGR, IYU2, v308, RGB, Y42B, NV61, NV16, VYUY, UYVY, YVYU, YUY2, I420, YV12, NV21, NV12, NV12_64Z32, NV12_4L4, NV12_32L32, NV12_16L32S, NV12_8L128, Y41B, IYU1, YVU9, YUV9, RGB16, BGR16, RGB15, BGR15, RGB8P, GRAY16_BE, GRAY16_LE, GRAY10_LE32, GRAY8 }" c:type="GST_VIDEO_FORMATS_ALL">
+    <constant name="VIDEO_FORMATS_ALL" value="{ ABGR64_BE, BGRA64_BE, AYUV64, ARGB64_BE, ARGB64, RGBA64_BE, ABGR64_LE, BGRA64_LE, ARGB64_LE, RGBA64_LE, GBRA_12BE, GBRA_12LE, Y412_BE, Y412_LE, A444_10BE, GBRA_10BE, A444_10LE, GBRA_10LE, A422_10BE, A422_10LE, A420_10BE, A420_10LE, Y410, RGB10A2_LE, BGR10A2_LE, GBRA, ABGR, VUYA, BGRA, AYUV, ARGB, RGBA, A420, AV12, Y444_16BE, Y444_16LE, v216, P016_BE, P016_LE, Y444_12BE, GBR_12BE, Y444_12LE, GBR_12LE, I422_12BE, I422_12LE, Y212_BE, Y212_LE, I420_12BE, I420_12LE, P012_BE, P012_LE, Y444_10BE, GBR_10BE, Y444_10LE, GBR_10LE, r210, I422_10BE, I422_10LE, NV16_10LE32, Y210, v210, UYVP, I420_10BE, I420_10LE, P010_10BE, P010_10LE, NV12_10LE32, NV12_10LE40, NV12_10BE_8L128, Y444, RGBP, GBR, BGRP, NV24, xBGR, BGRx, xRGB, RGBx, BGR, IYU2, v308, RGB, Y42B, NV61, NV16, VYUY, UYVY, YVYU, YUY2, I420, YV12, NV21, NV12, NV12_8L128, NV12_64Z32, NV12_4L4, NV12_32L32, NV12_16L32S, Y41B, IYU1, YVU9, YUV9, RGB16, BGR16, RGB15, BGR15, RGB8P, GRAY16_BE, GRAY16_LE, GRAY10_LE32, GRAY8 }" c:type="GST_VIDEO_FORMATS_ALL">
       <doc xml:space="preserve">List of all video formats, for use in template caps strings.
 
 Formats are sorted by decreasing "quality", using these criteria by priority:
@@ -14996,6 +15127,11 @@ to automatically add #GstVideoMeta to the buffers.</doc>
           <doc xml:space="preserve">A string identifying the key press.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </parameter>
+        <parameter name="state" transfer-ownership="none">
+          <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+          <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
+        </parameter>
       </parameters>
     </function>
     <function name="navigation_event_new_key_release" c:identifier="gst_navigation_event_new_key_release" moved-to="Navigation.event_new_key_release" version="1.22">
@@ -15008,6 +15144,11 @@ to automatically add #GstVideoMeta to the buffers.</doc>
         <parameter name="key" transfer-ownership="none">
           <doc xml:space="preserve">A string identifying the released key.</doc>
           <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="state" transfer-ownership="none">
+          <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+          <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
         </parameter>
       </parameters>
     </function>
@@ -15030,6 +15171,11 @@ to automatically add #GstVideoMeta to the buffers.</doc>
           <doc xml:space="preserve">The y coordinate of the mouse cursor.</doc>
           <type name="gdouble" c:type="gdouble"/>
         </parameter>
+        <parameter name="state" transfer-ownership="none">
+          <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+          <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
+        </parameter>
       </parameters>
     </function>
     <function name="navigation_event_new_mouse_button_release" c:identifier="gst_navigation_event_new_mouse_button_release" moved-to="Navigation.event_new_mouse_button_release" version="1.22">
@@ -15051,6 +15197,11 @@ to automatically add #GstVideoMeta to the buffers.</doc>
           <doc xml:space="preserve">The y coordinate of the mouse cursor.</doc>
           <type name="gdouble" c:type="gdouble"/>
         </parameter>
+        <parameter name="state" transfer-ownership="none">
+          <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+          <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
+        </parameter>
       </parameters>
     </function>
     <function name="navigation_event_new_mouse_move" c:identifier="gst_navigation_event_new_mouse_move" moved-to="Navigation.event_new_mouse_move" version="1.22">
@@ -15067,6 +15218,11 @@ to automatically add #GstVideoMeta to the buffers.</doc>
         <parameter name="y" transfer-ownership="none">
           <doc xml:space="preserve">The y coordinate of the mouse cursor.</doc>
           <type name="gdouble" c:type="gdouble"/>
+        </parameter>
+        <parameter name="state" transfer-ownership="none">
+          <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+          <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
         </parameter>
       </parameters>
     </function>
@@ -15093,6 +15249,11 @@ to automatically add #GstVideoMeta to the buffers.</doc>
           <doc xml:space="preserve">The y component of the scroll movement.</doc>
           <type name="gdouble" c:type="gdouble"/>
         </parameter>
+        <parameter name="state" transfer-ownership="none">
+          <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+          <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
+        </parameter>
       </parameters>
     </function>
     <function name="navigation_event_new_touch_cancel" c:identifier="gst_navigation_event_new_touch_cancel" moved-to="Navigation.event_new_touch_cancel" version="1.22">
@@ -15104,6 +15265,13 @@ as a gesture by the compositor.</doc>
         <doc xml:space="preserve">a new #GstEvent</doc>
         <type name="Gst.Event" c:type="GstEvent*"/>
       </return-value>
+      <parameters>
+        <parameter name="state" transfer-ownership="none">
+          <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+          <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
+        </parameter>
+      </parameters>
     </function>
     <function name="navigation_event_new_touch_down" c:identifier="gst_navigation_event_new_touch_down" moved-to="Navigation.event_new_touch_down" version="1.22">
       <doc xml:space="preserve">Create a new navigation event for an added touch point.</doc>
@@ -15131,6 +15299,11 @@ as a gesture by the compositor.</doc>
    data is available.</doc>
           <type name="gdouble" c:type="gdouble"/>
         </parameter>
+        <parameter name="state" transfer-ownership="none">
+          <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+          <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
+        </parameter>
       </parameters>
     </function>
     <function name="navigation_event_new_touch_frame" c:identifier="gst_navigation_event_new_touch_frame" moved-to="Navigation.event_new_touch_frame" version="1.22">
@@ -15141,6 +15314,13 @@ another touch frame event already should be considered simultaneous.</doc>
         <doc xml:space="preserve">a new #GstEvent</doc>
         <type name="Gst.Event" c:type="GstEvent*"/>
       </return-value>
+      <parameters>
+        <parameter name="state" transfer-ownership="none">
+          <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+          <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
+        </parameter>
+      </parameters>
     </function>
     <function name="navigation_event_new_touch_motion" c:identifier="gst_navigation_event_new_touch_motion" moved-to="Navigation.event_new_touch_motion" version="1.22">
       <doc xml:space="preserve">Create a new navigation event for a moved touch point.</doc>
@@ -15167,6 +15347,11 @@ another touch frame event already should be considered simultaneous.</doc>
    data is available.</doc>
           <type name="gdouble" c:type="gdouble"/>
         </parameter>
+        <parameter name="state" transfer-ownership="none">
+          <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+          <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
+        </parameter>
       </parameters>
     </function>
     <function name="navigation_event_new_touch_up" c:identifier="gst_navigation_event_new_touch_up" moved-to="Navigation.event_new_touch_up" version="1.22">
@@ -15190,6 +15375,11 @@ another touch frame event already should be considered simultaneous.</doc>
           <doc xml:space="preserve">The y coordinate of the touch point.</doc>
           <type name="gdouble" c:type="gdouble"/>
         </parameter>
+        <parameter name="state" transfer-ownership="none">
+          <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+          <type name="NavigationModifierType" c:type="GstNavigationModifierType"/>
+        </parameter>
       </parameters>
     </function>
     <function name="navigation_event_parse_command" c:identifier="gst_navigation_event_parse_command" moved-to="Navigation.event_parse_command">
@@ -15212,6 +15402,10 @@ associated command.</doc>
       </parameters>
     </function>
     <function name="navigation_event_parse_key_event" c:identifier="gst_navigation_event_parse_key_event" moved-to="Navigation.event_parse_key_event">
+      <doc xml:space="preserve">Note: Modifier keys (as defined in #GstNavigationModifierType)
+[press](GST_NAVIGATION_EVENT_KEY_PRESS) and
+[release](GST_NAVIGATION_KEY_PRESS) events are generated even if those states are
+present on all other related events</doc>
       <return-value transfer-ownership="none">
         <type name="gboolean" c:type="gboolean"/>
       </return-value>
@@ -15314,6 +15508,24 @@ of the event.</doc>
           <doc xml:space="preserve">Pointer to a gdouble to receive the delta_y coordinate of the
     mouse movement.</doc>
           <type name="gdouble" c:type="gdouble*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="navigation_event_parse_state" c:identifier="gst_navigation_event_parse_state" moved-to="Navigation.event_parse_state" version="1.22">
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">TRUE if the event is a #GstNavigation event with associated
+modifiers state, otherwise FALSE.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="event" transfer-ownership="none">
+          <doc xml:space="preserve">The #GstEvent to modify.</doc>
+          <type name="Gst.Event" c:type="GstEvent*"/>
+        </parameter>
+        <parameter name="state" transfer-ownership="none">
+          <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+          <type name="NavigationModifierType" c:type="GstNavigationModifierType*"/>
         </parameter>
       </parameters>
     </function>

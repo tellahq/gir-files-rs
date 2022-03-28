@@ -18333,15 +18333,15 @@ MT safe.</doc>
           <doc xml:space="preserve">The structure of the event. The structure
 is still owned by the event, which means that you should not free
 it and that the pointer becomes invalid when you free the event.
-This function checks if @event is writable and will never return
-%NULL.
+This function ensures that @event is writable, and if so, will
+never return %NULL.
 
 MT safe.</doc>
           <type name="Structure" c:type="GstStructure*"/>
         </return-value>
         <parameters>
           <instance-parameter name="event" transfer-ownership="none">
-            <doc xml:space="preserve">The #GstEvent.</doc>
+            <doc xml:space="preserve">A writable #GstEvent.</doc>
             <type name="Event" c:type="GstEvent*"/>
           </instance-parameter>
         </parameters>
@@ -23824,15 +23824,15 @@ freeing it.</doc>
           <doc xml:space="preserve">The structure of the message. The structure
 is still owned by the message, which means that you should not free
 it and that the pointer becomes invalid when you free the message.
-This function checks if @message is writable and will never return
-%NULL.
+This function ensures that @message is writable, and if so, will
+never return %NULL.
 
 MT safe.</doc>
           <type name="Structure" c:type="GstStructure*"/>
         </return-value>
         <parameters>
           <instance-parameter name="message" transfer-ownership="none">
-            <doc xml:space="preserve">The #GstMessage.</doc>
+            <doc xml:space="preserve">A writable #GstMessage.</doc>
             <type name="Message" c:type="GstMessage*"/>
           </instance-parameter>
         </parameters>

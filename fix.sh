@@ -81,6 +81,7 @@ xmlstarlet ed --inplace \
 xmlstarlet ed --inplace \
     --delete "//_:member[@c:identifier=\"GST_VIDEO_BUFFER_FLAG_ONEFIELD\"][2]" \
     --delete "//_:member[@c:identifier=\"GST_VIDEO_FRAME_FLAG_ONEFIELD\"][2]" \
+    --delete "//_:member[@c:identifier=\"GST_NAVIGATION_MODIFIER_META_MASK\"][2]" \
     GstVideo-1.0.gir
 
 xmlstarlet ed --inplace \
