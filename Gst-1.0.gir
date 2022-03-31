@@ -33433,6 +33433,15 @@ Free-function: gst_query_unref()</doc>
           </parameter>
         </parameters>
       </constructor>
+      <constructor name="new_selectable" c:identifier="gst_query_new_selectable" version="1.22">
+        <doc xml:space="preserve">Constructs a new query object for querying the stream selection capability.
+
+Free-function: gst_query_unref()</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a new #GstQuery</doc>
+          <type name="Query" c:type="GstQuery*"/>
+        </return-value>
+      </constructor>
       <constructor name="new_uri" c:identifier="gst_query_new_uri">
         <doc xml:space="preserve">Constructs a new query URI query object. Use gst_query_unref()
 when done with it. An URI query is used to query the current URI
@@ -34302,6 +34311,22 @@ See gst_query_set_segment() for an explanation of the function arguments.</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="parse_selectable" c:identifier="gst_query_parse_selectable" version="1.22">
+        <doc xml:space="preserve">Get the results of a selectable query. See also gst_query_set_selectable().</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="query" transfer-ownership="none">
+            <doc xml:space="preserve">a GST_QUERY_SELECTABLE type #GstQuery</doc>
+            <type name="Query" c:type="GstQuery*"/>
+          </instance-parameter>
+          <parameter name="selectable" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+            <doc xml:space="preserve">The resulting stream selection capability</doc>
+            <type name="gboolean" c:type="gboolean*"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="parse_uri" c:identifier="gst_query_parse_uri">
         <doc xml:space="preserve">Parse an URI query, writing the URI into @uri as a newly
 allocated string, if the respective parameters are non-%NULL.
@@ -34853,6 +34878,23 @@ negative rates, playback will actually happen from @stop_value to
           </parameter>
         </parameters>
       </method>
+      <method name="set_selectable" c:identifier="gst_query_set_selectable" version="1.22">
+        <doc xml:space="preserve">Set the results of a selectable query. If the element answering the query can
+handle stream selection, @selectable should be set to %TRUE.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="query" transfer-ownership="none">
+            <doc xml:space="preserve">a GST_QUERY_SELECTABLE type #GstQuery</doc>
+            <type name="Query" c:type="GstQuery*"/>
+          </instance-parameter>
+          <parameter name="selectable" transfer-ownership="none">
+            <doc xml:space="preserve">Whether the element can handle stream selection.</doc>
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="set_uri" c:identifier="gst_query_set_uri">
         <doc xml:space="preserve">Answer a URI query by setting the requested URI.</doc>
         <return-value transfer-ownership="none">
@@ -35041,6 +35083,9 @@ Either @new_query or the #GstQuery pointed to by @old_query may be %NULL.</doc>
       </member>
       <member name="bitrate" value="51202" c:identifier="GST_QUERY_BITRATE" glib:nick="bitrate" glib:name="GST_QUERY_BITRATE">
         <doc xml:space="preserve">the bitrate query (since 1.16)</doc>
+      </member>
+      <member name="selectable" value="53763" c:identifier="GST_QUERY_SELECTABLE" version="1.22" glib:nick="selectable" glib:name="GST_QUERY_SELECTABLE">
+        <doc xml:space="preserve">Query stream selection capability.</doc>
       </member>
       <function name="get_flags" c:identifier="gst_query_type_get_flags">
         <doc xml:space="preserve">Gets the #GstQueryTypeFlags associated with @type.</doc>

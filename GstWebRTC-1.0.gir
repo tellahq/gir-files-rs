@@ -489,6 +489,9 @@ for more information.</doc>
       <member name="internal_failure" value="8" c:identifier="GST_WEBRTC_ERROR_INTERNAL_FAILURE" glib:nick="internal-failure" glib:name="GST_WEBRTC_ERROR_INTERNAL_FAILURE">
         <doc xml:space="preserve">GStreamer-specific failure, not matching any other value from the specification</doc>
       </member>
+      <member name="invalid_modification" value="9" c:identifier="GST_WEBRTC_ERROR_INVALID_MODIFICATION" version="1.22" glib:nick="invalid-modification" glib:name="GST_WEBRTC_ERROR_INVALID_MODIFICATION">
+        <doc xml:space="preserve">invalid-modification (part of WebIDL specification)</doc>
+      </member>
       <function name="quark" c:identifier="gst_webrtc_error_quark" version="1.20">
         <return-value transfer-ownership="none">
           <type name="GLib.Quark" c:type="GQuark"/>
