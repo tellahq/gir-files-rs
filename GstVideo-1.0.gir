@@ -1068,6 +1068,24 @@ present on all other related events</doc>
           </parameter>
         </parameters>
       </function>
+      <function name="event_parse_modifier_state" c:identifier="gst_navigation_event_parse_modifier_state" version="1.22">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">TRUE if the event is a #GstNavigation event with associated
+modifiers state, otherwise FALSE.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <parameter name="event" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstEvent to modify.</doc>
+            <type name="Gst.Event" c:type="GstEvent*"/>
+          </parameter>
+          <parameter name="state" transfer-ownership="none">
+            <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+            <type name="NavigationModifierType" c:type="GstNavigationModifierType*"/>
+          </parameter>
+        </parameters>
+      </function>
       <function name="event_parse_mouse_button_event" c:identifier="gst_navigation_event_parse_mouse_button_event">
         <doc xml:space="preserve">Retrieve the details of either a #GstNavigation mouse button press event or
 a mouse button release event. Determine which type the event is using
@@ -1154,24 +1172,6 @@ of the event.</doc>
             <doc xml:space="preserve">Pointer to a gdouble to receive the delta_y coordinate of the
     mouse movement.</doc>
             <type name="gdouble" c:type="gdouble*"/>
-          </parameter>
-        </parameters>
-      </function>
-      <function name="event_parse_state" c:identifier="gst_navigation_event_parse_state" version="1.22">
-        <return-value transfer-ownership="none">
-          <doc xml:space="preserve">TRUE if the event is a #GstNavigation event with associated
-modifiers state, otherwise FALSE.</doc>
-          <type name="gboolean" c:type="gboolean"/>
-        </return-value>
-        <parameters>
-          <parameter name="event" transfer-ownership="none">
-            <doc xml:space="preserve">The #GstEvent to modify.</doc>
-            <type name="Gst.Event" c:type="GstEvent*"/>
-          </parameter>
-          <parameter name="state" transfer-ownership="none">
-            <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
-Shift and Alt).</doc>
-            <type name="NavigationModifierType" c:type="GstNavigationModifierType*"/>
           </parameter>
         </parameters>
       </function>
@@ -15422,6 +15422,24 @@ present on all other related events</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="navigation_event_parse_modifier_state" c:identifier="gst_navigation_event_parse_modifier_state" moved-to="Navigation.event_parse_modifier_state" version="1.22">
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">TRUE if the event is a #GstNavigation event with associated
+modifiers state, otherwise FALSE.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="event" transfer-ownership="none">
+          <doc xml:space="preserve">The #GstEvent to modify.</doc>
+          <type name="Gst.Event" c:type="GstEvent*"/>
+        </parameter>
+        <parameter name="state" transfer-ownership="none">
+          <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
+Shift and Alt).</doc>
+          <type name="NavigationModifierType" c:type="GstNavigationModifierType*"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="navigation_event_parse_mouse_button_event" c:identifier="gst_navigation_event_parse_mouse_button_event" moved-to="Navigation.event_parse_mouse_button_event">
       <doc xml:space="preserve">Retrieve the details of either a #GstNavigation mouse button press event or
 a mouse button release event. Determine which type the event is using
@@ -15508,24 +15526,6 @@ of the event.</doc>
           <doc xml:space="preserve">Pointer to a gdouble to receive the delta_y coordinate of the
     mouse movement.</doc>
           <type name="gdouble" c:type="gdouble*"/>
-        </parameter>
-      </parameters>
-    </function>
-    <function name="navigation_event_parse_state" c:identifier="gst_navigation_event_parse_state" moved-to="Navigation.event_parse_state" version="1.22">
-      <return-value transfer-ownership="none">
-        <doc xml:space="preserve">TRUE if the event is a #GstNavigation event with associated
-modifiers state, otherwise FALSE.</doc>
-        <type name="gboolean" c:type="gboolean"/>
-      </return-value>
-      <parameters>
-        <parameter name="event" transfer-ownership="none">
-          <doc xml:space="preserve">The #GstEvent to modify.</doc>
-          <type name="Gst.Event" c:type="GstEvent*"/>
-        </parameter>
-        <parameter name="state" transfer-ownership="none">
-          <doc xml:space="preserve">a bit-mask representing the state of the modifier keys (e.g. Control,
-Shift and Alt).</doc>
-          <type name="NavigationModifierType" c:type="GstNavigationModifierType*"/>
         </parameter>
       </parameters>
     </function>
