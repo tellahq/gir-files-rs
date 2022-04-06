@@ -444,11 +444,8 @@ for more information.</doc>
     <record name="WebRTCDataChannelClass" c:type="GstWebRTCDataChannelClass" disguised="1" glib:is-gtype-struct-for="WebRTCDataChannel"/>
     <enumeration name="WebRTCDataChannelState" version="1.16" glib:type-name="GstWebRTCDataChannelState" glib:get-type="gst_webrtc_data_channel_state_get_type" c:type="GstWebRTCDataChannelState">
       <doc xml:space="preserve">See &lt;http://w3c.github.io/webrtc-pc/#dom-rtcdatachannelstate&gt;</doc>
-      <member name="new" value="0" c:identifier="GST_WEBRTC_DATA_CHANNEL_STATE_NEW" glib:nick="new" glib:name="GST_WEBRTC_DATA_CHANNEL_STATE_NEW">
-        <doc xml:space="preserve">new</doc>
-      </member>
       <member name="connecting" value="1" c:identifier="GST_WEBRTC_DATA_CHANNEL_STATE_CONNECTING" glib:nick="connecting" glib:name="GST_WEBRTC_DATA_CHANNEL_STATE_CONNECTING">
-        <doc xml:space="preserve">connection</doc>
+        <doc xml:space="preserve">connecting</doc>
       </member>
       <member name="open" value="2" c:identifier="GST_WEBRTC_DATA_CHANNEL_STATE_OPEN" glib:nick="open" glib:name="GST_WEBRTC_DATA_CHANNEL_STATE_OPEN">
         <doc xml:space="preserve">open</doc>
