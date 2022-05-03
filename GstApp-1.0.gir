@@ -1985,7 +1985,8 @@ becomes available in the queue.</doc>
           <type name="Gst.FlowReturn"/>
         </return-value>
         <parameters>
-          <parameter name="object" transfer-ownership="none">
+          <parameter name="buffer" transfer-ownership="none">
+            <doc xml:space="preserve">a buffer to push</doc>
             <type name="Gst.Buffer"/>
           </parameter>
         </parameters>
@@ -2004,7 +2005,8 @@ becomes available in the queue.</doc>
           <type name="Gst.FlowReturn"/>
         </return-value>
         <parameters>
-          <parameter name="object" transfer-ownership="none">
+          <parameter name="buffer_list" transfer-ownership="none">
+            <doc xml:space="preserve">a buffer list to push</doc>
             <type name="Gst.BufferList"/>
           </parameter>
         </parameters>
@@ -2027,7 +2029,8 @@ becomes available in the queue.</doc>
           <type name="Gst.FlowReturn"/>
         </return-value>
         <parameters>
-          <parameter name="object" transfer-ownership="none">
+          <parameter name="sample" transfer-ownership="none">
+            <doc xml:space="preserve">a sample from which extract buffer to push</doc>
             <type name="Gst.Sample"/>
           </parameter>
         </parameters>

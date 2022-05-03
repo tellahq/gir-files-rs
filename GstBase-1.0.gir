@@ -975,6 +975,8 @@ Control is given to the subclass when all pads have data.
    these into gap buffers with matching PTS and duration. It will also
    flag these buffers with GST_BUFFER_FLAG_GAP and GST_BUFFER_FLAG_DROPPABLE
    to ease their identification and subsequent processing.
+   In addition, if the gap event was flagged with GST_GAP_FLAG_MISSING_DATA,
+   a custom meta is added to the resulting gap buffer (GstAggregatorMissingDataMeta).
 
  * Subclasses must use (a subclass of) #GstAggregatorPad for both their
    sink and source pads.

@@ -9630,6 +9630,34 @@ useful to support legacy API were only one stride is supported.</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="get_tile_sizes" c:identifier="gst_video_format_info_get_tile_sizes" version="1.22">
+        <doc xml:space="preserve">This function will read the width and height tile dimension shifts from
+@info and scale it according to the tiling type and @plane. The results
+will written into @out_hs and @out_ws. It also computes the size of a tile
+in bytes.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">The size of a tile in bytes.</doc>
+          <type name="guint" c:type="guint"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="finfo" transfer-ownership="none">
+            <doc xml:space="preserve">#GstVideoFormatInfo</doc>
+            <type name="VideoFormatInfo" c:type="const GstVideoFormatInfo*"/>
+          </instance-parameter>
+          <parameter name="plane" transfer-ownership="none">
+            <doc xml:space="preserve">The plane to read the tile sizes for.</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="out_ws" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">Set to the scaled tile width shift</doc>
+            <type name="guint" c:type="guint*"/>
+          </parameter>
+          <parameter name="out_hs" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">Set to the scaled tile height shift</doc>
+            <type name="guint" c:type="guint*"/>
+          </parameter>
+        </parameters>
+      </method>
     </record>
     <callback name="VideoFormatPack" c:type="GstVideoFormatPack">
       <doc xml:space="preserve">Packs @width pixels from @src to the given planes and strides in the

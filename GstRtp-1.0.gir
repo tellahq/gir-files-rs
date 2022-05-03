@@ -2730,7 +2730,7 @@ This function takes ownership of @buffer.</doc>
             <doc xml:space="preserve">a #GstRTPBasePayload</doc>
             <type name="RTPBasePayload" c:type="GstRTPBasePayload*"/>
           </instance-parameter>
-          <parameter name="buffer" transfer-ownership="none">
+          <parameter name="buffer" transfer-ownership="full">
             <doc xml:space="preserve">a #GstBuffer</doc>
             <type name="Gst.Buffer" c:type="GstBuffer*"/>
           </parameter>
@@ -2750,7 +2750,7 @@ This function takes ownership of @list.</doc>
             <doc xml:space="preserve">a #GstRTPBasePayload</doc>
             <type name="RTPBasePayload" c:type="GstRTPBasePayload*"/>
           </instance-parameter>
-          <parameter name="list" transfer-ownership="none">
+          <parameter name="list" transfer-ownership="full">
             <doc xml:space="preserve">a #GstBufferList</doc>
             <type name="Gst.BufferList" c:type="GstBufferList*"/>
           </parameter>

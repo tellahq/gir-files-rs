@@ -1839,7 +1839,7 @@ a=framesize:(payload) (width)-(height)
 
 a=fmtp:(payload) (param)[=(value)];...
 
-Note that the extmap attribute is set only by gst_sdp_media_attributes_to_caps().</doc>
+Note that the extmap, ssrc and rid attributes are set only by gst_sdp_media_attributes_to_caps().</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">a #GstCaps, or %NULL if an error happened</doc>
           <type name="Gst.Caps" c:type="GstCaps*"/>
