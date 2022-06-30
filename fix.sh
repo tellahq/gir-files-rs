@@ -8,6 +8,7 @@ for file in *.gir; do
         -d '//_:doc/@line' \
         -d '//_:doc/@filename' \
         -d '///_:source-position' \
+        -d '//_:doc-version' \
         "$file"
 done
 
