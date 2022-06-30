@@ -2692,6 +2692,10 @@ describe the format of the caps.</doc>
         <doc xml:space="preserve">Container format can store any kind of
     stream type.</doc>
       </member>
+      <member name="metadata" value="128" c:identifier="GST_PBUTILS_CAPS_DESCRIPTION_FLAG_METADATA" version="1.22" glib:nick="metadata" glib:name="GST_PBUTILS_CAPS_DESCRIPTION_FLAG_METADATA">
+        <doc xml:space="preserve">Caps describe a metadata format, or a container format that can store
+metadata.</doc>
+      </member>
     </bitfield>
     <function name="codec_utils_aac_caps_set_level_and_profile" c:identifier="gst_codec_utils_aac_caps_set_level_and_profile">
       <doc xml:space="preserve">Sets the level and profile on @caps if it can be determined from

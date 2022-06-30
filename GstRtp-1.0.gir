@@ -1988,8 +1988,8 @@ according to the [IANA registry](https://www.iana.org/assignments/rtcp-xr-block-
       <doc xml:space="preserve">The maximum amount of SDES items.</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="RTCP_REDUCED_SIZE_VALID_MASK" value="57592" c:type="GST_RTCP_REDUCED_SIZE_VALID_MASK">
-      <doc xml:space="preserve">Mask for version, padding bit and packet type pair allowing reduced size
+    <constant name="RTCP_REDUCED_SIZE_VALID_MASK" value="49400" c:type="GST_RTCP_REDUCED_SIZE_VALID_MASK">
+      <doc xml:space="preserve">Mask for version and packet type pair allowing reduced size
 packets, basically it accepts other types than RR and SR</doc>
       <type name="gint" c:type="gint"/>
     </constant>

@@ -9,6 +9,25 @@ and/or use gtk-doc annotations.  -->
   <package name="gstreamer-1.0"/>
   <c:include name="gst/gst.h"/>
   <namespace name="Gst" version="1.0" shared-library="libgstreamer-1.0.so.0" c:identifier-prefixes="Gst" c:symbol-prefixes="gst">
+    <alias name="BufferMapInfo" c:type="GstBufferMapInfo" introspectable="0">
+      <doc xml:space="preserve">Alias for #GstMapInfo to be used with g_auto():
+```c
+void my_func(GstBuffer *buf)
+{
+  g_auto(GstBufferMapInfo) map = GST_MAP_INFO_INIT;
+  if (!gst_buffer_map(buf, &amp;map, GST_MAP_READWRITE))
+    return;
+  ...
+  // No need to call gst_buffer_unmap()
+}
+```
+
+#GstMapInfo cannot be used with g_auto() because it is ambiguous whether it
+needs to be unmapped using gst_buffer_unmap() or gst_memory_unmap().
+
+See also #GstMemoryMapInfo.</doc>
+      <type name="MapInfo" c:type="GstMapInfo"/>
+    </alias>
     <alias name="ClockID" c:type="GstClockID">
       <doc xml:space="preserve">A datatype to hold the handle to an outstanding sync or async clock callback.</doc>
       <type name="gpointer" c:type="gpointer"/>
@@ -24,6 +43,25 @@ and/or use gtk-doc annotations.  -->
     <alias name="ElementFactoryListType" c:type="GstElementFactoryListType">
       <doc xml:space="preserve">A type defining the type of an element factory.</doc>
       <type name="guint64" c:type="guint64"/>
+    </alias>
+    <alias name="MemoryMapInfo" c:type="GstMemoryMapInfo" introspectable="0">
+      <doc xml:space="preserve">Alias for #GstMapInfo to be used with g_auto():
+```c
+void my_func(GstMemory *mem)
+{
+  g_auto(GstMemoryMapInfo) map = GST_MAP_INFO_INIT;
+  if (!gst_memory_map(mem, &amp;map, GST_MAP_READWRITE))
+    return;
+  ...
+  // No need to call gst_memory_unmap()
+}
+```
+
+#GstMapInfo cannot be used with g_auto() because it is ambiguous whether it
+needs to be unmapped using gst_buffer_unmap() or gst_memory_unmap().
+
+See also #GstBufferMapInfo.</doc>
+      <type name="MapInfo" c:type="GstMapInfo"/>
     </alias>
     <function-macro name="ALLOCATOR" c:identifier="GST_ALLOCATOR" introspectable="0">
       <parameters>
@@ -20795,7 +20833,11 @@ gst_mini_object_lock() and gst_mini_object_unlock().</doc>
     </bitfield>
     <record name="MapInfo" c:type="GstMapInfo">
       <doc xml:space="preserve">A structure containing the result of a map operation such as
-gst_memory_map(). It contains the data and size.</doc>
+gst_memory_map(). It contains the data and size.
+
+#GstMapInfo cannot be used with g_auto() because it is ambiguous whether it
+needs to be unmapped using gst_buffer_unmap() or gst_memory_unmap(). Instead,
+#GstBufferMapInfo and #GstMemoryMapInfo can be used in that case.</doc>
       <field name="memory" writable="1">
         <doc xml:space="preserve">a pointer to the mapped memory</doc>
         <type name="Memory" c:type="GstMemory*"/>

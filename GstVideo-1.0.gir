@@ -12887,8 +12887,6 @@ can be supported by cross platform applications).</doc>
       <method name="get_param" c:identifier="gst_video_region_of_interest_meta_get_param" version="1.14">
         <doc xml:space="preserve">Retrieve the parameter for @meta having @name as structure name,
 or %NULL if there is none.</doc>
-        <doc-version xml:space="preserve">
-See also: gst_video_region_of_interest_meta_add_param()</doc-version>
         <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">a #GstStructure</doc>
           <type name="Gst.Structure" c:type="GstStructure*"/>
@@ -13028,6 +13026,33 @@ required to perform various kinds of resampling filtering.</doc>
         <doc xml:space="preserve">Uses lanczos interpolation</doc>
       </member>
     </enumeration>
+    <record name="VideoSEIUserDataUnregisteredMeta" c:type="GstVideoSEIUserDataUnregisteredMeta" version="1.22">
+      <doc xml:space="preserve">H.264 H.265 metadata from SEI User Data Unregistered messages</doc>
+      <field name="meta" writable="1">
+        <doc xml:space="preserve">parent #GstMeta</doc>
+        <type name="Gst.Meta" c:type="GstMeta"/>
+      </field>
+      <field name="uuid" writable="1">
+        <doc xml:space="preserve">User Data Unregistered UUID</doc>
+        <array zero-terminated="0" fixed-size="16">
+          <type name="guint8" c:type="guint8"/>
+        </array>
+      </field>
+      <field name="data" writable="1">
+        <doc xml:space="preserve">Unparsed data buffer</doc>
+        <type name="guint8" c:type="guint8*"/>
+      </field>
+      <field name="size" writable="1">
+        <doc xml:space="preserve">Size of the data buffer</doc>
+        <type name="gsize" c:type="gsize"/>
+      </field>
+      <function name="get_info" c:identifier="gst_video_sei_user_data_unregistered_meta_get_info" version="1.22">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">#GstMetaInfo pointer that describes #GstVideoSEIUserDataUnregisteredMeta.</doc>
+          <type name="Gst.MetaInfo" c:type="const GstMetaInfo*"/>
+        </return-value>
+      </function>
+    </record>
     <record name="VideoScaler" c:type="GstVideoScaler" disguised="1">
       <doc xml:space="preserve">#GstVideoScaler is a utility object for rescaling and resampling
 video frames using various interpolation / sampling methods.</doc>
@@ -14811,6 +14836,32 @@ parameters.</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="buffer_add_video_sei_user_data_unregistered_meta" c:identifier="gst_buffer_add_video_sei_user_data_unregistered_meta" version="1.22">
+      <doc xml:space="preserve">Attaches #GstVideoSEIUserDataUnregisteredMeta metadata to @buffer with the given
+parameters.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">the #GstVideoSEIUserDataUnregisteredMeta on @buffer.</doc>
+        <type name="VideoSEIUserDataUnregisteredMeta" c:type="GstVideoSEIUserDataUnregisteredMeta*"/>
+      </return-value>
+      <parameters>
+        <parameter name="buffer" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstBuffer</doc>
+          <type name="Gst.Buffer" c:type="GstBuffer*"/>
+        </parameter>
+        <parameter name="uuid" transfer-ownership="none">
+          <doc xml:space="preserve">User Data Unregistered UUID</doc>
+          <type name="guint8" c:type="guint8*"/>
+        </parameter>
+        <parameter name="data" transfer-ownership="none">
+          <doc xml:space="preserve">SEI User Data Unregistered buffer</doc>
+          <type name="guint8" c:type="guint8*"/>
+        </parameter>
+        <parameter name="size" transfer-ownership="none">
+          <doc xml:space="preserve">size of the data buffer</doc>
+          <type name="gsize" c:type="gsize"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="buffer_add_video_time_code_meta" c:identifier="gst_buffer_add_video_time_code_meta" version="1.10">
       <doc xml:space="preserve">Attaches #GstVideoTimeCodeMeta metadata to @buffer with the given
 parameters.</doc>
@@ -15010,6 +15061,14 @@ no such metadata on @buffer.</doc>
         </parameter>
       </parameters>
     </function>
+    <function-macro name="buffer_get_video_sei_user_data_unregistered_meta" c:identifier="gst_buffer_get_video_sei_user_data_unregistered_meta" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Gets the GstVideoSEIUserDataUnregisteredMeta that might be present on @b.</doc>
+      <parameters>
+        <parameter name="b">
+          <doc xml:space="preserve">A #GstBuffer</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="buffer_get_video_time_code_meta" c:identifier="gst_buffer_get_video_time_code_meta" introspectable="0">
       <parameters>
         <parameter name="b">
@@ -15080,6 +15139,10 @@ and converting between different chroma sampling sitings.</doc>
 Allows configuration of video-specific requirements such as
 stride alignments or pixel padding, and can also be configured
 to automatically add #GstVideoMeta to the buffers.</doc>
+    </docsection>
+    <docsection name="gstvideosei">
+      <doc xml:space="preserve">A collection of objects and methods to assist with SEI User Data Unregistered
+metadata in H.264 and H.265 streams.</doc>
     </docsection>
     <function name="is_video_overlay_prepare_window_handle_message" c:identifier="gst_is_video_overlay_prepare_window_handle_message">
       <doc xml:space="preserve">Convenience function to check if the given message is a
@@ -17185,6 +17248,34 @@ recognised, and %FALSE otherwise.</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="video_is_common_aspect_ratio" c:identifier="gst_video_is_common_aspect_ratio" version="1.22">
+      <doc xml:space="preserve">Given a frame's dimensions and pixel aspect ratio, this function will
+calculate the frame's aspect ratio and compare it against a set of
+common well-known "standard" aspect ratios.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE if a known "standard" aspect ratio was
+recognised, and %FALSE otherwise.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="width" transfer-ownership="none">
+          <doc xml:space="preserve">Width of the video frame</doc>
+          <type name="gint" c:type="gint"/>
+        </parameter>
+        <parameter name="height" transfer-ownership="none">
+          <doc xml:space="preserve">Height of the video frame</doc>
+          <type name="gint" c:type="gint"/>
+        </parameter>
+        <parameter name="par_n" transfer-ownership="none">
+          <doc xml:space="preserve">Pixel aspect ratio numerator</doc>
+          <type name="gint" c:type="gint"/>
+        </parameter>
+        <parameter name="par_d" transfer-ownership="none">
+          <doc xml:space="preserve">Pixel aspect ratio denominator</doc>
+          <type name="gint" c:type="gint"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="video_make_raw_caps" c:identifier="gst_video_make_raw_caps" version="1.18">
       <doc xml:space="preserve">Return a generic raw video caps for formats defined in @formats.
 If @formats is %NULL returns a caps for all the supported raw video formats,
@@ -17524,6 +17615,39 @@ on the @method and @in_size/@out_size.</doc>
         <parameter name="options" transfer-ownership="none" nullable="1" allow-none="1">
           <doc xml:space="preserve">extra options</doc>
           <type name="Gst.Structure" c:type="GstStructure*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="video_sei_user_data_unregistered_meta_api_get_type" c:identifier="gst_video_sei_user_data_unregistered_meta_api_get_type" version="1.22">
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">#GType for the #GstVideoSEIUserDataUnregisteredMeta structure.</doc>
+        <type name="GType" c:type="GType"/>
+      </return-value>
+    </function>
+    <function name="video_sei_user_data_unregistered_meta_get_info" c:identifier="gst_video_sei_user_data_unregistered_meta_get_info" moved-to="VideoSEIUserDataUnregisteredMeta.get_info" version="1.22">
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">#GstMetaInfo pointer that describes #GstVideoSEIUserDataUnregisteredMeta.</doc>
+        <type name="Gst.MetaInfo" c:type="const GstMetaInfo*"/>
+      </return-value>
+    </function>
+    <function name="video_sei_user_data_unregistered_parse_precision_time_stamp" c:identifier="gst_video_sei_user_data_unregistered_parse_precision_time_stamp" version="1.22">
+      <doc xml:space="preserve">Parses and returns the Precision Time Stamp (ST 0604) from the SEI User Data Unregistered buffer</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">True if data is a Precision Time Stamp and it was parsed correctly</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="user_data" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstVideoSEIUserDataUnregisteredMeta</doc>
+          <type name="VideoSEIUserDataUnregisteredMeta" c:type="GstVideoSEIUserDataUnregisteredMeta*"/>
+        </parameter>
+        <parameter name="status" direction="out" caller-allocates="0" transfer-ownership="full">
+          <doc xml:space="preserve">User Data Unregistered UUID</doc>
+          <type name="guint8" c:type="guint8*"/>
+        </parameter>
+        <parameter name="precision_time_stamp" direction="out" caller-allocates="0" transfer-ownership="full">
+          <doc xml:space="preserve">The parsed Precision Time Stamp SEI</doc>
+          <type name="guint64" c:type="guint64*"/>
         </parameter>
       </parameters>
     </function>

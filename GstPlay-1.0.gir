@@ -11,7 +11,7 @@ and/or use gtk-doc annotations.  -->
   <include name="GstVideo" version="1.0"/>
   <package name="gstreamer-play-1.0"/>
   <c:include name="gst/play/play.h"/>
-  <namespace name="GstPlay"  version="1.0" shared-library="libgstplay-1.0.so.0" c:identifier-prefixes="Gst" c:symbol-prefixes="gst">
+  <namespace name="GstPlay" version="1.0" shared-library="libgstplay-1.0.so.0" c:identifier-prefixes="Gst" c:symbol-prefixes="gst">
     <function-macro name="IS_PLAY" c:identifier="GST_IS_PLAY" introspectable="0">
       <parameters>
         <parameter name="obj">
@@ -1553,11 +1553,6 @@ matching #GstPlayVideoInfo.</doc>
     </class>
     <record name="PlayMediaInfoClass" c:type="GstPlayMediaInfoClass" disguised="1" glib:is-gtype-struct-for="PlayMediaInfo"/>
     <enumeration name="PlayMessage" version="1.20" glib:type-name="GstPlayMessage" glib:get-type="gst_play_message_get_type" c:type="GstPlayMessage">
-      <!--doc-version xml:space="preserve">
-
-Types of messages that will be posted on the play API bus.
-
-See also #gst_play_get_message_bus()</doc-version-->
       <member name="uri_loaded" value="0" c:identifier="GST_PLAY_MESSAGE_URI_LOADED" glib:nick="uri-loaded" glib:name="GST_PLAY_MESSAGE_URI_LOADED">
         <doc xml:space="preserve">Source element was initalized for set URI</doc>
       </member>

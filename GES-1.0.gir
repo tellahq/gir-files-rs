@@ -14722,6 +14722,10 @@ account.</doc>
       <member name="crossfade" value="512" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_CROSSFADE" glib:nick="crossfade" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_CROSSFADE">
         <doc xml:space="preserve">Crossfade</doc>
       </member>
+      <member name="fade_in" value="513" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_FADE_IN" version="1.22" glib:nick="fade-in" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_FADE_IN">
+        <doc xml:space="preserve">Similar to crossfade, but fade in the front video without fading out
+the background one</doc>
+      </member>
     </enumeration>
     <enumeration name="VideoTestPattern" glib:type-name="GESVideoTestPattern" glib:get-type="ges_video_test_pattern_get_type" c:type="GESVideoTestPattern">
       <doc xml:space="preserve">The test pattern to produce</doc>
