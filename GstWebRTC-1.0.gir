@@ -32,6 +32,30 @@ and/or use gtk-doc annotations.  -->
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="IS_WEBRTC_ICE" c:identifier="GST_IS_WEBRTC_ICE" introspectable="0">
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_WEBRTC_ICE_CLASS" c:identifier="GST_IS_WEBRTC_ICE_CLASS" introspectable="0">
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_WEBRTC_ICE_STREAM" c:identifier="GST_IS_WEBRTC_ICE_STREAM" introspectable="0">
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="IS_WEBRTC_ICE_STREAM_CLASS" c:identifier="GST_IS_WEBRTC_ICE_STREAM_CLASS" introspectable="0">
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="IS_WEBRTC_ICE_TRANSPORT" c:identifier="GST_IS_WEBRTC_ICE_TRANSPORT" introspectable="0">
       <parameters>
         <parameter name="obj">
@@ -123,6 +147,42 @@ and/or use gtk-doc annotations.  -->
       </parameters>
     </function-macro>
     <function-macro name="WEBRTC_DTLS_TRANSPORT_GET_CLASS" c:identifier="GST_WEBRTC_DTLS_TRANSPORT_GET_CLASS" introspectable="0">
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="WEBRTC_ICE" c:identifier="GST_WEBRTC_ICE" introspectable="0">
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="WEBRTC_ICE_CLASS" c:identifier="GST_WEBRTC_ICE_CLASS" introspectable="0">
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="WEBRTC_ICE_GET_CLASS" c:identifier="GST_WEBRTC_ICE_GET_CLASS" introspectable="0">
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="WEBRTC_ICE_STREAM" c:identifier="GST_WEBRTC_ICE_STREAM" introspectable="0">
+      <parameters>
+        <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="WEBRTC_ICE_STREAM_CLASS" c:identifier="GST_WEBRTC_ICE_STREAM_CLASS" introspectable="0">
+      <parameters>
+        <parameter name="klass">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="WEBRTC_ICE_STREAM_GET_CLASS" c:identifier="GST_WEBRTC_ICE_STREAM_GET_CLASS" introspectable="0">
       <parameters>
         <parameter name="obj">
         </parameter>
@@ -503,6 +563,1128 @@ for more information.</doc>
         <doc xml:space="preserve">ulpfec + red</doc>
       </member>
     </enumeration>
+    <class name="WebRTCICE" c:symbol-prefix="webrtc_ice" c:type="GstWebRTCICE" parent="Gst.Object" abstract="1" glib:type-name="GstWebRTCICE" glib:get-type="gst_webrtc_ice_get_type" glib:type-struct="WebRTCICEClass">
+      <function name="candidate_stats_free" c:identifier="gst_webrtc_ice_candidate_stats_free" version="1.22">
+        <doc xml:space="preserve">Helper function to free #GstWebRTCICECandidateStats</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="stats" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICECandidateStats to be free'd</doc>
+            <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <virtual-method name="add_candidate" invoker="add_candidate" version="1.22">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="stream" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </parameter>
+          <parameter name="candidate" transfer-ownership="none">
+            <doc xml:space="preserve">The ICE candidate</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="add_stream" invoker="add_stream" version="1.22">
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">The #GstWebRTCICEStream, or %NULL</doc>
+          <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="session_id" transfer-ownership="none">
+            <doc xml:space="preserve">The session id</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="add_turn_server" invoker="add_turn_server" version="1.22">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">FALSE on error, TRUE otherwise</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="uri" transfer-ownership="none">
+            <doc xml:space="preserve">URI of the TURN server</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="find_transport" invoker="find_transport" version="1.22">
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">The #GstWebRTCICETransport, or %NULL</doc>
+          <type name="WebRTCICETransport" c:type="GstWebRTCICETransport*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="stream" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </parameter>
+          <parameter name="component" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEComponent</doc>
+            <type name="WebRTCICEComponent" c:type="GstWebRTCICEComponent"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="gather_candidates" invoker="gather_candidates" version="1.22">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">FALSE on error, TRUE otherwise</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="stream" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="get_is_controller" invoker="get_is_controller" version="1.22">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">TRUE if set as controller, FALSE otherwise</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="get_local_candidates" invoker="get_local_candidates" version="1.22">
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">List of local candidates</doc>
+          <array name="GLib.Array" c:type="GArray*">
+            <type name="WebRTCICECandidateStats"/>
+          </array>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="stream" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="get_remote_candidates" invoker="get_remote_candidates" version="1.22">
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">List of remote candidates</doc>
+          <array name="GLib.Array" c:type="GArray*">
+            <type name="WebRTCICECandidateStats"/>
+          </array>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="stream" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="get_selected_pair" invoker="get_selected_pair" version="1.22">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">FALSE on failure, otherwise @local_stats @remote_stats will be set</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="stream" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </parameter>
+          <parameter name="local_stats" transfer-ownership="none">
+            <doc xml:space="preserve">A pointer to #GstWebRTCICECandidateStats for local candidate</doc>
+            <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats**"/>
+          </parameter>
+          <parameter name="remote_stats" transfer-ownership="none">
+            <doc xml:space="preserve">A pointer to #GstWebRTCICECandidateStats for remote candidate</doc>
+            <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats**"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="get_stun_server" invoker="get_stun_server" version="1.22">
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">URI of the STUN sever</doc>
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="get_turn_server" invoker="get_turn_server" version="1.22">
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">URI of the TURN sever</doc>
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="set_force_relay" invoker="set_force_relay" version="1.22">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="force_relay" transfer-ownership="none">
+            <doc xml:space="preserve">TRUE to enable force relay</doc>
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="set_is_controller" invoker="set_is_controller" version="1.22">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="controller" transfer-ownership="none">
+            <doc xml:space="preserve">TRUE to set as controller</doc>
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="set_local_credentials" invoker="set_local_credentials" version="1.22">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">FALSE on error, TRUE otherwise</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="stream" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </parameter>
+          <parameter name="ufrag" transfer-ownership="none">
+            <doc xml:space="preserve">ICE username</doc>
+            <type name="utf8" c:type="gchar*"/>
+          </parameter>
+          <parameter name="pwd" transfer-ownership="none">
+            <doc xml:space="preserve">ICE password</doc>
+            <type name="utf8" c:type="gchar*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="set_on_ice_candidate" invoker="set_on_ice_candidate" version="1.22">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="func" transfer-ownership="none" scope="notified" closure="1" destroy="2">
+            <doc xml:space="preserve">The #GstWebRTCICEOnCandidateFunc callback function</doc>
+            <type name="WebRTCICEOnCandidateFunc" c:type="GstWebRTCICEOnCandidateFunc"/>
+          </parameter>
+          <parameter name="user_data" transfer-ownership="none" nullable="1" allow-none="1" closure="1">
+            <doc xml:space="preserve">User data passed to the callback function</doc>
+            <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+          <parameter name="notify" transfer-ownership="none" scope="async">
+            <doc xml:space="preserve">a #GDestroyNotify when the candidate is no longer needed</doc>
+            <type name="GLib.DestroyNotify" c:type="GDestroyNotify"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="set_remote_credentials" invoker="set_remote_credentials" version="1.22">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">FALSE on error, TRUE otherwise</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="stream" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </parameter>
+          <parameter name="ufrag" transfer-ownership="none">
+            <doc xml:space="preserve">ICE username</doc>
+            <type name="utf8" c:type="gchar*"/>
+          </parameter>
+          <parameter name="pwd" transfer-ownership="none">
+            <doc xml:space="preserve">ICE password</doc>
+            <type name="utf8" c:type="gchar*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="set_stun_server" invoker="set_stun_server" version="1.22">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="uri" transfer-ownership="none">
+            <doc xml:space="preserve">URI of the STUN server</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="set_tos" invoker="set_tos" version="1.22">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="stream" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </parameter>
+          <parameter name="tos" transfer-ownership="none">
+            <doc xml:space="preserve">ToS to be set</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="set_turn_server" invoker="set_turn_server" version="1.22">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="uri" transfer-ownership="none">
+            <doc xml:space="preserve">URI of the TURN sever</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <method name="add_candidate" c:identifier="gst_webrtc_ice_add_candidate" version="1.22">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="stream" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </parameter>
+          <parameter name="candidate" transfer-ownership="none">
+            <doc xml:space="preserve">The ICE candidate</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="add_stream" c:identifier="gst_webrtc_ice_add_stream" version="1.22">
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">The #GstWebRTCICEStream, or %NULL</doc>
+          <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="session_id" transfer-ownership="none">
+            <doc xml:space="preserve">The session id</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="add_turn_server" c:identifier="gst_webrtc_ice_add_turn_server" version="1.22">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">FALSE on error, TRUE otherwise</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="uri" transfer-ownership="none">
+            <doc xml:space="preserve">URI of the TURN server</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="find_transport" c:identifier="gst_webrtc_ice_find_transport" version="1.22">
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">The #GstWebRTCICETransport, or %NULL</doc>
+          <type name="WebRTCICETransport" c:type="GstWebRTCICETransport*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="stream" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </parameter>
+          <parameter name="component" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEComponent</doc>
+            <type name="WebRTCICEComponent" c:type="GstWebRTCICEComponent"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="gather_candidates" c:identifier="gst_webrtc_ice_gather_candidates" version="1.22">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">FALSE on error, TRUE otherwise</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="stream" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_is_controller" c:identifier="gst_webrtc_ice_get_is_controller" version="1.22">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">TRUE if set as controller, FALSE otherwise</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_local_candidates" c:identifier="gst_webrtc_ice_get_local_candidates" version="1.22">
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">List of local candidates</doc>
+          <array name="GLib.Array" c:type="GArray*">
+            <type name="WebRTCICECandidateStats"/>
+          </array>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="stream" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_remote_candidates" c:identifier="gst_webrtc_ice_get_remote_candidates" version="1.22">
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">List of remote candidates</doc>
+          <array name="GLib.Array" c:type="GArray*">
+            <type name="WebRTCICECandidateStats"/>
+          </array>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="stream" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_selected_pair" c:identifier="gst_webrtc_ice_get_selected_pair" version="1.22">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">FALSE on failure, otherwise @local_stats @remote_stats will be set</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="stream" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </parameter>
+          <parameter name="local_stats" transfer-ownership="none">
+            <doc xml:space="preserve">A pointer to #GstWebRTCICECandidateStats for local candidate</doc>
+            <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats**"/>
+          </parameter>
+          <parameter name="remote_stats" transfer-ownership="none">
+            <doc xml:space="preserve">A pointer to #GstWebRTCICECandidateStats for remote candidate</doc>
+            <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats**"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_stun_server" c:identifier="gst_webrtc_ice_get_stun_server" version="1.22">
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">URI of the STUN sever</doc>
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_turn_server" c:identifier="gst_webrtc_ice_get_turn_server" version="1.22">
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">URI of the TURN sever</doc>
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="set_force_relay" c:identifier="gst_webrtc_ice_set_force_relay" version="1.22">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="force_relay" transfer-ownership="none">
+            <doc xml:space="preserve">TRUE to enable force relay</doc>
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_is_controller" c:identifier="gst_webrtc_ice_set_is_controller" version="1.22">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="controller" transfer-ownership="none">
+            <doc xml:space="preserve">TRUE to set as controller</doc>
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_local_credentials" c:identifier="gst_webrtc_ice_set_local_credentials" version="1.22">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">FALSE on error, TRUE otherwise</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="stream" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </parameter>
+          <parameter name="ufrag" transfer-ownership="none">
+            <doc xml:space="preserve">ICE username</doc>
+            <type name="utf8" c:type="gchar*"/>
+          </parameter>
+          <parameter name="pwd" transfer-ownership="none">
+            <doc xml:space="preserve">ICE password</doc>
+            <type name="utf8" c:type="gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_on_ice_candidate" c:identifier="gst_webrtc_ice_set_on_ice_candidate" version="1.22">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="func" transfer-ownership="none" scope="notified" closure="1" destroy="2">
+            <doc xml:space="preserve">The #GstWebRTCICEOnCandidateFunc callback function</doc>
+            <type name="WebRTCICEOnCandidateFunc" c:type="GstWebRTCICEOnCandidateFunc"/>
+          </parameter>
+          <parameter name="user_data" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">User data passed to the callback function</doc>
+            <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+          <parameter name="notify" transfer-ownership="none" scope="async">
+            <doc xml:space="preserve">a #GDestroyNotify when the candidate is no longer needed</doc>
+            <type name="GLib.DestroyNotify" c:type="GDestroyNotify"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_remote_credentials" c:identifier="gst_webrtc_ice_set_remote_credentials" version="1.22">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">FALSE on error, TRUE otherwise</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="stream" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </parameter>
+          <parameter name="ufrag" transfer-ownership="none">
+            <doc xml:space="preserve">ICE username</doc>
+            <type name="utf8" c:type="gchar*"/>
+          </parameter>
+          <parameter name="pwd" transfer-ownership="none">
+            <doc xml:space="preserve">ICE password</doc>
+            <type name="utf8" c:type="gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_stun_server" c:identifier="gst_webrtc_ice_set_stun_server" version="1.22">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="uri" transfer-ownership="none">
+            <doc xml:space="preserve">URI of the STUN server</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_tos" c:identifier="gst_webrtc_ice_set_tos" version="1.22">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="stream" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </parameter>
+          <parameter name="tos" transfer-ownership="none">
+            <doc xml:space="preserve">ToS to be set</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_turn_server" c:identifier="gst_webrtc_ice_set_turn_server" version="1.22">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="uri" transfer-ownership="none">
+            <doc xml:space="preserve">URI of the TURN sever</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <property name="max-rtp-port" version="1.20" writable="1" construct="1" transfer-ownership="none">
+        <doc xml:space="preserve">Maximum port for local rtp port range.
+min-rtp-port must be &lt;= max-rtp-port</doc>
+        <type name="guint" c:type="guint"/>
+      </property>
+      <property name="min-rtp-port" version="1.20" writable="1" construct="1" transfer-ownership="none">
+        <doc xml:space="preserve">Minimum port for local rtp port range.
+min-rtp-port must be &lt;= max-rtp-port</doc>
+        <type name="guint" c:type="guint"/>
+      </property>
+      <field name="parent">
+        <type name="Gst.Object" c:type="GstObject"/>
+      </field>
+      <field name="ice_gathering_state">
+        <type name="WebRTCICEGatheringState" c:type="GstWebRTCICEGatheringState"/>
+      </field>
+      <field name="ice_connection_state">
+        <type name="WebRTCICEConnectionState" c:type="GstWebRTCICEConnectionState"/>
+      </field>
+      <field name="min_rtp_port">
+        <type name="guint" c:type="guint"/>
+      </field>
+      <field name="max_rtp_port">
+        <type name="guint" c:type="guint"/>
+      </field>
+      <glib:signal name="add-local-ip-address" when="last" action="1">
+        <doc xml:space="preserve">Add a local IP address to use for ICE candidate gathering.  If none
+are supplied, they will be discovered automatically. Calling this signal
+stops automatic ICE gathering.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">whether the address could be added.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <parameter name="address" transfer-ownership="none">
+            <doc xml:space="preserve">The local IP address</doc>
+            <type name="utf8" c:type="gchar*"/>
+          </parameter>
+        </parameters>
+      </glib:signal>
+    </class>
+    <record name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats">
+      <field name="ipaddr" writable="1">
+        <type name="utf8" c:type="gchar*"/>
+      </field>
+      <field name="port" writable="1">
+        <type name="guint" c:type="guint"/>
+      </field>
+      <field name="stream_id" writable="1">
+        <type name="guint" c:type="guint"/>
+      </field>
+      <field name="type" writable="1">
+        <type name="utf8" c:type="const gchar*"/>
+      </field>
+      <field name="proto" writable="1">
+        <type name="utf8" c:type="const gchar*"/>
+      </field>
+      <field name="relay_proto" writable="1">
+        <type name="utf8" c:type="const gchar*"/>
+      </field>
+      <field name="prio" writable="1">
+        <type name="guint" c:type="guint"/>
+      </field>
+      <field name="url" writable="1">
+        <type name="utf8" c:type="gchar*"/>
+      </field>
+    </record>
+    <record name="WebRTCICEClass" c:type="GstWebRTCICEClass" glib:is-gtype-struct-for="WebRTCICE">
+      <field name="parent_class">
+        <type name="Gst.ObjectClass" c:type="GstObjectClass"/>
+      </field>
+      <field name="add_stream">
+        <callback name="add_stream">
+          <return-value transfer-ownership="full" nullable="1">
+            <doc xml:space="preserve">The #GstWebRTCICEStream, or %NULL</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICE</doc>
+              <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+            </parameter>
+            <parameter name="session_id" transfer-ownership="none">
+              <doc xml:space="preserve">The session id</doc>
+              <type name="guint" c:type="guint"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="find_transport">
+        <callback name="find_transport">
+          <return-value transfer-ownership="full" nullable="1">
+            <doc xml:space="preserve">The #GstWebRTCICETransport, or %NULL</doc>
+            <type name="WebRTCICETransport" c:type="GstWebRTCICETransport*"/>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICE</doc>
+              <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+            </parameter>
+            <parameter name="stream" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+              <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+            </parameter>
+            <parameter name="component" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICEComponent</doc>
+              <type name="WebRTCICEComponent" c:type="GstWebRTCICEComponent"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="gather_candidates">
+        <callback name="gather_candidates">
+          <return-value transfer-ownership="none">
+            <doc xml:space="preserve">FALSE on error, TRUE otherwise</doc>
+            <type name="gboolean" c:type="gboolean"/>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICE</doc>
+              <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+            </parameter>
+            <parameter name="stream" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+              <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="add_candidate">
+        <callback name="add_candidate">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICE</doc>
+              <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+            </parameter>
+            <parameter name="stream" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+              <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+            </parameter>
+            <parameter name="candidate" transfer-ownership="none">
+              <doc xml:space="preserve">The ICE candidate</doc>
+              <type name="utf8" c:type="const gchar*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="set_local_credentials">
+        <callback name="set_local_credentials">
+          <return-value transfer-ownership="none">
+            <doc xml:space="preserve">FALSE on error, TRUE otherwise</doc>
+            <type name="gboolean" c:type="gboolean"/>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICE</doc>
+              <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+            </parameter>
+            <parameter name="stream" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+              <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+            </parameter>
+            <parameter name="ufrag" transfer-ownership="none">
+              <doc xml:space="preserve">ICE username</doc>
+              <type name="utf8" c:type="gchar*"/>
+            </parameter>
+            <parameter name="pwd" transfer-ownership="none">
+              <doc xml:space="preserve">ICE password</doc>
+              <type name="utf8" c:type="gchar*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="set_remote_credentials">
+        <callback name="set_remote_credentials">
+          <return-value transfer-ownership="none">
+            <doc xml:space="preserve">FALSE on error, TRUE otherwise</doc>
+            <type name="gboolean" c:type="gboolean"/>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICE</doc>
+              <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+            </parameter>
+            <parameter name="stream" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+              <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+            </parameter>
+            <parameter name="ufrag" transfer-ownership="none">
+              <doc xml:space="preserve">ICE username</doc>
+              <type name="utf8" c:type="gchar*"/>
+            </parameter>
+            <parameter name="pwd" transfer-ownership="none">
+              <doc xml:space="preserve">ICE password</doc>
+              <type name="utf8" c:type="gchar*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="add_turn_server">
+        <callback name="add_turn_server">
+          <return-value transfer-ownership="none">
+            <doc xml:space="preserve">FALSE on error, TRUE otherwise</doc>
+            <type name="gboolean" c:type="gboolean"/>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICE</doc>
+              <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+            </parameter>
+            <parameter name="uri" transfer-ownership="none">
+              <doc xml:space="preserve">URI of the TURN server</doc>
+              <type name="utf8" c:type="const gchar*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="set_is_controller">
+        <callback name="set_is_controller">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICE</doc>
+              <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+            </parameter>
+            <parameter name="controller" transfer-ownership="none">
+              <doc xml:space="preserve">TRUE to set as controller</doc>
+              <type name="gboolean" c:type="gboolean"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="get_is_controller">
+        <callback name="get_is_controller">
+          <return-value transfer-ownership="none">
+            <doc xml:space="preserve">TRUE if set as controller, FALSE otherwise</doc>
+            <type name="gboolean" c:type="gboolean"/>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICE</doc>
+              <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="set_force_relay">
+        <callback name="set_force_relay">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICE</doc>
+              <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+            </parameter>
+            <parameter name="force_relay" transfer-ownership="none">
+              <doc xml:space="preserve">TRUE to enable force relay</doc>
+              <type name="gboolean" c:type="gboolean"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="set_stun_server">
+        <callback name="set_stun_server">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICE</doc>
+              <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+            </parameter>
+            <parameter name="uri" transfer-ownership="none">
+              <doc xml:space="preserve">URI of the STUN server</doc>
+              <type name="utf8" c:type="const gchar*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="get_stun_server">
+        <callback name="get_stun_server">
+          <return-value transfer-ownership="full">
+            <doc xml:space="preserve">URI of the STUN sever</doc>
+            <type name="utf8" c:type="gchar*"/>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICE</doc>
+              <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="set_turn_server">
+        <callback name="set_turn_server">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICE</doc>
+              <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+            </parameter>
+            <parameter name="uri" transfer-ownership="none">
+              <doc xml:space="preserve">URI of the TURN sever</doc>
+              <type name="utf8" c:type="const gchar*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="get_turn_server">
+        <callback name="get_turn_server">
+          <return-value transfer-ownership="full">
+            <doc xml:space="preserve">URI of the TURN sever</doc>
+            <type name="utf8" c:type="gchar*"/>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICE</doc>
+              <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="set_tos">
+        <callback name="set_tos">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICE</doc>
+              <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+            </parameter>
+            <parameter name="stream" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+              <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+            </parameter>
+            <parameter name="tos" transfer-ownership="none">
+              <doc xml:space="preserve">ToS to be set</doc>
+              <type name="guint" c:type="guint"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="set_on_ice_candidate">
+        <callback name="set_on_ice_candidate">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICE</doc>
+              <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+            </parameter>
+            <parameter name="func" transfer-ownership="none" scope="notified" closure="2" destroy="3">
+              <doc xml:space="preserve">The #GstWebRTCICEOnCandidateFunc callback function</doc>
+              <type name="WebRTCICEOnCandidateFunc" c:type="GstWebRTCICEOnCandidateFunc"/>
+            </parameter>
+            <parameter name="user_data" transfer-ownership="none" nullable="1" allow-none="1" closure="2">
+              <doc xml:space="preserve">User data passed to the callback function</doc>
+              <type name="gpointer" c:type="gpointer"/>
+            </parameter>
+            <parameter name="notify" transfer-ownership="none" scope="async">
+              <doc xml:space="preserve">a #GDestroyNotify when the candidate is no longer needed</doc>
+              <type name="GLib.DestroyNotify" c:type="GDestroyNotify"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="get_local_candidates">
+        <callback name="get_local_candidates">
+          <return-value transfer-ownership="full">
+            <doc xml:space="preserve">List of local candidates</doc>
+            <array name="GLib.Array" c:type="GArray*">
+              <type name="WebRTCICECandidateStats"/>
+            </array>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICE</doc>
+              <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+            </parameter>
+            <parameter name="stream" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+              <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="get_remote_candidates">
+        <callback name="get_remote_candidates">
+          <return-value transfer-ownership="full">
+            <doc xml:space="preserve">List of remote candidates</doc>
+            <array name="GLib.Array" c:type="GArray*">
+              <type name="WebRTCICECandidateStats"/>
+            </array>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICE</doc>
+              <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+            </parameter>
+            <parameter name="stream" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+              <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="get_selected_pair">
+        <callback name="get_selected_pair">
+          <return-value transfer-ownership="none">
+            <doc xml:space="preserve">FALSE on failure, otherwise @local_stats @remote_stats will be set</doc>
+            <type name="gboolean" c:type="gboolean"/>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICE</doc>
+              <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+            </parameter>
+            <parameter name="stream" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
+              <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+            </parameter>
+            <parameter name="local_stats" transfer-ownership="none">
+              <doc xml:space="preserve">A pointer to #GstWebRTCICECandidateStats for local candidate</doc>
+              <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats**"/>
+            </parameter>
+            <parameter name="remote_stats" transfer-ownership="none">
+              <doc xml:space="preserve">A pointer to #GstWebRTCICECandidateStats for remote candidate</doc>
+              <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats**"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+    </record>
     <enumeration name="WebRTCICEComponent" glib:type-name="GstWebRTCICEComponent" glib:get-type="gst_webrtc_ice_component_get_type" c:type="GstWebRTCICEComponent">
       <member name="rtp" value="0" c:identifier="GST_WEBRTC_ICE_COMPONENT_RTP" glib:nick="rtp" glib:name="GST_WEBRTC_ICE_COMPONENT_RTP">
         <doc xml:space="preserve">RTP component</doc>
@@ -547,6 +1729,30 @@ for more information.</doc>
         <doc xml:space="preserve">complete</doc>
       </member>
     </enumeration>
+    <callback name="WebRTCICEOnCandidateFunc" c:type="GstWebRTCICEOnCandidateFunc" version="1.22">
+      <doc xml:space="preserve">Callback function to be triggered on discovery of a new candidate</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="ice" transfer-ownership="none">
+          <doc xml:space="preserve">The #GstWebRTCICE</doc>
+          <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+        </parameter>
+        <parameter name="stream_id" transfer-ownership="none">
+          <doc xml:space="preserve">The stream id</doc>
+          <type name="guint" c:type="guint"/>
+        </parameter>
+        <parameter name="candidate" transfer-ownership="none">
+          <doc xml:space="preserve">The discovered candidate</doc>
+          <type name="utf8" c:type="gchar*"/>
+        </parameter>
+        <parameter name="user_data" transfer-ownership="none" nullable="1" allow-none="1" closure="3">
+          <doc xml:space="preserve">User data that was set by #gst_webrtc_ice_set_on_ice_candidate</doc>
+          <type name="gpointer" c:type="gpointer"/>
+        </parameter>
+      </parameters>
+    </callback>
     <enumeration name="WebRTCICERole" glib:type-name="GstWebRTCICERole" glib:get-type="gst_webrtc_ice_role_get_type" c:type="GstWebRTCICERole">
       <member name="controlled" value="0" c:identifier="GST_WEBRTC_ICE_ROLE_CONTROLLED" glib:nick="controlled" glib:name="GST_WEBRTC_ICE_ROLE_CONTROLLED">
         <doc xml:space="preserve">controlled</doc>
@@ -555,7 +1761,176 @@ for more information.</doc>
         <doc xml:space="preserve">controlling</doc>
       </member>
     </enumeration>
+    <class name="WebRTCICEStream" c:symbol-prefix="webrtc_ice_stream" c:type="GstWebRTCICEStream" parent="Gst.Object" abstract="1" glib:type-name="GstWebRTCICEStream" glib:get-type="gst_webrtc_ice_stream_get_type" glib:type-struct="WebRTCICEStreamClass">
+      <virtual-method name="find_transport" invoker="find_transport" version="1.22">
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">the #GstWebRTCICETransport, or %NULL</doc>
+          <type name="WebRTCICETransport" c:type="GstWebRTCICETransport*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stream" transfer-ownership="none">
+            <doc xml:space="preserve">the #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </instance-parameter>
+          <parameter name="component" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEComponent</doc>
+            <type name="WebRTCICEComponent" c:type="GstWebRTCICEComponent"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="gather_candidates" invoker="gather_candidates" version="1.22">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">FALSE on error, TRUE otherwise</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">the #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </instance-parameter>
+        </parameters>
+      </virtual-method>
+      <method name="find_transport" c:identifier="gst_webrtc_ice_stream_find_transport" version="1.22">
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">the #GstWebRTCICETransport, or %NULL</doc>
+          <type name="WebRTCICETransport" c:type="GstWebRTCICETransport*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stream" transfer-ownership="none">
+            <doc xml:space="preserve">the #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </instance-parameter>
+          <parameter name="component" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICEComponent</doc>
+            <type name="WebRTCICEComponent" c:type="GstWebRTCICEComponent"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="gather_candidates" c:identifier="gst_webrtc_ice_stream_gather_candidates" version="1.22">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">FALSE on error, TRUE otherwise</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">the #GstWebRTCICEStream</doc>
+            <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="stream-id" writable="1" construct-only="1" transfer-ownership="none">
+        <type name="guint" c:type="guint"/>
+      </property>
+      <field name="parent">
+        <type name="Gst.Object" c:type="GstObject"/>
+      </field>
+      <field name="stream_id">
+        <type name="guint" c:type="guint"/>
+      </field>
+    </class>
+    <record name="WebRTCICEStreamClass" c:type="GstWebRTCICEStreamClass" glib:is-gtype-struct-for="WebRTCICEStream">
+      <field name="parent_class">
+        <type name="Gst.ObjectClass" c:type="GstObjectClass"/>
+      </field>
+      <field name="find_transport">
+        <callback name="find_transport">
+          <return-value transfer-ownership="full" nullable="1">
+            <doc xml:space="preserve">the #GstWebRTCICETransport, or %NULL</doc>
+            <type name="WebRTCICETransport" c:type="GstWebRTCICETransport*"/>
+          </return-value>
+          <parameters>
+            <parameter name="stream" transfer-ownership="none">
+              <doc xml:space="preserve">the #GstWebRTCICEStream</doc>
+              <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+            </parameter>
+            <parameter name="component" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICEComponent</doc>
+              <type name="WebRTCICEComponent" c:type="GstWebRTCICEComponent"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="gather_candidates">
+        <callback name="gather_candidates">
+          <return-value transfer-ownership="none">
+            <doc xml:space="preserve">FALSE on error, TRUE otherwise</doc>
+            <type name="gboolean" c:type="gboolean"/>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">the #GstWebRTCICEStream</doc>
+              <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+    </record>
     <class name="WebRTCICETransport" c:symbol-prefix="webrtc_ice_transport" c:type="GstWebRTCICETransport" parent="Gst.Object" abstract="1" glib:type-name="GstWebRTCICETransport" glib:get-type="gst_webrtc_ice_transport_get_type" glib:type-struct="WebRTCICETransportClass">
+      <virtual-method name="gather_candidates">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="transport" transfer-ownership="none">
+            <type name="WebRTCICETransport" c:type="GstWebRTCICETransport*"/>
+          </instance-parameter>
+        </parameters>
+      </virtual-method>
+      <method name="connection_state_change" c:identifier="gst_webrtc_ice_transport_connection_state_change">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <type name="WebRTCICETransport" c:type="GstWebRTCICETransport*"/>
+          </instance-parameter>
+          <parameter name="new_state" transfer-ownership="none">
+            <type name="WebRTCICEConnectionState" c:type="GstWebRTCICEConnectionState"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="gathering_state_change" c:identifier="gst_webrtc_ice_transport_gathering_state_change">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <type name="WebRTCICETransport" c:type="GstWebRTCICETransport*"/>
+          </instance-parameter>
+          <parameter name="new_state" transfer-ownership="none">
+            <type name="WebRTCICEGatheringState" c:type="GstWebRTCICEGatheringState"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="new_candidate" c:identifier="gst_webrtc_ice_transport_new_candidate">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <type name="WebRTCICETransport" c:type="GstWebRTCICETransport*"/>
+          </instance-parameter>
+          <parameter name="stream_id" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="component" transfer-ownership="none">
+            <type name="WebRTCICEComponent" c:type="GstWebRTCICEComponent"/>
+          </parameter>
+          <parameter name="attr" transfer-ownership="none">
+            <type name="utf8" c:type="gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="selected_pair_change" c:identifier="gst_webrtc_ice_transport_selected_pair_change">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <type name="WebRTCICETransport" c:type="GstWebRTCICETransport*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <property name="component" writable="1" construct-only="1" transfer-ownership="none">
         <type name="WebRTCICEComponent"/>
       </property>
@@ -565,6 +1940,32 @@ for more information.</doc>
       <property name="state" transfer-ownership="none">
         <type name="WebRTCICEConnectionState"/>
       </property>
+      <field name="parent">
+        <type name="Gst.Object" c:type="GstObject"/>
+      </field>
+      <field name="role">
+        <type name="WebRTCICERole" c:type="GstWebRTCICERole"/>
+      </field>
+      <field name="component">
+        <type name="WebRTCICEComponent" c:type="GstWebRTCICEComponent"/>
+      </field>
+      <field name="state">
+        <type name="WebRTCICEConnectionState" c:type="GstWebRTCICEConnectionState"/>
+      </field>
+      <field name="gathering_state">
+        <type name="WebRTCICEGatheringState" c:type="GstWebRTCICEGatheringState"/>
+      </field>
+      <field name="src">
+        <type name="Gst.Element" c:type="GstElement*"/>
+      </field>
+      <field name="sink">
+        <type name="Gst.Element" c:type="GstElement*"/>
+      </field>
+      <field name="_padding">
+        <array zero-terminated="0" fixed-size="4">
+          <type name="gpointer" c:type="gpointer"/>
+        </array>
+      </field>
       <glib:signal name="on-new-candidate" when="last">
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -581,7 +1982,28 @@ for more information.</doc>
         </return-value>
       </glib:signal>
     </class>
-    <record name="WebRTCICETransportClass" c:type="GstWebRTCICETransportClass" disguised="1" glib:is-gtype-struct-for="WebRTCICETransport"/>
+    <record name="WebRTCICETransportClass" c:type="GstWebRTCICETransportClass" glib:is-gtype-struct-for="WebRTCICETransport">
+      <field name="parent_class">
+        <type name="Gst.ObjectClass" c:type="GstObjectClass"/>
+      </field>
+      <field name="gather_candidates">
+        <callback name="gather_candidates">
+          <return-value transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </return-value>
+          <parameters>
+            <parameter name="transport" transfer-ownership="none">
+              <type name="WebRTCICETransport" c:type="GstWebRTCICETransport*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="_padding">
+        <array zero-terminated="0" fixed-size="4">
+          <type name="gpointer" c:type="gpointer"/>
+        </array>
+      </field>
+    </record>
     <enumeration name="WebRTCICETransportPolicy" version="1.16" glib:type-name="GstWebRTCICETransportPolicy" glib:get-type="gst_webrtc_ice_transport_policy_get_type" c:type="GstWebRTCICETransportPolicy">
       <doc xml:space="preserve">See https://tools.ietf.org/html/draft-ietf-rtcweb-jsep-24#section-4.1.1
 for more information.</doc>

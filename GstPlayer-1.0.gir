@@ -1215,7 +1215,7 @@ in the stream.</doc>
       <property name="video-multiview-mode" writable="1" transfer-ownership="none">
         <type name="GstVideo.VideoMultiviewFramePacking"/>
       </property>
-      <property name="video-renderer" transfer-ownership="none">
+      <property name="video-renderer" writable="1" construct-only="1" transfer-ownership="none">
         <type name="PlayerVideoRenderer"/>
       </property>
       <property name="volume" writable="1" transfer-ownership="none" setter="set_volume" getter="get_volume">

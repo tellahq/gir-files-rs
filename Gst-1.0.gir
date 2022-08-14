@@ -5644,7 +5644,12 @@ character, a newline character will be added automatically.</doc>
     </function-macro>
     <function-macro name="CHECK_VERSION" c:identifier="GST_CHECK_VERSION" introspectable="0">
       <doc xml:space="preserve">Check whether a GStreamer version equal to or greater than
-major.minor.micro is present.</doc>
+major.minor.micro is present.
+
+Note: Since version 1.22 this macro can no longer be used to check that
+current git version maps to the next version. So for instance,
+GST_CHECK_VERSION(1, 22, 0) on a git checkout of the 1.21 development version
+will expand to `FALSE`.</doc>
       <parameters>
         <parameter name="major">
           <doc xml:space="preserve">a number indicating the major version</doc>
@@ -39109,6 +39114,35 @@ returned.</doc>
           <parameter name="fieldname" transfer-ownership="none">
             <doc xml:space="preserve">the name of the field</doc>
             <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_flags" c:identifier="gst_structure_get_flags" version="1.22">
+        <doc xml:space="preserve">Sets the unsigned int pointed to by @value corresponding to the value of the
+given field. Caller is responsible for making sure the field exists,
+has the correct type and that the flagstype is correct.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if the value could be set correctly. If there was no field
+with @fieldname or the existing field did not contain flags or
+did not contain flags of the given type, this function returns %FALSE.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="structure" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstStructure</doc>
+            <type name="Structure" c:type="const GstStructure*"/>
+          </instance-parameter>
+          <parameter name="fieldname" transfer-ownership="none">
+            <doc xml:space="preserve">the name of a field</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="flags_type" transfer-ownership="none">
+            <doc xml:space="preserve">the flags type of a field</doc>
+            <type name="GType" c:type="GType"/>
+          </parameter>
+          <parameter name="value" direction="out" caller-allocates="0" transfer-ownership="full">
+            <doc xml:space="preserve">a pointer to an unsigned int to set</doc>
+            <type name="guint" c:type="guint*"/>
           </parameter>
         </parameters>
       </method>

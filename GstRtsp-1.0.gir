@@ -368,9 +368,18 @@ g_object_unref() to release.</doc>
       </method>
       <method name="get_tls_validation_flags" c:identifier="gst_rtsp_connection_get_tls_validation_flags" version="1.2.1">
         <doc xml:space="preserve">Gets the TLS validation flags used to verify the peer certificate
-when a TLS connection is established.</doc>
+when a TLS connection is established.
+
+GLib guarantees that if certificate verification fails, at least one error
+will be set, but it does not guarantee that all possible errors will be
+set. Accordingly, you may not safely decide to ignore any particular type
+of error.
+
+For example, it would be incorrect to ignore %G_TLS_CERTIFICATE_EXPIRED if
+you want to allow expired certificates, because this could potentially be
+the only error flag set even if other problems exist with the certificate.</doc>
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">the validationg flags.</doc>
+          <doc xml:space="preserve">the validation flags.</doc>
           <type name="Gio.TlsCertificateFlags" c:type="GTlsCertificateFlags"/>
         </return-value>
         <parameters>
@@ -1005,7 +1014,16 @@ user for passwords where necessary.</doc>
       </method>
       <method name="set_tls_validation_flags" c:identifier="gst_rtsp_connection_set_tls_validation_flags" version="1.2.1">
         <doc xml:space="preserve">Sets the TLS validation flags to be used to verify the peer
-certificate when a TLS connection is established.</doc>
+certificate when a TLS connection is established.
+
+GLib guarantees that if certificate verification fails, at least one error
+will be set, but it does not guarantee that all possible errors will be
+set. Accordingly, you may not safely decide to ignore any particular type
+of error.
+
+For example, it would be incorrect to mask %G_TLS_CERTIFICATE_EXPIRED if
+you want to allow expired certificates, because this could potentially be
+the only error flag set even if other problems exist with the certificate.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">TRUE if the validation flags are set correctly, or FALSE if
 @conn is NULL or is not a TLS connection.</doc>
