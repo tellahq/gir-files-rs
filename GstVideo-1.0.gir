@@ -5854,6 +5854,30 @@ gst_video_converter_frame() to complete.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="get_in_info" c:identifier="gst_video_converter_get_in_info" version="1.22">
+        <doc xml:space="preserve">Retrieve the input format of @convert.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">a #GstVideoInfo</doc>
+          <type name="VideoInfo" c:type="const GstVideoInfo*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="convert" transfer-ownership="none">
+            <type name="VideoConverter" c:type="GstVideoConverter*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_out_info" c:identifier="gst_video_converter_get_out_info" version="1.22">
+        <doc xml:space="preserve">Retrieve the output format of @convert.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">a #GstVideoInfo</doc>
+          <type name="VideoInfo" c:type="const GstVideoInfo*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="convert" transfer-ownership="none">
+            <type name="VideoConverter" c:type="GstVideoConverter*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="set_config" c:identifier="gst_video_converter_set_config" version="1.6">
         <doc xml:space="preserve">Set @config as extra configuration for @convert.
 

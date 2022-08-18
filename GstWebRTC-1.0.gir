@@ -563,19 +563,7 @@ for more information.</doc>
         <doc xml:space="preserve">ulpfec + red</doc>
       </member>
     </enumeration>
-    <class name="WebRTCICE" c:symbol-prefix="webrtc_ice" c:type="GstWebRTCICE" parent="Gst.Object" abstract="1" glib:type-name="GstWebRTCICE" glib:get-type="gst_webrtc_ice_get_type" glib:type-struct="WebRTCICEClass">
-      <function name="candidate_stats_free" c:identifier="gst_webrtc_ice_candidate_stats_free" version="1.22">
-        <doc xml:space="preserve">Helper function to free #GstWebRTCICECandidateStats</doc>
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <parameter name="stats" transfer-ownership="none">
-            <doc xml:space="preserve">The #GstWebRTCICECandidateStats to be free'd</doc>
-            <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats*"/>
-          </parameter>
-        </parameters>
-      </function>
+    <class name="WebRTCICE" c:symbol-prefix="webrtc_ice" c:type="GstWebRTCICE" version="1.22" parent="Gst.Object" abstract="1" glib:type-name="GstWebRTCICE" glib:get-type="gst_webrtc_ice_get_type" glib:type-struct="WebRTCICEClass">
       <virtual-method name="add_candidate" invoker="add_candidate" version="1.22">
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -675,38 +663,28 @@ for more information.</doc>
           </instance-parameter>
         </parameters>
       </virtual-method>
-      <virtual-method name="get_local_candidates" invoker="get_local_candidates" version="1.22">
+      <virtual-method name="get_local_candidates">
         <return-value transfer-ownership="full">
-          <doc xml:space="preserve">List of local candidates</doc>
-          <array name="GLib.Array" c:type="GArray*">
-            <type name="WebRTCICECandidateStats"/>
-          </array>
+          <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats*"/>
         </return-value>
         <parameters>
           <instance-parameter name="ice" transfer-ownership="none">
-            <doc xml:space="preserve">The #GstWebRTCICE</doc>
             <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
           </instance-parameter>
           <parameter name="stream" transfer-ownership="none">
-            <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
             <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
           </parameter>
         </parameters>
       </virtual-method>
-      <virtual-method name="get_remote_candidates" invoker="get_remote_candidates" version="1.22">
+      <virtual-method name="get_remote_candidates">
         <return-value transfer-ownership="full">
-          <doc xml:space="preserve">List of remote candidates</doc>
-          <array name="GLib.Array" c:type="GArray*">
-            <type name="WebRTCICECandidateStats"/>
-          </array>
+          <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats*"/>
         </return-value>
         <parameters>
           <instance-parameter name="ice" transfer-ownership="none">
-            <doc xml:space="preserve">The #GstWebRTCICE</doc>
             <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
           </instance-parameter>
           <parameter name="stream" transfer-ownership="none">
-            <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
             <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
           </parameter>
         </parameters>
@@ -725,12 +703,12 @@ for more information.</doc>
             <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
             <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
           </parameter>
-          <parameter name="local_stats" transfer-ownership="none">
+          <parameter name="local_stats" direction="out" caller-allocates="0" transfer-ownership="full">
             <doc xml:space="preserve">A pointer to #GstWebRTCICECandidateStats for local candidate</doc>
             <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats**"/>
           </parameter>
-          <parameter name="remote_stats" transfer-ownership="none">
-            <doc xml:space="preserve">A pointer to #GstWebRTCICECandidateStats for remote candidate</doc>
+          <parameter name="remote_stats" direction="out" caller-allocates="0" transfer-ownership="full">
+            <doc xml:space="preserve">pointer to #GstWebRTCICECandidateStats for remote candidate</doc>
             <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats**"/>
           </parameter>
         </parameters>
@@ -1011,8 +989,8 @@ for more information.</doc>
       <method name="get_local_candidates" c:identifier="gst_webrtc_ice_get_local_candidates" version="1.22">
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">List of local candidates</doc>
-          <array name="GLib.Array" c:type="GArray*">
-            <type name="WebRTCICECandidateStats"/>
+          <array c:type="GstWebRTCICECandidateStats*">
+            <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats"/>
           </array>
         </return-value>
         <parameters>
@@ -1029,8 +1007,8 @@ for more information.</doc>
       <method name="get_remote_candidates" c:identifier="gst_webrtc_ice_get_remote_candidates" version="1.22">
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">List of remote candidates</doc>
-          <array name="GLib.Array" c:type="GArray*">
-            <type name="WebRTCICECandidateStats"/>
+          <array c:type="GstWebRTCICECandidateStats*">
+            <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats"/>
           </array>
         </return-value>
         <parameters>
@@ -1058,12 +1036,12 @@ for more information.</doc>
             <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
             <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
           </parameter>
-          <parameter name="local_stats" transfer-ownership="none">
+          <parameter name="local_stats" direction="out" caller-allocates="0" transfer-ownership="full">
             <doc xml:space="preserve">A pointer to #GstWebRTCICECandidateStats for local candidate</doc>
             <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats**"/>
           </parameter>
-          <parameter name="remote_stats" transfer-ownership="none">
-            <doc xml:space="preserve">A pointer to #GstWebRTCICECandidateStats for remote candidate</doc>
+          <parameter name="remote_stats" direction="out" caller-allocates="0" transfer-ownership="full">
+            <doc xml:space="preserve">pointer to #GstWebRTCICECandidateStats for remote candidate</doc>
             <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats**"/>
           </parameter>
         </parameters>
@@ -1267,6 +1245,11 @@ min-rtp-port must be &lt;= max-rtp-port</doc>
       <field name="max_rtp_port">
         <type name="guint" c:type="guint"/>
       </field>
+      <field name="_gst_reserved">
+        <array zero-terminated="0" fixed-size="4">
+          <type name="gpointer" c:type="gpointer"/>
+        </array>
+      </field>
       <glib:signal name="add-local-ip-address" when="last" action="1">
         <doc xml:space="preserve">Add a local IP address to use for ICE candidate gathering.  If none
 are supplied, they will be discovered automatically. Calling this signal
@@ -1283,7 +1266,7 @@ stops automatic ICE gathering.</doc>
         </parameters>
       </glib:signal>
     </class>
-    <record name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats">
+    <record name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats" version="1.22" glib:type-name="GstWebRTCICECandidateStats" glib:get-type="gst_webrtc_ice_candidate_stats_get_type" c:symbol-prefix="webrtc_ice_candidate_stats">
       <field name="ipaddr" writable="1">
         <type name="utf8" c:type="gchar*"/>
       </field>
@@ -1308,6 +1291,35 @@ stops automatic ICE gathering.</doc>
       <field name="url" writable="1">
         <type name="utf8" c:type="gchar*"/>
       </field>
+      <field name="_gst_reserved" writable="1">
+        <array zero-terminated="0" fixed-size="20">
+          <type name="gpointer" c:type="gpointer"/>
+        </array>
+      </field>
+      <method name="copy" c:identifier="gst_webrtc_ice_candidate_stats_copy" version="1.22">
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A copy of @stats</doc>
+          <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stats" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="free" c:identifier="gst_webrtc_ice_candidate_stats_free" version="1.22">
+        <doc xml:space="preserve">Helper function to free #GstWebRTCICECandidateStats</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stats" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICECandidateStats to be free'd</doc>
+            <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
     </record>
     <record name="WebRTCICEClass" c:type="GstWebRTCICEClass" glib:is-gtype-struct-for="WebRTCICE">
       <field name="parent_class">
@@ -1621,18 +1633,13 @@ stops automatic ICE gathering.</doc>
       <field name="get_local_candidates">
         <callback name="get_local_candidates">
           <return-value transfer-ownership="full">
-            <doc xml:space="preserve">List of local candidates</doc>
-            <array name="GLib.Array" c:type="GArray*">
-              <type name="WebRTCICECandidateStats"/>
-            </array>
+            <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats*"/>
           </return-value>
           <parameters>
             <parameter name="ice" transfer-ownership="none">
-              <doc xml:space="preserve">The #GstWebRTCICE</doc>
               <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
             </parameter>
             <parameter name="stream" transfer-ownership="none">
-              <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
               <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
             </parameter>
           </parameters>
@@ -1641,18 +1648,13 @@ stops automatic ICE gathering.</doc>
       <field name="get_remote_candidates">
         <callback name="get_remote_candidates">
           <return-value transfer-ownership="full">
-            <doc xml:space="preserve">List of remote candidates</doc>
-            <array name="GLib.Array" c:type="GArray*">
-              <type name="WebRTCICECandidateStats"/>
-            </array>
+            <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats*"/>
           </return-value>
           <parameters>
             <parameter name="ice" transfer-ownership="none">
-              <doc xml:space="preserve">The #GstWebRTCICE</doc>
               <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
             </parameter>
             <parameter name="stream" transfer-ownership="none">
-              <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
               <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
             </parameter>
           </parameters>
@@ -1673,16 +1675,21 @@ stops automatic ICE gathering.</doc>
               <doc xml:space="preserve">The #GstWebRTCICEStream</doc>
               <type name="WebRTCICEStream" c:type="GstWebRTCICEStream*"/>
             </parameter>
-            <parameter name="local_stats" transfer-ownership="none">
+            <parameter name="local_stats" direction="out" caller-allocates="0" transfer-ownership="full">
               <doc xml:space="preserve">A pointer to #GstWebRTCICECandidateStats for local candidate</doc>
               <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats**"/>
             </parameter>
-            <parameter name="remote_stats" transfer-ownership="none">
-              <doc xml:space="preserve">A pointer to #GstWebRTCICECandidateStats for remote candidate</doc>
+            <parameter name="remote_stats" direction="out" caller-allocates="0" transfer-ownership="full">
+              <doc xml:space="preserve">pointer to #GstWebRTCICECandidateStats for remote candidate</doc>
               <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats**"/>
             </parameter>
           </parameters>
         </callback>
+      </field>
+      <field name="_gst_reserved">
+        <array zero-terminated="0" fixed-size="4">
+          <type name="gpointer" c:type="gpointer"/>
+        </array>
       </field>
     </record>
     <enumeration name="WebRTCICEComponent" glib:type-name="GstWebRTCICEComponent" glib:get-type="gst_webrtc_ice_component_get_type" c:type="GstWebRTCICEComponent">
@@ -1761,7 +1768,7 @@ stops automatic ICE gathering.</doc>
         <doc xml:space="preserve">controlling</doc>
       </member>
     </enumeration>
-    <class name="WebRTCICEStream" c:symbol-prefix="webrtc_ice_stream" c:type="GstWebRTCICEStream" parent="Gst.Object" abstract="1" glib:type-name="GstWebRTCICEStream" glib:get-type="gst_webrtc_ice_stream_get_type" glib:type-struct="WebRTCICEStreamClass">
+    <class name="WebRTCICEStream" c:symbol-prefix="webrtc_ice_stream" c:type="GstWebRTCICEStream" version="1.22" parent="Gst.Object" abstract="1" glib:type-name="GstWebRTCICEStream" glib:get-type="gst_webrtc_ice_stream_get_type" glib:type-struct="WebRTCICEStreamClass">
       <virtual-method name="find_transport" invoker="find_transport" version="1.22">
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the #GstWebRTCICETransport, or %NULL</doc>
@@ -2344,7 +2351,7 @@ answer.</doc>
       <doc xml:space="preserve">&lt;https://www.w3.org/TR/webrtc/#rtcdtlstransport&gt;</doc>
     </docsection>
     <docsection name="gstwebrtc-icetransport">
-      <doc xml:space="preserve">&lt;https://www.w3.org/TR/webrtc/#rtcicetransport&gt;</doc>
+      <doc xml:space="preserve">See the [specification](https://www.w3.org/TR/webrtc/#rtcicetransport)</doc>
     </docsection>
     <docsection name="gstwebrtc-receiver">
       <doc xml:space="preserve">&lt;https://www.w3.org/TR/webrtc/#rtcrtpreceiver-interface&gt;</doc>
