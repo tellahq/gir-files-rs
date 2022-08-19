@@ -665,7 +665,7 @@ for more information.</doc>
       </virtual-method>
       <virtual-method name="get_local_candidates">
         <return-value transfer-ownership="full">
-          <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats*"/>
+          <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats**"/>
         </return-value>
         <parameters>
           <instance-parameter name="ice" transfer-ownership="none">
@@ -678,7 +678,7 @@ for more information.</doc>
       </virtual-method>
       <virtual-method name="get_remote_candidates">
         <return-value transfer-ownership="full">
-          <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats*"/>
+          <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats**"/>
         </return-value>
         <parameters>
           <instance-parameter name="ice" transfer-ownership="none">
@@ -989,8 +989,8 @@ for more information.</doc>
       <method name="get_local_candidates" c:identifier="gst_webrtc_ice_get_local_candidates" version="1.22">
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">List of local candidates</doc>
-          <array c:type="GstWebRTCICECandidateStats*">
-            <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats"/>
+          <array c:type="GstWebRTCICECandidateStats**">
+            <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats*"/>
           </array>
         </return-value>
         <parameters>
@@ -1007,8 +1007,8 @@ for more information.</doc>
       <method name="get_remote_candidates" c:identifier="gst_webrtc_ice_get_remote_candidates" version="1.22">
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">List of remote candidates</doc>
-          <array c:type="GstWebRTCICECandidateStats*">
-            <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats"/>
+          <array c:type="GstWebRTCICECandidateStats**">
+            <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats*"/>
           </array>
         </return-value>
         <parameters>
@@ -1633,7 +1633,7 @@ stops automatic ICE gathering.</doc>
       <field name="get_local_candidates">
         <callback name="get_local_candidates">
           <return-value transfer-ownership="full">
-            <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats*"/>
+            <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats**"/>
           </return-value>
           <parameters>
             <parameter name="ice" transfer-ownership="none">
@@ -1648,7 +1648,7 @@ stops automatic ICE gathering.</doc>
       <field name="get_remote_candidates">
         <callback name="get_remote_candidates">
           <return-value transfer-ownership="full">
-            <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats*"/>
+            <type name="WebRTCICECandidateStats" c:type="GstWebRTCICECandidateStats**"/>
           </return-value>
           <parameters>
             <parameter name="ice" transfer-ownership="none">
