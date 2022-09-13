@@ -4000,7 +4000,9 @@ padding.</doc>
       </function>
       <virtual-method name="acquire_buffer" invoker="acquire_buffer">
         <doc xml:space="preserve">Acquires a buffer from @pool. @buffer should point to a memory location that
-can hold a pointer to the new buffer.
+can hold a pointer to the new buffer. When the pool is empty, this function
+will by default block until a buffer is released into the pool again or when
+the pool is set to flushing or deactivated.
 
 @params can contain optional parameters to influence the allocation.</doc>
         <return-value transfer-ownership="none">
@@ -4212,7 +4214,9 @@ returned to the pool.</doc>
       </virtual-method>
       <method name="acquire_buffer" c:identifier="gst_buffer_pool_acquire_buffer">
         <doc xml:space="preserve">Acquires a buffer from @pool. @buffer should point to a memory location that
-can hold a pointer to the new buffer.
+can hold a pointer to the new buffer. When the pool is empty, this function
+will by default block until a buffer is released into the pool again or when
+the pool is set to flushing or deactivated.
 
 @params can contain optional parameters to influence the allocation.</doc>
         <return-value transfer-ownership="none">
@@ -5598,6 +5602,184 @@ evaluates to @def_return.</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="CAT_DEBUG" c:identifier="GST_CAT_DEBUG" introspectable="0">
+      <doc xml:space="preserve">Output an debugging message in the given category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="cat">
+          <doc xml:space="preserve">category to use</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="CAT_DEBUG_OBJECT" c:identifier="GST_CAT_DEBUG_OBJECT" introspectable="0">
+      <doc xml:space="preserve">Output an debugging message belonging to the given object in the given category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="cat">
+          <doc xml:space="preserve">category to use</doc>
+        </parameter>
+        <parameter name="obj">
+          <doc xml:space="preserve">the #GObject the message belongs to</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="CAT_ERROR" c:identifier="GST_CAT_ERROR" introspectable="0">
+      <doc xml:space="preserve">Output an error message in the given category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="cat">
+          <doc xml:space="preserve">category to use</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="CAT_ERROR_OBJECT" c:identifier="GST_CAT_ERROR_OBJECT" introspectable="0">
+      <doc xml:space="preserve">Output an error message belonging to the given object in the given category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="cat">
+          <doc xml:space="preserve">category to use</doc>
+        </parameter>
+        <parameter name="obj">
+          <doc xml:space="preserve">the #GObject the message belongs to</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="CAT_FIXME" c:identifier="GST_CAT_FIXME" introspectable="0">
+      <doc xml:space="preserve">Output an fixme message in the given category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="cat">
+          <doc xml:space="preserve">category to use</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="CAT_FIXME_OBJECT" c:identifier="GST_CAT_FIXME_OBJECT" introspectable="0">
+      <doc xml:space="preserve">Output a fixme message belonging to the given object in the given category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="cat">
+          <doc xml:space="preserve">category to use</doc>
+        </parameter>
+        <parameter name="obj">
+          <doc xml:space="preserve">the #GObject the message belongs to</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="CAT_INFO" c:identifier="GST_CAT_INFO" introspectable="0">
+      <doc xml:space="preserve">Output an informational message in the given category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="cat">
+          <doc xml:space="preserve">category to use</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="CAT_INFO_OBJECT" c:identifier="GST_CAT_INFO_OBJECT" introspectable="0">
+      <doc xml:space="preserve">Output an informational message belonging to the given object in the given
+category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="cat">
+          <doc xml:space="preserve">category to use</doc>
+        </parameter>
+        <parameter name="obj">
+          <doc xml:space="preserve">the #GObject the message belongs to</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="CAT_LEVEL_LOG" c:identifier="GST_CAT_LEVEL_LOG" introspectable="0">
+      <doc xml:space="preserve">Outputs a debugging message. This is the most general macro for outputting
+debugging messages. You will probably want to use one of the ones described
+below.
+
+There is no need to finish the end of the debug message with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="cat">
+          <doc xml:space="preserve">category to use</doc>
+        </parameter>
+        <parameter name="level">
+          <doc xml:space="preserve">the severity of the message</doc>
+        </parameter>
+        <parameter name="object">
+          <doc xml:space="preserve">the #GObject the message belongs to or %NULL if none</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">A printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="CAT_LOG" c:identifier="GST_CAT_LOG" introspectable="0">
+      <doc xml:space="preserve">Output an logging message in the given category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="cat">
+          <doc xml:space="preserve">category to use</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="CAT_LOG_OBJECT" c:identifier="GST_CAT_LOG_OBJECT" introspectable="0">
+      <doc xml:space="preserve">Output an logging message belonging to the given object in the given category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="cat">
+          <doc xml:space="preserve">category to use</doc>
+        </parameter>
+        <parameter name="obj">
+          <doc xml:space="preserve">the #GObject the message belongs to</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="CAT_MEMDUMP" c:identifier="GST_CAT_MEMDUMP" introspectable="0">
       <doc xml:space="preserve">Output a hexdump of @data in the given category.
 
@@ -5639,6 +5821,69 @@ character, a newline character will be added automatically.</doc>
         </parameter>
         <parameter name="length">
           <doc xml:space="preserve">length of the data to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="CAT_TRACE" c:identifier="GST_CAT_TRACE" introspectable="0">
+      <doc xml:space="preserve">Output a tracing message in the given category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="cat">
+          <doc xml:space="preserve">category to use</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="CAT_TRACE_OBJECT" c:identifier="GST_CAT_TRACE_OBJECT" introspectable="0">
+      <doc xml:space="preserve">Output a tracing message belonging to the given object in the given
+category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="cat">
+          <doc xml:space="preserve">category to use</doc>
+        </parameter>
+        <parameter name="obj">
+          <doc xml:space="preserve">the #GObject the message belongs to</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="CAT_WARNING" c:identifier="GST_CAT_WARNING" introspectable="0">
+      <doc xml:space="preserve">Output an warning message in the given category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="cat">
+          <doc xml:space="preserve">category to use</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="CAT_WARNING_OBJECT" c:identifier="GST_CAT_WARNING_OBJECT" introspectable="0">
+      <doc xml:space="preserve">Output a warning message belonging to the given object in the given category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="cat">
+          <doc xml:space="preserve">category to use</doc>
+        </parameter>
+        <parameter name="obj">
+          <doc xml:space="preserve">the #GObject the message belongs to</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
         </parameter>
       </parameters>
     </function-macro>
@@ -10019,6 +10264,17 @@ the metadata on @transbuf.</doc>
         </parameter>
       </parameters>
     </callback>
+    <function-macro name="DEBUG" c:identifier="GST_DEBUG" introspectable="0">
+      <doc xml:space="preserve">Output a debugging message in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <constant name="DEBUG_BG_MASK" value="240" c:type="GST_DEBUG_BG_MASK">
       <type name="gint" c:type="gint"/>
     </constant>
@@ -10177,6 +10433,21 @@ freed by the caller.</doc>
       <parameters>
         <parameter name="ptr">
           <doc xml:space="preserve">address of the function of which to look up the name</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="DEBUG_OBJECT" c:identifier="GST_DEBUG_OBJECT" introspectable="0">
+      <doc xml:space="preserve">Output a debugging message belonging to the given object in the default
+category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="obj">
+          <doc xml:space="preserve">the #GObject the message belongs to</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
         </parameter>
       </parameters>
     </function-macro>
@@ -13141,6 +13412,31 @@ application will be informed.</doc>
           <doc xml:space="preserve">optional name, type, value triplets, which will be stored
          in the associated GstStructure. NULL terminator required.
          Must be enclosed within parentheses.</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="ERROR" c:identifier="GST_ERROR" introspectable="0">
+      <doc xml:space="preserve">Output an error message in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="ERROR_OBJECT" c:identifier="GST_ERROR_OBJECT" introspectable="0">
+      <doc xml:space="preserve">Output an error message belonging to the given object in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="obj">
+          <doc xml:space="preserve">the #GObject the message belongs to</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
         </parameter>
       </parameters>
     </function-macro>
@@ -18646,6 +18942,31 @@ gst_event_type_get_flags() function.</doc>
                               identified by the event name.</doc>
       </member>
     </bitfield>
+    <function-macro name="FIXME" c:identifier="GST_FIXME" introspectable="0">
+      <doc xml:space="preserve">Output a fixme message in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="FIXME_OBJECT" c:identifier="GST_FIXME_OBJECT" introspectable="0">
+      <doc xml:space="preserve">Output a fixme message belonging to the given object in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="obj">
+          <doc xml:space="preserve">the #GObject the message belongs to</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <constant name="FLAG_SET_MASK_EXACT" value="4294967295" c:type="GST_FLAG_SET_MASK_EXACT" version="1.6">
       <doc xml:space="preserve">A mask value with all bits set, for use as a
 GstFlagSet mask where all flag bits must match
@@ -19148,6 +19469,32 @@ is unlinked and links to the new target are established. if @newtarget is
       </field>
     </record>
     <record name="GhostPadPrivate" c:type="GstGhostPadPrivate" disguised="1"/>
+    <function-macro name="INFO" c:identifier="GST_INFO" introspectable="0">
+      <doc xml:space="preserve">Output an informational message in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="INFO_OBJECT" c:identifier="GST_INFO_OBJECT" introspectable="0">
+      <doc xml:space="preserve">Output an informational message belonging to the given object in the default
+category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="obj">
+          <doc xml:space="preserve">the #GObject the message belongs to</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="IS_ALLOCATOR" c:identifier="GST_IS_ALLOCATOR" introspectable="0">
       <parameters>
         <parameter name="obj">
@@ -20326,6 +20673,31 @@ The function will be called with the iterator lock held.</doc>
       <doc xml:space="preserve">GstLockFlags value alias for GST_LOCK_FLAG_READ | GST_LOCK_FLAG_WRITE</doc>
       <type name="LockFlags" c:type="GstLockFlags"/>
     </constant>
+    <function-macro name="LOG" c:identifier="GST_LOG" introspectable="0">
+      <doc xml:space="preserve">Output a logging message in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="LOG_OBJECT" c:identifier="GST_LOG_OBJECT" introspectable="0">
+      <doc xml:space="preserve">Output a logging message belonging to the given object in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="obj">
+          <doc xml:space="preserve">the #GObject the message belongs to</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <enumeration name="LibraryError" glib:type-name="GstLibraryError" glib:get-type="gst_library_error_get_type" c:type="GstLibraryError" glib:error-domain="gst-library-error-quark">
       <doc xml:space="preserve">Library errors are for errors from the library being used by elements
 (initializing, finalizing, settings, ...)</doc>
@@ -40946,6 +41318,17 @@ returned by gst_toc_entry_set_loop() to indicate infinite looping.</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="TRACE" c:identifier="GST_TRACE" introspectable="0">
+      <doc xml:space="preserve">Output a tracing message in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="TRACER" c:identifier="GST_TRACER" introspectable="0">
       <parameters>
         <parameter name="obj">
@@ -41015,6 +41398,20 @@ returned by gst_toc_entry_set_loop() to indicate infinite looping.</doc>
     <function-macro name="TRACER_RECORD_GET_CLASS" c:identifier="GST_TRACER_RECORD_GET_CLASS" introspectable="0">
       <parameters>
         <parameter name="obj">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="TRACE_OBJECT" c:identifier="GST_TRACE_OBJECT" introspectable="0">
+      <doc xml:space="preserve">Output a tracing message belonging to the given object in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="obj">
+          <doc xml:space="preserve">the #GObject the message belongs to</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
         </parameter>
       </parameters>
     </function-macro>
@@ -46359,6 +46756,31 @@ Free-function: g_free</doc>
         </array>
       </field>
     </record>
+    <function-macro name="WARNING" c:identifier="GST_WARNING" introspectable="0">
+      <doc xml:space="preserve">Output a warning message in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="WARNING_OBJECT" c:identifier="GST_WARNING_OBJECT" introspectable="0">
+      <doc xml:space="preserve">Output a warning message belonging to the given object in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="obj">
+          <doc xml:space="preserve">the #GObject the message belongs to</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="WRITE_UINT16_BE" c:identifier="GST_WRITE_UINT16_BE" introspectable="0">
       <doc xml:space="preserve">Store a 16 bit unsigned integer value in big endian format into the memory buffer.</doc>
       <parameters>

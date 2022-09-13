@@ -8592,6 +8592,29 @@ user-defined purposes.</doc>
       <doc xml:space="preserve">The name for %GST_GL_API_OPENGL used in various places</doc>
       <type name="utf8" c:type="gchar*"/>
     </constant>
+    <function-macro name="GL_ASYNC_CAT_LEVEL_LOG" c:identifier="GST_GL_ASYNC_CAT_LEVEL_LOG" introspectable="0">
+      <doc xml:space="preserve">Stores a debug message in @ad for later output</doc>
+      <parameters>
+        <parameter name="ad">
+          <doc xml:space="preserve">the #GstGLAsyncDebug to store the message in</doc>
+        </parameter>
+        <parameter name="cat">
+          <doc xml:space="preserve">the #GstDebugCategory to output the message in</doc>
+        </parameter>
+        <parameter name="level">
+          <doc xml:space="preserve">the #GstDebugLevel</doc>
+        </parameter>
+        <parameter name="object">
+          <doc xml:space="preserve">a #GObject to associate with the debug message</doc>
+        </parameter>
+        <parameter name="format">
+          <doc xml:space="preserve">a printf style format string</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">the list of arguments for @format</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="GL_ASYNC_CAT_LEVEL_LOG_valist" c:identifier="GST_GL_ASYNC_CAT_LEVEL_LOG_valist" introspectable="0">
       <doc xml:space="preserve">Stores a debug message in @ad for later output</doc>
       <parameters>
@@ -9957,6 +9980,22 @@ multiple times.  This must be called before any other GstGLMemory operation.</do
         </parameter>
       </parameters>
     </function>
+    <function-macro name="gl_query_counter_log" c:identifier="gst_gl_query_counter_log" introspectable="0">
+      <parameters>
+        <parameter name="query">
+        </parameter>
+        <parameter name="cat">
+        </parameter>
+        <parameter name="level">
+        </parameter>
+        <parameter name="object">
+        </parameter>
+        <parameter name="format">
+        </parameter>
+        <parameter name="...">
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="gl_query_counter_log_valist" c:identifier="gst_gl_query_counter_log_valist" introspectable="0">
       <parameters>
         <parameter name="query">
@@ -10014,6 +10053,22 @@ GStreamer elements.</doc>
         </parameter>
       </parameters>
     </function>
+    <function-macro name="gl_query_start_log" c:identifier="gst_gl_query_start_log" introspectable="0">
+      <parameters>
+        <parameter name="query">
+        </parameter>
+        <parameter name="cat">
+        </parameter>
+        <parameter name="level">
+        </parameter>
+        <parameter name="object">
+        </parameter>
+        <parameter name="format">
+        </parameter>
+        <parameter name="...">
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="gl_query_start_log_valist" c:identifier="gst_gl_query_start_log_valist" introspectable="0">
       <parameters>
         <parameter name="query">

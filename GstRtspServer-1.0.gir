@@ -1590,7 +1590,7 @@ The connection object returned remains valid until the client is freed.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_mount_points" c:identifier="gst_rtsp_client_get_mount_points">
+      <method name="get_mount_points" c:identifier="gst_rtsp_client_get_mount_points" glib:get-property="mount-points">
         <doc xml:space="preserve">Get the #GstRTSPMountPoints object that @client uses to manage its sessions.</doc>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstRTSPMountPoints, unref after usage.</doc>
@@ -1603,7 +1603,7 @@ The connection object returned remains valid until the client is freed.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_session_pool" c:identifier="gst_rtsp_client_get_session_pool">
+      <method name="get_session_pool" c:identifier="gst_rtsp_client_get_session_pool" glib:get-property="session-pool">
         <doc xml:space="preserve">Get the #GstRTSPSessionPool object that @client uses to manage its sessions.</doc>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstRTSPSessionPool, unref after usage.</doc>
@@ -1779,7 +1779,7 @@ limit with response status 413 Request Entity Too Large</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_mount_points" c:identifier="gst_rtsp_client_set_mount_points">
+      <method name="set_mount_points" c:identifier="gst_rtsp_client_set_mount_points" glib:set-property="mount-points">
         <doc xml:space="preserve">Set @mounts as the mount points for @client which it will use to map urls
 to media streams. These mount points are usually inherited from the server that
 created the client but can be overriden later.</doc>
@@ -1861,7 +1861,7 @@ but not both at the same time.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_session_pool" c:identifier="gst_rtsp_client_set_session_pool">
+      <method name="set_session_pool" c:identifier="gst_rtsp_client_set_session_pool" glib:set-property="session-pool">
         <doc xml:space="preserve">Set @pool as the sessionpool for @client which it will use to find
 or allocate sessions. the sessionpool is usually inherited from the server
 that created the client but can be overridden later.</doc>
@@ -1898,13 +1898,13 @@ that created the client but can be overridden later.</doc>
       <property name="drop-backlog" writable="1" transfer-ownership="none">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="mount-points" writable="1" transfer-ownership="none">
+      <property name="mount-points" writable="1" transfer-ownership="none" setter="set_mount_points" getter="get_mount_points">
         <type name="RTSPMountPoints"/>
       </property>
       <property name="post-session-timeout" writable="1" transfer-ownership="none">
         <type name="gint" c:type="gint"/>
       </property>
-      <property name="session-pool" writable="1" transfer-ownership="none">
+      <property name="session-pool" writable="1" transfer-ownership="none" setter="set_session_pool" getter="get_session_pool">
         <type name="RTSPSessionPool"/>
       </property>
       <field name="parent">
@@ -2973,6 +2973,22 @@ context can then be received using gst_rtsp_context_get_current().</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="set_token" c:identifier="gst_rtsp_context_set_token" version="1.22">
+        <doc xml:space="preserve">Set the token for @ctx.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ctx" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstRTSPContext</doc>
+            <type name="RTSPContext" c:type="GstRTSPContext*"/>
+          </instance-parameter>
+          <parameter name="token" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstRTSPToken</doc>
+            <type name="RTSPToken" c:type="GstRTSPToken*"/>
+          </parameter>
+        </parameters>
+      </method>
       <function name="get_current" c:identifier="gst_rtsp_context_get_current" introspectable="0">
         <doc xml:space="preserve">Get the current #GstRTSPContext. This object is retrieved from the
 current thread that is handling the request for a client.</doc>
@@ -3398,7 +3414,7 @@ g_object_unref() after usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_buffer_size" c:identifier="gst_rtsp_media_get_buffer_size">
+      <method name="get_buffer_size" c:identifier="gst_rtsp_media_get_buffer_size" glib:get-property="buffer-size">
         <doc xml:space="preserve">Get the kernel UDP buffer size.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the kernel UDP buffer size.</doc>
@@ -3411,7 +3427,7 @@ g_object_unref() after usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_clock" c:identifier="gst_rtsp_media_get_clock">
+      <method name="get_clock" c:identifier="gst_rtsp_media_get_clock" glib:get-property="clock">
         <doc xml:space="preserve">Get the clock that is used by the pipeline in @media.
 
 @media must be prepared before this method returns a valid clock object.</doc>
@@ -3437,7 +3453,7 @@ g_object_unref() after usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_dscp_qos" c:identifier="gst_rtsp_media_get_dscp_qos" version="1.18">
+      <method name="get_dscp_qos" c:identifier="gst_rtsp_media_get_dscp_qos" glib:get-property="dscp-qos" version="1.18">
         <doc xml:space="preserve">Get the configured DSCP QoS of attached media.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the DSCP QoS value of attached streams or -1 if disabled.</doc>
@@ -3450,7 +3466,7 @@ g_object_unref() after usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_element" c:identifier="gst_rtsp_media_get_element">
+      <method name="get_element" c:identifier="gst_rtsp_media_get_element" glib:get-property="element">
         <doc xml:space="preserve">Get the element that was used when constructing @media.</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">a #GstElement. Unref after usage.</doc>
@@ -3463,7 +3479,7 @@ g_object_unref() after usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_latency" c:identifier="gst_rtsp_media_get_latency">
+      <method name="get_latency" c:identifier="gst_rtsp_media_get_latency" glib:get-property="latency">
         <doc xml:space="preserve">Get the latency that is used for receiving media.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">latency in milliseconds</doc>
@@ -3476,7 +3492,7 @@ g_object_unref() after usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_max_mcast_ttl" c:identifier="gst_rtsp_media_get_max_mcast_ttl" version="1.16">
+      <method name="get_max_mcast_ttl" c:identifier="gst_rtsp_media_get_max_mcast_ttl" glib:get-property="max-mcast-ttl" version="1.16">
         <doc xml:space="preserve">Get the the maximum time-to-live value of outgoing multicast packets.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the maximum time-to-live value of outgoing multicast packets.</doc>
@@ -3516,7 +3532,7 @@ g_free() after usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_profiles" c:identifier="gst_rtsp_media_get_profiles">
+      <method name="get_profiles" c:identifier="gst_rtsp_media_get_profiles" glib:get-property="profiles">
         <doc xml:space="preserve">Get the allowed profiles of @media.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">a #GstRTSPProfile</doc>
@@ -3529,7 +3545,7 @@ g_free() after usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_protocols" c:identifier="gst_rtsp_media_get_protocols">
+      <method name="get_protocols" c:identifier="gst_rtsp_media_get_protocols" glib:get-property="protocols">
         <doc xml:space="preserve">Get the allowed protocols of @media.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">a #GstRTSPLowerTrans</doc>
@@ -3657,7 +3673,7 @@ until @media is prepared or in error.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="get_suspend_mode" c:identifier="gst_rtsp_media_get_suspend_mode">
+      <method name="get_suspend_mode" c:identifier="gst_rtsp_media_get_suspend_mode" glib:get-property="suspend-mode">
         <doc xml:space="preserve">Get how @media will be suspended.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">#GstRTSPSuspendMode.</doc>
@@ -3670,7 +3686,7 @@ until @media is prepared or in error.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_time_provider" c:identifier="gst_rtsp_media_get_time_provider">
+      <method name="get_time_provider" c:identifier="gst_rtsp_media_get_time_provider" glib:get-property="time-provider">
         <doc xml:space="preserve">Get the #GstNetTimeProvider for the clock used by @media. The time provider
 will listen on @address and @port for client time requests.</doc>
         <return-value transfer-ownership="full">
@@ -3692,7 +3708,7 @@ will listen on @address and @port for client time requests.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="get_transport_mode" c:identifier="gst_rtsp_media_get_transport_mode">
+      <method name="get_transport_mode" c:identifier="gst_rtsp_media_get_transport_mode" glib:get-property="transport-mode">
         <doc xml:space="preserve">Check if the pipeline for @media can be used for PLAY or RECORD methods.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The transport mode.</doc>
@@ -3989,7 +4005,7 @@ and &gt; 0 to indicate the longest duration between any two random access points
           </parameter>
         </parameters>
       </method>
-      <method name="set_bind_mcast_address" c:identifier="gst_rtsp_media_set_bind_mcast_address" version="1.16">
+      <method name="set_bind_mcast_address" c:identifier="gst_rtsp_media_set_bind_mcast_address" glib:set-property="bind-mcast-address" version="1.16">
         <doc xml:space="preserve">Decide whether the multicast socket should be bound to a multicast address or
 INADDR_ANY.</doc>
         <return-value transfer-ownership="none">
@@ -4006,7 +4022,7 @@ INADDR_ANY.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_buffer_size" c:identifier="gst_rtsp_media_set_buffer_size">
+      <method name="set_buffer_size" c:identifier="gst_rtsp_media_set_buffer_size" glib:set-property="buffer-size">
         <doc xml:space="preserve">Set the kernel UDP buffer size.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -4022,7 +4038,7 @@ INADDR_ANY.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_clock" c:identifier="gst_rtsp_media_set_clock">
+      <method name="set_clock" c:identifier="gst_rtsp_media_set_clock" glib:set-property="clock">
         <doc xml:space="preserve">Configure the clock used for the media.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -4052,7 +4068,7 @@ INADDR_ANY.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_dscp_qos" c:identifier="gst_rtsp_media_set_dscp_qos" version="1.18">
+      <method name="set_dscp_qos" c:identifier="gst_rtsp_media_set_dscp_qos" glib:set-property="dscp-qos" version="1.18">
         <doc xml:space="preserve">Configure the dscp qos of attached streams to @dscp_qos.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -4068,7 +4084,7 @@ INADDR_ANY.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_eos_shutdown" c:identifier="gst_rtsp_media_set_eos_shutdown">
+      <method name="set_eos_shutdown" c:identifier="gst_rtsp_media_set_eos_shutdown" glib:set-property="eos-shutdown">
         <doc xml:space="preserve">Set or unset if an EOS event will be sent to the pipeline for @media before
 it is unprepared.</doc>
         <return-value transfer-ownership="none">
@@ -4085,7 +4101,7 @@ it is unprepared.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_latency" c:identifier="gst_rtsp_media_set_latency">
+      <method name="set_latency" c:identifier="gst_rtsp_media_set_latency" glib:set-property="latency">
         <doc xml:space="preserve">Configure the latency used for receiving media.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -4101,7 +4117,7 @@ it is unprepared.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_max_mcast_ttl" c:identifier="gst_rtsp_media_set_max_mcast_ttl" version="1.16">
+      <method name="set_max_mcast_ttl" c:identifier="gst_rtsp_media_set_max_mcast_ttl" glib:set-property="max-mcast-ttl" version="1.16">
         <doc xml:space="preserve">Set the maximum time-to-live value of outgoing multicast packets.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">%TRUE if the requested ttl has been set successfully.</doc>
@@ -4166,7 +4182,7 @@ it is unprepared.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_profiles" c:identifier="gst_rtsp_media_set_profiles">
+      <method name="set_profiles" c:identifier="gst_rtsp_media_set_profiles" glib:set-property="profiles">
         <doc xml:space="preserve">Configure the allowed lower transport for @media.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -4182,7 +4198,7 @@ it is unprepared.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_protocols" c:identifier="gst_rtsp_media_set_protocols">
+      <method name="set_protocols" c:identifier="gst_rtsp_media_set_protocols" glib:set-property="protocols">
         <doc xml:space="preserve">Configure the allowed lower transport for @media.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -4245,7 +4261,7 @@ in the ONVIF replay spec.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_reusable" c:identifier="gst_rtsp_media_set_reusable">
+      <method name="set_reusable" c:identifier="gst_rtsp_media_set_reusable" glib:set-property="reusable">
         <doc xml:space="preserve">Set or unset if the pipeline for @media can be reused after the pipeline has
 been unprepared.</doc>
         <return-value transfer-ownership="none">
@@ -4262,7 +4278,7 @@ been unprepared.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_shared" c:identifier="gst_rtsp_media_set_shared">
+      <method name="set_shared" c:identifier="gst_rtsp_media_set_shared" glib:set-property="shared">
         <doc xml:space="preserve">Set or unset if the pipeline for @media can be shared will multiple clients.
 When @shared is %TRUE, client requests for this media will share the media
 pipeline.</doc>
@@ -4306,7 +4322,7 @@ a #GPtrArray of #GstRTSPStreamTransport pointers</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_stop_on_disconnect" c:identifier="gst_rtsp_media_set_stop_on_disconnect">
+      <method name="set_stop_on_disconnect" c:identifier="gst_rtsp_media_set_stop_on_disconnect" glib:set-property="stop-on-disconnect">
         <doc xml:space="preserve">Set or unset if the pipeline for @media should be stopped when a
 client disconnects without sending TEARDOWN.</doc>
         <return-value transfer-ownership="none">
@@ -4323,7 +4339,7 @@ client disconnects without sending TEARDOWN.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_suspend_mode" c:identifier="gst_rtsp_media_set_suspend_mode">
+      <method name="set_suspend_mode" c:identifier="gst_rtsp_media_set_suspend_mode" glib:set-property="suspend-mode">
         <doc xml:space="preserve">Control how @ media will be suspended after the SDP has been generated and
 after a PAUSE request has been performed.
 
@@ -4342,7 +4358,7 @@ Media must be unprepared when setting the suspend mode.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_transport_mode" c:identifier="gst_rtsp_media_set_transport_mode">
+      <method name="set_transport_mode" c:identifier="gst_rtsp_media_set_transport_mode" glib:set-property="transport-mode">
         <doc xml:space="preserve">Sets if the media pipeline can work in PLAY or RECORD mode</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -4471,52 +4487,52 @@ when the media was not in the suspended state.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="bind-mcast-address" writable="1" transfer-ownership="none">
+      <property name="bind-mcast-address" writable="1" transfer-ownership="none" setter="set_bind_mcast_address">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="buffer-size" writable="1" transfer-ownership="none">
+      <property name="buffer-size" writable="1" transfer-ownership="none" setter="set_buffer_size" getter="get_buffer_size">
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="clock" writable="1" transfer-ownership="none">
+      <property name="clock" writable="1" transfer-ownership="none" setter="set_clock" getter="get_clock">
         <type name="Gst.Clock"/>
       </property>
-      <property name="dscp-qos" writable="1" transfer-ownership="none">
+      <property name="dscp-qos" writable="1" transfer-ownership="none" setter="set_dscp_qos" getter="get_dscp_qos">
         <type name="gint" c:type="gint"/>
       </property>
-      <property name="element" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="element" writable="1" construct-only="1" transfer-ownership="none" getter="get_element">
         <type name="Gst.Element"/>
       </property>
-      <property name="eos-shutdown" writable="1" transfer-ownership="none">
+      <property name="eos-shutdown" writable="1" transfer-ownership="none" setter="set_eos_shutdown">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="latency" writable="1" transfer-ownership="none">
+      <property name="latency" writable="1" transfer-ownership="none" setter="set_latency" getter="get_latency">
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="max-mcast-ttl" writable="1" transfer-ownership="none">
+      <property name="max-mcast-ttl" writable="1" transfer-ownership="none" setter="set_max_mcast_ttl" getter="get_max_mcast_ttl">
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="profiles" writable="1" transfer-ownership="none">
+      <property name="profiles" writable="1" transfer-ownership="none" setter="set_profiles" getter="get_profiles">
         <type name="GstRtsp.RTSPProfile"/>
       </property>
-      <property name="protocols" writable="1" transfer-ownership="none">
+      <property name="protocols" writable="1" transfer-ownership="none" setter="set_protocols" getter="get_protocols">
         <type name="GstRtsp.RTSPLowerTrans"/>
       </property>
-      <property name="reusable" writable="1" transfer-ownership="none">
+      <property name="reusable" writable="1" transfer-ownership="none" setter="set_reusable">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="shared" writable="1" transfer-ownership="none">
+      <property name="shared" writable="1" transfer-ownership="none" setter="set_shared">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="stop-on-disconnect" writable="1" transfer-ownership="none">
+      <property name="stop-on-disconnect" writable="1" transfer-ownership="none" setter="set_stop_on_disconnect">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="suspend-mode" writable="1" transfer-ownership="none">
+      <property name="suspend-mode" writable="1" transfer-ownership="none" setter="set_suspend_mode" getter="get_suspend_mode">
         <type name="RTSPSuspendMode"/>
       </property>
-      <property name="time-provider" writable="1" transfer-ownership="none">
+      <property name="time-provider" writable="1" transfer-ownership="none" getter="get_time_provider">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="transport-mode" writable="1" transfer-ownership="none">
+      <property name="transport-mode" writable="1" transfer-ownership="none" setter="set_transport_mode" getter="get_transport_mode">
         <type name="RTSPTransportMode"/>
       </property>
       <field name="parent">
@@ -5092,7 +5108,7 @@ usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_buffer_size" c:identifier="gst_rtsp_media_factory_get_buffer_size">
+      <method name="get_buffer_size" c:identifier="gst_rtsp_media_factory_get_buffer_size" glib:get-property="buffer-size">
         <doc xml:space="preserve">Get the kernel UDP buffer size.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the kernel UDP buffer size.</doc>
@@ -5105,7 +5121,7 @@ usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_clock" c:identifier="gst_rtsp_media_factory_get_clock" version="1.8">
+      <method name="get_clock" c:identifier="gst_rtsp_media_factory_get_clock" glib:get-property="clock" version="1.8">
         <doc xml:space="preserve">Returns the clock that is going to be used by the pipelines
 of all medias created from this factory.</doc>
         <return-value transfer-ownership="full">
@@ -5130,7 +5146,7 @@ of all medias created from this factory.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_dscp_qos" c:identifier="gst_rtsp_media_factory_get_dscp_qos" version="1.18">
+      <method name="get_dscp_qos" c:identifier="gst_rtsp_media_factory_get_dscp_qos" glib:get-property="dscp-qos" version="1.18">
         <doc xml:space="preserve">Get the configured media DSCP QoS.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the media DSCP QoS value or -1 if disabled.</doc>
@@ -5143,7 +5159,7 @@ of all medias created from this factory.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_latency" c:identifier="gst_rtsp_media_factory_get_latency">
+      <method name="get_latency" c:identifier="gst_rtsp_media_factory_get_latency" glib:get-property="latency">
         <doc xml:space="preserve">Get the latency that is used for receiving media</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">latency in milliseconds</doc>
@@ -5156,7 +5172,7 @@ of all medias created from this factory.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_launch" c:identifier="gst_rtsp_media_factory_get_launch">
+      <method name="get_launch" c:identifier="gst_rtsp_media_factory_get_launch" glib:get-property="launch">
         <doc xml:space="preserve">Get the gst_parse_launch() pipeline description that will be used in the
 default prepare vmethod.</doc>
         <return-value transfer-ownership="full" nullable="1">
@@ -5171,7 +5187,7 @@ usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_max_mcast_ttl" c:identifier="gst_rtsp_media_factory_get_max_mcast_ttl" version="1.16">
+      <method name="get_max_mcast_ttl" c:identifier="gst_rtsp_media_factory_get_max_mcast_ttl" glib:get-property="max-mcast-ttl" version="1.16">
         <doc xml:space="preserve">Get the the maximum time-to-live value of outgoing multicast packets.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the maximum time-to-live value of outgoing multicast packets.</doc>
@@ -5224,7 +5240,7 @@ usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_profiles" c:identifier="gst_rtsp_media_factory_get_profiles">
+      <method name="get_profiles" c:identifier="gst_rtsp_media_factory_get_profiles" glib:get-property="profiles">
         <doc xml:space="preserve">Get the allowed profiles of @factory.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">a #GstRTSPProfile</doc>
@@ -5237,7 +5253,7 @@ usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_protocols" c:identifier="gst_rtsp_media_factory_get_protocols">
+      <method name="get_protocols" c:identifier="gst_rtsp_media_factory_get_protocols" glib:get-property="protocols">
         <doc xml:space="preserve">Get the allowed protocols of @factory.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">a #GstRTSPLowerTrans</doc>
@@ -5276,7 +5292,7 @@ usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_suspend_mode" c:identifier="gst_rtsp_media_factory_get_suspend_mode">
+      <method name="get_suspend_mode" c:identifier="gst_rtsp_media_factory_get_suspend_mode" glib:get-property="suspend-mode">
         <doc xml:space="preserve">Get how media created from this factory will be suspended.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">a #GstRTSPSuspendMode.</doc>
@@ -5289,7 +5305,7 @@ usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_transport_mode" c:identifier="gst_rtsp_media_factory_get_transport_mode">
+      <method name="get_transport_mode" c:identifier="gst_rtsp_media_factory_get_transport_mode" glib:get-property="transport-mode">
         <doc xml:space="preserve">Get if media created from this factory can be used for PLAY or RECORD
 methods.</doc>
         <return-value transfer-ownership="none">
@@ -5382,7 +5398,7 @@ pipeline before shutdown.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_bind_mcast_address" c:identifier="gst_rtsp_media_factory_set_bind_mcast_address" version="1.16">
+      <method name="set_bind_mcast_address" c:identifier="gst_rtsp_media_factory_set_bind_mcast_address" glib:set-property="bind-mcast-address" version="1.16">
         <doc xml:space="preserve">Decide whether the multicast socket should be bound to a multicast address or
 INADDR_ANY.</doc>
         <return-value transfer-ownership="none">
@@ -5399,7 +5415,7 @@ INADDR_ANY.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_buffer_size" c:identifier="gst_rtsp_media_factory_set_buffer_size">
+      <method name="set_buffer_size" c:identifier="gst_rtsp_media_factory_set_buffer_size" glib:set-property="buffer-size">
         <doc xml:space="preserve">Set the kernel UDP buffer size.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -5415,7 +5431,7 @@ INADDR_ANY.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_clock" c:identifier="gst_rtsp_media_factory_set_clock" version="1.8">
+      <method name="set_clock" c:identifier="gst_rtsp_media_factory_set_clock" glib:set-property="clock" version="1.8">
         <doc xml:space="preserve">Configures a specific clock to be used by the pipelines
 of all medias created from this factory.</doc>
         <return-value transfer-ownership="none">
@@ -5447,7 +5463,7 @@ receiving media</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_dscp_qos" c:identifier="gst_rtsp_media_factory_set_dscp_qos" version="1.18">
+      <method name="set_dscp_qos" c:identifier="gst_rtsp_media_factory_set_dscp_qos" glib:set-property="dscp-qos" version="1.18">
         <doc xml:space="preserve">Configure the media dscp qos to @dscp_qos.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -5463,7 +5479,7 @@ receiving media</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_enable_rtcp" c:identifier="gst_rtsp_media_factory_set_enable_rtcp" version="1.20">
+      <method name="set_enable_rtcp" c:identifier="gst_rtsp_media_factory_set_enable_rtcp" glib:set-property="enable-rtcp" version="1.20">
         <doc xml:space="preserve">Decide whether the created media should send and receive RTCP</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -5479,7 +5495,7 @@ receiving media</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_eos_shutdown" c:identifier="gst_rtsp_media_factory_set_eos_shutdown">
+      <method name="set_eos_shutdown" c:identifier="gst_rtsp_media_factory_set_eos_shutdown" glib:set-property="eos-shutdown">
         <doc xml:space="preserve">Configure if media created from this factory will have an EOS sent to the
 pipeline before shutdown.</doc>
         <return-value transfer-ownership="none">
@@ -5496,7 +5512,7 @@ pipeline before shutdown.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_latency" c:identifier="gst_rtsp_media_factory_set_latency">
+      <method name="set_latency" c:identifier="gst_rtsp_media_factory_set_latency" glib:set-property="latency">
         <doc xml:space="preserve">Configure the latency used for receiving media</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -5512,7 +5528,7 @@ pipeline before shutdown.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_launch" c:identifier="gst_rtsp_media_factory_set_launch">
+      <method name="set_launch" c:identifier="gst_rtsp_media_factory_set_launch" glib:set-property="launch">
         <doc xml:space="preserve">The gst_parse_launch() line to use for constructing the pipeline in the
 default prepare vmethod.
 
@@ -5536,7 +5552,7 @@ etc.. Each of the payloaders will result in a stream.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_max_mcast_ttl" c:identifier="gst_rtsp_media_factory_set_max_mcast_ttl" version="1.16">
+      <method name="set_max_mcast_ttl" c:identifier="gst_rtsp_media_factory_set_max_mcast_ttl" glib:set-property="max-mcast-ttl" version="1.16">
         <doc xml:space="preserve">Set the maximum time-to-live value of outgoing multicast packets.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">%TRUE if the requested ttl has been set successfully.</doc>
@@ -5603,7 +5619,7 @@ may of course do something different)</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_profiles" c:identifier="gst_rtsp_media_factory_set_profiles">
+      <method name="set_profiles" c:identifier="gst_rtsp_media_factory_set_profiles" glib:set-property="profiles">
         <doc xml:space="preserve">Configure the allowed profiles for @factory.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -5619,7 +5635,7 @@ may of course do something different)</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_protocols" c:identifier="gst_rtsp_media_factory_set_protocols">
+      <method name="set_protocols" c:identifier="gst_rtsp_media_factory_set_protocols" glib:set-property="protocols">
         <doc xml:space="preserve">Configure the allowed lower transport for @factory.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -5667,7 +5683,7 @@ may of course do something different)</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_shared" c:identifier="gst_rtsp_media_factory_set_shared">
+      <method name="set_shared" c:identifier="gst_rtsp_media_factory_set_shared" glib:set-property="shared">
         <doc xml:space="preserve">Configure if media created from this factory can be shared between clients.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -5683,7 +5699,7 @@ may of course do something different)</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_stop_on_disconnect" c:identifier="gst_rtsp_media_factory_set_stop_on_disconnect">
+      <method name="set_stop_on_disconnect" c:identifier="gst_rtsp_media_factory_set_stop_on_disconnect" glib:set-property="stop-on-disconnect">
         <doc xml:space="preserve">Configure if media created from this factory should be stopped
 when a client disconnects without sending TEARDOWN.</doc>
         <return-value transfer-ownership="none">
@@ -5700,7 +5716,7 @@ when a client disconnects without sending TEARDOWN.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_suspend_mode" c:identifier="gst_rtsp_media_factory_set_suspend_mode">
+      <method name="set_suspend_mode" c:identifier="gst_rtsp_media_factory_set_suspend_mode" glib:set-property="suspend-mode">
         <doc xml:space="preserve">Configure how media created from this factory will be suspended.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -5716,7 +5732,7 @@ when a client disconnects without sending TEARDOWN.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_transport_mode" c:identifier="gst_rtsp_media_factory_set_transport_mode">
+      <method name="set_transport_mode" c:identifier="gst_rtsp_media_factory_set_transport_mode" glib:set-property="transport-mode">
         <doc xml:space="preserve">Configure if this factory creates media for PLAY or RECORD modes.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -5732,50 +5748,50 @@ when a client disconnects without sending TEARDOWN.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="bind-mcast-address" writable="1" transfer-ownership="none">
+      <property name="bind-mcast-address" writable="1" transfer-ownership="none" setter="set_bind_mcast_address">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="buffer-size" writable="1" transfer-ownership="none">
+      <property name="buffer-size" writable="1" transfer-ownership="none" setter="set_buffer_size" getter="get_buffer_size">
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="clock" writable="1" transfer-ownership="none">
+      <property name="clock" writable="1" transfer-ownership="none" setter="set_clock" getter="get_clock">
         <type name="Gst.Clock"/>
       </property>
-      <property name="dscp-qos" writable="1" transfer-ownership="none">
+      <property name="dscp-qos" writable="1" transfer-ownership="none" setter="set_dscp_qos" getter="get_dscp_qos">
         <type name="gint" c:type="gint"/>
       </property>
-      <property name="enable-rtcp" version="1.20" writable="1" transfer-ownership="none">
+      <property name="enable-rtcp" version="1.20" writable="1" transfer-ownership="none" setter="set_enable_rtcp">
         <doc xml:space="preserve">Whether the created media should send and receive RTCP</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="eos-shutdown" writable="1" transfer-ownership="none">
+      <property name="eos-shutdown" writable="1" transfer-ownership="none" setter="set_eos_shutdown">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="latency" writable="1" transfer-ownership="none">
+      <property name="latency" writable="1" transfer-ownership="none" setter="set_latency" getter="get_latency">
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="launch" writable="1" transfer-ownership="none">
+      <property name="launch" writable="1" transfer-ownership="none" setter="set_launch" getter="get_launch">
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="max-mcast-ttl" writable="1" transfer-ownership="none">
+      <property name="max-mcast-ttl" writable="1" transfer-ownership="none" setter="set_max_mcast_ttl" getter="get_max_mcast_ttl">
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="profiles" writable="1" transfer-ownership="none">
+      <property name="profiles" writable="1" transfer-ownership="none" setter="set_profiles" getter="get_profiles">
         <type name="GstRtsp.RTSPProfile"/>
       </property>
-      <property name="protocols" writable="1" transfer-ownership="none">
+      <property name="protocols" writable="1" transfer-ownership="none" setter="set_protocols" getter="get_protocols">
         <type name="GstRtsp.RTSPLowerTrans"/>
       </property>
-      <property name="shared" writable="1" transfer-ownership="none">
+      <property name="shared" writable="1" transfer-ownership="none" setter="set_shared">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="stop-on-disconnect" writable="1" transfer-ownership="none">
+      <property name="stop-on-disconnect" writable="1" transfer-ownership="none" setter="set_stop_on_disconnect">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="suspend-mode" writable="1" transfer-ownership="none">
+      <property name="suspend-mode" writable="1" transfer-ownership="none" setter="set_suspend_mode" getter="get_suspend_mode">
         <type name="RTSPSuspendMode"/>
       </property>
-      <property name="transport-mode" writable="1" transfer-ownership="none">
+      <property name="transport-mode" writable="1" transfer-ownership="none" setter="set_transport_mode" getter="get_transport_mode">
         <type name="RTSPTransportMode"/>
       </property>
       <field name="parent">
@@ -5942,7 +5958,7 @@ when a client disconnects without sending TEARDOWN.</doc>
           <type name="RTSPMediaFactoryURI" c:type="GstRTSPMediaFactoryURI*"/>
         </return-value>
       </constructor>
-      <method name="get_uri" c:identifier="gst_rtsp_media_factory_uri_get_uri">
+      <method name="get_uri" c:identifier="gst_rtsp_media_factory_uri_get_uri" glib:get-property="uri">
         <doc xml:space="preserve">Get the URI that will provide media for this factory.</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">the configured URI. g_free() after usage.</doc>
@@ -5955,7 +5971,7 @@ when a client disconnects without sending TEARDOWN.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="set_uri" c:identifier="gst_rtsp_media_factory_uri_set_uri">
+      <method name="set_uri" c:identifier="gst_rtsp_media_factory_uri_set_uri" glib:set-property="uri">
         <doc xml:space="preserve">Set the URI of the resource that will be streamed by this factory.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -5971,7 +5987,7 @@ when a client disconnects without sending TEARDOWN.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="uri" writable="1" transfer-ownership="none">
+      <property name="uri" writable="1" transfer-ownership="none" setter="set_uri" getter="get_uri">
         <type name="utf8" c:type="gchar*"/>
       </property>
       <property name="use-gstpay" writable="1" transfer-ownership="none">
@@ -6703,13 +6719,13 @@ remains valid for as long as @permissions is valid.</doc>
     </record>
     <enumeration name="RTSPPublishClockMode" glib:type-name="GstRTSPPublishClockMode" glib:get-type="gst_rtsp_publish_clock_mode_get_type" c:type="GstRTSPPublishClockMode">
       <doc xml:space="preserve">Whether the clock and possibly RTP/clock offset should be published according to RFC7273.</doc>
-      <member name="none" value="0" c:identifier="GST_RTSP_PUBLISH_CLOCK_MODE_NONE" glib:nick="none">
+      <member name="none" value="0" c:identifier="GST_RTSP_PUBLISH_CLOCK_MODE_NONE" glib:nick="none" glib:name="GST_RTSP_PUBLISH_CLOCK_MODE_NONE">
         <doc xml:space="preserve">Publish nothing</doc>
       </member>
-      <member name="clock" value="1" c:identifier="GST_RTSP_PUBLISH_CLOCK_MODE_CLOCK" glib:nick="clock">
+      <member name="clock" value="1" c:identifier="GST_RTSP_PUBLISH_CLOCK_MODE_CLOCK" glib:nick="clock" glib:name="GST_RTSP_PUBLISH_CLOCK_MODE_CLOCK">
         <doc xml:space="preserve">Publish the clock but not the offset</doc>
       </member>
-      <member name="clock_and_offset" value="2" c:identifier="GST_RTSP_PUBLISH_CLOCK_MODE_CLOCK_AND_OFFSET" glib:nick="clock-and-offset">
+      <member name="clock_and_offset" value="2" c:identifier="GST_RTSP_PUBLISH_CLOCK_MODE_CLOCK_AND_OFFSET" glib:nick="clock-and-offset" glib:name="GST_RTSP_PUBLISH_CLOCK_MODE_CLOCK_AND_OFFSET">
         <doc xml:space="preserve">Publish the clock and offset</doc>
       </member>
     </enumeration>
@@ -6923,7 +6939,7 @@ occurred. Free with g_source_unref ()</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="get_address" c:identifier="gst_rtsp_server_get_address">
+      <method name="get_address" c:identifier="gst_rtsp_server_get_address" glib:get-property="address">
         <doc xml:space="preserve">Get the address on which the server will accept connections.</doc>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the server address. g_free() after usage.</doc>
@@ -6950,7 +6966,7 @@ usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_backlog" c:identifier="gst_rtsp_server_get_backlog">
+      <method name="get_backlog" c:identifier="gst_rtsp_server_get_backlog" glib:get-property="backlog">
         <doc xml:space="preserve">The maximum amount of queued requests for the server.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the server backlog.</doc>
@@ -6963,7 +6979,7 @@ usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_bound_port" c:identifier="gst_rtsp_server_get_bound_port">
+      <method name="get_bound_port" c:identifier="gst_rtsp_server_get_bound_port" glib:get-property="bound-port">
         <doc xml:space="preserve">Get the port number where the server was bound to.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the port number</doc>
@@ -6976,7 +6992,7 @@ usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_content_length_limit" c:identifier="gst_rtsp_server_get_content_length_limit" version="1.18">
+      <method name="get_content_length_limit" c:identifier="gst_rtsp_server_get_content_length_limit" glib:get-property="content-length-limit" version="1.18">
         <doc xml:space="preserve">Get the Content-Length limit of @server.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the Content-Length limit.</doc>
@@ -6989,7 +7005,7 @@ usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_mount_points" c:identifier="gst_rtsp_server_get_mount_points">
+      <method name="get_mount_points" c:identifier="gst_rtsp_server_get_mount_points" glib:get-property="mount-points">
         <doc xml:space="preserve">Get the #GstRTSPMountPoints used as the mount points of @server.</doc>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the #GstRTSPMountPoints of @server. g_object_unref() after
@@ -7003,7 +7019,7 @@ usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_service" c:identifier="gst_rtsp_server_get_service">
+      <method name="get_service" c:identifier="gst_rtsp_server_get_service" glib:get-property="service">
         <doc xml:space="preserve">Get the service on which the server will accept connections.</doc>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the service. use g_free() after usage.</doc>
@@ -7016,7 +7032,7 @@ usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_session_pool" c:identifier="gst_rtsp_server_get_session_pool">
+      <method name="get_session_pool" c:identifier="gst_rtsp_server_get_session_pool" glib:get-property="session-pool">
         <doc xml:space="preserve">Get the #GstRTSPSessionPool used as the session pool of @server.</doc>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the #GstRTSPSessionPool used for sessions. g_object_unref() after
@@ -7044,7 +7060,7 @@ usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="set_address" c:identifier="gst_rtsp_server_set_address">
+      <method name="set_address" c:identifier="gst_rtsp_server_set_address" glib:set-property="address">
         <doc xml:space="preserve">Configure @server to accept connections on the given address.
 
 This function must be called before the server is bound.</doc>
@@ -7078,7 +7094,7 @@ This function must be called before the server is bound.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_backlog" c:identifier="gst_rtsp_server_set_backlog">
+      <method name="set_backlog" c:identifier="gst_rtsp_server_set_backlog" glib:set-property="backlog">
         <doc xml:space="preserve">configure the maximum amount of requests that may be queued for the
 server.
 
@@ -7097,7 +7113,7 @@ This function must be called before the server is bound.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_content_length_limit" c:identifier="gst_rtsp_server_set_content_length_limit" version="1.18">
+      <method name="set_content_length_limit" c:identifier="gst_rtsp_server_set_content_length_limit" glib:set-property="content-length-limit" version="1.18">
         <doc xml:space="preserve">Define an appropriate request size limit and reject requests exceeding the
 limit.</doc>
         <return-value transfer-ownership="none">
@@ -7114,7 +7130,7 @@ Configure @server to use the specified Content-Length limit.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_mount_points" c:identifier="gst_rtsp_server_set_mount_points">
+      <method name="set_mount_points" c:identifier="gst_rtsp_server_set_mount_points" glib:set-property="mount-points">
         <doc xml:space="preserve">configure @mounts to be used as the mount points of @server.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -7130,7 +7146,7 @@ Configure @server to use the specified Content-Length limit.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_service" c:identifier="gst_rtsp_server_set_service">
+      <method name="set_service" c:identifier="gst_rtsp_server_set_service" glib:set-property="service">
         <doc xml:space="preserve">Configure @server to accept connections on the given service.
 @service should be a string containing the service name (see services(5)) or
 a string containing a port number between 1 and 65535.
@@ -7154,7 +7170,7 @@ This function must be called before the server is bound.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_session_pool" c:identifier="gst_rtsp_server_set_session_pool">
+      <method name="set_session_pool" c:identifier="gst_rtsp_server_set_session_pool" glib:set-property="session-pool">
         <doc xml:space="preserve">configure @pool to be used as the session pool of @server.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -7218,25 +7234,25 @@ that the HTTP server read from the socket while parsing the HTTP header.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="address" writable="1" transfer-ownership="none">
+      <property name="address" writable="1" transfer-ownership="none" setter="set_address" getter="get_address">
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="backlog" writable="1" transfer-ownership="none">
+      <property name="backlog" writable="1" transfer-ownership="none" setter="set_backlog" getter="get_backlog">
         <type name="gint" c:type="gint"/>
       </property>
-      <property name="bound-port" transfer-ownership="none">
+      <property name="bound-port" transfer-ownership="none" getter="get_bound_port">
         <type name="gint" c:type="gint"/>
       </property>
-      <property name="content-length-limit" writable="1" transfer-ownership="none">
+      <property name="content-length-limit" writable="1" transfer-ownership="none" setter="set_content_length_limit" getter="get_content_length_limit">
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="mount-points" writable="1" transfer-ownership="none">
+      <property name="mount-points" writable="1" transfer-ownership="none" setter="set_mount_points" getter="get_mount_points">
         <type name="RTSPMountPoints"/>
       </property>
-      <property name="service" writable="1" transfer-ownership="none">
+      <property name="service" writable="1" transfer-ownership="none" setter="set_service" getter="get_service">
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="session-pool" writable="1" transfer-ownership="none">
+      <property name="session-pool" writable="1" transfer-ownership="none" setter="set_session_pool" getter="get_session_pool">
         <type name="RTSPSessionPool"/>
       </property>
       <field name="parent">
@@ -7361,6 +7377,29 @@ amount of time as gst_rtsp_session_prevent_expire().</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="dup_media" c:identifier="gst_rtsp_session_dup_media" version="1.20">
+        <doc xml:space="preserve">Gets the session media for @path, increasing its reference count. @matched
+will contain the number of matched characters of @path.</doc>
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">the configuration for @path in @sess,
+should be unreferenced when no longer needed.</doc>
+          <type name="RTSPSessionMedia" c:type="GstRTSPSessionMedia*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="sess" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstRTSPSession</doc>
+            <type name="RTSPSession" c:type="GstRTSPSession*"/>
+          </instance-parameter>
+          <parameter name="path" transfer-ownership="none">
+            <doc xml:space="preserve">the path for the media</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="matched" direction="out" caller-allocates="0" transfer-ownership="full">
+            <doc xml:space="preserve">the amount of matched characters</doc>
+            <type name="gint" c:type="gint*"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="filter" c:identifier="gst_rtsp_session_filter">
         <doc xml:space="preserve">Call @func for each media in @sess. The result value of @func determines
 what happens to the media. @func will be called with @sess
@@ -7414,7 +7453,7 @@ g_free() after usage.</doc>
         </parameters>
       </method>
       <method name="get_media" c:identifier="gst_rtsp_session_get_media">
-        <doc xml:space="preserve">Get the session media for @path. @matched will contain the number of matched
+        <doc xml:space="preserve">Gets the session media for @path. @matched will contain the number of matched
 characters of @path.</doc>
         <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the configuration for @path in @sess.</doc>
@@ -7435,7 +7474,7 @@ characters of @path.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="get_sessionid" c:identifier="gst_rtsp_session_get_sessionid">
+      <method name="get_sessionid" c:identifier="gst_rtsp_session_get_sessionid" glib:get-property="sessionid">
         <doc xml:space="preserve">Get the sessionid of @session.</doc>
         <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the sessionid of @session.
@@ -7449,7 +7488,7 @@ The value remains valid as long as @session is alive.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_timeout" c:identifier="gst_rtsp_session_get_timeout">
+      <method name="get_timeout" c:identifier="gst_rtsp_session_get_timeout" glib:get-property="timeout">
         <doc xml:space="preserve">Get the timeout value of @session.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the timeout of @session in seconds.</doc>
@@ -7585,7 +7624,7 @@ Ownership is taken from @media.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_timeout" c:identifier="gst_rtsp_session_set_timeout">
+      <method name="set_timeout" c:identifier="gst_rtsp_session_set_timeout" glib:set-property="timeout">
         <doc xml:space="preserve">Configure @session for a timeout of @timeout seconds. The session will be
 cleaned up when there is no activity for @timeout seconds.</doc>
         <return-value transfer-ownership="none">
@@ -7617,10 +7656,10 @@ cleaned up when there is no activity for @timeout seconds.</doc>
       <property name="extra-timeout" writable="1" transfer-ownership="none">
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="sessionid" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="sessionid" writable="1" construct-only="1" transfer-ownership="none" getter="get_sessionid">
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="timeout" writable="1" transfer-ownership="none">
+      <property name="timeout" writable="1" transfer-ownership="none" setter="set_timeout" getter="get_timeout">
         <type name="guint" c:type="guint"/>
       </property>
       <property name="timeout-always-visible" writable="1" transfer-ownership="none">
@@ -8052,7 +8091,7 @@ or %NULL when the session did not exist. g_object_unref() after usage.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="get_max_sessions" c:identifier="gst_rtsp_session_pool_get_max_sessions">
+      <method name="get_max_sessions" c:identifier="gst_rtsp_session_pool_get_max_sessions" glib:get-property="max-sessions">
         <doc xml:space="preserve">Get the maximum allowed number of sessions in @pool. 0 means an unlimited
 amount of sessions.</doc>
         <return-value transfer-ownership="none">
@@ -8096,7 +8135,7 @@ amount of sessions.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_max_sessions" c:identifier="gst_rtsp_session_pool_set_max_sessions">
+      <method name="set_max_sessions" c:identifier="gst_rtsp_session_pool_set_max_sessions" glib:set-property="max-sessions">
         <doc xml:space="preserve">Configure the maximum allowed number of sessions in @pool to @max.
 A value of 0 means an unlimited amount of sessions.</doc>
         <return-value transfer-ownership="none">
@@ -8113,7 +8152,7 @@ A value of 0 means an unlimited amount of sessions.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="max-sessions" writable="1" transfer-ownership="none">
+      <property name="max-sessions" writable="1" transfer-ownership="none" setter="set_max_sessions" getter="get_max_sessions">
         <type name="guint" c:type="guint"/>
       </property>
       <field name="parent">
@@ -8351,7 +8390,7 @@ same transport twice will not add it a second time.
         <doc xml:space="preserve">Add a receiver and sender part to the pipeline based on the transport from
 SETUP.</doc>
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">%TRUE if the stream has been sucessfully updated.</doc>
+          <doc xml:space="preserve">%TRUE if the stream has been successfully updated.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
@@ -8406,7 +8445,7 @@ use gst_caps_unref() after usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_control" c:identifier="gst_rtsp_stream_get_control">
+      <method name="get_control" c:identifier="gst_rtsp_stream_get_control" glib:get-property="control">
         <doc xml:space="preserve">Get the control string to identify this stream.</doc>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the control string. g_free() after usage.</doc>
@@ -8542,7 +8581,7 @@ g_free() after usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_profiles" c:identifier="gst_rtsp_stream_get_profiles">
+      <method name="get_profiles" c:identifier="gst_rtsp_stream_get_profiles" glib:get-property="profiles">
         <doc xml:space="preserve">Get the allowed profiles of @stream.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">a #GstRTSPProfile</doc>
@@ -8555,7 +8594,7 @@ g_free() after usage.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_protocols" c:identifier="gst_rtsp_stream_get_protocols">
+      <method name="get_protocols" c:identifier="gst_rtsp_stream_get_protocols" glib:get-property="protocols">
         <doc xml:space="preserve">Get the allowed protocols of @stream.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">a #GstRTSPLowerTrans</doc>
@@ -9361,7 +9400,7 @@ an RTSP connection.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_control" c:identifier="gst_rtsp_stream_set_control">
+      <method name="set_control" c:identifier="gst_rtsp_stream_set_control" glib:set-property="control">
         <doc xml:space="preserve">Set the control string in @stream.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -9442,7 +9481,7 @@ an RTSP connection.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_profiles" c:identifier="gst_rtsp_stream_set_profiles">
+      <method name="set_profiles" c:identifier="gst_rtsp_stream_set_profiles" glib:set-property="profiles">
         <doc xml:space="preserve">Configure the allowed profiles for @stream.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -9458,7 +9497,7 @@ an RTSP connection.</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_protocols" c:identifier="gst_rtsp_stream_set_protocols">
+      <method name="set_protocols" c:identifier="gst_rtsp_stream_set_protocols" glib:set-property="protocols">
         <doc xml:space="preserve">Configure the allowed lower transport for @stream.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -9647,6 +9686,20 @@ element in the #GList should be unreffed before the list is freed.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="unblock_rtcp" c:identifier="gst_rtsp_stream_unblock_rtcp" version="1.20">
+        <doc xml:space="preserve">Remove blocking probe from the RTCP source. When creating an UDP source for
+RTCP it is initially blocked until this function is called.
+This functions should be called once the pipeline is ready for handling RTCP
+packets.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stream" transfer-ownership="none">
+            <type name="RTSPStream" c:type="GstRTSPStream*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="update_crypto" c:identifier="gst_rtsp_stream_update_crypto">
         <doc xml:space="preserve">Update the new crypto information for @ssrc in @stream. If information
 for @ssrc did not exist, it will be added. If information
@@ -9688,13 +9741,13 @@ be removed from @stream.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="control" writable="1" transfer-ownership="none">
+      <property name="control" writable="1" transfer-ownership="none" setter="set_control" getter="get_control">
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="profiles" writable="1" transfer-ownership="none">
+      <property name="profiles" writable="1" transfer-ownership="none" setter="set_profiles" getter="get_profiles">
         <type name="GstRtsp.RTSPProfile"/>
       </property>
-      <property name="protocols" writable="1" transfer-ownership="none">
+      <property name="protocols" writable="1" transfer-ownership="none" setter="set_protocols" getter="get_protocols">
         <type name="GstRtsp.RTSPLowerTrans"/>
       </property>
       <field name="parent">
@@ -10212,13 +10265,13 @@ gst_rtsp_stream_transport_filter().</doc>
     <enumeration name="RTSPSuspendMode" glib:type-name="GstRTSPSuspendMode" glib:get-type="gst_rtsp_suspend_mode_get_type" c:type="GstRTSPSuspendMode">
       <doc xml:space="preserve">The suspend mode of the media pipeline. A media pipeline is suspended right
 after creating the SDP and when the client performs a PAUSED request.</doc>
-      <member name="none" value="0" c:identifier="GST_RTSP_SUSPEND_MODE_NONE" glib:nick="none">
+      <member name="none" value="0" c:identifier="GST_RTSP_SUSPEND_MODE_NONE" glib:nick="none" glib:name="GST_RTSP_SUSPEND_MODE_NONE">
         <doc xml:space="preserve">Media is not suspended</doc>
       </member>
-      <member name="pause" value="1" c:identifier="GST_RTSP_SUSPEND_MODE_PAUSE" glib:nick="pause">
+      <member name="pause" value="1" c:identifier="GST_RTSP_SUSPEND_MODE_PAUSE" glib:nick="pause" glib:name="GST_RTSP_SUSPEND_MODE_PAUSE">
         <doc xml:space="preserve">Media is PAUSED in suspend</doc>
       </member>
-      <member name="reset" value="2" c:identifier="GST_RTSP_SUSPEND_MODE_RESET" glib:nick="reset">
+      <member name="reset" value="2" c:identifier="GST_RTSP_SUSPEND_MODE_RESET" glib:nick="reset" glib:name="GST_RTSP_SUSPEND_MODE_RESET">
         <doc xml:space="preserve">The media is set to NULL when suspended</doc>
       </member>
     </enumeration>
@@ -10361,7 +10414,7 @@ gst_rtsp_thread_stop() after usage</doc>
           </parameter>
         </parameters>
       </virtual-method>
-      <method name="get_max_threads" c:identifier="gst_rtsp_thread_pool_get_max_threads">
+      <method name="get_max_threads" c:identifier="gst_rtsp_thread_pool_get_max_threads" glib:get-property="max-threads">
         <doc xml:space="preserve">Get the maximum number of threads used for client connections.
 See gst_rtsp_thread_pool_set_max_threads().</doc>
         <return-value transfer-ownership="none">
@@ -10397,7 +10450,7 @@ gst_rtsp_thread_stop() after usage</doc>
           </parameter>
         </parameters>
       </method>
-      <method name="set_max_threads" c:identifier="gst_rtsp_thread_pool_set_max_threads">
+      <method name="set_max_threads" c:identifier="gst_rtsp_thread_pool_set_max_threads" glib:set-property="max-threads">
         <doc xml:space="preserve">Set the maximum threads used by the pool to handle client requests.
 A value of 0 will use the pool mainloop, a value of -1 will use an
 unlimited number of threads.</doc>
@@ -10415,7 +10468,7 @@ unlimited number of threads.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="max-threads" writable="1" transfer-ownership="none">
+      <property name="max-threads" writable="1" transfer-ownership="none" setter="set_max_threads" getter="get_max_threads">
         <type name="gint" c:type="gint"/>
       </property>
       <field name="parent">
@@ -10673,15 +10726,15 @@ MT safe.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">The structure of the token. The structure is still
 owned by the token, which means that you should not free it and that the
-pointer becomes invalid when you free the token. This function checks if
-@token is writable and will never return %NULL.
+pointer becomes invalid when you free the token. This function ensures
+that @token is writable, and if so, will never return %NULL.
 
 MT safe.</doc>
           <type name="Gst.Structure" c:type="GstStructure*"/>
         </return-value>
         <parameters>
           <instance-parameter name="token" transfer-ownership="none">
-            <doc xml:space="preserve">The #GstRTSPToken.</doc>
+            <doc xml:space="preserve">A writable #GstRTSPToken.</doc>
             <type name="RTSPToken" c:type="GstRTSPToken*"/>
           </instance-parameter>
         </parameters>
@@ -10689,10 +10742,10 @@ MT safe.</doc>
     </record>
     <bitfield name="RTSPTransportMode" glib:type-name="GstRTSPTransportMode" glib:get-type="gst_rtsp_transport_mode_get_type" c:type="GstRTSPTransportMode">
       <doc xml:space="preserve">The supported modes of the media.</doc>
-      <member name="play" value="1" c:identifier="GST_RTSP_TRANSPORT_MODE_PLAY" glib:nick="play">
+      <member name="play" value="1" c:identifier="GST_RTSP_TRANSPORT_MODE_PLAY" glib:nick="play" glib:name="GST_RTSP_TRANSPORT_MODE_PLAY">
         <doc xml:space="preserve">Transport supports PLAY mode</doc>
       </member>
-      <member name="record" value="2" c:identifier="GST_RTSP_TRANSPORT_MODE_RECORD" glib:nick="record">
+      <member name="record" value="2" c:identifier="GST_RTSP_TRANSPORT_MODE_RECORD" glib:nick="record" glib:name="GST_RTSP_TRANSPORT_MODE_RECORD">
         <doc xml:space="preserve">Transport supports RECORD mode</doc>
       </member>
     </bitfield>

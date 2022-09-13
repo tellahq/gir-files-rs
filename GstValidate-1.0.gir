@@ -371,6 +371,12 @@ actions execution.</doc>
         <doc xml:space="preserve">The action can be used in config files even if it is not strictly a config
                                              action (ie. it needs a scenario to run).</doc>
       </member>
+      <member name="check" value="1024" c:identifier="GST_VALIDATE_ACTION_TYPE_CHECK" version="1.22" glib:nick="check" glib:name="GST_VALIDATE_ACTION_TYPE_CHECK">
+        <doc xml:space="preserve">The action is checking some state from objects in the pipeline. It means that it can
+be used as 'check' in different action which have a `check` "sub action", such as the 'wait' action type.
+This implies that the action can be executed from any thread and not only from the scenario thread as other
+types.</doc>
+      </member>
     </bitfield>
     <record name="ActionTypePrivate" c:type="GstValidateActionTypePrivate" disguised="1"/>
     <class name="BinMonitor" c:symbol-prefix="bin_monitor" c:type="GstValidateBinMonitor" parent="ElementMonitor" glib:type-name="GstValidateBinMonitor" glib:get-type="gst_validate_bin_monitor_get_type" glib:type-struct="BinMonitorClass">
@@ -2486,6 +2492,34 @@ equations in the action structure.</doc>
         </parameter>
       </parameters>
     </callback>
+    <function-macro name="REPORT" c:identifier="GST_VALIDATE_REPORT" introspectable="0">
+      <doc xml:space="preserve">Reports a new issue in the GstValidate reporting system with @m
+as the source of that issue.</doc>
+      <parameters>
+        <parameter name="m">
+          <doc xml:space="preserve">The #GstValidateReporter where the issue happened</doc>
+        </parameter>
+        <parameter name="issue_id">
+          <doc xml:space="preserve">The #GstValidateIssueId of the issue</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">The format of the message describing the issue in a printf
+      format, followed by the parameters.</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="REPORT_ACTION" c:identifier="GST_VALIDATE_REPORT_ACTION" introspectable="0">
+      <parameters>
+        <parameter name="m">
+        </parameter>
+        <parameter name="a">
+        </parameter>
+        <parameter name="issue_id">
+        </parameter>
+        <parameter name="...">
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="REPORT_PRINT_ARGS" c:identifier="GST_VALIDATE_REPORT_PRINT_ARGS" introspectable="0">
       <parameters>
         <parameter name="r">
