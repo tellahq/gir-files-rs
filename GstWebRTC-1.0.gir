@@ -134,6 +134,13 @@ and/or use gtk-doc annotations.  -->
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="WEBRTC_DEPRECATED_FOR" c:identifier="GST_WEBRTC_DEPRECATED_FOR" introspectable="0">
+      <attribute name="doc.skip" value="true"/>
+      <parameters>
+        <parameter name="f">
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="WEBRTC_DTLS_TRANSPORT" c:identifier="GST_WEBRTC_DTLS_TRANSPORT" introspectable="0">
       <parameters>
         <parameter name="obj">
@@ -375,10 +382,44 @@ for more information.</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="send_data_full" c:identifier="gst_webrtc_data_channel_send_data_full" version="1.22" throws="1">
+        <doc xml:space="preserve">Send @data as a data message over @channel.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">TRUE if @channel is open and data could be queued</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="channel" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstWebRTCDataChannel</doc>
+            <type name="WebRTCDataChannel" c:type="GstWebRTCDataChannel*"/>
+          </instance-parameter>
+          <parameter name="data" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">a #GBytes or %NULL</doc>
+            <type name="GLib.Bytes" c:type="GBytes*"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="send_string" c:identifier="gst_webrtc_data_channel_send_string">
         <doc xml:space="preserve">Send @str as a string message over @channel.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="channel" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstWebRTCDataChannel</doc>
+            <type name="WebRTCDataChannel" c:type="GstWebRTCDataChannel*"/>
+          </instance-parameter>
+          <parameter name="str" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">a string or %NULL</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="send_string_full" c:identifier="gst_webrtc_data_channel_send_string_full" version="1.22" throws="1">
+        <doc xml:space="preserve">Send @str as a string message over @channel.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">TRUE if @channel is open and data could be queued</doc>
+          <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="channel" transfer-ownership="none">
@@ -548,6 +589,9 @@ for more information.</doc>
       </member>
       <member name="invalid_modification" value="9" c:identifier="GST_WEBRTC_ERROR_INVALID_MODIFICATION" version="1.22" glib:nick="invalid-modification" glib:name="GST_WEBRTC_ERROR_INVALID_MODIFICATION">
         <doc xml:space="preserve">invalid-modification (part of WebIDL specification)</doc>
+      </member>
+      <member name="type_error" value="10" c:identifier="GST_WEBRTC_ERROR_TYPE_ERROR" version="1.22" glib:nick="type-error" glib:name="GST_WEBRTC_ERROR_TYPE_ERROR">
+        <doc xml:space="preserve">type-error (maps to JavaScript TypeError)</doc>
       </member>
       <function name="quark" c:identifier="gst_webrtc_error_quark" version="1.20">
         <return-value transfer-ownership="none">

@@ -5862,6 +5862,7 @@ gst_video_converter_frame() to complete.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="convert" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoConverter</doc>
             <type name="VideoConverter" c:type="GstVideoConverter*"/>
           </instance-parameter>
         </parameters>
@@ -5874,6 +5875,7 @@ gst_video_converter_frame() to complete.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="convert" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoConverter</doc>
             <type name="VideoConverter" c:type="GstVideoConverter*"/>
           </instance-parameter>
         </parameters>

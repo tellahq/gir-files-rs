@@ -16380,9 +16380,9 @@ the old one is replaced by the new one.</doc>
       </method>
       <method name="get_pad_template" c:identifier="gst_element_class_get_pad_template">
         <doc xml:space="preserve">Retrieves a padtemplate from @element_class with the given name.
-&gt; If you use this function in the #GInstanceInitFunc of an object class
+&gt; If you use this function in the GInstanceInitFunc of an object class
 &gt; that has subclasses, make sure to pass the g_class parameter of the
-&gt; #GInstanceInitFunc here.</doc>
+&gt; GInstanceInitFunc here.</doc>
         <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the #GstPadTemplate with the
     given name, or %NULL if none was found. No unreferencing is
@@ -16403,9 +16403,9 @@ the old one is replaced by the new one.</doc>
       <method name="get_pad_template_list" c:identifier="gst_element_class_get_pad_template_list">
         <doc xml:space="preserve">Retrieves a list of the pad templates associated with @element_class. The
 list must not be modified by the calling code.
-&gt; If you use this function in the #GInstanceInitFunc of an object class
+&gt; If you use this function in the GInstanceInitFunc of an object class
 &gt; that has subclasses, make sure to pass the g_class parameter of the
-&gt; #GInstanceInitFunc here.</doc>
+&gt; GInstanceInitFunc here.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">the #GList of
     pad templates.</doc>
@@ -21088,8 +21088,13 @@ was created.</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <constant name="META_TAG_MEMORY_REFERENCE_STR" value="memory-reference" c:type="GST_META_TAG_MEMORY_REFERENCE_STR" version="1.20.4">
+      <doc xml:space="preserve">This metadata stays relevant until a deep copy is made.</doc>
+      <type name="utf8" c:type="gchar*"/>
+    </constant>
     <constant name="META_TAG_MEMORY_STR" value="memory" c:type="GST_META_TAG_MEMORY_STR" version="1.2">
-      <doc xml:space="preserve">This metadata stays relevant as long as memory layout is unchanged.</doc>
+      <doc xml:space="preserve">This metadata stays relevant as long as memory layout is unchanged.
+In hindsight, this tag should have been called "memory-layout".</doc>
       <type name="utf8" c:type="gchar*"/>
     </constant>
     <function-macro name="META_TRANSFORM_IS_COPY" c:identifier="GST_META_TRANSFORM_IS_COPY" introspectable="0">
@@ -46399,7 +46404,7 @@ determine a order for the two provided values.</doc>
       <doc xml:space="preserve">The major version of GStreamer at compile time:</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="VERSION_MICRO" value="0" c:type="GST_VERSION_MICRO">
+    <constant name="VERSION_MICRO" value="1" c:type="GST_VERSION_MICRO">
       <doc xml:space="preserve">The micro version of GStreamer at compile time:</doc>
       <type name="gint" c:type="gint"/>
     </constant>

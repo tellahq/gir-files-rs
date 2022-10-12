@@ -1024,6 +1024,28 @@ no one else overrides it.</doc>
           <type name="RTSPClient" c:type="GstRTSPClient*"/>
         </return-value>
       </constructor>
+      <virtual-method name="adjust_error_code" version="1.22">
+        <doc xml:space="preserve">Called before sending error response to give the application the
+possibility to adjust the error code.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">a #GstRTSPStatusCode, containing the adjusted error code.</doc>
+          <type name="GstRtsp.RTSPStatusCode" c:type="GstRTSPStatusCode"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="client" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstRTSPClient</doc>
+            <type name="RTSPClient" c:type="GstRTSPClient*"/>
+          </instance-parameter>
+          <parameter name="ctx" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstRTSPContext</doc>
+            <type name="RTSPContext" c:type="GstRTSPContext*"/>
+          </parameter>
+          <parameter name="code" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstRTSPStatusCode</doc>
+            <type name="GstRtsp.RTSPStatusCode" c:type="GstRTSPStatusCode"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
       <virtual-method name="adjust_play_mode">
         <return-value transfer-ownership="none">
           <type name="GstRtsp.RTSPStatusCode" c:type="GstRTSPStatusCode"/>
@@ -2786,8 +2808,30 @@ that created the client but can be overridden later.</doc>
           </parameters>
         </callback>
       </field>
+      <field name="adjust_error_code">
+        <callback name="adjust_error_code">
+          <return-value transfer-ownership="none">
+            <doc xml:space="preserve">a #GstRTSPStatusCode, containing the adjusted error code.</doc>
+            <type name="GstRtsp.RTSPStatusCode" c:type="GstRTSPStatusCode"/>
+          </return-value>
+          <parameters>
+            <parameter name="client" transfer-ownership="none">
+              <doc xml:space="preserve">a #GstRTSPClient</doc>
+              <type name="RTSPClient" c:type="GstRTSPClient*"/>
+            </parameter>
+            <parameter name="ctx" transfer-ownership="none">
+              <doc xml:space="preserve">a #GstRTSPContext</doc>
+              <type name="RTSPContext" c:type="GstRTSPContext*"/>
+            </parameter>
+            <parameter name="code" transfer-ownership="none">
+              <doc xml:space="preserve">a #GstRTSPStatusCode</doc>
+              <type name="GstRtsp.RTSPStatusCode" c:type="GstRTSPStatusCode"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
       <field name="_gst_reserved" readable="0" private="1">
-        <array zero-terminated="0" fixed-size="2">
+        <array zero-terminated="0" fixed-size="1">
           <type name="gpointer" c:type="gpointer"/>
         </array>
       </field>
@@ -4546,6 +4590,19 @@ when the media was not in the suspended state.</doc>
           <type name="gpointer" c:type="gpointer"/>
         </array>
       </field>
+      <glib:signal name="handle-message" when="last" detailed="1" version="1.22">
+        <doc xml:space="preserve">Will be emitted when a message appears on the pipeline bus.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">a #gboolean indicating if the call was successful or not.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <parameter name="message" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstMessage</doc>
+            <type name="Gst.Message"/>
+          </parameter>
+        </parameters>
+      </glib:signal>
       <glib:signal name="new-state" when="last">
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
