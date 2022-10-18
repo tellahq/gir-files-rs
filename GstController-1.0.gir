@@ -746,7 +746,7 @@ If all values in the control point list come after the given
 timestamp or no values exist, %NULL is returned.
 
 For use in control source implementations.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the found #GSequenceIter or %NULL</doc>
           <type name="GLib.SequenceIter" c:type="GSequenceIter*"/>
         </return-value>

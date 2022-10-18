@@ -5906,9 +5906,10 @@ option and values.</doc>
       </method>
       <function name="new" c:identifier="gst_video_converter_new" version="1.6" introspectable="0">
         <doc xml:space="preserve">Create a new converter object to convert between @in_info and @out_info
-with @config.</doc>
+with @config.
+
+Returns (nullable): a #GstVideoConverter or %NULL if conversion is not possible.</doc>
         <return-value>
-          <doc xml:space="preserve">a #GstVideoConverter or %NULL if conversion is not possible.</doc>
           <type name="VideoConverter" c:type="GstVideoConverter*"/>
         </return-value>
         <parameters>
@@ -5931,9 +5932,10 @@ with @config.</doc>
 with @config.
 
 The optional @pool can be used to spawn threads, this is useful when
-creating new converters rapidly, for example when updating cropping.</doc>
+creating new converters rapidly, for example when updating cropping.
+
+Returns (nullable): a #GstVideoConverter or %NULL if conversion is not possible.</doc>
         <return-value>
-          <doc xml:space="preserve">a #GstVideoConverter or %NULL if conversion is not possible.</doc>
           <type name="VideoConverter" c:type="GstVideoConverter*"/>
         </return-value>
         <parameters>
@@ -6397,7 +6399,7 @@ current #GstVideoCodecState.
 
 You should use gst_video_decoder_allocate_output_frame() instead of this
 function, if possible at all.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">allocated buffer, or NULL if no buffer could be
     allocated (e.g. when downstream is flushing or shutting down)</doc>
           <type name="Gst.Buffer" c:type="GstBuffer*"/>
@@ -6548,7 +6550,7 @@ Unref the @allocator after use it.</doc>
             <doc xml:space="preserve">a #GstVideoDecoder</doc>
             <type name="VideoDecoder" c:type="GstVideoDecoder*"/>
           </instance-parameter>
-          <parameter name="allocator" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+          <parameter name="allocator" direction="out" caller-allocates="0" transfer-ownership="full" nullable="1" optional="1" allow-none="1">
             <doc xml:space="preserve">the #GstAllocator
 used</doc>
             <type name="Gst.Allocator" c:type="GstAllocator**"/>
@@ -6561,7 +6563,7 @@ used</doc>
         </parameters>
       </method>
       <method name="get_buffer_pool" c:identifier="gst_video_decoder_get_buffer_pool">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the instance of the #GstBufferPool used
 by the decoder; free it after use it</doc>
           <type name="Gst.BufferPool" c:type="GstBufferPool*"/>
@@ -6587,7 +6589,7 @@ by the decoder; free it after use it</doc>
       </method>
       <method name="get_frame" c:identifier="gst_video_decoder_get_frame">
         <doc xml:space="preserve">Get a pending unfinished #GstVideoCodecFrame</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">pending unfinished #GstVideoCodecFrame identified by @frame_number.</doc>
           <type name="VideoCodecFrame" c:type="GstVideoCodecFrame*"/>
         </return-value>
@@ -6719,7 +6721,7 @@ data in the beginning.</doc>
       </method>
       <method name="get_oldest_frame" c:identifier="gst_video_decoder_get_oldest_frame">
         <doc xml:space="preserve">Get the oldest pending unfinished #GstVideoCodecFrame</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">oldest pending unfinished #GstVideoCodecFrame.</doc>
           <type name="VideoCodecFrame" c:type="GstVideoCodecFrame*"/>
         </return-value>
@@ -6732,7 +6734,7 @@ data in the beginning.</doc>
       </method>
       <method name="get_output_state" c:identifier="gst_video_decoder_get_output_state">
         <doc xml:space="preserve">Get the #GstVideoCodecState currently describing the output stream.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">#GstVideoCodecState describing format of video data.</doc>
           <type name="VideoCodecState" c:type="GstVideoCodecState*"/>
         </return-value>
@@ -6996,7 +6998,7 @@ should be handled:
       <method name="set_interlaced_output_state" c:identifier="gst_video_decoder_set_interlaced_output_state" version="1.16.">
         <doc xml:space="preserve">Same as #gst_video_decoder_set_output_state() but also allows you to also set
 the interlacing mode.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the newly configured output state.</doc>
           <type name="VideoCodecState" c:type="GstVideoCodecState*"/>
         </return-value>
@@ -7128,7 +7130,7 @@ pixel-aspect-ratio or framerate) it can do so on the returned #GstVideoCodecStat
 
 The new output state will only take effect (set on pads and buffers) starting
 from the next call to #gst_video_decoder_finish_frame().</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the newly configured output state.</doc>
           <type name="VideoCodecState" c:type="GstVideoCodecState*"/>
         </return-value>
@@ -8151,7 +8153,7 @@ Unref the @allocator after use it.</doc>
             <doc xml:space="preserve">a #GstVideoEncoder</doc>
             <type name="VideoEncoder" c:type="GstVideoEncoder*"/>
           </instance-parameter>
-          <parameter name="allocator" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+          <parameter name="allocator" direction="out" caller-allocates="0" transfer-ownership="full" nullable="1" optional="1" allow-none="1">
             <doc xml:space="preserve">the #GstAllocator
 used</doc>
             <type name="Gst.Allocator" c:type="GstAllocator**"/>
@@ -8165,7 +8167,7 @@ used</doc>
       </method>
       <method name="get_frame" c:identifier="gst_video_encoder_get_frame">
         <doc xml:space="preserve">Get a pending unfinished #GstVideoCodecFrame</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">pending unfinished #GstVideoCodecFrame identified by @frame_number.</doc>
           <type name="VideoCodecFrame" c:type="GstVideoCodecFrame*"/>
         </return-value>
@@ -8257,7 +8259,7 @@ for more details.</doc>
       </method>
       <method name="get_oldest_frame" c:identifier="gst_video_encoder_get_oldest_frame">
         <doc xml:space="preserve">Get the oldest unfinished pending #GstVideoCodecFrame</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">oldest unfinished pending #GstVideoCodecFrame</doc>
           <type name="VideoCodecFrame" c:type="GstVideoCodecFrame*"/>
         </return-value>
@@ -8270,7 +8272,7 @@ for more details.</doc>
       </method>
       <method name="get_output_state" c:identifier="gst_video_encoder_get_output_state">
         <doc xml:space="preserve">Get the current #GstVideoCodecState</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">#GstVideoCodecState describing format of video data.</doc>
           <type name="VideoCodecState" c:type="GstVideoCodecState*"/>
         </return-value>
@@ -8455,7 +8457,7 @@ pixel-aspect-ratio or framerate) it can do so on the returned #GstVideoCodecStat
 
 The new output state will only take effect (set on pads and buffers) starting
 from the next call to #gst_video_encoder_finish_frame().</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the newly configured output state.</doc>
           <type name="VideoCodecState" c:type="GstVideoCodecState*"/>
         </return-value>
@@ -8841,7 +8843,7 @@ buffer flags.</doc>
       <function name="to_string" c:identifier="gst_video_field_order_to_string" version="1.12">
         <doc xml:space="preserve">Convert @order to its string representation.</doc>
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">@order as a string or NULL if @order in invalid.</doc>
+          <doc xml:space="preserve">@order as a string.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
         <parameters>
@@ -10309,7 +10311,7 @@ gst_video_info_init().</doc>
       </constructor>
       <constructor name="new_from_caps" c:identifier="gst_video_info_new_from_caps" version="1.20">
         <doc xml:space="preserve">Parse @caps to generate a #GstVideoInfo.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">A #GstVideoInfo, or %NULL if @caps couldn't be parsed</doc>
           <type name="VideoInfo" c:type="GstVideoInfo*"/>
         </return-value>
@@ -10599,7 +10601,7 @@ mode of the stream.</doc>
       <function name="to_string" c:identifier="gst_video_interlace_mode_to_string" version="1.6">
         <doc xml:space="preserve">Convert @mode to its string representation.</doc>
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">@mode as a string or NULL if @mode in invalid.</doc>
+          <doc xml:space="preserve">@mode as a string.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
         <parameters>
@@ -11202,11 +11204,10 @@ or #GST_VIDEO_MULTIVIEW_MODE_NONE</doc>
         </parameters>
       </function>
       <function name="to_caps_string" c:identifier="gst_video_multiview_mode_to_caps_string" version="1.6">
-        <return-value transfer-ownership="none">
-          <doc xml:space="preserve">The caps string representation of the mode, or NULL if invalid.
-
-Given a #GstVideoMultiviewMode returns the multiview-mode caps string
+        <doc xml:space="preserve">Given a #GstVideoMultiviewMode returns the multiview-mode caps string
 for insertion into a caps structure</doc>
+        <return-value transfer-ownership="none" nullable="1">
+          <doc xml:space="preserve">The caps string representation of the mode, or NULL if invalid.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
         <parameters>
@@ -12302,7 +12303,7 @@ copied.</doc>
       </method>
       <method name="get_rectangle" c:identifier="gst_video_overlay_composition_get_rectangle">
         <doc xml:space="preserve">Returns the @n-th #GstVideoOverlayRectangle contained in @comp.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the @n-th rectangle, or NULL if @n is out of
     bounds. Will not return a new reference, the caller will need to
     obtain her own reference using gst_video_overlay_rectangle_ref()
@@ -13660,7 +13661,7 @@ that you would get %NULL instead in that case.</doc>
       <constructor name="new_from_date_time_full" c:identifier="gst_video_time_code_new_from_date_time_full" version="1.16">
         <doc xml:space="preserve">The resulting config-&gt;latest_daily_jam is set to
 midnight, and timecode is set to the given time.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the #GstVideoTimeCode representation of @dt, or %NULL if
   no valid timecode could be created.</doc>
           <type name="VideoTimeCode" c:type="GstVideoTimeCode*"/>
@@ -14378,7 +14379,7 @@ and "ITU-T H.273 Table 3".
 Vertical Blanking Interval lines of component signals.</doc>
       <constructor name="new" c:identifier="gst_video_vbi_encoder_new" version="1.16">
         <doc xml:space="preserve">Create a new #GstVideoVBIEncoder for the specified @format and @pixel_width.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">The new #GstVideoVBIEncoder or %NULL if the @format and/or @pixel_width
 is not supported.</doc>
           <type name="VideoVBIEncoder" c:type="GstVideoVBIEncoder*"/>
@@ -14476,7 +14477,7 @@ the parity check bits).</doc>
 Vertical Blanking Interval lines of component signals.</doc>
       <constructor name="new" c:identifier="gst_video_vbi_parser_new" version="1.16">
         <doc xml:space="preserve">Create a new #GstVideoVBIParser for the specified @format and @pixel_width.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">The new #GstVideoVBIParser or %NULL if the @format and/or @pixel_width
 is not supported.</doc>
           <type name="VideoVBIParser" c:type="GstVideoVBIParser*"/>
@@ -14952,7 +14953,7 @@ parameters.</doc>
     <function name="buffer_add_video_time_code_meta_full" c:identifier="gst_buffer_add_video_time_code_meta_full" version="1.10">
       <doc xml:space="preserve">Attaches #GstVideoTimeCodeMeta metadata to @buffer with the given
 parameters.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">the #GstVideoTimeCodeMeta on @buffer, or
 (since 1.16) %NULL if the timecode was invalid.</doc>
         <type name="VideoTimeCodeMeta" c:type="GstVideoTimeCodeMeta*"/>
@@ -15057,7 +15058,7 @@ Note: there may be two #GstVideoAFDMeta structs for interlaced video.</doc>
 
 Buffers can contain multiple #GstVideoMeta metadata items when dealing with
 multiview buffers.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">the #GstVideoMeta with lowest id (usually 0) or %NULL when there
 is no such metadata on @buffer.</doc>
         <type name="VideoMeta" c:type="GstVideoMeta*"/>
@@ -15074,7 +15075,7 @@ is no such metadata on @buffer.</doc>
 
 Buffers can contain multiple #GstVideoMeta metadata items when dealing with
 multiview buffers.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">the #GstVideoMeta with @id or %NULL when there is no such metadata
 on @buffer.</doc>
         <type name="VideoMeta" c:type="GstVideoMeta*"/>
@@ -15113,7 +15114,7 @@ on @buffer.</doc>
 
 Buffers can contain multiple #GstVideoRegionOfInterestMeta metadata items if
 multiple regions of interests are marked on a frame.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">the #GstVideoRegionOfInterestMeta with @id or %NULL when there is
 no such metadata on @buffer.</doc>
         <type name="VideoRegionOfInterestMeta" c:type="GstVideoRegionOfInterestMeta*"/>
@@ -16678,9 +16679,10 @@ anymore.</doc>
     </function>
     <function name="video_converter_new" c:identifier="gst_video_converter_new" moved-to="VideoConverter.new" version="1.6" introspectable="0">
       <doc xml:space="preserve">Create a new converter object to convert between @in_info and @out_info
-with @config.</doc>
+with @config.
+
+Returns (nullable): a #GstVideoConverter or %NULL if conversion is not possible.</doc>
       <return-value>
-        <doc xml:space="preserve">a #GstVideoConverter or %NULL if conversion is not possible.</doc>
         <type name="VideoConverter" c:type="GstVideoConverter*"/>
       </return-value>
       <parameters>
@@ -16703,9 +16705,10 @@ with @config.</doc>
 with @config.
 
 The optional @pool can be used to spawn threads, this is useful when
-creating new converters rapidly, for example when updating cropping.</doc>
+creating new converters rapidly, for example when updating cropping.
+
+Returns (nullable): a #GstVideoConverter or %NULL if conversion is not possible.</doc>
       <return-value>
-        <doc xml:space="preserve">a #GstVideoConverter or %NULL if conversion is not possible.</doc>
         <type name="VideoConverter" c:type="GstVideoConverter*"/>
       </return-value>
       <parameters>
@@ -16980,7 +16983,7 @@ Create an upstream force key unit event using  gst_video_event_new_upstream_forc
     <function name="video_field_order_to_string" c:identifier="gst_video_field_order_to_string" moved-to="VideoFieldOrder.to_string" version="1.12">
       <doc xml:space="preserve">Convert @order to its string representation.</doc>
       <return-value transfer-ownership="none">
-        <doc xml:space="preserve">@order as a string or NULL if @order in invalid.</doc>
+        <doc xml:space="preserve">@order as a string.</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>
       <parameters>
@@ -17323,7 +17326,7 @@ recognised, and %FALSE otherwise.</doc>
     <function name="video_interlace_mode_to_string" c:identifier="gst_video_interlace_mode_to_string" moved-to="VideoInterlaceMode.to_string" version="1.6">
       <doc xml:space="preserve">Convert @mode to its string representation.</doc>
       <return-value transfer-ownership="none">
-        <doc xml:space="preserve">@mode as a string or NULL if @mode in invalid.</doc>
+        <doc xml:space="preserve">@mode as a string.</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>
       <parameters>
@@ -17544,11 +17547,10 @@ or #GST_VIDEO_MULTIVIEW_MODE_NONE</doc>
       </parameters>
     </function>
     <function name="video_multiview_mode_to_caps_string" c:identifier="gst_video_multiview_mode_to_caps_string" moved-to="VideoMultiviewMode.to_caps_string" version="1.6">
-      <return-value transfer-ownership="none">
-        <doc xml:space="preserve">The caps string representation of the mode, or NULL if invalid.
-
-Given a #GstVideoMultiviewMode returns the multiview-mode caps string
+      <doc xml:space="preserve">Given a #GstVideoMultiviewMode returns the multiview-mode caps string
 for insertion into a caps structure</doc>
+      <return-value transfer-ownership="none" nullable="1">
+        <doc xml:space="preserve">The caps string representation of the mode, or NULL if invalid.</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>
       <parameters>

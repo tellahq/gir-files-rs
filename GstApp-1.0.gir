@@ -200,7 +200,7 @@ to handle incoming events events as well as samples.
 
 Note that future releases may extend this API to return other object types
 so make sure that your code is checking for the actual type it is handling.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstSample, or #GstEvent or NULL when the appsink is stopped or EOS or the timeout expires.
 Call gst_mini_object_unref() after usage.</doc>
           <type name="Gst.MiniObject" c:type="GstMiniObject*"/>
@@ -296,7 +296,7 @@ condition.</doc>
       </method>
       <method name="get_caps" c:identifier="gst_app_sink_get_caps" glib:get-property="caps">
         <doc xml:space="preserve">Get the configured caps on @appsink.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the #GstCaps accepted by the sink. gst_caps_unref() after usage.</doc>
           <type name="Gst.Caps" c:type="GstCaps*"/>
         </return-value>
@@ -401,7 +401,7 @@ to handle incoming events events as well as samples.
 
 Note that future releases may extend this API to return other object types
 so make sure that your code is checking for the actual type it is handling.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstSample, or a #GstEvent or NULL when the appsink is stopped or EOS.
          Call gst_mini_object_unref() after usage.</doc>
           <type name="Gst.MiniObject" c:type="GstMiniObject*"/>
@@ -627,7 +627,7 @@ to handle incoming events events as well as samples.
 
 Note that future releases may extend this API to return other object types
 so make sure that your code is checking for the actual type it is handling.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstSample, or #GstEvent or NULL when the appsink is stopped or EOS or the timeout expires.
 Call gst_mini_object_unref() after usage.</doc>
           <type name="Gst.MiniObject" c:type="GstMiniObject*"/>
@@ -820,7 +820,7 @@ If an EOS event was received before any buffers, this function returns
 
 This function blocks until a preroll sample or EOS is received or the appsink
 element is set to the READY/NULL state.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstSample or NULL when the appsink is stopped or EOS.</doc>
           <type name="Gst.Sample"/>
         </return-value>
@@ -840,7 +840,7 @@ the "drop" and "max-buffers" properties.
 
 If an EOS event was received before any buffers, this function returns
 %NULL. Use gst_app_sink_is_eos () to check for the EOS condition.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstSample or NULL when the appsink is stopped or EOS.</doc>
           <type name="Gst.Sample"/>
         </return-value>
@@ -868,7 +868,7 @@ to handle incoming events as well as samples.
 
 Note that future releases may extend this API to return other object types
 so make sure that your code is checking for the actual type it is handling.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstSample or a #GstEvent or NULL when the appsink is stopped or EOS or the timeout expires.</doc>
           <type name="Gst.MiniObject"/>
         </return-value>
@@ -899,7 +899,7 @@ condition.
 
 This function blocks until a preroll sample or EOS is received, the appsink
 element is set to the READY/NULL state, or the timeout expires.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstSample or NULL when the appsink is stopped or EOS or the timeout expires.</doc>
           <type name="Gst.Sample"/>
         </return-value>
@@ -926,7 +926,7 @@ the "drop" and "max-buffers" properties.
 If an EOS event was received before any buffers or the timeout expires,
 this function returns %NULL. Use gst_app_sink_is_eos () to check
 for the EOS condition.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstSample or NULL when the appsink is stopped or EOS or the timeout expires.</doc>
           <type name="Gst.Sample"/>
         </return-value>
@@ -1117,7 +1117,7 @@ gst_app_sink_set_callbacks().</doc>
       </field>
       <field name="try_pull_object">
         <callback name="try_pull_object">
-          <return-value transfer-ownership="full">
+          <return-value transfer-ownership="full" nullable="1">
             <doc xml:space="preserve">a #GstSample, or #GstEvent or NULL when the appsink is stopped or EOS or the timeout expires.
 Call gst_mini_object_unref() after usage.</doc>
             <type name="Gst.MiniObject" c:type="GstMiniObject*"/>
@@ -1352,7 +1352,7 @@ element is the last buffer of the stream.</doc>
       </method>
       <method name="get_caps" c:identifier="gst_app_src_get_caps" glib:get-property="caps">
         <doc xml:space="preserve">Get the configured caps on @appsrc.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the #GstCaps produced by the source. gst_caps_unref() after usage.</doc>
           <type name="Gst.Caps" c:type="GstCaps*"/>
         </return-value>

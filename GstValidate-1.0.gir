@@ -124,7 +124,7 @@ Only access it from the default main context.</doc>
       </constructor>
       <method name="get_scenario" c:identifier="gst_validate_action_get_scenario">
         <doc xml:space="preserve">Retrieve the scenario from which @action is executed.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">The scenario from which the action is being executed.</doc>
           <type name="Scenario" c:type="GstValidateScenario*"/>
         </return-value>
@@ -386,7 +386,7 @@ Class that wraps a #GstBin for Validate checks</doc>
       <implements name="Reporter"/>
       <constructor name="new" c:identifier="gst_validate_bin_monitor_new">
         <return-value transfer-ownership="full">
-          <doc xml:space="preserve">A #GstValidateBinMonitor or NULL</doc>
+          <doc xml:space="preserve">A #GstValidateBinMonitor</doc>
           <type name="BinMonitor" c:type="GstValidateBinMonitor*"/>
         </return-value>
         <parameters>
@@ -515,7 +515,7 @@ Class that wraps a #GstElement for Validate checks</doc>
       <implements name="Reporter"/>
       <constructor name="new" c:identifier="gst_validate_element_monitor_new">
         <return-value transfer-ownership="full">
-          <doc xml:space="preserve">A #GstValidateElementMonitor or NULL</doc>
+          <doc xml:space="preserve">A #GstValidateElementMonitor</doc>
           <type name="ElementMonitor" c:type="GstValidateElementMonitor*"/>
         </return-value>
         <parameters>
@@ -743,11 +743,13 @@ Class that wraps a #GstElement for Validate checks</doc>
         </parameters>
       </method>
       <function name="from_id" c:identifier="gst_validate_issue_from_id">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">The issue if found or NULL otherwise</doc>
           <type name="Issue" c:type="GstValidateIssue*"/>
         </return-value>
         <parameters>
           <parameter name="issue_id" transfer-ownership="none">
+            <doc xml:space="preserve">The issue id</doc>
             <type name="IssueId" c:type="GstValidateIssueId"/>
           </parameter>
         </parameters>
@@ -1398,7 +1400,7 @@ Class that wraps a #GObject for Validate checks</doc>
         </parameters>
       </function>
       <virtual-method name="get_element" invoker="get_element">
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The GstElement associated with @monitor</doc>
           <type name="Gst.Element" c:type="GstElement*"/>
         </return-value>
@@ -1446,7 +1448,7 @@ Class that wraps a #GObject for Validate checks</doc>
         </parameters>
       </method>
       <method name="get_element" c:identifier="gst_validate_monitor_get_element">
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The GstElement associated with @monitor</doc>
           <type name="Gst.Element" c:type="GstElement*"/>
         </return-value>
@@ -1458,11 +1460,13 @@ Class that wraps a #GObject for Validate checks</doc>
         </parameters>
       </method>
       <method name="get_element_name" c:identifier="gst_validate_monitor_get_element_name">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">The name of the element associated with @monitor</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="monitor" transfer-ownership="none">
+            <doc xml:space="preserve">The monitor</doc>
             <type name="Monitor" c:type="GstValidateMonitor*"/>
           </instance-parameter>
         </parameters>
@@ -1585,7 +1589,7 @@ target is in.</doc>
       </field>
       <field name="get_element">
         <callback name="get_element">
-          <return-value transfer-ownership="none">
+          <return-value transfer-ownership="none" nullable="1">
             <doc xml:space="preserve">The GstElement associated with @monitor</doc>
             <type name="Gst.Element" c:type="GstElement*"/>
           </return-value>
@@ -2209,7 +2213,7 @@ Class that wraps a #GstPad for Validate checks</doc>
       <implements name="Reporter"/>
       <constructor name="new" c:identifier="gst_validate_pad_monitor_new">
         <return-value transfer-ownership="full">
-          <doc xml:space="preserve">A #GstValidatePadMonitor or NULL</doc>
+          <doc xml:space="preserve">A #GstValidatePadMonitor</doc>
           <type name="PadMonitor" c:type="GstValidatePadMonitor*"/>
         </return-value>
         <parameters>
@@ -2408,7 +2412,7 @@ Class that wraps a #GstPipeline for Validate checks</doc>
       <implements name="Reporter"/>
       <constructor name="new" c:identifier="gst_validate_pipeline_monitor_new">
         <return-value transfer-ownership="full">
-          <doc xml:space="preserve">A #GstValidatePipelineMonitor or NULL</doc>
+          <doc xml:space="preserve">A #GstValidatePipelineMonitor</doc>
           <type name="PipelineMonitor" c:type="GstValidatePipelineMonitor*"/>
         </return-value>
         <parameters>
@@ -2631,7 +2635,7 @@ as the source of that issue.</doc>
         </parameters>
       </method>
       <method name="get_dotfile_name" c:identifier="gst_validate_report_get_dotfile_name" version="1.22">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">report dot file name</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
@@ -2729,7 +2733,7 @@ as the source of that issue.</doc>
         </parameters>
       </method>
       <method name="get_trace" c:identifier="gst_validate_report_get_trace" version="1.22">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">report backtrace</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
@@ -2975,11 +2979,14 @@ You can also use #GST_VALIDATE_REPORT instead.</doc>
         </parameters>
       </virtual-method>
       <method name="get_name" c:identifier="gst_validate_reporter_get_name">
-        <return-value transfer-ownership="none">
+        <doc xml:space="preserve">Gets @name of @reporter</doc>
+        <return-value transfer-ownership="none" nullable="1">
+          <doc xml:space="preserve">The name of the reporter</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="reporter" transfer-ownership="none">
+            <doc xml:space="preserve">The reporter to get the name from</doc>
             <type name="Reporter" c:type="GstValidateReporter*"/>
           </instance-parameter>
         </parameters>
@@ -2997,14 +3004,17 @@ You can also use #GST_VALIDATE_REPORT instead.</doc>
         </parameters>
       </method>
       <method name="get_report" c:identifier="gst_validate_reporter_get_report">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="none" nullable="1">
+          <doc xml:space="preserve">The #GstValidateReport</doc>
           <type name="Report" c:type="GstValidateReport*"/>
         </return-value>
         <parameters>
           <instance-parameter name="reporter" transfer-ownership="none">
+            <doc xml:space="preserve">The reporter to get the report from</doc>
             <type name="Reporter" c:type="GstValidateReporter*"/>
           </instance-parameter>
           <parameter name="issue_id" transfer-ownership="none">
+            <doc xml:space="preserve">The issue id to get the report from</doc>
             <type name="IssueId" c:type="GstValidateIssueId"/>
           </parameter>
         </parameters>
@@ -3122,7 +3132,7 @@ in the GstValidate reporting system.</doc>
         </parameters>
       </method>
       <method name="set_name" c:identifier="gst_validate_reporter_set_name">
-        <doc xml:space="preserve">Sets @ name on @reporter</doc>
+        <doc xml:space="preserve">Sets @name on @reporter</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -3131,7 +3141,7 @@ in the GstValidate reporting system.</doc>
             <doc xml:space="preserve">The reporter to set the name on</doc>
             <type name="Reporter" c:type="GstValidateReporter*"/>
           </instance-parameter>
-          <parameter name="name" transfer-ownership="full">
+          <parameter name="name" transfer-ownership="full" nullable="1" allow-none="1">
             <doc xml:space="preserve">The name of the reporter</doc>
             <type name="utf8" c:type="gchar*"/>
           </parameter>
@@ -3421,7 +3431,7 @@ exit code of the application.</doc>
         </return-value>
       </function>
       <function name="factory_create" c:identifier="gst_validate_scenario_factory_create">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">A #GstValidateScenario or NULL</doc>
           <type name="Scenario" c:type="GstValidateScenario*"/>
         </return-value>
@@ -3505,7 +3515,7 @@ For more information you should have a look at #gst_event_new_seek</doc>
         </parameters>
       </method>
       <method name="get_pipeline" c:identifier="gst_validate_scenario_get_pipeline">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">The #GstPipeline the scenario is running
 against</doc>
           <type name="Gst.Element" c:type="GstElement*"/>
@@ -3833,11 +3843,13 @@ function.</doc>
       </return-value>
     </function>
     <function name="issue_from_id" c:identifier="gst_validate_issue_from_id" moved-to="Issue.from_id">
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
+        <doc xml:space="preserve">The issue if found or NULL otherwise</doc>
         <type name="Issue" c:type="GstValidateIssue*"/>
       </return-value>
       <parameters>
         <parameter name="issue_id" transfer-ownership="none">
+          <doc xml:space="preserve">The issue id</doc>
           <type name="IssueId" c:type="GstValidateIssueId"/>
         </parameter>
       </parameters>

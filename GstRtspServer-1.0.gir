@@ -676,7 +676,7 @@ usage.</doc>
         </parameters>
       </method>
       <method name="get_realm" c:identifier="gst_rtsp_auth_get_realm" version="1.16">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the @realm of @auth</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
@@ -823,7 +823,8 @@ be used for unauthenticated users.</doc>
           <instance-parameter name="auth" transfer-ownership="none">
             <type name="RTSPAuth" c:type="GstRTSPAuth*"/>
           </instance-parameter>
-          <parameter name="realm" transfer-ownership="none">
+          <parameter name="realm" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">The realm to set</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
@@ -3733,7 +3734,7 @@ until @media is prepared or in error.</doc>
       <method name="get_time_provider" c:identifier="gst_rtsp_media_get_time_provider" glib:get-property="time-provider">
         <doc xml:space="preserve">Get the #GstNetTimeProvider for the clock used by @media. The time provider
 will listen on @address and @port for client time requests.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the #GstNetTimeProvider of @media.</doc>
           <type name="GstNet.NetTimeProvider" c:type="GstNetTimeProvider*"/>
         </return-value>
@@ -4973,7 +4974,7 @@ with gst_rtsp_media_create_stream ().
 
 After the media is constructed, it can be configured and then prepared
 with gst_rtsp_media_prepare ().</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a new #GstRTSPMedia if the media could be prepared.</doc>
           <type name="RTSPMedia" c:type="GstRTSPMedia*"/>
         </return-value>
@@ -4995,7 +4996,7 @@ the elements to use for streaming the media.
 The bin should contain payloaders pay\%d for each stream. The default
 implementation of this function returns the bin created from the
 launch parameter.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">a new #GstElement.</doc>
           <type name="Gst.Element" c:type="GstElement*"/>
         </return-value>
@@ -5114,7 +5115,7 @@ with gst_rtsp_media_create_stream ().
 
 After the media is constructed, it can be configured and then prepared
 with gst_rtsp_media_prepare ().</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a new #GstRTSPMedia if the media could be prepared.</doc>
           <type name="RTSPMedia" c:type="GstRTSPMedia*"/>
         </return-value>
@@ -5136,7 +5137,7 @@ the elements to use for streaming the media.
 The bin should contain payloaders pay\%d for each stream. The default
 implementation of this function returns the bin created from the
 launch parameter.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">a new #GstElement.</doc>
           <type name="Gst.Element" c:type="GstElement*"/>
         </return-value>
@@ -5181,7 +5182,7 @@ usage.</doc>
       <method name="get_clock" c:identifier="gst_rtsp_media_factory_get_clock" glib:get-property="clock" version="1.8">
         <doc xml:space="preserve">Returns the clock that is going to be used by the pipelines
 of all medias created from this factory.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">The GstClock</doc>
           <type name="Gst.Clock" c:type="GstClock*"/>
         </return-value>
@@ -5905,7 +5906,7 @@ when a client disconnects without sending TEARDOWN.</doc>
       </field>
       <field name="create_element">
         <callback name="create_element">
-          <return-value transfer-ownership="none">
+          <return-value transfer-ownership="none" nullable="1">
             <doc xml:space="preserve">a new #GstElement.</doc>
             <type name="Gst.Element" c:type="GstElement*"/>
           </return-value>
@@ -5923,7 +5924,7 @@ when a client disconnects without sending TEARDOWN.</doc>
       </field>
       <field name="construct">
         <callback name="construct">
-          <return-value transfer-ownership="full">
+          <return-value transfer-ownership="full" nullable="1">
             <doc xml:space="preserve">a new #GstRTSPMedia if the media could be prepared.</doc>
             <type name="RTSPMedia" c:type="GstRTSPMedia*"/>
           </return-value>
@@ -6431,7 +6432,7 @@ bits per second.</doc>
       <method name="get_backchannel_launch" c:identifier="gst_rtsp_onvif_media_factory_get_backchannel_launch" version="1.14">
         <doc xml:space="preserve">Get the gst_parse_launch() pipeline description that will be used in the
 default prepare vmethod for generating the ONVIF backchannel pipeline.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the configured backchannel launch description. g_free() after
 usage.</doc>
           <type name="utf8" c:type="gchar*"/>
@@ -6509,7 +6510,7 @@ prepare.</doc>
             <doc xml:space="preserve">a #GstRTSPMediaFactory</doc>
             <type name="RTSPOnvifMediaFactory" c:type="GstRTSPOnvifMediaFactory*"/>
           </instance-parameter>
-          <parameter name="launch" transfer-ownership="none">
+          <parameter name="launch" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">the launch description</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
@@ -7078,7 +7079,7 @@ usage.</doc>
       </method>
       <method name="get_service" c:identifier="gst_rtsp_server_get_service" glib:get-property="service">
         <doc xml:space="preserve">Get the service on which the server will accept connections.</doc>
-        <return-value transfer-ownership="full" nullable="1">
+        <return-value transfer-ownership="full">
           <doc xml:space="preserve">the service. use g_free() after usage.</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
@@ -8858,7 +8859,7 @@ construct a RTPInfo reply header.</doc>
       </method>
       <method name="get_rtpsession" c:identifier="gst_rtsp_stream_get_rtpsession">
         <doc xml:space="preserve">Get the RTP session of this stream.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">The RTP session of this stream. Unref after usage.</doc>
           <type name="GObject.Object" c:type="GObject*"/>
         </return-value>
@@ -8918,7 +8919,7 @@ only be called when @stream has been joined.</doc>
       </method>
       <method name="get_srtp_encoder" c:identifier="gst_rtsp_stream_get_srtp_encoder">
         <doc xml:space="preserve">Get the SRTP encoder for this stream.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">The SRTP encoder for this stream. Unref after usage.</doc>
           <type name="Gst.Element" c:type="GstElement*"/>
         </return-value>

@@ -758,7 +758,7 @@ for more information.</doc>
         </parameters>
       </virtual-method>
       <virtual-method name="get_stun_server" invoker="get_stun_server" version="1.22">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">URI of the STUN sever</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
@@ -770,7 +770,7 @@ for more information.</doc>
         </parameters>
       </virtual-method>
       <virtual-method name="get_turn_server" invoker="get_turn_server" version="1.22">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">URI of the TURN sever</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
@@ -827,11 +827,11 @@ for more information.</doc>
           </parameter>
           <parameter name="ufrag" transfer-ownership="none">
             <doc xml:space="preserve">ICE username</doc>
-            <type name="utf8" c:type="gchar*"/>
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
           <parameter name="pwd" transfer-ownership="none">
             <doc xml:space="preserve">ICE password</doc>
-            <type name="utf8" c:type="gchar*"/>
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
       </virtual-method>
@@ -874,11 +874,11 @@ for more information.</doc>
           </parameter>
           <parameter name="ufrag" transfer-ownership="none">
             <doc xml:space="preserve">ICE username</doc>
-            <type name="utf8" c:type="gchar*"/>
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
           <parameter name="pwd" transfer-ownership="none">
             <doc xml:space="preserve">ICE password</doc>
-            <type name="utf8" c:type="gchar*"/>
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
       </virtual-method>
@@ -891,7 +891,7 @@ for more information.</doc>
             <doc xml:space="preserve">The #GstWebRTCICE</doc>
             <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
           </instance-parameter>
-          <parameter name="uri" transfer-ownership="none">
+          <parameter name="uri" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">URI of the STUN server</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
@@ -925,7 +925,7 @@ for more information.</doc>
             <doc xml:space="preserve">The #GstWebRTCICE</doc>
             <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
           </instance-parameter>
-          <parameter name="uri" transfer-ownership="none">
+          <parameter name="uri" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">URI of the TURN sever</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
@@ -1091,7 +1091,7 @@ for more information.</doc>
         </parameters>
       </method>
       <method name="get_stun_server" c:identifier="gst_webrtc_ice_get_stun_server" version="1.22">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">URI of the STUN sever</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
@@ -1103,7 +1103,7 @@ for more information.</doc>
         </parameters>
       </method>
       <method name="get_turn_server" c:identifier="gst_webrtc_ice_get_turn_server" version="1.22">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">URI of the TURN sever</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
@@ -1160,11 +1160,11 @@ for more information.</doc>
           </parameter>
           <parameter name="ufrag" transfer-ownership="none">
             <doc xml:space="preserve">ICE username</doc>
-            <type name="utf8" c:type="gchar*"/>
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
           <parameter name="pwd" transfer-ownership="none">
             <doc xml:space="preserve">ICE password</doc>
-            <type name="utf8" c:type="gchar*"/>
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
       </method>
@@ -1207,11 +1207,11 @@ for more information.</doc>
           </parameter>
           <parameter name="ufrag" transfer-ownership="none">
             <doc xml:space="preserve">ICE username</doc>
-            <type name="utf8" c:type="gchar*"/>
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
           <parameter name="pwd" transfer-ownership="none">
             <doc xml:space="preserve">ICE password</doc>
-            <type name="utf8" c:type="gchar*"/>
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
       </method>
@@ -1224,7 +1224,7 @@ for more information.</doc>
             <doc xml:space="preserve">The #GstWebRTCICE</doc>
             <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
           </instance-parameter>
-          <parameter name="uri" transfer-ownership="none">
+          <parameter name="uri" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">URI of the STUN server</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
@@ -1258,7 +1258,7 @@ for more information.</doc>
             <doc xml:space="preserve">The #GstWebRTCICE</doc>
             <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
           </instance-parameter>
-          <parameter name="uri" transfer-ownership="none">
+          <parameter name="uri" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">URI of the TURN sever</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
@@ -1465,11 +1465,11 @@ stops automatic ICE gathering.</doc>
             </parameter>
             <parameter name="ufrag" transfer-ownership="none">
               <doc xml:space="preserve">ICE username</doc>
-              <type name="utf8" c:type="gchar*"/>
+              <type name="utf8" c:type="const gchar*"/>
             </parameter>
             <parameter name="pwd" transfer-ownership="none">
               <doc xml:space="preserve">ICE password</doc>
-              <type name="utf8" c:type="gchar*"/>
+              <type name="utf8" c:type="const gchar*"/>
             </parameter>
           </parameters>
         </callback>
@@ -1491,11 +1491,11 @@ stops automatic ICE gathering.</doc>
             </parameter>
             <parameter name="ufrag" transfer-ownership="none">
               <doc xml:space="preserve">ICE username</doc>
-              <type name="utf8" c:type="gchar*"/>
+              <type name="utf8" c:type="const gchar*"/>
             </parameter>
             <parameter name="pwd" transfer-ownership="none">
               <doc xml:space="preserve">ICE password</doc>
-              <type name="utf8" c:type="gchar*"/>
+              <type name="utf8" c:type="const gchar*"/>
             </parameter>
           </parameters>
         </callback>
@@ -1576,7 +1576,7 @@ stops automatic ICE gathering.</doc>
               <doc xml:space="preserve">The #GstWebRTCICE</doc>
               <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
             </parameter>
-            <parameter name="uri" transfer-ownership="none">
+            <parameter name="uri" transfer-ownership="none" nullable="1" allow-none="1">
               <doc xml:space="preserve">URI of the STUN server</doc>
               <type name="utf8" c:type="const gchar*"/>
             </parameter>
@@ -1585,7 +1585,7 @@ stops automatic ICE gathering.</doc>
       </field>
       <field name="get_stun_server">
         <callback name="get_stun_server">
-          <return-value transfer-ownership="full">
+          <return-value transfer-ownership="full" nullable="1">
             <doc xml:space="preserve">URI of the STUN sever</doc>
             <type name="utf8" c:type="gchar*"/>
           </return-value>
@@ -1607,7 +1607,7 @@ stops automatic ICE gathering.</doc>
               <doc xml:space="preserve">The #GstWebRTCICE</doc>
               <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
             </parameter>
-            <parameter name="uri" transfer-ownership="none">
+            <parameter name="uri" transfer-ownership="none" nullable="1" allow-none="1">
               <doc xml:space="preserve">URI of the TURN sever</doc>
               <type name="utf8" c:type="const gchar*"/>
             </parameter>
@@ -1616,7 +1616,7 @@ stops automatic ICE gathering.</doc>
       </field>
       <field name="get_turn_server">
         <callback name="get_turn_server">
-          <return-value transfer-ownership="full">
+          <return-value transfer-ownership="full" nullable="1">
             <doc xml:space="preserve">URI of the TURN sever</doc>
             <type name="utf8" c:type="gchar*"/>
           </return-value>
@@ -1796,7 +1796,7 @@ stops automatic ICE gathering.</doc>
         </parameter>
         <parameter name="candidate" transfer-ownership="none">
           <doc xml:space="preserve">The discovered candidate</doc>
-          <type name="utf8" c:type="gchar*"/>
+          <type name="utf8" c:type="const gchar*"/>
         </parameter>
         <parameter name="user_data" transfer-ownership="none" nullable="1" allow-none="1" closure="3">
           <doc xml:space="preserve">User data that was set by #gst_webrtc_ice_set_on_ice_candidate</doc>
@@ -1968,7 +1968,7 @@ stops automatic ICE gathering.</doc>
             <type name="WebRTCICEComponent" c:type="GstWebRTCICEComponent"/>
           </parameter>
           <parameter name="attr" transfer-ownership="none">
-            <type name="utf8" c:type="gchar*"/>
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
       </method>

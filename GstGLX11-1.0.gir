@@ -16,7 +16,7 @@ through the provided API</doc>
       <constructor name="new" c:identifier="gst_gl_display_x11_new">
         <doc xml:space="preserve">Create a new #GstGLDisplayX11 from the x11 display name.  See `XOpenDisplay`()
 for details on what is a valid name.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a new #GstGLDisplayX11 or %NULL</doc>
           <type name="GLDisplayX11" c:type="GstGLDisplayX11*"/>
         </return-value>

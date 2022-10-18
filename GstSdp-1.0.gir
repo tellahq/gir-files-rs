@@ -159,7 +159,7 @@ protocol sessions.</doc>
  - Security Policy Payload
  - Key Data Transport Payload
  - Key Data Sub-Payload</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstMIKEYMessage,
 or %NULL if there is no srtp information in the caps.</doc>
           <type name="MIKEYMessage" c:type="GstMIKEYMessage*"/>
@@ -356,7 +356,7 @@ in NTP-UTC format.</doc>
       </method>
       <method name="find_payload" c:identifier="gst_mikey_message_find_payload" version="1.4">
         <doc xml:space="preserve">Find the @nth occurrence of the payload with @type in @msg.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the @nth #GstMIKEYPayload of @type.</doc>
           <type name="MIKEYPayload" c:type="const GstMIKEYPayload*"/>
         </return-value>
@@ -377,7 +377,7 @@ in NTP-UTC format.</doc>
       </method>
       <method name="get_cs_srtp" c:identifier="gst_mikey_message_get_cs_srtp" version="1.4">
         <doc xml:space="preserve">Get the policy information of @msg at @idx.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">a #GstMIKEYMapSRTP</doc>
           <type name="MIKEYMapSRTP" c:type="const GstMIKEYMapSRTP*"/>
         </return-value>
@@ -420,7 +420,7 @@ in NTP-UTC format.</doc>
       </method>
       <method name="get_payload" c:identifier="gst_mikey_message_get_payload" version="1.4">
         <doc xml:space="preserve">Get the #GstMIKEYPayload at @idx in @msg</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the #GstMIKEYPayload at @idx. The payload
 remains valid for as long as it is part of @msg.</doc>
           <type name="MIKEYPayload" c:type="const GstMIKEYPayload*"/>
@@ -694,7 +694,7 @@ will be appended to @msg.</doc>
       <method name="kemac_get_sub" c:identifier="gst_mikey_payload_kemac_get_sub" version="1.4">
         <doc xml:space="preserve">Get the sub payload of @payload at @idx. @payload should be of type
 %GST_MIKEY_PT_KEMAC.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the #GstMIKEYPayload at @idx.</doc>
           <type name="MIKEYPayload" c:type="const GstMIKEYPayload*"/>
         </return-value>
@@ -952,7 +952,7 @@ and @val.</doc>
       <method name="sp_get_param" c:identifier="gst_mikey_payload_sp_get_param" version="1.4">
         <doc xml:space="preserve">Get the Security Policy parameter in a %GST_MIKEY_PT_SP @payload
 at @idx.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the #GstMIKEYPayloadSPParam at @idx in @payload</doc>
           <type name="MIKEYPayloadSPParam" c:type="const GstMIKEYPayloadSPParam*"/>
         </return-value>
@@ -1777,7 +1777,7 @@ allocated with gst_sdp_media_new().</doc>
       </method>
       <method name="get_attribute_val" c:identifier="gst_sdp_media_get_attribute_val">
         <doc xml:space="preserve">Get the first attribute value for @key in @media.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the first attribute value for @key.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
@@ -1794,7 +1794,7 @@ allocated with gst_sdp_media_new().</doc>
       </method>
       <method name="get_attribute_val_n" c:identifier="gst_sdp_media_get_attribute_val_n">
         <doc xml:space="preserve">Get the @nth attribute value for @key in @media.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the @nth attribute value.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
@@ -1840,7 +1840,7 @@ a=framesize:(payload) (width)-(height)
 a=fmtp:(payload) (param)[=(value)];...
 
 Note that the extmap, ssrc and rid attributes are set only by gst_sdp_media_attributes_to_caps().</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstCaps, or %NULL if an error happened</doc>
           <type name="Gst.Caps" c:type="GstCaps*"/>
         </return-value>
@@ -1964,24 +1964,6 @@ Note that the extmap, ssrc and rid attributes are set only by gst_sdp_media_attr
           <instance-parameter name="media" transfer-ownership="none">
             <doc xml:space="preserve">a #GstSDPMedia</doc>
             <type name="SDPMedia" c:type="const GstSDPMedia*"/>
-          </instance-parameter>
-        </parameters>
-      </method>
-      <method name="init" c:identifier="gst_sdp_media_init">
-        <doc xml:space="preserve">Initialize @media so that its contents are as if it was freshly allocated
-with gst_sdp_media_new(). This function is mostly used to initialize a media
-allocated on the stack. gst_sdp_media_uninit() undoes this operation.
-
-When this function is invoked on newly allocated data (with malloc or on the
-stack), its contents should be set to 0 before calling this function.</doc>
-        <return-value transfer-ownership="none">
-          <doc xml:space="preserve">a #GstSDPResult.</doc>
-          <type name="SDPResult" c:type="GstSDPResult"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="media" transfer-ownership="none">
-            <doc xml:space="preserve">a #GstSDPMedia</doc>
-            <type name="SDPMedia" c:type="GstSDPMedia*"/>
           </instance-parameter>
         </parameters>
       </method>
@@ -2351,6 +2333,24 @@ stack and initialized with gst_sdp_media_init().</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <function name="init" c:identifier="gst_sdp_media_init">
+        <doc xml:space="preserve">Initialize @media so that its contents are as if it was freshly allocated
+with gst_sdp_media_new(). This function is mostly used to initialize a media
+allocated on the stack. gst_sdp_media_uninit() undoes this operation.
+
+When this function is invoked on newly allocated data (with malloc or on the
+stack), its contents should be set to 0 before calling this function.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">a #GstSDPResult.</doc>
+          <type name="SDPResult" c:type="GstSDPResult"/>
+        </return-value>
+        <parameters>
+          <parameter name="media" direction="out" caller-allocates="1" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstSDPMedia</doc>
+            <type name="SDPMedia" c:type="GstSDPMedia*"/>
+          </parameter>
+        </parameters>
+      </function>
       <function name="new" c:identifier="gst_sdp_media_new">
         <doc xml:space="preserve">Allocate a new GstSDPMedia and store the result in @media.</doc>
         <return-value transfer-ownership="none">
@@ -2385,7 +2385,7 @@ a=extmap:(id)[/direction] (extensionname) (extensionattributes)</doc>
             <doc xml:space="preserve">a #GstCaps</doc>
             <type name="Gst.Caps" c:type="const GstCaps*"/>
           </parameter>
-          <parameter name="media" transfer-ownership="none">
+          <parameter name="media" direction="out" caller-allocates="1" transfer-ownership="none">
             <doc xml:space="preserve">a #GstSDPMedia</doc>
             <type name="SDPMedia" c:type="GstSDPMedia*"/>
           </parameter>
@@ -2742,7 +2742,7 @@ allocated with gst_sdp_message_new().</doc>
       </method>
       <method name="get_attribute_val" c:identifier="gst_sdp_message_get_attribute_val">
         <doc xml:space="preserve">Get the first attribute with key @key in @msg.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the attribute value of the first attribute with @key.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
@@ -2759,7 +2759,7 @@ allocated with gst_sdp_message_new().</doc>
       </method>
       <method name="get_attribute_val_n" c:identifier="gst_sdp_message_get_attribute_val_n">
         <doc xml:space="preserve">Get the @nth attribute with key @key in @msg.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the attribute value of the @nth attribute with @key.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
@@ -2969,24 +2969,6 @@ allocated with gst_sdp_message_new().</doc>
             <doc xml:space="preserve">the zone index</doc>
             <type name="guint" c:type="guint"/>
           </parameter>
-        </parameters>
-      </method>
-      <method name="init" c:identifier="gst_sdp_message_init">
-        <doc xml:space="preserve">Initialize @msg so that its contents are as if it was freshly allocated
-with gst_sdp_message_new(). This function is mostly used to initialize a message
-allocated on the stack. gst_sdp_message_uninit() undoes this operation.
-
-When this function is invoked on newly allocated data (with malloc or on the
-stack), its contents should be set to 0 before calling this function.</doc>
-        <return-value transfer-ownership="none">
-          <doc xml:space="preserve">a #GstSDPResult.</doc>
-          <type name="SDPResult" c:type="GstSDPResult"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="msg" transfer-ownership="none">
-            <doc xml:space="preserve">a #GstSDPMessage</doc>
-            <type name="SDPMessage" c:type="GstSDPMessage*"/>
-          </instance-parameter>
         </parameters>
       </method>
       <method name="insert_attribute" c:identifier="gst_sdp_message_insert_attribute" version="1.2">
@@ -3619,6 +3601,24 @@ stack and initialized with gst_sdp_message_init().</doc>
           </parameter>
         </parameters>
       </function>
+      <function name="init" c:identifier="gst_sdp_message_init">
+        <doc xml:space="preserve">Initialize @msg so that its contents are as if it was freshly allocated
+with gst_sdp_message_new(). This function is mostly used to initialize a message
+allocated on the stack. gst_sdp_message_uninit() undoes this operation.
+
+When this function is invoked on newly allocated data (with malloc or on the
+stack), its contents should be set to 0 before calling this function.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">a #GstSDPResult.</doc>
+          <type name="SDPResult" c:type="GstSDPResult"/>
+        </return-value>
+        <parameters>
+          <parameter name="msg" direction="out" caller-allocates="1" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstSDPMessage</doc>
+            <type name="SDPMessage" c:type="GstSDPMessage*"/>
+          </parameter>
+        </parameters>
+      </function>
       <function name="new" c:identifier="gst_sdp_message_new">
         <doc xml:space="preserve">Allocate a new GstSDPMessage and store the result in @msg.</doc>
         <return-value transfer-ownership="none">
@@ -3667,7 +3667,7 @@ stack and initialized with gst_sdp_message_init().</doc>
             <doc xml:space="preserve">the size of the buffer</doc>
             <type name="guint" c:type="guint"/>
           </parameter>
-          <parameter name="msg" transfer-ownership="none">
+          <parameter name="msg" direction="out" caller-allocates="1" transfer-ownership="none">
             <doc xml:space="preserve">the result #GstSDPMessage</doc>
             <type name="SDPMessage" c:type="GstSDPMessage*"/>
           </parameter>
@@ -3692,7 +3692,7 @@ The uri should be of the form:
             <doc xml:space="preserve">the start of the uri</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
-          <parameter name="msg" transfer-ownership="none">
+          <parameter name="msg" direction="out" caller-allocates="1" transfer-ownership="none">
             <doc xml:space="preserve">the result #GstSDPMessage</doc>
             <type name="SDPMessage" c:type="GstSDPMessage*"/>
           </parameter>
@@ -3927,6 +3927,24 @@ messages.</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="sdp_media_init" c:identifier="gst_sdp_media_init" moved-to="SDPMedia.init">
+      <doc xml:space="preserve">Initialize @media so that its contents are as if it was freshly allocated
+with gst_sdp_media_new(). This function is mostly used to initialize a media
+allocated on the stack. gst_sdp_media_uninit() undoes this operation.
+
+When this function is invoked on newly allocated data (with malloc or on the
+stack), its contents should be set to 0 before calling this function.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">a #GstSDPResult.</doc>
+        <type name="SDPResult" c:type="GstSDPResult"/>
+      </return-value>
+      <parameters>
+        <parameter name="media" direction="out" caller-allocates="1" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstSDPMedia</doc>
+          <type name="SDPMedia" c:type="GstSDPMedia*"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="sdp_media_new" c:identifier="gst_sdp_media_new" moved-to="SDPMedia.new">
       <doc xml:space="preserve">Allocate a new GstSDPMedia and store the result in @media.</doc>
       <return-value transfer-ownership="none">
@@ -3961,7 +3979,7 @@ a=extmap:(id)[/direction] (extensionname) (extensionattributes)</doc>
           <doc xml:space="preserve">a #GstCaps</doc>
           <type name="Gst.Caps" c:type="const GstCaps*"/>
         </parameter>
-        <parameter name="media" transfer-ownership="none">
+        <parameter name="media" direction="out" caller-allocates="1" transfer-ownership="none">
           <doc xml:space="preserve">a #GstSDPMedia</doc>
           <type name="SDPMedia" c:type="GstSDPMedia*"/>
         </parameter>
@@ -3985,6 +4003,24 @@ a=extmap:(id)[/direction] (extensionname) (extensionattributes)</doc>
         <parameter name="msg" transfer-ownership="none">
           <doc xml:space="preserve">the #GstSDPMessage</doc>
           <type name="SDPMessage" c:type="const GstSDPMessage*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="sdp_message_init" c:identifier="gst_sdp_message_init" moved-to="SDPMessage.init">
+      <doc xml:space="preserve">Initialize @msg so that its contents are as if it was freshly allocated
+with gst_sdp_message_new(). This function is mostly used to initialize a message
+allocated on the stack. gst_sdp_message_uninit() undoes this operation.
+
+When this function is invoked on newly allocated data (with malloc or on the
+stack), its contents should be set to 0 before calling this function.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">a #GstSDPResult.</doc>
+        <type name="SDPResult" c:type="GstSDPResult"/>
+      </return-value>
+      <parameters>
+        <parameter name="msg" direction="out" caller-allocates="1" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstSDPMessage</doc>
+          <type name="SDPMessage" c:type="GstSDPMessage*"/>
         </parameter>
       </parameters>
     </function>
@@ -4036,7 +4072,7 @@ a=extmap:(id)[/direction] (extensionname) (extensionattributes)</doc>
           <doc xml:space="preserve">the size of the buffer</doc>
           <type name="guint" c:type="guint"/>
         </parameter>
-        <parameter name="msg" transfer-ownership="none">
+        <parameter name="msg" direction="out" caller-allocates="1" transfer-ownership="none">
           <doc xml:space="preserve">the result #GstSDPMessage</doc>
           <type name="SDPMessage" c:type="GstSDPMessage*"/>
         </parameter>
@@ -4061,7 +4097,7 @@ The uri should be of the form:
           <doc xml:space="preserve">the start of the uri</doc>
           <type name="utf8" c:type="const gchar*"/>
         </parameter>
-        <parameter name="msg" transfer-ownership="none">
+        <parameter name="msg" direction="out" caller-allocates="1" transfer-ownership="none">
           <doc xml:space="preserve">the result #GstSDPMessage</doc>
           <type name="SDPMessage" c:type="GstSDPMessage*"/>
         </parameter>

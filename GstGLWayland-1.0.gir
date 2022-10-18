@@ -16,7 +16,7 @@ through the provided API</doc>
       <constructor name="new" c:identifier="gst_gl_display_wayland_new">
         <doc xml:space="preserve">Create a new #GstGLDisplayWayland from the wayland display name.  See `wl_display_connect`()
 for details on what is a valid name.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a new #GstGLDisplayWayland or %NULL</doc>
           <type name="GLDisplayWayland" c:type="GstGLDisplayWayland*"/>
         </return-value>

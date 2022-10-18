@@ -649,11 +649,11 @@ MT safe.</doc>
             <doc xml:space="preserve">a #GstHarness</doc>
             <type name="Harness" c:type="GstHarness*"/>
           </instance-parameter>
-          <parameter name="allocator" direction="out" caller-allocates="0" transfer-ownership="none" optional="1" allow-none="1">
+          <parameter name="allocator" direction="out" caller-allocates="0" transfer-ownership="none" nullable="1" optional="1" allow-none="1">
             <doc xml:space="preserve">the #GstAllocator used</doc>
             <type name="Gst.Allocator" c:type="GstAllocator**"/>
           </parameter>
-          <parameter name="params" direction="out" caller-allocates="1" transfer-ownership="full" optional="1" allow-none="1">
+          <parameter name="params" direction="out" caller-allocates="1" transfer-ownership="none" optional="1" allow-none="1">
             <doc xml:space="preserve">the #GstAllocationParams of
   @allocator</doc>
             <type name="Gst.AllocationParams" c:type="GstAllocationParams*"/>
@@ -682,7 +682,7 @@ MT safe.</doc>
 needed.
 
 MT safe.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstTestClock, or %NULL if the testclock is not
 present.</doc>
           <type name="TestClock" c:type="GstTestClock*"/>
@@ -720,7 +720,7 @@ will timeout in 60 seconds. This is the standard way of getting a buffer
 from a harnessed #GstElement.
 
 MT safe.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstBuffer or %NULL if timed out.</doc>
           <type name="Gst.Buffer" c:type="GstBuffer*"/>
         </return-value>
@@ -736,7 +736,7 @@ MT safe.</doc>
 Timeouts after 60 seconds similar to gst_harness_pull.
 
 MT safe.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstEvent or %NULL if timed out.</doc>
           <type name="Gst.Event" c:type="GstEvent*"/>
         </return-value>
@@ -760,7 +760,7 @@ MT safe.</doc>
             <doc xml:space="preserve">a #GstHarness</doc>
             <type name="Harness" c:type="GstHarness*"/>
           </instance-parameter>
-          <parameter name="buf" direction="out" caller-allocates="0" transfer-ownership="full">
+          <parameter name="buf" direction="out" caller-allocates="0" transfer-ownership="full" nullable="1">
             <doc xml:space="preserve">A #GstBuffer, or %NULL if EOS or timeout occures
   first.</doc>
             <type name="Gst.Buffer" c:type="GstBuffer**"/>
@@ -772,7 +772,7 @@ MT safe.</doc>
 Timeouts after 60 seconds similar to gst_harness_pull.
 
 MT safe.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstEvent or %NULL if timed out.</doc>
           <type name="Gst.Event" c:type="GstEvent*"/>
         </return-value>
@@ -809,7 +809,7 @@ the fact that you often want to do exactly this in your test: Push one buffer
 in, and inspect the outcome.
 
 MT safe.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstBuffer or %NULL if timed out.</doc>
           <type name="Gst.Buffer" c:type="GstBuffer*"/>
         </return-value>
@@ -837,7 +837,7 @@ MT safe.</doc>
             <doc xml:space="preserve">a #GstHarness</doc>
             <type name="Harness" c:type="GstHarness*"/>
           </instance-parameter>
-          <parameter name="event" transfer-ownership="none">
+          <parameter name="event" transfer-ownership="full">
             <doc xml:space="preserve">a #GstEvent to push</doc>
             <type name="Gst.Event" c:type="GstEvent*"/>
           </parameter>
@@ -892,7 +892,7 @@ MT safe.</doc>
             <doc xml:space="preserve">a #GstHarness</doc>
             <type name="Harness" c:type="GstHarness*"/>
           </instance-parameter>
-          <parameter name="event" transfer-ownership="none">
+          <parameter name="event" transfer-ownership="full">
             <doc xml:space="preserve">a #GstEvent to push</doc>
             <type name="Gst.Event" c:type="GstEvent*"/>
           </parameter>
@@ -1644,7 +1644,7 @@ gst_harness_pull this will not wait for any buffers if not any are present,
 and return %NULL straight away.
 
 MT safe.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstBuffer or %NULL if no buffers are present in the #GAsyncQueue</doc>
           <type name="Gst.Buffer" c:type="GstBuffer*"/>
         </return-value>
@@ -1660,7 +1660,7 @@ MT safe.</doc>
 See gst_harness_try_pull for details.
 
 MT safe.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstEvent or %NULL if no buffers are present in the #GAsyncQueue</doc>
           <type name="Gst.Event" c:type="GstEvent*"/>
         </return-value>
@@ -1676,7 +1676,7 @@ MT safe.</doc>
 See gst_harness_try_pull for details.
 
 MT safe.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstEvent or %NULL if no buffers are present in the #GAsyncQueue</doc>
           <type name="Gst.Event" c:type="GstEvent*"/>
         </return-value>
@@ -1780,7 +1780,7 @@ the #GstTestClock</doc>
 assumes the #GstElement sinkpad is named "sink" and srcpad is named "src"
 
 MT safe.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstHarness, or %NULL if the harness could
 not be created</doc>
           <type name="Harness" c:type="GstHarness*"/>
@@ -1797,7 +1797,7 @@ not be created</doc>
 an #GstElement to it.
 
 MT safe.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstHarness, or %NULL if the harness could
 not be created</doc>
           <type name="Harness" c:type="GstHarness*"/>
@@ -1807,7 +1807,7 @@ not be created</doc>
         <doc xml:space="preserve">Creates a new harness.
 
 MT safe.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstHarness, or %NULL if the harness could
 not be created</doc>
           <type name="Harness" c:type="GstHarness*"/>
@@ -1847,7 +1847,7 @@ srcpad that is then linked to the harness sinkpad, similar to the
 and then attches the harness to the bin.
 
 MT safe.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstHarness, or %NULL if the harness could
 not be created</doc>
           <type name="Harness" c:type="GstHarness*"/>
@@ -1865,7 +1865,7 @@ that generic padtemplates are used for the harness src and sinkpads, which
 will be sufficient in most usecases.
 
 MT safe.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstHarness, or %NULL if the harness could
 not be created</doc>
           <type name="Harness" c:type="GstHarness*"/>
@@ -1894,7 +1894,7 @@ srcpad</doc>
 except you specify the factoryname of the #GstElement
 
 MT safe.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstHarness, or %NULL if the harness could
 not be created</doc>
           <type name="Harness" c:type="GstHarness*"/>
@@ -1923,7 +1923,7 @@ srcpad</doc>
 assumes the #GstElement sinkpad is named "sink" and srcpad is named "src"
 
 MT safe.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstHarness, or %NULL if the harness could
 not be created</doc>
           <type name="Harness" c:type="GstHarness*"/>
@@ -2615,7 +2615,7 @@ inside the 'check' directories of various GStreamer packages.</doc>
 assumes the #GstElement sinkpad is named "sink" and srcpad is named "src"
 
 MT safe.</doc>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">a #GstHarness, or %NULL if the harness could
 not be created</doc>
         <type name="Harness" c:type="GstHarness*"/>
@@ -2632,7 +2632,7 @@ not be created</doc>
 an #GstElement to it.
 
 MT safe.</doc>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">a #GstHarness, or %NULL if the harness could
 not be created</doc>
         <type name="Harness" c:type="GstHarness*"/>
@@ -2642,7 +2642,7 @@ not be created</doc>
       <doc xml:space="preserve">Creates a new harness.
 
 MT safe.</doc>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">a #GstHarness, or %NULL if the harness could
 not be created</doc>
         <type name="Harness" c:type="GstHarness*"/>
@@ -2682,7 +2682,7 @@ srcpad that is then linked to the harness sinkpad, similar to the
 and then attches the harness to the bin.
 
 MT safe.</doc>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">a #GstHarness, or %NULL if the harness could
 not be created</doc>
         <type name="Harness" c:type="GstHarness*"/>
@@ -2700,7 +2700,7 @@ that generic padtemplates are used for the harness src and sinkpads, which
 will be sufficient in most usecases.
 
 MT safe.</doc>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">a #GstHarness, or %NULL if the harness could
 not be created</doc>
         <type name="Harness" c:type="GstHarness*"/>
@@ -2729,7 +2729,7 @@ srcpad</doc>
 except you specify the factoryname of the #GstElement
 
 MT safe.</doc>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">a #GstHarness, or %NULL if the harness could
 not be created</doc>
         <type name="Harness" c:type="GstHarness*"/>
@@ -2758,7 +2758,7 @@ srcpad</doc>
 assumes the #GstElement sinkpad is named "sink" and srcpad is named "src"
 
 MT safe.</doc>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">a #GstHarness, or %NULL if the harness could
 not be created</doc>
         <type name="Harness" c:type="GstHarness*"/>

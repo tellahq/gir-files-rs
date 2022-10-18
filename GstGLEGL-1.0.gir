@@ -15,7 +15,7 @@ and/or use gtk-doc annotations.  -->
 through the provided API</doc>
       <constructor name="new" c:identifier="gst_gl_display_egl_new">
         <doc xml:space="preserve">Create a new #GstGLDisplayEGL using the default EGL_DEFAULT_DISPLAY.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a new #GstGLDisplayEGL or %NULL</doc>
           <type name="GLDisplayEGL" c:type="GstGLDisplayEGL*"/>
         </return-value>
@@ -35,7 +35,7 @@ through the provided API</doc>
 
 This function will return the same value for multiple calls with the same
 @display.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a new #GstGLDisplayEGL</doc>
           <type name="GLDisplayEGL" c:type="GstGLDisplayEGL*"/>
         </return-value>

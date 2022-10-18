@@ -917,7 +917,7 @@ variables (whose names are specified in the NULL-terminated string array
 @env_vars) containing a list of character encodings to try/use. If none
 are specified, the current locale will be tried. If that also doesn't work,
 WINDOWS-1252/ISO-8859-1 is assumed (which will almost always succeed).</doc>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">a newly-allocated string in UTF-8 encoding, or NULL</doc>
         <type name="utf8" c:type="gchar*"/>
       </return-value>
@@ -943,7 +943,7 @@ WINDOWS-1252/ISO-8859-1 is assumed (which will almost always succeed).</doc>
     </function>
     <function name="tag_from_id3_tag" c:identifier="gst_tag_from_id3_tag">
       <doc xml:space="preserve">Looks up the GStreamer tag for a ID3v2 tag.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">The corresponding GStreamer tag or NULL if none exists.</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>
@@ -957,7 +957,7 @@ WINDOWS-1252/ISO-8859-1 is assumed (which will almost always succeed).</doc>
     <function name="tag_from_id3_user_tag" c:identifier="gst_tag_from_id3_user_tag">
       <doc xml:space="preserve">Looks up the GStreamer tag for an ID3v2 user tag (e.g. description in
 TXXX frame or owner in UFID frame).</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">The corresponding GStreamer tag or NULL if none exists.</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>
@@ -974,7 +974,7 @@ TXXX frame or owner in UFID frame).</doc>
     </function>
     <function name="tag_from_vorbis_tag" c:identifier="gst_tag_from_vorbis_tag">
       <doc xml:space="preserve">Looks up the GStreamer tag for a vorbiscomment tag.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">The corresponding GStreamer tag or NULL if none exists.</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>
@@ -1013,7 +1013,7 @@ language code or two-letter ISO-639-1 language code (both are accepted for
 convenience).
 
 Language codes are case-sensitive and expected to be lower case.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">two-letter ISO-639-1 language code string that maps to @lang_code,
     or NULL if no mapping is known. The returned string must not be
     modified or freed.</doc>
@@ -1036,7 +1036,7 @@ The "bibliographic" code is derived from the English name of the language
 "terminological" codes are preferred.
 
 Language codes are case-sensitive and expected to be lower case.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">three-letter ISO-639-2 language code string that maps to @lang_code,
     or NULL if no mapping is known. The returned string must not be
     modified or freed.</doc>
@@ -1059,7 +1059,7 @@ The "terminological" code is derived from the local name of the language
 "terminological" codes are preferred over the "bibliographic" ones.
 
 Language codes are case-sensitive and expected to be lower case.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">three-letter ISO-639-2 language code string that maps to @lang_code,
     or NULL if no mapping is known. The returned string must not be
     modified or freed.</doc>
@@ -1092,7 +1092,7 @@ according to the current locale (if the library was built against the
 iso-codes package, otherwise the English name will be returned).
 
 Language codes are case-sensitive and expected to be lower case.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">language name in UTF-8 format, or NULL if @language_code could
     not be mapped to a language name. The returned string must not be
     modified and does not need to freed; it will stay valid until the
@@ -1109,7 +1109,7 @@ Language codes are case-sensitive and expected to be lower case.</doc>
     <function name="tag_get_license_description" c:identifier="gst_tag_get_license_description">
       <doc xml:space="preserve">Get the description of a license, which is a translated description
 of the license's main features.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">the description of the license, or NULL if the license is unknown
    or a description is not available.</doc>
         <type name="utf8" c:type="const gchar*"/>
@@ -1145,7 +1145,7 @@ for which no code exists and which is thus represented as "scotland".
 Known jurisdictions: ar, at, au, be, bg, br, ca, ch, cl, cn, co, de,
 dk, es, fi, fr, hr, hu, il, in, it, jp, kr, mk, mt, mx, my, nl, pe, pl,
 pt, scotland, se, si, tw, uk, us, za.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">the jurisdiction code of the license, or NULL if the license is
    unknown or is not specific to a particular jurisdiction.</doc>
         <type name="utf8" c:type="const gchar*"/>
@@ -1161,7 +1161,7 @@ pt, scotland, se, si, tw, uk, us, za.</doc>
     <function name="tag_get_license_nick" c:identifier="gst_tag_get_license_nick">
       <doc xml:space="preserve">Get the nick name of a license, which is a short (untranslated) string
 such as e.g. "CC BY-NC-ND 2.0 UK".</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">the nick name of the license, or NULL if the license is unknown</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>
@@ -1176,7 +1176,7 @@ such as e.g. "CC BY-NC-ND 2.0 UK".</doc>
     <function name="tag_get_license_title" c:identifier="gst_tag_get_license_title">
       <doc xml:space="preserve">Get the title of a license, which is a short translated description
 of the license's features (generally not very pretty though).</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">the title of the license, or NULL if the license is unknown or
    no title is available.</doc>
         <type name="utf8" c:type="const gchar*"/>
@@ -1191,7 +1191,7 @@ of the license's features (generally not very pretty though).</doc>
     </function>
     <function name="tag_get_license_version" c:identifier="gst_tag_get_license_version">
       <doc xml:space="preserve">Get the version of a license.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">the version of the license, or NULL if the license is not known or
    has no version</doc>
         <type name="utf8" c:type="const gchar*"/>
@@ -1227,7 +1227,7 @@ included.</doc>
     </function>
     <function name="tag_id3_genre_get" c:identifier="gst_tag_id3_genre_get">
       <doc xml:space="preserve">Gets the ID3v1 genre name for a given ID.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">the genre or NULL if no genre is associated with that ID.</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>
@@ -1261,7 +1261,7 @@ the special tag name.
 
 This function will do various checks and typefind the encoded image
 data (we can't trust the declared mime type).</doc>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">a newly-allocated image sample for use in tag lists, or NULL</doc>
         <type name="Gst.Sample" c:type="GstSample*"/>
       </return-value>
@@ -1354,7 +1354,7 @@ start</doc>
     <function name="tag_list_from_id3v2_tag" c:identifier="gst_tag_list_from_id3v2_tag">
       <doc xml:space="preserve">Creates a new tag list that contains the information parsed out of a
 ID3 tag.</doc>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">A new #GstTagList with all tags that could be extracted from the
          given vorbiscomment buffer or NULL on error.</doc>
         <type name="Gst.TagList" c:type="GstTagList*"/>
@@ -1369,7 +1369,7 @@ ID3 tag.</doc>
     <function name="tag_list_from_vorbiscomment" c:identifier="gst_tag_list_from_vorbiscomment">
       <doc xml:space="preserve">Creates a new tag list that contains the information parsed out of a
 vorbiscomment packet.</doc>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">A new #GstTagList with all tags that could be extracted from the
          given vorbiscomment buffer or NULL on error.</doc>
         <type name="Gst.TagList" c:type="GstTagList*"/>
@@ -1405,7 +1405,7 @@ vorbiscomment packet.</doc>
     <function name="tag_list_from_vorbiscomment_buffer" c:identifier="gst_tag_list_from_vorbiscomment_buffer">
       <doc xml:space="preserve">Creates a new tag list that contains the information parsed out of a
 vorbiscomment packet.</doc>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">A new #GstTagList with all tags that could be extracted from the
          given vorbiscomment buffer or NULL on error.</doc>
         <type name="Gst.TagList" c:type="GstTagList*"/>
@@ -1434,7 +1434,7 @@ vorbiscomment packet.</doc>
     </function>
     <function name="tag_list_from_xmp_buffer" c:identifier="gst_tag_list_from_xmp_buffer">
       <doc xml:space="preserve">Parse a xmp packet into a taglist.</doc>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">new taglist or %NULL, free the list when done</doc>
         <type name="Gst.TagList" c:type="GstTagList*"/>
       </return-value>
@@ -1448,7 +1448,7 @@ vorbiscomment packet.</doc>
     <function name="tag_list_new_from_id3v1" c:identifier="gst_tag_list_new_from_id3v1">
       <doc xml:space="preserve">Parses the data containing an ID3v1 tag and returns a #GstTagList from the
 parsed data.</doc>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">A new tag list or NULL if the data was not an ID3v1 tag.</doc>
         <type name="Gst.TagList" c:type="GstTagList*"/>
       </return-value>
@@ -1529,7 +1529,7 @@ is put in the beginning of the buffer.</doc>
       <doc xml:space="preserve">Formats a taglist as a xmp packet using only the selected
 schemas. An empty list (%NULL) means that all schemas should
 be used</doc>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">new buffer or %NULL, unref the buffer when done</doc>
         <type name="Gst.Buffer" c:type="GstBuffer*"/>
       </return-value>
@@ -1598,7 +1598,7 @@ function before using them. Can be called multiple times.</doc>
     </function>
     <function name="tag_to_id3_tag" c:identifier="gst_tag_to_id3_tag">
       <doc xml:space="preserve">Looks up the ID3v2 tag for a GStreamer tag.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">The corresponding ID3v2 tag or NULL if none exists.</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>
@@ -1633,7 +1633,7 @@ vorbiscomment packet.</doc>
     </function>
     <function name="tag_to_vorbis_tag" c:identifier="gst_tag_to_vorbis_tag">
       <doc xml:space="preserve">Looks up the vorbiscomment tag for a GStreamer tag.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">The corresponding vorbiscomment tag or NULL if none exists.</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>

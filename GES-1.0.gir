@@ -2408,7 +2408,7 @@ and #GESTimelineElement:in-point; exist in the same layer; and all of
 the sources share the same #GESAsset. If this fails, or one of the
 elements is not a #GESClip, this method will try to create a #GESGroup
 instead.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The container created by merging
 @containers, or %NULL if they could not be merged into a single
 container.</doc>
@@ -4255,7 +4255,7 @@ layers will simply play in addition.</doc>
       </virtual-method>
       <method name="add_asset" c:identifier="ges_layer_add_asset">
         <doc xml:space="preserve">See ges_layer_add_asset_full(), which also gives an error.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The newly created clip.</doc>
           <type name="Clip" c:type="GESClip*"/>
         </return-value>
@@ -5103,7 +5103,7 @@ to @dest.</doc>
             <doc xml:space="preserve">The key for the @container field to get</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
-          <parameter name="dest" direction="out" caller-allocates="0" transfer-ownership="full">
+          <parameter name="dest" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
             <doc xml:space="preserve">Destination into which the value under @meta_item
 should be copied.</doc>
             <type name="GLib.Date" c:type="GDate**"/>
@@ -5128,7 +5128,7 @@ to @dest.</doc>
             <doc xml:space="preserve">The key for the @container field to get</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
-          <parameter name="dest" direction="out" caller-allocates="0" transfer-ownership="full">
+          <parameter name="dest" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
             <doc xml:space="preserve">Destination into which the value under @meta_item
 should be copied.</doc>
             <type name="Gst.DateTime" c:type="GstDateTime**"/>
@@ -5239,7 +5239,7 @@ should be copied.</doc>
         <doc xml:space="preserve">Gets the current marker list value of the specified field of the meta
 container. If the field does not have a set value, or it is of the
 wrong type, the method will fail.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">A copy of the marker list value under @key,
 or %NULL if it could not be fetched.</doc>
           <type name="MarkerList" c:type="GESMarkerList*"/>
@@ -5257,7 +5257,7 @@ or %NULL if it could not be fetched.</doc>
       </method>
       <method name="get_meta" c:identifier="ges_meta_container_get_meta">
         <doc xml:space="preserve">Gets the current value of the specified field of the meta container.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The value under @key, or %NULL if @container
 does not have the field set.</doc>
           <type name="GObject.Value" c:type="const GValue*"/>
@@ -5277,7 +5277,7 @@ does not have the field set.</doc>
         <doc xml:space="preserve">Gets the current string value of the specified field of the meta
 container. If the field does not have a set value, or it is of the
 wrong type, the method will fail.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The string value under @meta_item, or %NULL
 if it could not be fetched.</doc>
           <type name="utf8" c:type="const gchar*"/>
@@ -5346,8 +5346,7 @@ should be copied.</doc>
       <method name="metas_to_string" c:identifier="ges_meta_container_metas_to_string">
         <doc xml:space="preserve">Serializes the set metadata fields of the meta container to a string.</doc>
         <return-value transfer-ownership="full">
-          <doc xml:space="preserve">A serialized @container, or %NULL if an error
-occurred.</doc>
+          <doc xml:space="preserve">A serialized @container.</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
@@ -6261,7 +6260,7 @@ preview, in the specified format.
 Note that if you use "ANY" caps for @caps, then the current format of
 the image is used. You can retrieve these caps from the returned sample
 with gst_sample_get_caps().</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">A sample of @self's current image preview in
 the format given by @caps, or %NULL if an error prevented fetching the
 sample.</doc>
@@ -6285,7 +6284,7 @@ preview, in the 24-bit "RGB" format and of the desired width and
 height.
 
 See ges_pipeline_get_thumbnail().</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">A sample of @self's current image preview in
 the "RGB" format, scaled to @width and @height, or %NULL if an error
 prevented fetching the sample.</doc>
@@ -6310,7 +6309,7 @@ native size</doc>
       </method>
       <method name="preview_get_audio_sink" c:identifier="ges_pipeline_preview_get_audio_sink">
         <doc xml:space="preserve">Gets the #GESPipeline:audio-sink of the pipeline.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">The audio sink used by @self for preview.</doc>
           <type name="Gst.Element" c:type="GstElement*"/>
         </return-value>
@@ -6323,7 +6322,7 @@ native size</doc>
       </method>
       <method name="preview_get_video_sink" c:identifier="ges_pipeline_preview_get_video_sink">
         <doc xml:space="preserve">Gets the #GESPipeline:video-sink of the pipeline.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">The video sink used by @self for preview.</doc>
           <type name="Gst.Element" c:type="GstElement*"/>
         </return-value>
@@ -6344,7 +6343,7 @@ native size</doc>
             <doc xml:space="preserve">A #GESPipeline in #GST_STATE_NULL</doc>
             <type name="Pipeline" c:type="GESPipeline*"/>
           </instance-parameter>
-          <parameter name="sink" transfer-ownership="none">
+          <parameter name="sink" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">A audio sink for @self to use for preview</doc>
             <type name="Gst.Element" c:type="GstElement*"/>
           </parameter>
@@ -6360,7 +6359,7 @@ native size</doc>
             <doc xml:space="preserve">A #GESPipeline in #GST_STATE_NULL</doc>
             <type name="Pipeline" c:type="GESPipeline*"/>
           </instance-parameter>
-          <parameter name="sink" transfer-ownership="none">
+          <parameter name="sink" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">A video sink for @self to use for preview</doc>
             <type name="Gst.Element" c:type="GstElement*"/>
           </parameter>
@@ -7778,7 +7777,7 @@ be created by clips.</doc-deprecated>
       </method>
       <method name="get_font_desc" c:identifier="ges_text_overlay_get_font_desc">
         <doc xml:space="preserve">Get the pango font description currently set on @source.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The pango font description currently set on @source.</doc>
           <type name="utf8" c:type="const char*"/>
         </return-value>
@@ -7804,7 +7803,7 @@ be created by clips.</doc-deprecated>
       </method>
       <method name="get_text" c:identifier="ges_text_overlay_get_text">
         <doc xml:space="preserve">Get the text currently set on @source.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The text currently set on @source.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
@@ -7881,7 +7880,7 @@ will render.</doc>
             <doc xml:space="preserve">the #GESTextOverlay</doc>
             <type name="TextOverlay" c:type="GESTextOverlay*"/>
           </instance-parameter>
-          <parameter name="font_desc" transfer-ownership="none">
+          <parameter name="font_desc" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">the pango font description</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
@@ -7914,7 +7913,7 @@ of the text render by @self.</doc>
             <doc xml:space="preserve">the #GESTextOverlay* to set text on</doc>
             <type name="TextOverlay" c:type="GESTextOverlay*"/>
           </instance-parameter>
-          <parameter name="text" transfer-ownership="none">
+          <parameter name="text" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">the text to render. an internal copy of this text will be
 made.</doc>
             <type name="utf8" c:type="const gchar*"/>
@@ -8019,7 +8018,7 @@ of the text render by @self.</doc>
       </method>
       <method name="get_font_desc" c:identifier="ges_text_overlay_clip_get_font_desc" glib:get-property="font-desc">
         <doc xml:space="preserve">Get the pango font description used by @self.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The pango font description used by @self.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
@@ -8045,7 +8044,7 @@ of the text render by @self.</doc>
       </method>
       <method name="get_text" c:identifier="ges_text_overlay_clip_get_text" glib:get-property="text">
         <doc xml:space="preserve">Get the text currently set on @self.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The text currently set on @self.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
@@ -8121,7 +8120,7 @@ of the text render by @self.</doc>
             <doc xml:space="preserve">the #GESTextOverlayClip*</doc>
             <type name="TextOverlayClip" c:type="GESTextOverlayClip*"/>
           </instance-parameter>
-          <parameter name="font_desc" transfer-ownership="none">
+          <parameter name="font_desc" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">the pango font description</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
@@ -8153,7 +8152,7 @@ of the text render by @self.</doc>
             <doc xml:space="preserve">the #GESTextOverlayClip* to set text on</doc>
             <type name="TextOverlayClip" c:type="GESTextOverlayClip*"/>
           </instance-parameter>
-          <parameter name="text" transfer-ownership="none">
+          <parameter name="text" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">the text to render. an internal copy of this text will be
 made.</doc>
             <type name="utf8" c:type="const gchar*"/>
@@ -8396,14 +8395,13 @@ content, or render it to a file.</doc>
         <doc xml:space="preserve">Creates a new timeline containing a single #GESAudioTrack and a
 single #GESVideoTrack.</doc>
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">The new timeline, or %NULL if the tracks
-could not be created and added.</doc>
+          <doc xml:space="preserve">The new timeline.</doc>
           <type name="Timeline" c:type="GESTimeline*"/>
         </return-value>
       </constructor>
       <constructor name="new_from_uri" c:identifier="ges_timeline_new_from_uri" throws="1">
         <doc xml:space="preserve">Creates a timeline from the given URI.</doc>
-        <return-value transfer-ownership="none" nullable="1">
+        <return-value transfer-ownership="none">
           <doc xml:space="preserve">A new timeline if the uri was loaded
 successfully, or %NULL if the uri could not be loaded.</doc>
           <type name="Timeline" c:type="GESTimeline*"/>
@@ -9177,7 +9175,7 @@ layers were created for the timeline.</doc>
       <glib:signal name="select-element-track" when="last" version="1.18">
         <doc xml:space="preserve">Simplified version of #GESTimeline::select-tracks-for-object which only
 allows @track_element to be added to a single #GESTrack.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">A track to put @track_element into, or %NULL if
 it should be discarded.</doc>
           <type name="Track"/>
@@ -10001,8 +9999,7 @@ particular, the new element itself is not an actual 'deep' copy of
 @self, but should be thought of as an intermediate object used for a
 single paste operation.</doc>
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">The newly create element,
-copied from @self.</doc>
+          <doc xml:space="preserve">The newly create element, copied from @self.</doc>
           <type name="TimelineElement" c:type="GESTimelineElement*"/>
         </return-value>
         <parameters>
@@ -10270,7 +10267,7 @@ layer.</doc>
       </method>
       <method name="get_name" c:identifier="ges_timeline_element_get_name" glib:get-property="name">
         <doc xml:space="preserve">Gets the #GESTimelineElement:name for the element.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">The name of @self.</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
@@ -11536,7 +11533,7 @@ See #GESTitleSource for more information about exposed properties</doc-deprecate
         <doc xml:space="preserve">Get the pango font description used by @self.</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_get_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">The pango font description used by @self.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
@@ -11566,7 +11563,7 @@ See #GESTitleSource for more information about exposed properties</doc-deprecate
         <doc xml:space="preserve">Get the text currently set on @self.</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_get_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">The text currently set on @self.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
@@ -11684,7 +11681,7 @@ See #GESTitleSource for more information about exposed properties</doc-deprecate
             <doc xml:space="preserve">the #GESTitleClip*</doc>
             <type name="TitleClip" c:type="GESTitleClip*"/>
           </instance-parameter>
-          <parameter name="font_desc" transfer-ownership="none">
+          <parameter name="font_desc" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">the pango font description</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
@@ -11720,7 +11717,7 @@ See #GESTitleSource for more information about exposed properties</doc-deprecate
             <doc xml:space="preserve">the #GESTitleClip* to set text on</doc>
             <type name="TitleClip" c:type="GESTitleClip*"/>
           </instance-parameter>
-          <parameter name="text" transfer-ownership="none">
+          <parameter name="text" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">the text to render. an internal copy of this text will be
 made.</doc>
             <type name="utf8" c:type="const gchar*"/>
@@ -11882,7 +11879,7 @@ of titles in GES.</doc>
         <doc xml:space="preserve">Get the pango font description used by @source.</doc>
         <doc-deprecated xml:space="preserve">Use ges_timeline_element_get_child_property instead
 (this actually returns a newly allocated string)</doc-deprecated>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">The pango font description used by this
 @source.</doc>
           <type name="utf8" c:type="const gchar*"/>
@@ -11911,7 +11908,7 @@ of titles in GES.</doc>
         <doc xml:space="preserve">Get the text currently set on the @source.</doc>
         <doc-deprecated xml:space="preserve">Use ges_timeline_element_get_child_property instead
 (this actually returns a newly allocated string)</doc-deprecated>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">The text currently set on the @source.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
@@ -12001,7 +11998,7 @@ the text.</doc>
             <doc xml:space="preserve">the #GESTitleSource</doc>
             <type name="TitleSource" c:type="GESTitleSource*"/>
           </instance-parameter>
-          <parameter name="font_desc" transfer-ownership="none">
+          <parameter name="font_desc" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">the pango font description</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
@@ -12035,7 +12032,7 @@ GESTrackElement instead</doc-deprecated>
             <doc xml:space="preserve">the #GESTitleSource* to set text on</doc>
             <type name="TitleSource" c:type="GESTitleSource*"/>
           </instance-parameter>
-          <parameter name="text" transfer-ownership="none">
+          <parameter name="text" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">the text to render. an internal copy of this text will be
 made.</doc>
             <type name="utf8" c:type="const gchar*"/>
@@ -12264,7 +12261,7 @@ needed to be committed.</doc>
       </method>
       <method name="get_caps" c:identifier="ges_track_get_caps" glib:get-property="caps">
         <doc xml:space="preserve">Get the #GESTrack:caps of the track.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The caps of @track.</doc>
           <type name="Gst.Caps" c:type="const GstCaps*"/>
         </return-value>
@@ -12308,7 +12305,7 @@ all the #GESTrackElement-s in @track.</doc>
       </method>
       <method name="get_restriction_caps" c:identifier="ges_track_get_restriction_caps" glib:get-property="restriction-caps" version="1.18">
         <doc xml:space="preserve">Gets the #GESTrack:restriction-caps of the track.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">The restriction-caps of @track.</doc>
           <type name="Gst.Caps" c:type="GstCaps*"/>
         </return-value>
@@ -13017,7 +13014,7 @@ binding of</doc>
       <method name="get_element" c:identifier="ges_track_element_get_element">
         <doc xml:space="preserve">Get the #GstElement that the track element's underlying nleobject
 controls.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The #GstElement being controlled by the
 nleobject that @object wraps.</doc>
           <type name="Gst.Element" c:type="GstElement*"/>
@@ -15292,7 +15289,7 @@ of the @filter type.</doc>
       <doc xml:space="preserve">Get the last buffer @playsink showed</doc>
       <doc-deprecated xml:space="preserve">Use the "convert-sample" action signal of
 #playsink instead.</doc-deprecated>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">A #GstSample containing the last frame from
 @playsink in the format defined by the @caps</doc>
         <type name="Gst.Sample" c:type="GstSample*"/>

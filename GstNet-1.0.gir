@@ -260,11 +260,9 @@ MT safe. Caller owns return value (gst_net_time_packet_free to free).</doc>
           <type name="NetTimePacket" c:type="GstNetTimePacket*"/>
         </return-value>
         <parameters>
-          <parameter name="buffer" transfer-ownership="none">
+          <parameter name="buffer" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">a buffer from which to construct the packet, or NULL</doc>
-            <array zero-terminated="0" c:type="const guint8*">
-              <type name="guint8" c:type="guint8"/>
-            </array>
+            <type name="guint8" c:type="const guint8*"/>
           </parameter>
         </parameters>
       </constructor>
@@ -323,7 +321,7 @@ suitable for passing to write(2) or sendto(2) for communication over the
 network.
 
 MT safe. Caller owns return value (g_free to free).</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="full">
           <doc xml:space="preserve">A newly allocated sequence of #GST_NET_TIME_PACKET_SIZE bytes.</doc>
           <type name="guint8" c:type="guint8*"/>
         </return-value>
@@ -347,7 +345,7 @@ calls, but otherwise returns NULL on error.</doc>
             <doc xml:space="preserve">socket to receive the time packet on</doc>
             <type name="Gio.Socket" c:type="GSocket*"/>
           </parameter>
-          <parameter name="src_address" direction="out" caller-allocates="0" transfer-ownership="full">
+          <parameter name="src_address" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
             <doc xml:space="preserve">address of variable to return sender address</doc>
             <type name="Gio.SocketAddress" c:type="GSocketAddress**"/>
           </parameter>
@@ -367,7 +365,7 @@ The #GstNetTimeProvider typically wraps the clock used by a #GstPipeline.</doc>
       <implements name="Gio.Initable"/>
       <constructor name="new" c:identifier="gst_net_time_provider_new">
         <doc xml:space="preserve">Allows network clients to get the current time of @clock.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the new #GstNetTimeProvider, or NULL on error</doc>
           <type name="NetTimeProvider" c:type="GstNetTimeProvider*"/>
         </return-value>
@@ -681,7 +679,7 @@ If %FALSE is returned, the callback is removed and never called again.</doc>
     </function>
     <function name="buffer_get_net_address_meta" c:identifier="gst_buffer_get_net_address_meta">
       <doc xml:space="preserve">Find the #GstNetAddressMeta on @buffer.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">the #GstNetAddressMeta or %NULL when there
 is no such metadata on @buffer.</doc>
         <type name="NetAddressMeta" c:type="GstNetAddressMeta*"/>
@@ -736,7 +734,7 @@ calls, but otherwise returns NULL on error.</doc>
           <doc xml:space="preserve">socket to receive the time packet on</doc>
           <type name="Gio.Socket" c:type="GSocket*"/>
         </parameter>
-        <parameter name="src_address" direction="out" caller-allocates="0" transfer-ownership="full">
+        <parameter name="src_address" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
           <doc xml:space="preserve">address of variable to return sender address</doc>
           <type name="Gio.SocketAddress" c:type="GSocketAddress**"/>
         </parameter>

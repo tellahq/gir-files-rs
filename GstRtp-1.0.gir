@@ -638,7 +638,7 @@ the max MTU is exceeded or the number of sources blocks is greater than
       </method>
       <method name="bye_get_reason" c:identifier="gst_rtcp_packet_bye_get_reason">
         <doc xml:space="preserve">Get the reason in @packet.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">The reason for the BYE @packet or NULL if the packet did not contain
 a reason string. The string must be freed with g_free() after usage.</doc>
           <type name="utf8" c:type="gchar*"/>
@@ -2316,7 +2316,7 @@ the outgoing buffer when it didn't have a timestamp already.</doc>
             <doc xml:space="preserve">a #GstRTPBaseDepayload</doc>
             <type name="RTPBaseDepayload" c:type="GstRTPBaseDepayload*"/>
           </instance-parameter>
-          <parameter name="out_buf" transfer-ownership="none">
+          <parameter name="out_buf" transfer-ownership="full">
             <doc xml:space="preserve">a #GstBuffer</doc>
             <type name="Gst.Buffer" c:type="GstBuffer*"/>
           </parameter>
@@ -2334,7 +2334,7 @@ the outgoing buffer when it didn't have a timestamp already.</doc>
             <doc xml:space="preserve">a #GstRTPBaseDepayload</doc>
             <type name="RTPBaseDepayload" c:type="GstRTPBaseDepayload*"/>
           </instance-parameter>
-          <parameter name="out_list" transfer-ownership="none">
+          <parameter name="out_list" transfer-ownership="full">
             <doc xml:space="preserve">a #GstBufferList</doc>
             <type name="Gst.BufferList" c:type="GstBufferList*"/>
           </parameter>
@@ -2441,7 +2441,7 @@ incoming RTP packets.</doc>
       <glib:signal name="request-extension" when="last" version="1.20">
         <doc xml:space="preserve">The returned @ext must be configured with the correct @ext_id and with the
 necessary attributes as required by the extension implementation.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the #GstRTPHeaderExtension for @ext_id, or %NULL</doc>
           <type name="RTPHeaderExtension"/>
         </return-value>
@@ -3035,7 +3035,7 @@ outgoing RTP packets.</doc>
       <glib:signal name="request-extension" when="last" version="1.20">
         <doc xml:space="preserve">The returned @ext must be configured with the correct @ext_id and with the
 necessary attributes as required by the extension implementation.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the #GstRTPHeaderExtension for @ext_id, or %NULL</doc>
           <type name="RTPHeaderExtension"/>
         </return-value>
@@ -3312,7 +3312,7 @@ the extension data (not including the extension header) is placed in a new
 If @rtp did not contain an extension, this function will return %NULL, with
 @bits unchanged. If there is an extension header but no extension data then
 an empty #GBytes will be returned.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">A new #GBytes if an extension header was present
 and %NULL otherwise.</doc>
           <type name="GLib.Bytes" c:type="GBytes*"/>
@@ -3486,7 +3486,7 @@ the fixed header, the CSRC list and the extension header.</doc>
       <method name="get_payload" c:identifier="gst_rtp_buffer_get_payload" shadowed-by="get_payload_bytes" introspectable="0">
         <doc xml:space="preserve">Get a pointer to the payload data in @buffer. This pointer is valid as long
 as a reference to @buffer is held.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">A pointer
 to the payload data in @buffer.</doc>
           <array zero-terminated="0" c:type="gpointer">
@@ -3519,7 +3519,7 @@ avoided.</doc>
         <doc xml:space="preserve">Similar to gst_rtp_buffer_get_payload, but more suitable for language
 bindings usage. The return value is a pointer to a #GBytes structure
 containing the payload data in @rtp.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">A new #GBytes containing the payload data in @rtp.</doc>
           <type name="GLib.Bytes" c:type="GBytes*"/>
         </return-value>
@@ -4461,7 +4461,7 @@ information given in the input @buffer.</doc>
         </parameters>
       </method>
       <method name="get_uri" c:identifier="gst_rtp_header_extension_get_uri" version="1.20">
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the RTP extension URI for this object</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
@@ -5096,7 +5096,7 @@ mostly used to get the default clock-rate and bandwidth for dynamic payload
 types specified with @media and @encoding name.
 
 The search for @encoding_name will be performed in a case insensitive way.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">a #GstRTPPayloadInfo or NULL when no info could be found.</doc>
           <type name="RTPPayloadInfo" c:type="const GstRTPPayloadInfo*"/>
         </return-value>
@@ -5115,7 +5115,7 @@ The search for @encoding_name will be performed in a case insensitive way.</doc>
         <doc xml:space="preserve">Get the #GstRTPPayloadInfo for @payload_type. This function is
 mostly used to get the default clock-rate and bandwidth for static payload
 types specified with @payload_type.</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">a #GstRTPPayloadInfo or NULL when no info could be found.</doc>
           <type name="RTPPayloadInfo" c:type="const GstRTPPayloadInfo*"/>
         </return-value>
@@ -5182,7 +5182,9 @@ types specified with @payload_type.</doc>
           </instance-parameter>
           <parameter name="csrc" transfer-ownership="none">
             <doc xml:space="preserve">the csrcs to append</doc>
-            <type name="guint32" c:type="const guint32*"/>
+            <array length="1" zero-terminated="0" c:type="const guint32*">
+              <type name="guint32" c:type="guint32"/>
+            </array>
           </parameter>
           <parameter name="csrc_count" transfer-ownership="none">
             <doc xml:space="preserve">number of elements in @csrc</doc>
@@ -5520,7 +5522,9 @@ is a RTP header extension.</doc>
         </parameter>
         <parameter name="csrc" transfer-ownership="none" nullable="1" allow-none="1">
           <doc xml:space="preserve">pointer to the CSRCs</doc>
-          <type name="guint32" c:type="const guint32*"/>
+          <array length="3" zero-terminated="0" c:type="const guint32*">
+            <type name="guint32" c:type="guint32"/>
+          </array>
         </parameter>
         <parameter name="csrc_count" transfer-ownership="none">
           <doc xml:space="preserve">number of elements in @csrc</doc>
@@ -5530,7 +5534,7 @@ is a RTP header extension.</doc>
     </function>
     <function name="buffer_get_rtp_source_meta" c:identifier="gst_buffer_get_rtp_source_meta" version="1.16">
       <doc xml:space="preserve">Find the #GstRTPSourceMeta on @buffer.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">the #GstRTPSourceMeta or %NULL when there
 is no such metadata on @buffer.</doc>
         <type name="RTPSourceMeta" c:type="GstRTPSourceMeta*"/>
@@ -6169,7 +6173,7 @@ mostly used to get the default clock-rate and bandwidth for dynamic payload
 types specified with @media and @encoding name.
 
 The search for @encoding_name will be performed in a case insensitive way.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">a #GstRTPPayloadInfo or NULL when no info could be found.</doc>
         <type name="RTPPayloadInfo" c:type="const GstRTPPayloadInfo*"/>
       </return-value>
@@ -6188,7 +6192,7 @@ The search for @encoding_name will be performed in a case insensitive way.</doc>
       <doc xml:space="preserve">Get the #GstRTPPayloadInfo for @payload_type. This function is
 mostly used to get the default clock-rate and bandwidth for static payload
 types specified with @payload_type.</doc>
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">a #GstRTPPayloadInfo or NULL when no info could be found.</doc>
         <type name="RTPPayloadInfo" c:type="const GstRTPPayloadInfo*"/>
       </return-value>

@@ -1311,7 +1311,7 @@ writing samples to the ringbuffer, synchronisation, clipping and flushing.</doc>
         <doc xml:space="preserve">Create and return the #GstAudioRingBuffer for @sink. This function will
 call the ::create_ringbuffer vmethod and will set @sink as the parent of
 the returned buffer (see gst_object_set_parent()).</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The new ringbuffer of @sink.</doc>
           <type name="AudioRingBuffer" c:type="GstAudioRingBuffer*"/>
         </return-value>
@@ -1339,7 +1339,7 @@ the returned buffer (see gst_object_set_parent()).</doc>
         <doc xml:space="preserve">Create and return the #GstAudioRingBuffer for @sink. This function will
 call the ::create_ringbuffer vmethod and will set @sink as the parent of
 the returned buffer (see gst_object_set_parent()).</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The new ringbuffer of @sink.</doc>
           <type name="AudioRingBuffer" c:type="GstAudioRingBuffer*"/>
         </return-value>
@@ -1613,7 +1613,7 @@ functionality.</doc>
       </field>
       <field name="create_ringbuffer">
         <callback name="create_ringbuffer">
-          <return-value transfer-ownership="none">
+          <return-value transfer-ownership="none" nullable="1">
             <doc xml:space="preserve">The new ringbuffer of @sink.</doc>
             <type name="AudioRingBuffer" c:type="GstAudioRingBuffer*"/>
           </return-value>
@@ -1748,7 +1748,7 @@ reading samples from the ringbuffer, synchronisation and flushing.</doc>
         <doc xml:space="preserve">Create and return the #GstAudioRingBuffer for @src. This function will call
 the ::create_ringbuffer vmethod and will set @src as the parent of the
 returned buffer (see gst_object_set_parent()).</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The new ringbuffer of @src.</doc>
           <type name="AudioRingBuffer" c:type="GstAudioRingBuffer*"/>
         </return-value>
@@ -1763,7 +1763,7 @@ returned buffer (see gst_object_set_parent()).</doc>
         <doc xml:space="preserve">Create and return the #GstAudioRingBuffer for @src. This function will call
 the ::create_ringbuffer vmethod and will set @src as the parent of the
 returned buffer (see gst_object_set_parent()).</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The new ringbuffer of @src.</doc>
           <type name="AudioRingBuffer" c:type="GstAudioRingBuffer*"/>
         </return-value>
@@ -1891,7 +1891,7 @@ functionality.</doc>
       </field>
       <field name="create_ringbuffer">
         <callback name="create_ringbuffer">
-          <return-value transfer-ownership="none">
+          <return-value transfer-ownership="none" nullable="1">
             <doc xml:space="preserve">The new ringbuffer of @src.</doc>
             <type name="AudioRingBuffer" c:type="GstAudioRingBuffer*"/>
           </return-value>
@@ -1994,7 +1994,7 @@ gst_audio_buffer_map().</doc>
 
 After calling this function the caller does not own a reference to
 @buffer anymore.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">%NULL if the buffer is completely outside the configured segment,
 otherwise the clipped buffer is returned.
 
@@ -2121,8 +2121,7 @@ offset end will be preserved / updated.
 After calling this function the caller does not own a reference to
 @buffer anymore.</doc>
         <return-value transfer-ownership="full">
-          <doc xml:space="preserve">the truncated buffer or %NULL if the arguments
-  were invalid</doc>
+          <doc xml:space="preserve">the truncated buffer</doc>
           <type name="Gst.Buffer" c:type="GstBuffer*"/>
         </return-value>
         <parameters>
@@ -2452,7 +2451,7 @@ Perform channel mixing on @in_data and write the result to @out_data.
       <function name="new" c:identifier="gst_audio_channel_mixer_new" introspectable="0">
         <doc xml:space="preserve">Create a new channel mixer object for the given parameters.</doc>
         <return-value>
-          <doc xml:space="preserve">a new #GstAudioChannelMixer object, or %NULL if @format isn't supported.
+          <doc xml:space="preserve">a new #GstAudioChannelMixer object.
   Free with gst_audio_channel_mixer_free() after usage.</doc>
           <type name="AudioChannelMixer" c:type="GstAudioChannelMixer*"/>
         </return-value>
@@ -2485,8 +2484,7 @@ Perform channel mixing on @in_data and write the result to @out_data.
       <function name="new_with_matrix" c:identifier="gst_audio_channel_mixer_new_with_matrix" version="1.14" introspectable="0">
         <doc xml:space="preserve">Create a new channel mixer object for the given parameters.</doc>
         <return-value>
-          <doc xml:space="preserve">a new #GstAudioChannelMixer object, or %NULL if @format isn't supported,
-  @matrix is invalid, or @matrix is %NULL and @in_channels != @out_channels.
+          <doc xml:space="preserve">a new #GstAudioChannelMixer object.
   Free with gst_audio_channel_mixer_free() after usage.</doc>
           <type name="AudioChannelMixer" c:type="GstAudioChannelMixer*"/>
         </return-value>
@@ -2857,7 +2855,7 @@ audio formats.
 
 @config contains extra configuration options, see `GST_AUDIO_CONVERTER_OPT_*`
 parameters for details about the options and values.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstAudioConverter or %NULL if conversion is not possible.</doc>
           <type name="AudioConverter" c:type="GstAudioConverter*"/>
         </return-value>
@@ -3563,7 +3561,7 @@ Unref the @allocator after use it.</doc>
             <doc xml:space="preserve">a #GstAudioDecoder</doc>
             <type name="AudioDecoder" c:type="GstAudioDecoder*"/>
           </instance-parameter>
-          <parameter name="allocator" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+          <parameter name="allocator" direction="out" caller-allocates="0" transfer-ownership="full" nullable="1" optional="1" allow-none="1">
             <doc xml:space="preserve">the #GstAllocator
 used</doc>
             <type name="Gst.Allocator" c:type="GstAllocator**"/>
@@ -4809,7 +4807,7 @@ Unref the @allocator after use it.</doc>
             <doc xml:space="preserve">a #GstAudioEncoder</doc>
             <type name="AudioEncoder" c:type="GstAudioEncoder*"/>
           </instance-parameter>
-          <parameter name="allocator" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+          <parameter name="allocator" direction="out" caller-allocates="0" transfer-ownership="full" nullable="1" optional="1" allow-none="1">
             <doc xml:space="preserve">the #GstAllocator
 used</doc>
             <type name="Gst.Allocator" c:type="GstAllocator**"/>
@@ -6162,7 +6160,7 @@ gst_audio_info_init().</doc>
       </constructor>
       <constructor name="new_from_caps" c:identifier="gst_audio_info_new_from_caps" version="1.20">
         <doc xml:space="preserve">Parse @caps to generate a #GstAudioInfo.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">A #GstAudioInfo, or %NULL if @caps couldn't be parsed</doc>
           <type name="AudioInfo" c:type="GstAudioInfo*"/>
         </return-value>
@@ -6688,8 +6686,7 @@ When @options is %NULL, the previously configured options are reused.</doc>
       <function name="new" c:identifier="gst_audio_resampler_new">
         <doc xml:space="preserve">Make a new resampler.</doc>
         <return-value transfer-ownership="full" skip="1">
-          <doc xml:space="preserve">The new #GstAudioResampler, or
-%NULL on failure.</doc>
+          <doc xml:space="preserve">The new #GstAudioResampler.</doc>
           <type name="AudioResampler" c:type="GstAudioResampler*"/>
         </return-value>
         <parameters>
@@ -9249,7 +9246,7 @@ cbrt(val) and 20 * log10 (val).</doc>
 
 After calling this function the caller does not own a reference to
 @buffer anymore.</doc>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">%NULL if the buffer is completely outside the configured segment,
 otherwise the clipped buffer is returned.
 
@@ -9376,8 +9373,7 @@ offset end will be preserved / updated.
 After calling this function the caller does not own a reference to
 @buffer anymore.</doc>
       <return-value transfer-ownership="full">
-        <doc xml:space="preserve">the truncated buffer or %NULL if the arguments
-  were invalid</doc>
+        <doc xml:space="preserve">the truncated buffer</doc>
         <type name="Gst.Buffer" c:type="GstBuffer*"/>
       </return-value>
       <parameters>
@@ -9422,7 +9418,7 @@ mask and mono.</doc>
     <function name="audio_channel_mixer_new" c:identifier="gst_audio_channel_mixer_new" moved-to="AudioChannelMixer.new" introspectable="0">
       <doc xml:space="preserve">Create a new channel mixer object for the given parameters.</doc>
       <return-value>
-        <doc xml:space="preserve">a new #GstAudioChannelMixer object, or %NULL if @format isn't supported.
+        <doc xml:space="preserve">a new #GstAudioChannelMixer object.
   Free with gst_audio_channel_mixer_free() after usage.</doc>
         <type name="AudioChannelMixer" c:type="GstAudioChannelMixer*"/>
       </return-value>
@@ -9455,8 +9451,7 @@ mask and mono.</doc>
     <function name="audio_channel_mixer_new_with_matrix" c:identifier="gst_audio_channel_mixer_new_with_matrix" moved-to="AudioChannelMixer.new_with_matrix" version="1.14" introspectable="0">
       <doc xml:space="preserve">Create a new channel mixer object for the given parameters.</doc>
       <return-value>
-        <doc xml:space="preserve">a new #GstAudioChannelMixer object, or %NULL if @format isn't supported,
-  @matrix is invalid, or @matrix is %NULL and @in_channels != @out_channels.
+        <doc xml:space="preserve">a new #GstAudioChannelMixer object.
   Free with gst_audio_channel_mixer_free() after usage.</doc>
         <type name="AudioChannelMixer" c:type="GstAudioChannelMixer*"/>
       </return-value>
@@ -9999,8 +9994,7 @@ Note: this function assumes the audio data is in interleaved layout</doc>
     <function name="audio_resampler_new" c:identifier="gst_audio_resampler_new" moved-to="AudioResampler.new">
       <doc xml:space="preserve">Make a new resampler.</doc>
       <return-value transfer-ownership="full" skip="1">
-        <doc xml:space="preserve">The new #GstAudioResampler, or
-%NULL on failure.</doc>
+        <doc xml:space="preserve">The new #GstAudioResampler.</doc>
         <type name="AudioResampler" c:type="GstAudioResampler*"/>
       </return-value>
       <parameters>

@@ -132,7 +132,7 @@ synchronization metadata on buffers from the pool.</doc>
       <method name="copy" c:identifier="gst_gl_allocation_params_copy" version="1.8">
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">a copy of the #GstGLAllocationParams specified by
-         @src or %NULL on failure</doc>
+         @src</doc>
           <type name="GLAllocationParams" c:type="GstGLAllocationParams*"/>
         </return-value>
         <parameters>
@@ -779,7 +779,7 @@ then this function imply returns TRUE.</doc>
         </parameters>
       </method>
       <function name="alloc" c:identifier="gst_gl_base_memory_alloc" version="1.8">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a new #GstGLBaseMemory from @allocator with the requested @params.</doc>
           <type name="GLBaseMemory" c:type="GstGLBaseMemory*"/>
         </return-value>
@@ -805,7 +805,7 @@ multiple times.  This must be called before any other GstGLBaseMemory operation.
     <class name="GLBaseMemoryAllocator" c:symbol-prefix="gl_base_memory_allocator" c:type="GstGLBaseMemoryAllocator" version="1.8" parent="Gst.Allocator" abstract="1" glib:type-name="GstGLBaseMemoryAllocator" glib:get-type="gst_gl_base_memory_allocator_get_type" glib:type-struct="GLBaseMemoryAllocatorClass">
       <doc xml:space="preserve">Opaque #GstGLBaseMemoryAllocator struct</doc>
       <virtual-method name="alloc">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a newly allocated #GstGLBaseMemory from @allocator and @params</doc>
           <type name="GLBaseMemory" c:type="GstGLBaseMemory*"/>
         </return-value>
@@ -834,7 +834,7 @@ multiple times.  This must be called before any other GstGLBaseMemory operation.
     </class>
     <callback name="GLBaseMemoryAllocatorAllocFunction" c:type="GstGLBaseMemoryAllocatorAllocFunction" version="1.8">
       <doc xml:space="preserve">Note: not called with a GL context current</doc>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">a newly allocated #GstGLBaseMemory from @allocator and @params</doc>
         <type name="GLBaseMemory" c:type="GstGLBaseMemory*"/>
       </return-value>
@@ -886,7 +886,7 @@ multiple times.  This must be called before any other GstGLBaseMemory operation.
     </record>
     <callback name="GLBaseMemoryAllocatorCopyFunction" c:type="GstGLBaseMemoryAllocatorCopyFunction" version="1.8">
       <doc xml:space="preserve">Also see gst_memory_copy();</doc>
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">the newly copied #GstGLMemory or %NULL</doc>
         <type name="GLBaseMemory" c:type="GstGLBaseMemory*"/>
       </return-value>
@@ -1249,7 +1249,7 @@ A #GstGLBufferPool is created with gst_gl_buffer_pool_new()
 call to gst_buffer_pool_set_config().  Subsequent successful calls to
 gst_buffer_pool_set_config() will cause this function to return a new
 #GstGLAllocationParams which may or may not contain the same information.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a copy of the #GstGLAllocationParams being used by the @pool</doc>
           <type name="GLAllocationParams" c:type="GstGLAllocationParams*"/>
         </return-value>
@@ -1379,7 +1379,7 @@ The glcolorconvertelement provides a GStreamer element that uses
       <method name="perform" c:identifier="gst_gl_color_convert_perform" version="1.4">
         <doc xml:space="preserve">Converts the data contained by @inbuf using the formats specified by the
 #GstCaps passed to gst_gl_color_convert_set_caps()</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a converted #GstBuffer or %NULL</doc>
           <type name="Gst.Buffer" c:type="GstBuffer*"/>
         </return-value>
@@ -1604,7 +1604,7 @@ See also: gst_gl_context_get_proc_address()</doc>
       </function>
       <function name="get_current" c:identifier="gst_gl_context_get_current" version="1.6">
         <doc xml:space="preserve">See also gst_gl_context_activate().</doc>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the #GstGLContext active in the current thread or %NULL</doc>
           <type name="GLContext" c:type="GstGLContext*"/>
         </return-value>
@@ -1633,7 +1633,7 @@ returned.</doc>
         </parameters>
       </function>
       <function name="get_current_gl_context" c:identifier="gst_gl_context_get_current_gl_context" version="1.6">
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The OpenGL context handle current in the calling thread or %NULL</doc>
           <type name="guintptr" c:type="guintptr"/>
         </return-value>
@@ -2209,7 +2209,7 @@ void (GSTGLAPI *PFN_glGetIntegerv) (GLenum name, GLint * ret)
         </parameters>
       </method>
       <method name="get_thread" c:identifier="gst_gl_context_get_thread" version="1.6">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">The #GThread, @context is current in or NULL</doc>
           <type name="GLib.Thread" c:type="GThread*"/>
         </return-value>
@@ -2733,7 +2733,7 @@ may return NULL.</doc>
         </parameters>
       </constructor>
       <virtual-method name="create_window" invoker="create_window">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a new #GstGLWindow for @display or %NULL.</doc>
           <type name="GLWindow" c:type="GstGLWindow*"/>
         </return-value>
@@ -2797,7 +2797,7 @@ Must be called with the object lock held.</doc>
         </parameters>
       </method>
       <method name="create_window" c:identifier="gst_gl_display_create_window">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a new #GstGLWindow for @display or %NULL.</doc>
           <type name="GLWindow" c:type="GstGLWindow*"/>
         </return-value>
@@ -2832,7 +2832,7 @@ API supported by a #GstGLContext.</doc>
 first argument to @compare_func is the #GstGLWindow being checked and the
 second argument is @data.</doc>
         <doc-deprecated xml:space="preserve">Use gst_gl_display_retrieve_window() instead.</doc-deprecated>
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">The first #GstGLWindow that causes a match
          from @compare_func</doc>
           <type name="GLWindow" c:type="GstGLWindow*"/>
@@ -2876,7 +2876,7 @@ second argument is @data.</doc>
         </parameters>
       </method>
       <method name="get_gl_context_for_thread" c:identifier="gst_gl_display_get_gl_context_for_thread" version="1.6">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the #GstGLContext current on @thread or %NULL
 
 Must be called with the object lock held.</doc>
@@ -2953,7 +2953,7 @@ Must be called with the object lock held.</doc>
         <doc xml:space="preserve">Execute @compare_func over the list of windows stored by @display.  The
 first argument to @compare_func is the #GstGLWindow being checked and the
 second argument is @data.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">The first #GstGLWindow that causes a match
          from @compare_func</doc>
           <type name="GLWindow" c:type="GstGLWindow*"/>
@@ -3000,7 +3000,7 @@ second argument is @data.</doc>
         <doc xml:space="preserve">Overrides the @GstGLContext creation mechanism.
 It can be called in any thread and it is emitted with
 display's object lock held.</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the new context.</doc>
           <type name="GLContext"/>
         </return-value>
@@ -3032,7 +3032,7 @@ display's object lock held.</doc>
       </field>
       <field name="create_window">
         <callback name="create_window">
-          <return-value transfer-ownership="full">
+          <return-value transfer-ownership="full" nullable="1">
             <doc xml:space="preserve">a new #GstGLWindow for @display or %NULL.</doc>
             <type name="GLWindow" c:type="GstGLWindow*"/>
           </return-value>
@@ -5200,7 +5200,7 @@ or a valid GLSL version and/or profile.</doc>
         </parameters>
       </function>
       <function name="profile_to_string" c:identifier="gst_glsl_version_profile_to_string">
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">the combined GLSL `#version` string for @version and @profile</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
@@ -6593,7 +6593,7 @@ targets with #GValue's when e.g. dealing with #GstCaps.</doc>
         </parameters>
       </function>
       <function name="to_buffer_pool_option" c:identifier="gst_gl_texture_target_to_buffer_pool_option">
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">a string representing the @GstBufferPoolOption specified by @target</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
@@ -6618,7 +6618,7 @@ targets with #GValue's when e.g. dealing with #GstCaps.</doc>
         </parameters>
       </function>
       <function name="to_string" c:identifier="gst_gl_texture_target_to_string">
-        <return-value transfer-ownership="none">
+        <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the stringified version of @target or %NULL</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
@@ -7182,7 +7182,7 @@ usage only to chain up at the end of a subclass free function.</doc>
       <method name="perform" c:identifier="gst_gl_view_convert_perform" version="1.6">
         <doc xml:space="preserve">Converts the data contained by @inbuf using the formats specified by the
 #GstCaps passed to gst_gl_view_convert_set_caps()</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a converted #GstBuffer or %NULL</doc>
           <type name="Gst.Buffer" c:type="GstBuffer*"/>
         </return-value>
@@ -9425,7 +9425,7 @@ you are writing to OpenGL. Conversely, combining #GST_MAP_GL with
       </parameters>
     </function-macro>
     <function name="buffer_pool_config_get_gl_allocation_params" c:identifier="gst_buffer_pool_config_get_gl_allocation_params">
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">the currently set #GstGLAllocationParams or %NULL</doc>
         <type name="GLAllocationParams" c:type="GstGLAllocationParams*"/>
       </return-value>
@@ -9446,7 +9446,7 @@ you are writing to OpenGL. Conversely, combining #GST_MAP_GL with
           <doc xml:space="preserve">a buffer pool config</doc>
           <type name="Gst.Structure" c:type="GstStructure*"/>
         </parameter>
-        <parameter name="params" transfer-ownership="none">
+        <parameter name="params" transfer-ownership="none" nullable="1" allow-none="1">
           <doc xml:space="preserve">a #GstGLAllocationParams</doc>
           <type name="GLAllocationParams" c:type="const GstGLAllocationParams*"/>
         </parameter>
@@ -9462,7 +9462,7 @@ you are writing to OpenGL. Conversely, combining #GST_MAP_GL with
           <doc xml:space="preserve">a #GstContext</doc>
           <type name="Gst.Context" c:type="GstContext*"/>
         </parameter>
-        <parameter name="display" direction="out" caller-allocates="0" transfer-ownership="full">
+        <parameter name="display" direction="out" caller-allocates="0" transfer-ownership="full" nullable="1" optional="1" allow-none="1">
           <doc xml:space="preserve">resulting #GstGLDisplay</doc>
           <type name="GLDisplay" c:type="GstGLDisplay**"/>
         </parameter>
@@ -9478,7 +9478,7 @@ you are writing to OpenGL. Conversely, combining #GST_MAP_GL with
           <doc xml:space="preserve">a #GstContext</doc>
           <type name="Gst.Context" c:type="GstContext*"/>
         </parameter>
-        <parameter name="display" transfer-ownership="none">
+        <parameter name="display" transfer-ownership="none" nullable="1" allow-none="1">
           <doc xml:space="preserve">resulting #GstGLDisplay</doc>
           <type name="GLDisplay" c:type="GstGLDisplay*"/>
         </parameter>
@@ -9516,7 +9516,7 @@ you are writing to OpenGL. Conversely, combining #GST_MAP_GL with
       </return-value>
     </function>
     <function name="gl_base_memory_alloc" c:identifier="gst_gl_base_memory_alloc" moved-to="GLBaseMemory.alloc" version="1.8">
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">a new #GstGLBaseMemory from @allocator with the requested @params.</doc>
         <type name="GLBaseMemory" c:type="GstGLBaseMemory*"/>
       </return-value>
@@ -10174,7 +10174,7 @@ NDC coordinates in @matrix.</doc>
       </parameters>
     </function>
     <function name="gl_texture_target_to_buffer_pool_option" c:identifier="gst_gl_texture_target_to_buffer_pool_option" moved-to="GLTextureTarget.to_buffer_pool_option">
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">a string representing the @GstBufferPoolOption specified by @target</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>
@@ -10199,7 +10199,7 @@ NDC coordinates in @matrix.</doc>
       </parameters>
     </function>
     <function name="gl_texture_target_to_string" c:identifier="gst_gl_texture_target_to_string" moved-to="GLTextureTarget.to_string">
-      <return-value transfer-ownership="none">
+      <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve">the stringified version of @target or %NULL</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>
@@ -10371,7 +10371,7 @@ or a valid GLSL version and/or profile.</doc>
       </parameters>
     </function>
     <function name="glsl_version_profile_to_string" c:identifier="gst_glsl_version_profile_to_string" moved-to="GLSLVersion.profile_to_string">
-      <return-value transfer-ownership="full">
+      <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve">the combined GLSL `#version` string for @version and @profile</doc>
         <type name="utf8" c:type="gchar*"/>
       </return-value>
