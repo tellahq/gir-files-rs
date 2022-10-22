@@ -30534,7 +30534,7 @@ expose "stable" caps to the reader.</doc>
             <doc xml:space="preserve">the pad template to set documented capabilities on</doc>
             <type name="PadTemplate" c:type="GstPadTemplate*"/>
           </instance-parameter>
-          <parameter name="caps" transfer-ownership="full">
+          <parameter name="caps" transfer-ownership="none">
             <doc xml:space="preserve">the documented capabilities</doc>
             <type name="Caps" c:type="GstCaps*"/>
           </parameter>

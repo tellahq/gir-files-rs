@@ -150,7 +150,7 @@ clock.</doc>
           <type name="Gst.Clock" c:type="GstClock*"/>
         </return-value>
         <parameters>
-          <parameter name="name" transfer-ownership="none">
+          <parameter name="name" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">a name for the clock</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
@@ -433,7 +433,7 @@ clock.</doc>
           <type name="Gst.Clock" c:type="GstClock*"/>
         </return-value>
         <parameters>
-          <parameter name="name" transfer-ownership="none">
+          <parameter name="name" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">a name for the clock</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
