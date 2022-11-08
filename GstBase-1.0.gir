@@ -1521,7 +1521,7 @@ sure upstream has had a fair chance to start up.</doc>
       <method name="set_latency" c:identifier="gst_aggregator_set_latency" glib:set-property="latency">
         <doc xml:space="preserve">Lets #GstAggregator sub-classes tell the baseclass what their internal
 latency is. Will also post a LATENCY message on the bus so the pipeline
-can reconfigure its global latency.</doc>
+can reconfigure its global latency if the values changed.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -3144,8 +3144,12 @@ timestamp inferring.</doc>
       </method>
       <method name="set_latency" c:identifier="gst_base_parse_set_latency">
         <doc xml:space="preserve">Sets the minimum and maximum (which may likely be equal) latency introduced
-by the parsing process.  If there is such a latency, which depends on the
-particular parsing of the format, it typically corresponds to 1 frame duration.</doc>
+by the parsing process. If there is such a latency, which depends on the
+particular parsing of the format, it typically corresponds to 1 frame duration.
+
+If the provided values changed from previously provided ones, this will
+also post a LATENCY message on the bus so the pipeline can reconfigure its
+global latency.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>

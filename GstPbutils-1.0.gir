@@ -730,7 +730,7 @@ back to a #GstDiscovererInfo.</doc>
 matching #GstDiscovererStreamInfo. The caller should free it with
 gst_discoverer_stream_info_list_free().</doc>
           <type name="GLib.List" c:type="GList*">
-            <type name="DiscovererStreamInfo"/>
+            <type name="DiscovererAudioInfo"/>
           </type>
         </return-value>
         <parameters>
@@ -747,7 +747,7 @@ gst_discoverer_stream_info_list_free().</doc>
 matching #GstDiscovererStreamInfo. The caller should free it with
 gst_discoverer_stream_info_list_free().</doc>
           <type name="GLib.List" c:type="GList*">
-            <type name="DiscovererStreamInfo"/>
+            <type name="DiscovererContainerInfo"/>
           </type>
         </return-value>
         <parameters>
@@ -900,7 +900,7 @@ gst_discoverer_stream_info_list_free().</doc>
 matching #GstDiscovererStreamInfo. The caller should free it with
 gst_discoverer_stream_info_list_free().</doc>
           <type name="GLib.List" c:type="GList*">
-            <type name="DiscovererStreamInfo"/>
+            <type name="DiscovererSubtitleInfo"/>
           </type>
         </return-value>
         <parameters>
@@ -957,7 +957,7 @@ Copy it if you wish to use it after the life-time of @info.</doc>
 matching #GstDiscovererStreamInfo. The caller should free it with
 gst_discoverer_stream_info_list_free().</doc>
           <type name="GLib.List" c:type="GList*">
-            <type name="DiscovererStreamInfo"/>
+            <type name="DiscovererVideoInfo"/>
           </type>
         </return-value>
         <parameters>
@@ -2650,7 +2650,7 @@ in debugging.</doc>
       <doc xml:space="preserve">The major version of GStreamer's gst-plugins-base libraries at compile time.</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="PLUGINS_BASE_VERSION_MICRO" value="1" c:type="GST_PLUGINS_BASE_VERSION_MICRO">
+    <constant name="PLUGINS_BASE_VERSION_MICRO" value="2" c:type="GST_PLUGINS_BASE_VERSION_MICRO">
       <doc xml:space="preserve">The micro version of GStreamer's gst-plugins-base libraries at compile time.</doc>
       <type name="gint" c:type="gint"/>
     </constant>

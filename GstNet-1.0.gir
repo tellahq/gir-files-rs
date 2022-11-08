@@ -262,7 +262,9 @@ MT safe. Caller owns return value (gst_net_time_packet_free to free).</doc>
         <parameters>
           <parameter name="buffer" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">a buffer from which to construct the packet, or NULL</doc>
-            <type name="guint8" c:type="const guint8*"/>
+            <array zero-terminated="0" c:type="const guint8*" fixed-size="16">
+              <type name="guint8" c:type="guint8"/>
+            </array>
           </parameter>
         </parameters>
       </constructor>
@@ -323,7 +325,9 @@ network.
 MT safe. Caller owns return value (g_free to free).</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">A newly allocated sequence of #GST_NET_TIME_PACKET_SIZE bytes.</doc>
-          <type name="guint8" c:type="guint8*"/>
+          <array zero-terminated="0" c:type="guint8*" fixed-size="16">
+            <type name="guint8" c:type="guint8"/>
+          </array>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">

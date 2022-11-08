@@ -7812,6 +7812,30 @@ together with gst_object_get_name(). If the interface is to be used with
           </parameter>
         </parameters>
       </method>
+      <method name="get_child_by_name_recurse" c:identifier="gst_child_proxy_get_child_by_name_recurse" version="1.22">
+        <doc xml:space="preserve">Looks up a child element by the given full-path name.
+
+Similar to gst_child_proxy_get_child_by_name(), this method
+searches and returns a child given a name. The difference is that
+this method allows a hierarchical path in the form of
+child1::child2::child3. In the later example this method would
+return a reference to child3, if found. The name should be made of
+element names only and should not contain any property names.</doc>
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">the child object or %NULL if
+    not found.</doc>
+          <type name="GObject.Object" c:type="GObject*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="child_proxy" transfer-ownership="none">
+            <type name="ChildProxy" c:type="GstChildProxy*"/>
+          </instance-parameter>
+          <parameter name="name" transfer-ownership="none">
+            <doc xml:space="preserve">the full-path child's name</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="get_children_count" c:identifier="gst_child_proxy_get_children_count">
         <doc xml:space="preserve">Gets the number of child objects this parent contains.</doc>
         <return-value transfer-ownership="none">
@@ -46405,7 +46429,7 @@ determine a order for the two provided values.</doc>
       <doc xml:space="preserve">The major version of GStreamer at compile time:</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="VERSION_MICRO" value="1" c:type="GST_VERSION_MICRO">
+    <constant name="VERSION_MICRO" value="2" c:type="GST_VERSION_MICRO">
       <doc xml:space="preserve">The micro version of GStreamer at compile time:</doc>
       <type name="gint" c:type="gint"/>
     </constant>

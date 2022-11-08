@@ -3869,7 +3869,9 @@ MT safe.</doc>
         </parameters>
       </method>
       <method name="set_latency" c:identifier="gst_audio_decoder_set_latency">
-        <doc xml:space="preserve">Sets decoder latency.</doc>
+        <doc xml:space="preserve">Sets decoder latency. If the provided values changed from
+previously provided ones, this will also post a LATENCY message on the bus
+so the pipeline can reconfigure its global latency.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -5211,7 +5213,9 @@ MT safe.</doc>
         </parameters>
       </method>
       <method name="set_latency" c:identifier="gst_audio_encoder_set_latency">
-        <doc xml:space="preserve">Sets encoder latency.</doc>
+        <doc xml:space="preserve">Sets encoder latency. If the provided values changed from
+previously provided ones, this will also post a LATENCY message on the bus
+so the pipeline can reconfigure its global latency.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>

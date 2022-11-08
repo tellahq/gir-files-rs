@@ -7030,9 +7030,10 @@ the interlacing mode.</doc>
         </parameters>
       </method>
       <method name="set_latency" c:identifier="gst_video_decoder_set_latency">
-        <doc xml:space="preserve">Lets #GstVideoDecoder sub-classes tell the baseclass what the decoder
-latency is. Will also post a LATENCY message on the bus so the pipeline
-can reconfigure its global latency.</doc>
+        <doc xml:space="preserve">Lets #GstVideoDecoder sub-classes tell the baseclass what the decoder latency
+is. If the provided values changed from previously provided ones, this will
+also post a LATENCY message on the bus so the pipeline can reconfigure its
+global latency.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -8382,7 +8383,9 @@ elements (e.g. muxers).</doc>
         </parameters>
       </method>
       <method name="set_latency" c:identifier="gst_video_encoder_set_latency">
-        <doc xml:space="preserve">Informs baseclass of encoding latency.</doc>
+        <doc xml:space="preserve">Informs baseclass of encoding latency. If the provided values changed from
+previously provided ones, this will also post a LATENCY message on the bus
+so the pipeline can reconfigure its global latency.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>

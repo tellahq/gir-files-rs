@@ -4220,11 +4220,11 @@ response message.</doc>
           <doc xml:space="preserve">the status code</doc>
           <type name="RTSPStatusCode" c:type="GstRTSPStatusCode"/>
         </parameter>
-        <parameter name="reason" transfer-ownership="none">
+        <parameter name="reason" transfer-ownership="none" nullable="1" allow-none="1">
           <doc xml:space="preserve">the status reason or %NULL</doc>
           <type name="utf8" c:type="const gchar*"/>
         </parameter>
-        <parameter name="request" transfer-ownership="none">
+        <parameter name="request" transfer-ownership="none" nullable="1" allow-none="1">
           <doc xml:space="preserve">the request that triggered the response or %NULL</doc>
           <type name="RTSPMessage" c:type="const GstRTSPMessage*"/>
         </parameter>
@@ -4304,11 +4304,11 @@ response message.</doc>
           <doc xml:space="preserve">the status code</doc>
           <type name="RTSPStatusCode" c:type="GstRTSPStatusCode"/>
         </parameter>
-        <parameter name="reason" transfer-ownership="none">
+        <parameter name="reason" transfer-ownership="none" nullable="1" allow-none="1">
           <doc xml:space="preserve">the status reason or %NULL</doc>
           <type name="utf8" c:type="const gchar*"/>
         </parameter>
-        <parameter name="request" transfer-ownership="none">
+        <parameter name="request" transfer-ownership="none" nullable="1" allow-none="1">
           <doc xml:space="preserve">the request that triggered the response or %NULL</doc>
           <type name="RTSPMessage" c:type="const GstRTSPMessage*"/>
         </parameter>
