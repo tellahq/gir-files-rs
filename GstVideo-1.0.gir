@@ -2926,6 +2926,19 @@ beginning of the next row is aligned in a particular way).</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="VIDEO_FORMAT_INFO_TILE_HEIGHT" c:identifier="GST_VIDEO_FORMAT_INFO_TILE_HEIGHT" version="1.22" introspectable="0">
+      <doc xml:space="preserve">See #GstVideoTileInfo.height.
+
+Returns the tile height.</doc>
+      <parameters>
+        <parameter name="info">
+          <doc xml:space="preserve">a #GstVideoFormatInfo</doc>
+        </parameter>
+        <parameter name="plane">
+          <doc xml:space="preserve">the plane index</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="VIDEO_FORMAT_INFO_TILE_HS" c:identifier="GST_VIDEO_FORMAT_INFO_TILE_HS" introspectable="0">
       <parameters>
         <parameter name="info">
@@ -2935,6 +2948,46 @@ beginning of the next row is aligned in a particular way).</doc>
     <function-macro name="VIDEO_FORMAT_INFO_TILE_MODE" c:identifier="GST_VIDEO_FORMAT_INFO_TILE_MODE" introspectable="0">
       <parameters>
         <parameter name="info">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="VIDEO_FORMAT_INFO_TILE_SIZE" c:identifier="GST_VIDEO_FORMAT_INFO_TILE_SIZE" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Provides the size in bytes of a tile in the specified @plane. This replaces
+the width and height shift, which was limited to power of two dimensions.</doc>
+      <parameters>
+        <parameter name="info">
+          <doc xml:space="preserve">a #GstVideoFormatInfo</doc>
+        </parameter>
+        <parameter name="plane">
+          <doc xml:space="preserve">the plane index</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="VIDEO_FORMAT_INFO_TILE_STRIDE" c:identifier="GST_VIDEO_FORMAT_INFO_TILE_STRIDE" version="1.22" introspectable="0">
+      <doc xml:space="preserve">See #GstVideoTileInfo.stride.
+
+Returns the stride of one tile, regardless of the internal details of the
+tile (could be a complex system with subtile) the tiles size should alway
+match the tile width multiplied by the tile stride.</doc>
+      <parameters>
+        <parameter name="info">
+          <doc xml:space="preserve">a #GstVideoFormatInfo</doc>
+        </parameter>
+        <parameter name="plane">
+          <doc xml:space="preserve">the plane index</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="VIDEO_FORMAT_INFO_TILE_WIDTH" c:identifier="GST_VIDEO_FORMAT_INFO_TILE_WIDTH" version="1.22" introspectable="0">
+      <doc xml:space="preserve">See #GstVideoTileInfo.width.
+
+Return the width of one tile in pixels, zero if its not an integer.</doc>
+      <parameters>
+        <parameter name="info">
+          <doc xml:space="preserve">a #GstVideoFormatInfo</doc>
+        </parameter>
+        <parameter name="plane">
+          <doc xml:space="preserve">the plane index</doc>
         </parameter>
       </parameters>
     </function-macro>
@@ -3961,6 +4014,13 @@ Subclasses can add their own operation to perform using the returned
           </instance-parameter>
         </parameters>
       </method>
+      <property name="force-live" version="1.22" writable="1" construct-only="1" transfer-ownership="none">
+        <doc xml:space="preserve">Causes the element to aggregate on a timeout even when no live source is
+connected to its sinks. See #GstAggregator:min-upstream-latency for a
+companion property: in the vast majority of cases where you plan to plug in
+live sources with a non-zero latency, you should set it to a non-zero value.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
       <field name="aggregator">
         <type name="GstBase.Aggregator" c:type="GstAggregator"/>
       </field>
@@ -9647,16 +9707,19 @@ the #GstVideoFormat if there is one, or NULL otherwise.</doc>
         <type name="VideoTileMode" c:type="GstVideoTileMode"/>
       </field>
       <field name="tile_ws" writable="1">
-        <doc xml:space="preserve">The width of a tile, in bytes, represented as a shift</doc>
+        <doc xml:space="preserve">The width of a tile, in bytes, represented as a shift. DEPRECATED,
+use tile_info[] array instead.</doc>
         <type name="guint" c:type="guint"/>
       </field>
       <field name="tile_hs" writable="1">
-        <doc xml:space="preserve">The height of a tile, in bytes, represented as a shift</doc>
+        <doc xml:space="preserve">The height of a tile, in bytes, represented as a shift. DEPREACTED,
+use tile_info[] array instead.</doc>
         <type name="guint" c:type="guint"/>
       </field>
-      <field name="_gst_reserved" readable="0" private="1">
+      <field name="tile_info" version="1.22" writable="1">
+        <doc xml:space="preserve">Information about the tiles for each of the planes.</doc>
         <array zero-terminated="0" fixed-size="4">
-          <type name="gpointer" c:type="gpointer"/>
+          <type name="VideoTileInfo" c:type="GstVideoTileInfo"/>
         </array>
       </field>
       <method name="component" c:identifier="gst_video_format_info_component" version="1.18">
@@ -9700,34 +9763,6 @@ useful to support legacy API were only one stride is supported.</doc>
           <parameter name="stride" transfer-ownership="none">
             <doc xml:space="preserve">The fist plane stride</doc>
             <type name="gint" c:type="gint"/>
-          </parameter>
-        </parameters>
-      </method>
-      <method name="get_tile_sizes" c:identifier="gst_video_format_info_get_tile_sizes" version="1.22">
-        <doc xml:space="preserve">This function will read the width and height tile dimension shifts from
-@info and scale it according to the tiling type and @plane. The results
-will written into @out_hs and @out_ws. It also computes the size of a tile
-in bytes.</doc>
-        <return-value transfer-ownership="none">
-          <doc xml:space="preserve">The size of a tile in bytes.</doc>
-          <type name="guint" c:type="guint"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="finfo" transfer-ownership="none">
-            <doc xml:space="preserve">#GstVideoFormatInfo</doc>
-            <type name="VideoFormatInfo" c:type="const GstVideoFormatInfo*"/>
-          </instance-parameter>
-          <parameter name="plane" transfer-ownership="none">
-            <doc xml:space="preserve">The plane to read the tile sizes for.</doc>
-            <type name="guint" c:type="guint"/>
-          </parameter>
-          <parameter name="out_ws" transfer-ownership="none" nullable="1" allow-none="1">
-            <doc xml:space="preserve">Set to the scaled tile width shift</doc>
-            <type name="guint" c:type="guint*"/>
-          </parameter>
-          <parameter name="out_hs" transfer-ownership="none" nullable="1" allow-none="1">
-            <doc xml:space="preserve">Set to the scaled tile height shift</doc>
-            <type name="guint" c:type="guint*"/>
           </parameter>
         </parameters>
       </method>
@@ -13517,6 +13552,35 @@ frames will only be rendered in PLAYING state.</doc>
       </field>
     </record>
     <record name="VideoSinkPrivate" c:type="GstVideoSinkPrivate" disguised="1"/>
+    <record name="VideoTileInfo" c:type="GstVideoTileInfo" version="1.22">
+      <doc xml:space="preserve">Description of a tile. This structure allow to describe arbitrary tile
+dimensions and sizes.</doc>
+      <field name="width" version="1.22" writable="1">
+        <doc xml:space="preserve">The width in pixels of a tile. This value can be zero if the number of
+pixels per line is not an integer value.</doc>
+        <type name="guint" c:type="guint"/>
+      </field>
+      <field name="height" writable="1">
+        <type name="guint" c:type="guint"/>
+      </field>
+      <field name="stride" version="1.22" writable="1">
+        <doc xml:space="preserve">The stride (in bytes) of a tile line. Regardless if the tile have sub-tiles
+this stride multiplied by the height should be equal to
+#GstVideoTileInfo.size. This value is used to translate into linear stride
+when older APIs are being used to expose this format.</doc>
+        <type name="guint" c:type="guint"/>
+      </field>
+      <field name="size" version="1.22" writable="1">
+        <doc xml:space="preserve">The size in bytes of a tile. This value must be divisible by
+#GstVideoTileInfo.stride.</doc>
+        <type name="guint" c:type="guint"/>
+      </field>
+      <field name="padding" readable="0" private="1">
+        <array zero-terminated="0" fixed-size="4">
+          <type name="guint32" c:type="guint32"/>
+        </array>
+      </field>
+    </record>
     <enumeration name="VideoTileMode" glib:type-name="GstVideoTileMode" glib:get-type="gst_video_tile_mode_get_type" c:type="GstVideoTileMode">
       <doc xml:space="preserve">Enum value describing the available tiling modes.</doc>
       <member name="unknown" value="0" c:identifier="GST_VIDEO_TILE_MODE_UNKNOWN" glib:nick="unknown" glib:name="GST_VIDEO_TILE_MODE_UNKNOWN">

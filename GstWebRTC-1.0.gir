@@ -695,6 +695,22 @@ for more information.</doc>
           </parameter>
         </parameters>
       </virtual-method>
+      <virtual-method name="get_http_proxy" invoker="get_http_proxy" version="1.22">
+        <doc xml:space="preserve">Get HTTP Proxy to be used when connecting to TURN server.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">URI of the HTTP proxy of the form
+  http://[username:password@]hostname[:port]
+
+Get HTTP Proxy to be used when connecting to TURN server.</doc>
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+        </parameters>
+      </virtual-method>
       <virtual-method name="get_is_controller" invoker="get_is_controller" version="1.22">
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">TRUE if set as controller, FALSE otherwise</doc>
@@ -793,6 +809,23 @@ for more information.</doc>
           <parameter name="force_relay" transfer-ownership="none">
             <doc xml:space="preserve">TRUE to enable force relay</doc>
             <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="set_http_proxy" invoker="set_http_proxy" version="1.22">
+        <doc xml:space="preserve">Set HTTP Proxy to be used when connecting to TURN server.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="uri" transfer-ownership="none">
+            <doc xml:space="preserve">URI of the HTTP proxy of the form
+  http://[username:password@]hostname[:port]</doc>
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
       </virtual-method>
@@ -1018,6 +1051,21 @@ for more information.</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="get_http_proxy" c:identifier="gst_webrtc_ice_get_http_proxy" version="1.22">
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">URI of the HTTP proxy of the form
+  http://[username:password@]hostname[:port]
+
+Get HTTP Proxy to be used when connecting to TURN server.</doc>
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="get_is_controller" c:identifier="gst_webrtc_ice_get_is_controller" version="1.22">
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">TRUE if set as controller, FALSE otherwise</doc>
@@ -1126,6 +1174,23 @@ for more information.</doc>
           <parameter name="force_relay" transfer-ownership="none">
             <doc xml:space="preserve">TRUE to enable force relay</doc>
             <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_http_proxy" c:identifier="gst_webrtc_ice_set_http_proxy" version="1.22">
+        <doc xml:space="preserve">Set HTTP Proxy to be used when connecting to TURN server.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="ice" transfer-ownership="none">
+            <doc xml:space="preserve">The #GstWebRTCICE</doc>
+            <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+          </instance-parameter>
+          <parameter name="uri" transfer-ownership="none">
+            <doc xml:space="preserve">URI of the HTTP proxy of the form
+  http://[username:password@]hostname[:port]</doc>
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
       </method>
@@ -1618,6 +1683,41 @@ stops automatic ICE gathering.</doc>
         <callback name="get_turn_server">
           <return-value transfer-ownership="full" nullable="1">
             <doc xml:space="preserve">URI of the TURN sever</doc>
+            <type name="utf8" c:type="gchar*"/>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICE</doc>
+              <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="set_http_proxy">
+        <callback name="set_http_proxy">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="ice" transfer-ownership="none">
+              <doc xml:space="preserve">The #GstWebRTCICE</doc>
+              <type name="WebRTCICE" c:type="GstWebRTCICE*"/>
+            </parameter>
+            <parameter name="uri" transfer-ownership="none">
+              <doc xml:space="preserve">URI of the HTTP proxy of the form
+  http://[username:password@]hostname[:port]</doc>
+              <type name="utf8" c:type="const gchar*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="get_http_proxy">
+        <callback name="get_http_proxy">
+          <return-value transfer-ownership="full">
+            <doc xml:space="preserve">URI of the HTTP proxy of the form
+  http://[username:password@]hostname[:port]
+
+Get HTTP Proxy to be used when connecting to TURN server.</doc>
             <type name="utf8" c:type="gchar*"/>
           </return-value>
           <parameters>
@@ -2345,6 +2445,7 @@ answer.</doc>
       </member>
     </enumeration>
     <enumeration name="WebRTCStatsType" glib:type-name="GstWebRTCStatsType" glib:get-type="gst_webrtc_stats_type_get_type" c:type="GstWebRTCStatsType">
+      <doc xml:space="preserve">See &lt;https://w3c.github.io/webrtc-stats/#dom-rtcstatstype&gt;</doc>
       <member name="codec" value="1" c:identifier="GST_WEBRTC_STATS_CODEC" glib:nick="codec" glib:name="GST_WEBRTC_STATS_CODEC">
         <doc xml:space="preserve">codec</doc>
       </member>
@@ -2364,7 +2465,7 @@ answer.</doc>
         <doc xml:space="preserve">csrc</doc>
       </member>
       <member name="peer_connection" value="7" c:identifier="GST_WEBRTC_STATS_PEER_CONNECTION" glib:nick="peer-connection" glib:name="GST_WEBRTC_STATS_PEER_CONNECTION">
-        <doc xml:space="preserve">peer-connectiion</doc>
+        <doc xml:space="preserve">peer-connection</doc>
       </member>
       <member name="data_channel" value="8" c:identifier="GST_WEBRTC_STATS_DATA_CHANNEL" glib:nick="data-channel" glib:name="GST_WEBRTC_STATS_DATA_CHANNEL">
         <doc xml:space="preserve">data-channel</doc>

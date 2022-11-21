@@ -7828,6 +7828,7 @@ element names only and should not contain any property names.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="child_proxy" transfer-ownership="none">
+            <doc xml:space="preserve">the parent object to get the child from</doc>
             <type name="ChildProxy" c:type="GstChildProxy*"/>
           </instance-parameter>
           <parameter name="name" transfer-ownership="none">

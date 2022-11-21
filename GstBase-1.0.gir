@@ -1397,6 +1397,19 @@ by @trans; free it after use it</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="get_force_live" c:identifier="gst_aggregator_get_force_live" version="1.22">
+        <doc xml:space="preserve">Subclasses may use the return value to inform whether they should return
+%GST_FLOW_EOS from their aggregate implementation.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">whether live status was forced on @self.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="Aggregator" c:type="GstAggregator*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
       <method name="get_ignore_inactive_pads" c:identifier="gst_aggregator_get_ignore_inactive_pads" version="1.20">
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">whether inactive pads will not be waited on</doc>
@@ -1495,6 +1508,21 @@ function.</doc>
           <parameter name="info" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">a #GstStructure containing additional information</doc>
             <type name="Gst.Structure" c:type="GstStructure*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_force_live" c:identifier="gst_aggregator_set_force_live" version="1.22">
+        <doc xml:space="preserve">Subclasses should call this at construction time in order for @self to
+aggregate on a timeout even when no live source is connected.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="Aggregator" c:type="GstAggregator*"/>
+          </instance-parameter>
+          <parameter name="force_live" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
           </parameter>
         </parameters>
       </method>
@@ -12632,6 +12660,83 @@ of size @struct_size, with an initial queue size of @initial_size.</doc>
         </parameters>
       </function>
     </record>
+    <record name="TypeFindData" c:type="GstTypeFindData" disguised="1" version="1.22">
+      <doc xml:space="preserve">The opaque #GstTypeFindData structure.</doc>
+      <method name="free" c:identifier="gst_type_find_data_free" version="1.22" introspectable="0">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="data" transfer-ownership="none">
+            <doc xml:space="preserve">GstTypeFindData * to free</doc>
+            <type name="TypeFindData" c:type="GstTypeFindData*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_caps" c:identifier="gst_type_find_data_get_caps" version="1.22" introspectable="0">
+        <doc xml:space="preserve">Returns #GstCaps associated with #GstTypeFindData</doc>
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">#GstCaps.</doc>
+          <type name="Gst.Caps" c:type="GstCaps*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="data" transfer-ownership="none">
+            <doc xml:space="preserve">GstTypeFindData *</doc>
+            <type name="TypeFindData" c:type="GstTypeFindData*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_probability" c:identifier="gst_type_find_data_get_probability" version="1.22" introspectable="0">
+        <doc xml:space="preserve">Returns #GstTypeFindProbability associated with #GstTypeFindData</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">#GstTypeFindProbability.</doc>
+          <type name="Gst.TypeFindProbability" c:type="GstTypeFindProbability"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="data" transfer-ownership="none">
+            <doc xml:space="preserve">GstTypeFindData *</doc>
+            <type name="TypeFindData" c:type="GstTypeFindData*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_typefind" c:identifier="gst_type_find_data_get_typefind" version="1.22" introspectable="0">
+        <doc xml:space="preserve">Returns #GstTypeFind associated with #GstTypeFindData</doc>
+        <return-value>
+          <doc xml:space="preserve">#GstTypeFind.</doc>
+          <type name="Gst.TypeFind" c:type="GstTypeFind*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="data" transfer-ownership="none">
+            <doc xml:space="preserve">GstTypeFindData *</doc>
+            <type name="TypeFindData" c:type="GstTypeFindData*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <function name="new" c:identifier="gst_type_find_data_new" version="1.22" introspectable="0">
+        <doc xml:space="preserve">Free-function: gst_type_find_data_free</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">the #GstTypeFindData. The caller should free
+         the returned #GstTypeFindData with gst_type_find_data_free().</doc>
+          <type name="TypeFindData" c:type="GstTypeFindData*"/>
+        </return-value>
+        <parameters>
+          <parameter name="obj" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">object doing the typefinding, or %NULL (used for logging)</doc>
+            <type name="Gst.Object" c:type="GstObject*"/>
+          </parameter>
+          <parameter name="data" transfer-ownership="none">
+            <doc xml:space="preserve">a pointer with data to typefind</doc>
+            <array length="2" zero-terminated="0" c:type="const guint8*">
+              <type name="guint8" c:type="guint8"/>
+            </array>
+          </parameter>
+          <parameter name="size" transfer-ownership="none">
+            <doc xml:space="preserve">the size of @data</doc>
+            <type name="gsize" c:type="gsize"/>
+          </parameter>
+        </parameters>
+      </function>
+    </record>
     <callback name="TypeFindHelperGetRangeFunction" c:type="GstTypeFindHelperGetRangeFunction">
       <doc xml:space="preserve">This function will be called by gst_type_find_helper_get_range() when
 typefinding functions request to peek at the data of a stream at certain
@@ -12918,6 +13023,30 @@ of size @struct_size, with an initial queue size of @initial_size.</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="type_find_data_new" c:identifier="gst_type_find_data_new" moved-to="TypeFindData.new" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Free-function: gst_type_find_data_free</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">the #GstTypeFindData. The caller should free
+         the returned #GstTypeFindData with gst_type_find_data_free().</doc>
+        <type name="TypeFindData" c:type="GstTypeFindData*"/>
+      </return-value>
+      <parameters>
+        <parameter name="obj" transfer-ownership="none" nullable="1" allow-none="1">
+          <doc xml:space="preserve">object doing the typefinding, or %NULL (used for logging)</doc>
+          <type name="Gst.Object" c:type="GstObject*"/>
+        </parameter>
+        <parameter name="data" transfer-ownership="none">
+          <doc xml:space="preserve">a pointer with data to typefind</doc>
+          <array length="2" zero-terminated="0" c:type="const guint8*">
+            <type name="guint8" c:type="guint8"/>
+          </array>
+        </parameter>
+        <parameter name="size" transfer-ownership="none">
+          <doc xml:space="preserve">the size of @data</doc>
+          <type name="gsize" c:type="gsize"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="type_find_helper" c:identifier="gst_type_find_helper">
       <doc xml:space="preserve">Tries to find what type of data is flowing from the given source #GstPad.
 
@@ -12965,6 +13094,46 @@ Free-function: gst_caps_unref</doc>
         <parameter name="buf" transfer-ownership="none">
           <doc xml:space="preserve">a #GstBuffer with data to typefind</doc>
           <type name="Gst.Buffer" c:type="GstBuffer*"/>
+        </parameter>
+        <parameter name="prob" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+          <doc xml:space="preserve">location to store the probability of the found
+    caps, or %NULL</doc>
+          <type name="Gst.TypeFindProbability" c:type="GstTypeFindProbability*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="type_find_helper_for_buffer_with_caps" c:identifier="gst_type_find_helper_for_buffer_with_caps" version="1.22">
+      <doc xml:space="preserve">Tries to find if type of media contained in the given #GstBuffer, matches
+@caps specified, assumption being that the buffer represents the beginning
+of the stream or file.
+
+Tries to find what type of data is contained in the given @data, the
+assumption being that the data represents the beginning of the stream or
+file.
+
+Only the typefinder matching the given caps will be called, if found. The
+caps with the highest probability will be returned, or %NULL if the content
+of the @data could not be identified.
+
+Free-function: gst_caps_unref</doc>
+      <return-value transfer-ownership="full" nullable="1">
+        <doc xml:space="preserve">the #GstCaps corresponding to the data,
+    or %NULL if no type could be found. The caller should free the caps
+    returned with gst_caps_unref().</doc>
+        <type name="Gst.Caps" c:type="GstCaps*"/>
+      </return-value>
+      <parameters>
+        <parameter name="obj" transfer-ownership="none" nullable="1" allow-none="1">
+          <doc xml:space="preserve">object doing the typefinding, or %NULL (used for logging)</doc>
+          <type name="Gst.Object" c:type="GstObject*"/>
+        </parameter>
+        <parameter name="buf" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstBuffer with data to typefind</doc>
+          <type name="Gst.Buffer" c:type="GstBuffer*"/>
+        </parameter>
+        <parameter name="caps" transfer-ownership="none">
+          <doc xml:space="preserve">caps of the media</doc>
+          <type name="Gst.Caps" c:type="GstCaps*"/>
         </parameter>
         <parameter name="prob" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
           <doc xml:space="preserve">location to store the probability of the found
@@ -13049,6 +13218,48 @@ Free-function: gst_caps_unref</doc>
         <parameter name="size" transfer-ownership="none">
           <doc xml:space="preserve">the size of @data</doc>
           <type name="gsize" c:type="gsize"/>
+        </parameter>
+        <parameter name="prob" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+          <doc xml:space="preserve">location to store the probability of the found
+    caps, or %NULL</doc>
+          <type name="Gst.TypeFindProbability" c:type="GstTypeFindProbability*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="type_find_helper_for_data_with_caps" c:identifier="gst_type_find_helper_for_data_with_caps" version="1.22">
+      <doc xml:space="preserve">Tries to find if type of media contained in the given @data, matches the
+@caps specified, assumption being that the data represents the beginning
+of the stream or file.
+
+Only the typefinder matching the given caps will be called, if found. The
+caps with the highest probability will be returned, or %NULL if the content
+of the @data could not be identified.
+
+Free-function: gst_caps_unref</doc>
+      <return-value transfer-ownership="full" nullable="1">
+        <doc xml:space="preserve">the #GstCaps corresponding to the data,
+    or %NULL if no type could be found. The caller should free the caps
+    returned with gst_caps_unref().</doc>
+        <type name="Gst.Caps" c:type="GstCaps*"/>
+      </return-value>
+      <parameters>
+        <parameter name="obj" transfer-ownership="none" nullable="1" allow-none="1">
+          <doc xml:space="preserve">object doing the typefinding, or %NULL (used for logging)</doc>
+          <type name="Gst.Object" c:type="GstObject*"/>
+        </parameter>
+        <parameter name="data" transfer-ownership="none">
+          <doc xml:space="preserve">a pointer with data to typefind</doc>
+          <array length="2" zero-terminated="0" c:type="const guint8*">
+            <type name="guint8" c:type="guint8"/>
+          </array>
+        </parameter>
+        <parameter name="size" transfer-ownership="none">
+          <doc xml:space="preserve">the size of @data</doc>
+          <type name="gsize" c:type="gsize"/>
+        </parameter>
+        <parameter name="caps" transfer-ownership="none">
+          <doc xml:space="preserve">caps of the media</doc>
+          <type name="Gst.Caps" c:type="GstCaps*"/>
         </parameter>
         <parameter name="prob" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
           <doc xml:space="preserve">location to store the probability of the found
@@ -13228,6 +13439,32 @@ in many cases.</doc>
           <doc xml:space="preserve">location to store the probability of the found
     caps, or %NULL</doc>
           <type name="Gst.TypeFindProbability" c:type="GstTypeFindProbability*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="type_find_list_factories_for_caps" c:identifier="gst_type_find_list_factories_for_caps" version="1.22">
+      <doc xml:space="preserve">Tries to find the best #GstTypeFindFactory associated with @caps.
+
+The typefinder that can handle @caps will be returned.
+
+Free-function: g_list_free</doc>
+      <return-value transfer-ownership="full" nullable="1">
+        <doc xml:space="preserve">the list of #GstTypeFindFactory
+         corresponding to @caps, or %NULL if no typefinder could be
+         found. Caller should free the returned list with g_list_free()
+         and list elements with gst_object_unref().</doc>
+        <type name="GLib.List" c:type="GList*">
+          <type name="Gst.TypeFindFactory"/>
+        </type>
+      </return-value>
+      <parameters>
+        <parameter name="obj" transfer-ownership="none" nullable="1" allow-none="1">
+          <doc xml:space="preserve">object doing the typefinding, or %NULL (used for logging)</doc>
+          <type name="Gst.Object" c:type="GstObject*"/>
+        </parameter>
+        <parameter name="caps" transfer-ownership="none">
+          <doc xml:space="preserve">caps of the media</doc>
+          <type name="Gst.Caps" c:type="GstCaps*"/>
         </parameter>
       </parameters>
     </function>
