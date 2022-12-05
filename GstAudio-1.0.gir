@@ -407,7 +407,7 @@ return to upstream/caller (indicating either GST_FLOW_ERROR or GST_FLOW_OK).</do
         </parameter>
       </parameters>
     </function-macro>
-    <constant name="AUDIO_DECODER_MAX_ERRORS" value="10" c:type="GST_AUDIO_DECODER_MAX_ERRORS">
+    <constant name="AUDIO_DECODER_MAX_ERRORS" value="-1" c:type="GST_AUDIO_DECODER_MAX_ERRORS">
       <doc xml:space="preserve">Default maximum number of errors tolerated before signaling error.</doc>
       <type name="gint" c:type="gint"/>
     </constant>

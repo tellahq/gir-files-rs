@@ -18943,6 +18943,21 @@ Specific custom events are distinguished by the name of the structure.</doc>
           </parameter>
         </parameters>
       </function>
+      <function name="to_sticky_ordering" c:identifier="gst_event_type_to_sticky_ordering" version="1.22">
+        <doc xml:space="preserve">Converts the #GstEventType to an unsigned integer that
+represents the ordering of sticky events when re-sending them.
+A lower value represents a higher-priority event.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">an unsigned integer</doc>
+          <type name="guint" c:type="guint"/>
+        </return-value>
+        <parameters>
+          <parameter name="type" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstEventType</doc>
+            <type name="EventType" c:type="GstEventType"/>
+          </parameter>
+        </parameters>
+      </function>
     </enumeration>
     <bitfield name="EventTypeFlags" glib:type-name="GstEventTypeFlags" glib:get-type="gst_event_type_flags_get_type" c:type="GstEventTypeFlags">
       <doc xml:space="preserve">#GstEventTypeFlags indicate the aspects of the different #GstEventType
@@ -46430,7 +46445,7 @@ determine a order for the two provided values.</doc>
       <doc xml:space="preserve">The major version of GStreamer at compile time:</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="VERSION_MICRO" value="2" c:type="GST_VERSION_MICRO">
+    <constant name="VERSION_MICRO" value="3" c:type="GST_VERSION_MICRO">
       <doc xml:space="preserve">The micro version of GStreamer at compile time:</doc>
       <type name="gint" c:type="gint"/>
     </constant>
@@ -48325,6 +48340,21 @@ Either @new_event or the #GstEvent pointed to by @old_event may be %NULL.</doc>
       <parameters>
         <parameter name="type" transfer-ownership="none">
           <doc xml:space="preserve">the event type</doc>
+          <type name="EventType" c:type="GstEventType"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="event_type_to_sticky_ordering" c:identifier="gst_event_type_to_sticky_ordering" moved-to="EventType.to_sticky_ordering" version="1.22">
+      <doc xml:space="preserve">Converts the #GstEventType to an unsigned integer that
+represents the ordering of sticky events when re-sending them.
+A lower value represents a higher-priority event.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">an unsigned integer</doc>
+        <type name="guint" c:type="guint"/>
+      </return-value>
+      <parameters>
+        <parameter name="type" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstEventType</doc>
           <type name="EventType" c:type="GstEventType"/>
         </parameter>
       </parameters>

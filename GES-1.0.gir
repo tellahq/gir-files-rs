@@ -8367,6 +8367,10 @@ still overlap at the same edges after the edit, then the same
 transition object will be kept, but with its timing and layer adjusted
 accordingly.
 
+NOTE: if you know what you are doing and want to be in full control of the
+timeline layout, you can disable the edit APIs with
+#ges_timeline_disable_edit_apis.
+
 ## Saving
 
 To save/load a timeline, you can use the ges_timeline_load_from_uri()
@@ -8616,11 +8620,38 @@ needed to be committed.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="disable_edit_apis" c:identifier="ges_timeline_disable_edit_apis" version="1.22">
+        <doc xml:space="preserve">WARNING: When using that mode, GES won't guarantee the coherence of the
+timeline. You need to ensure that the rules described in the [Overlaps and
+auto transitions](#overlaps-and-autotransitions) section are respected any time
+the timeline is [commited](ges_timeline_commit) (otherwise playback will most
+probably fail in different ways).
+
+When disabling editing APIs, GES won't be able to enforce the rules that
+makes the timeline overall state to be valid but some feature won't be
+usable:
+  * #GESTimeline:snapping-distance
+  * #GESTimeline:auto-transition</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <doc xml:space="preserve">A #GESTimeline</doc>
+            <type name="Timeline" c:type="GESTimeline*"/>
+          </instance-parameter>
+          <parameter name="disable_edit_apis" transfer-ownership="none">
+            <doc xml:space="preserve">%TRUE to disable all the edit APIs so the user is in full
+control of ensuring timeline state validity %FALSE otherwise.</doc>
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="freeze_commit" c:identifier="ges_timeline_freeze_commit" version="1.20">
         <doc xml:space="preserve">Freezes the timeline from being committed. This is usually needed while the
 timeline is being rendered to ensure that not change to the timeline are
 taken into account during that moment. Once the rendering is done, you
-should call #ges_timeline_thaw_commit so that comiting becomes possible
+should call #ges_timeline_thaw_commit so that committing becomes possible
 again and any call to `commit()` that happened during the rendering is
 actually taken into account.</doc>
         <return-value transfer-ownership="none">
@@ -8655,6 +8686,18 @@ actually taken into account.</doc>
         <parameters>
           <instance-parameter name="timeline" transfer-ownership="none">
             <doc xml:space="preserve">The #GESTimeline</doc>
+            <type name="Timeline" c:type="GESTimeline*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_edit_apis_disabled" c:identifier="ges_timeline_get_edit_apis_disabled" version="1.22">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if edit APIs are disabled, %FALSE otherwise.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <doc xml:space="preserve">A #GESTimeline</doc>
             <type name="Timeline" c:type="GESTimeline*"/>
           </instance-parameter>
         </parameters>
@@ -14370,7 +14413,7 @@ contains one frame)</doc>
     <constant name="VERSION_MAJOR" value="1" c:type="GES_VERSION_MAJOR">
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="VERSION_MICRO" value="2" c:type="GES_VERSION_MICRO">
+    <constant name="VERSION_MICRO" value="3" c:type="GES_VERSION_MICRO">
       <type name="gint" c:type="gint"/>
     </constant>
     <constant name="VERSION_MINOR" value="21" c:type="GES_VERSION_MINOR">
