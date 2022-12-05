@@ -5749,6 +5749,29 @@ character, a newline character will be added automatically.</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="CAT_LEVEL_LOG_ID" c:identifier="GST_CAT_LEVEL_LOG_ID" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Outputs a debugging message. This is the most general macro for outputting
+debugging messages. You will probably want to use one of the ones described
+below.
+
+There is no need to finish the end of the debug message with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="cat">
+          <doc xml:space="preserve">category to use</doc>
+        </parameter>
+        <parameter name="level">
+          <doc xml:space="preserve">the severity of the message</doc>
+        </parameter>
+        <parameter name="id">
+          <doc xml:space="preserve">the identifier of the object this message
+    relates to, or %NULL if none</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">A printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="CAT_LOG" c:identifier="GST_CAT_LOG" introspectable="0">
       <doc xml:space="preserve">Output an logging message in the given category.
 
@@ -5788,6 +5811,29 @@ character, a newline character will be added automatically.</doc>
       <parameters>
         <parameter name="cat">
           <doc xml:space="preserve">category to use</doc>
+        </parameter>
+        <parameter name="msg">
+          <doc xml:space="preserve">message string to log with the data</doc>
+        </parameter>
+        <parameter name="data">
+          <doc xml:space="preserve">pointer to the data to output</doc>
+        </parameter>
+        <parameter name="length">
+          <doc xml:space="preserve">length of the data to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="CAT_MEMDUMP_ID" c:identifier="GST_CAT_MEMDUMP_ID" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Output a hexdump of @data relating to the given @id in the given category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="cat">
+          <doc xml:space="preserve">category to use</doc>
+        </parameter>
+        <parameter name="id">
+          <doc xml:space="preserve">An identifier of the message provider</doc>
         </parameter>
         <parameter name="msg">
           <doc xml:space="preserve">message string to log with the data</doc>
@@ -10476,6 +10522,20 @@ character, a newline character will be added automatically.</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="DEBUG_OBJECT_ID" c:identifier="GST_DEBUG_OBJECT_ID" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Output a debugging message for the given identifier in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="id">
+          <doc xml:space="preserve">An identifier of the message provider</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="DEBUG_PAD_NAME" c:identifier="GST_DEBUG_PAD_NAME" introspectable="0">
       <doc xml:space="preserve">Evaluates to 2 strings, that describe the pad. Often used in debugging
 statements.</doc>
@@ -11554,6 +11614,20 @@ message is, the greater the probability that the debugging system outputs it.</d
 in debug handlers to extract the message.</doc>
         <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the string representation of a #GstDebugMessage.</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="message" transfer-ownership="none">
+            <doc xml:space="preserve">a debug message</doc>
+            <type name="DebugMessage" c:type="GstDebugMessage*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_id" c:identifier="gst_debug_message_get_id" version="1.22">
+        <doc xml:space="preserve">Get the id of the object that emitted this message. This function is used in
+debug handlers. Can be empty.</doc>
+        <return-value transfer-ownership="none" nullable="1">
+          <doc xml:space="preserve">The emitter of a #GstDebugMessage.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
         <parameters>
@@ -13459,6 +13533,20 @@ character, a newline character will be added automatically.</doc>
       <parameters>
         <parameter name="obj">
           <doc xml:space="preserve">the #GObject the message belongs to</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="ERROR_OBJECT_ID" c:identifier="GST_ERROR_OBJECT_ID" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Output an error message for the given identifier in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="id">
+          <doc xml:space="preserve">An identifier of the message provider</doc>
         </parameter>
         <parameter name="...">
           <doc xml:space="preserve">printf-style message to output</doc>
@@ -19006,6 +19094,20 @@ character, a newline character will be added automatically.</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="FIXME_OBJECT_ID" c:identifier="GST_FIXME_OBJECT_ID" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Output a fixme message for the given identifier in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="id">
+          <doc xml:space="preserve">An identifier of the message provider</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <constant name="FLAG_SET_MASK_EXACT" value="4294967295" c:type="GST_FLAG_SET_MASK_EXACT" version="1.6">
       <doc xml:space="preserve">A mask value with all bits set, for use as a
 GstFlagSet mask where all flag bits must match
@@ -19528,6 +19630,21 @@ character, a newline character will be added automatically.</doc>
       <parameters>
         <parameter name="obj">
           <doc xml:space="preserve">the #GObject the message belongs to</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="INFO_OBJECT_ID" c:identifier="GST_INFO_OBJECT_ID" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Output an informational message for the given identifier the default
+category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="id">
+          <doc xml:space="preserve">An identifier of the message provider</doc>
         </parameter>
         <parameter name="...">
           <doc xml:space="preserve">printf-style message to output</doc>
@@ -20737,6 +20854,20 @@ character, a newline character will be added automatically.</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="LOG_OBJECT_ID" c:identifier="GST_LOG_OBJECT_ID" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Output a logging message for the given identifier in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="id">
+          <doc xml:space="preserve">An identifier of the message provider</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <enumeration name="LibraryError" glib:type-name="GstLibraryError" glib:get-type="gst_library_error_get_type" c:type="GstLibraryError" glib:error-domain="gst-library-error-quark">
       <doc xml:space="preserve">Library errors are for errors from the library being used by elements
 (initializing, finalizing, settings, ...)</doc>
@@ -20859,6 +20990,26 @@ guint32 fourcc = GST_MAKE_FOURCC ('M', 'J', 'P', 'G');
 There is no need to finish the end of the message string with a newline
 character, a newline character will be added automatically.</doc>
       <parameters>
+        <parameter name="msg">
+          <doc xml:space="preserve">message string to log with the data</doc>
+        </parameter>
+        <parameter name="data">
+          <doc xml:space="preserve">pointer to the data to output</doc>
+        </parameter>
+        <parameter name="length">
+          <doc xml:space="preserve">length of the data to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="MEMDUMP_ID" c:identifier="GST_MEMDUMP_ID" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Output a logging message belonging to the given object in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="id">
+          <doc xml:space="preserve">An identifier of the message provider</doc>
+        </parameter>
         <parameter name="msg">
           <doc xml:space="preserve">message string to log with the data</doc>
         </parameter>
@@ -41462,6 +41613,20 @@ character, a newline character will be added automatically.</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="TRACE_OBJECT_ID" c:identifier="GST_TRACE_OBJECT_ID" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Output a tracing message for the given identifier  in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="id">
+          <doc xml:space="preserve">An identifier of the message provider</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="TYPE_FIND_FACTORY" c:identifier="GST_TYPE_FIND_FACTORY" introspectable="0">
       <parameters>
         <parameter name="obj">
@@ -46827,6 +46992,20 @@ character, a newline character will be added automatically.</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="WARNING_OBJECT_ID" c:identifier="GST_WARNING_OBJECT_ID" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Output a warning message for the given identifier in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="id">
+          <doc xml:space="preserve">An identifier of the message provider</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="WRITE_UINT16_BE" c:identifier="GST_WRITE_UINT16_BE" introspectable="0">
       <doc xml:space="preserve">Store a 16 bit unsigned integer value in big endian format into the memory buffer.</doc>
       <parameters>
@@ -47834,6 +48013,125 @@ would write out.</doc>
         <parameter name="message" transfer-ownership="none">
           <doc xml:space="preserve">the actual message</doc>
           <type name="DebugMessage" c:type="GstDebugMessage*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="debug_log_id" c:identifier="gst_debug_log_id" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Logs the given message using the currently registered debugging handlers.</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="category" transfer-ownership="none">
+          <doc xml:space="preserve">category to log</doc>
+          <type name="DebugCategory" c:type="GstDebugCategory*"/>
+        </parameter>
+        <parameter name="level" transfer-ownership="none">
+          <doc xml:space="preserve">level of the message is in</doc>
+          <type name="DebugLevel" c:type="GstDebugLevel"/>
+        </parameter>
+        <parameter name="file" transfer-ownership="none">
+          <doc xml:space="preserve">the file that emitted the message, usually the __FILE__ identifier</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="function" transfer-ownership="none">
+          <doc xml:space="preserve">the function that emitted the message</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="line" transfer-ownership="none">
+          <doc xml:space="preserve">the line from that the message was emitted, usually __LINE__</doc>
+          <type name="gint" c:type="gint"/>
+        </parameter>
+        <parameter name="id" transfer-ownership="none" nullable="1" allow-none="1">
+          <doc xml:space="preserve">the identifier of the object this message
+   relates to, or %NULL if none.</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="format" transfer-ownership="none">
+          <doc xml:space="preserve">a printf style format string</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="..." transfer-ownership="none">
+          <doc xml:space="preserve">optional arguments for the format</doc>
+          <varargs/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="debug_log_id_literal" c:identifier="gst_debug_log_id_literal" version="1.22">
+      <doc xml:space="preserve">Logs the given message using the currently registered debugging handlers.</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="category" transfer-ownership="none">
+          <doc xml:space="preserve">category to log</doc>
+          <type name="DebugCategory" c:type="GstDebugCategory*"/>
+        </parameter>
+        <parameter name="level" transfer-ownership="none">
+          <doc xml:space="preserve">level of the message is in</doc>
+          <type name="DebugLevel" c:type="GstDebugLevel"/>
+        </parameter>
+        <parameter name="file" transfer-ownership="none">
+          <doc xml:space="preserve">the file that emitted the message, usually the __FILE__ identifier</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="function" transfer-ownership="none">
+          <doc xml:space="preserve">the function that emitted the message</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="line" transfer-ownership="none">
+          <doc xml:space="preserve">the line from that the message was emitted, usually __LINE__</doc>
+          <type name="gint" c:type="gint"/>
+        </parameter>
+        <parameter name="id" transfer-ownership="none" nullable="1" allow-none="1">
+          <doc xml:space="preserve">the identifier of the object this message relates to
+   or %NULL if none</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="message_string" transfer-ownership="none">
+          <doc xml:space="preserve">a message string</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="debug_log_id_valist" c:identifier="gst_debug_log_id_valist" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Logs the given message using the currently registered debugging handlers.</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="category" transfer-ownership="none">
+          <doc xml:space="preserve">category to log</doc>
+          <type name="DebugCategory" c:type="GstDebugCategory*"/>
+        </parameter>
+        <parameter name="level" transfer-ownership="none">
+          <doc xml:space="preserve">level of the message is in</doc>
+          <type name="DebugLevel" c:type="GstDebugLevel"/>
+        </parameter>
+        <parameter name="file" transfer-ownership="none">
+          <doc xml:space="preserve">the file that emitted the message, usually the __FILE__ identifier</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="function" transfer-ownership="none">
+          <doc xml:space="preserve">the function that emitted the message</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="line" transfer-ownership="none">
+          <doc xml:space="preserve">the line from that the message was emitted, usually __LINE__</doc>
+          <type name="gint" c:type="gint"/>
+        </parameter>
+        <parameter name="id" transfer-ownership="none" nullable="1" allow-none="1">
+          <doc xml:space="preserve">the identifier of the object this message
+   relates to or %NULL if none.</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="format" transfer-ownership="none">
+          <doc xml:space="preserve">a printf style format string</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="args" transfer-ownership="none">
+          <doc xml:space="preserve">optional arguments for the format</doc>
+          <type name="va_list" c:type="va_list"/>
         </parameter>
       </parameters>
     </function>
