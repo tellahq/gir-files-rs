@@ -673,6 +673,14 @@ Formats are sorted by decreasing "quality", using these criteria by priority:
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="AUDIO_FORMAT_INFO_IS_VALID_RAW" c:identifier="GST_AUDIO_FORMAT_INFO_IS_VALID_RAW" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Tests that the given #GstAudioFormatInfo represents a valid un-encoded
+format.</doc>
+      <parameters>
+        <parameter name="info">
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="AUDIO_FORMAT_INFO_NAME" c:identifier="GST_AUDIO_FORMAT_INFO_NAME" introspectable="0">
       <parameters>
         <parameter name="info">

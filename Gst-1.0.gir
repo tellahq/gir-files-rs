@@ -2206,8 +2206,8 @@ data to a newly allocated memory if needed (if the type of memory
 requires it), otherwise the underlying data is just referenced.
 Check gst_buffer_copy_deep() if you want to force the data
 to be copied to newly allocated memory.</doc>
-        <return-value transfer-ownership="full">
-          <doc xml:space="preserve">a new copy of @buf.</doc>
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">a new copy of @buf if the copy succeeded, %NULL otherwise.</doc>
           <type name="Buffer" c:type="GstBuffer*"/>
         </return-value>
         <parameters>
@@ -2220,8 +2220,8 @@ to be copied to newly allocated memory.</doc>
       <method name="copy_deep" c:identifier="gst_buffer_copy_deep" version="1.6">
         <doc xml:space="preserve">Creates a copy of the given buffer. This will make a newly allocated
 copy of the data the source buffer contains.</doc>
-        <return-value transfer-ownership="full">
-          <doc xml:space="preserve">a new copy of @buf.</doc>
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">a new copy of @buf if the copy succeeded, %NULL otherwise.</doc>
           <type name="Buffer" c:type="GstBuffer*"/>
         </return-value>
         <parameters>
@@ -10507,6 +10507,20 @@ freed by the caller.</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="DEBUG_ID" c:identifier="GST_DEBUG_ID" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Output a debugging message for the given identifier in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="id">
+          <doc xml:space="preserve">An identifier of the message provider</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="DEBUG_OBJECT" c:identifier="GST_DEBUG_OBJECT" introspectable="0">
       <doc xml:space="preserve">Output a debugging message belonging to the given object in the default
 category.
@@ -10516,20 +10530,6 @@ character, a newline character will be added automatically.</doc>
       <parameters>
         <parameter name="obj">
           <doc xml:space="preserve">the #GObject the message belongs to</doc>
-        </parameter>
-        <parameter name="...">
-          <doc xml:space="preserve">printf-style message to output</doc>
-        </parameter>
-      </parameters>
-    </function-macro>
-    <function-macro name="DEBUG_OBJECT_ID" c:identifier="GST_DEBUG_OBJECT_ID" version="1.22" introspectable="0">
-      <doc xml:space="preserve">Output a debugging message for the given identifier in the default category.
-
-There is no need to finish the end of the message string with a newline
-character, a newline character will be added automatically.</doc>
-      <parameters>
-        <parameter name="id">
-          <doc xml:space="preserve">An identifier of the message provider</doc>
         </parameter>
         <parameter name="...">
           <doc xml:space="preserve">printf-style message to output</doc>
@@ -13525,6 +13525,20 @@ character, a newline character will be added automatically.</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="ERROR_ID" c:identifier="GST_ERROR_ID" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Output an error message for the given identifier in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="id">
+          <doc xml:space="preserve">An identifier of the message provider</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="ERROR_OBJECT" c:identifier="GST_ERROR_OBJECT" introspectable="0">
       <doc xml:space="preserve">Output an error message belonging to the given object in the default category.
 
@@ -13533,20 +13547,6 @@ character, a newline character will be added automatically.</doc>
       <parameters>
         <parameter name="obj">
           <doc xml:space="preserve">the #GObject the message belongs to</doc>
-        </parameter>
-        <parameter name="...">
-          <doc xml:space="preserve">printf-style message to output</doc>
-        </parameter>
-      </parameters>
-    </function-macro>
-    <function-macro name="ERROR_OBJECT_ID" c:identifier="GST_ERROR_OBJECT_ID" version="1.22" introspectable="0">
-      <doc xml:space="preserve">Output an error message for the given identifier in the default category.
-
-There is no need to finish the end of the message string with a newline
-character, a newline character will be added automatically.</doc>
-      <parameters>
-        <parameter name="id">
-          <doc xml:space="preserve">An identifier of the message provider</doc>
         </parameter>
         <parameter name="...">
           <doc xml:space="preserve">printf-style message to output</doc>
@@ -19080,6 +19080,20 @@ character, a newline character will be added automatically.</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="FIXME_ID" c:identifier="GST_FIXME_ID" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Output a fixme message for the given identifier in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="id">
+          <doc xml:space="preserve">An identifier of the message provider</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="FIXME_OBJECT" c:identifier="GST_FIXME_OBJECT" introspectable="0">
       <doc xml:space="preserve">Output a fixme message belonging to the given object in the default category.
 
@@ -19088,20 +19102,6 @@ character, a newline character will be added automatically.</doc>
       <parameters>
         <parameter name="obj">
           <doc xml:space="preserve">the #GObject the message belongs to</doc>
-        </parameter>
-        <parameter name="...">
-          <doc xml:space="preserve">printf-style message to output</doc>
-        </parameter>
-      </parameters>
-    </function-macro>
-    <function-macro name="FIXME_OBJECT_ID" c:identifier="GST_FIXME_OBJECT_ID" version="1.22" introspectable="0">
-      <doc xml:space="preserve">Output a fixme message for the given identifier in the default category.
-
-There is no need to finish the end of the message string with a newline
-character, a newline character will be added automatically.</doc>
-      <parameters>
-        <parameter name="id">
-          <doc xml:space="preserve">An identifier of the message provider</doc>
         </parameter>
         <parameter name="...">
           <doc xml:space="preserve">printf-style message to output</doc>
@@ -19621,6 +19621,21 @@ character, a newline character will be added automatically.</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="INFO_ID" c:identifier="GST_INFO_ID" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Output an informational message for the given identifier the default
+category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="id">
+          <doc xml:space="preserve">An identifier of the message provider</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="INFO_OBJECT" c:identifier="GST_INFO_OBJECT" introspectable="0">
       <doc xml:space="preserve">Output an informational message belonging to the given object in the default
 category.
@@ -19630,21 +19645,6 @@ character, a newline character will be added automatically.</doc>
       <parameters>
         <parameter name="obj">
           <doc xml:space="preserve">the #GObject the message belongs to</doc>
-        </parameter>
-        <parameter name="...">
-          <doc xml:space="preserve">printf-style message to output</doc>
-        </parameter>
-      </parameters>
-    </function-macro>
-    <function-macro name="INFO_OBJECT_ID" c:identifier="GST_INFO_OBJECT_ID" version="1.22" introspectable="0">
-      <doc xml:space="preserve">Output an informational message for the given identifier the default
-category.
-
-There is no need to finish the end of the message string with a newline
-character, a newline character will be added automatically.</doc>
-      <parameters>
-        <parameter name="id">
-          <doc xml:space="preserve">An identifier of the message provider</doc>
         </parameter>
         <parameter name="...">
           <doc xml:space="preserve">printf-style message to output</doc>
@@ -20840,6 +20840,20 @@ character, a newline character will be added automatically.</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="LOG_ID" c:identifier="GST_LOG_ID" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Output a logging message for the given identifier in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="id">
+          <doc xml:space="preserve">An identifier of the message provider</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="LOG_OBJECT" c:identifier="GST_LOG_OBJECT" introspectable="0">
       <doc xml:space="preserve">Output a logging message belonging to the given object in the default category.
 
@@ -20848,20 +20862,6 @@ character, a newline character will be added automatically.</doc>
       <parameters>
         <parameter name="obj">
           <doc xml:space="preserve">the #GObject the message belongs to</doc>
-        </parameter>
-        <parameter name="...">
-          <doc xml:space="preserve">printf-style message to output</doc>
-        </parameter>
-      </parameters>
-    </function-macro>
-    <function-macro name="LOG_OBJECT_ID" c:identifier="GST_LOG_OBJECT_ID" version="1.22" introspectable="0">
-      <doc xml:space="preserve">Output a logging message for the given identifier in the default category.
-
-There is no need to finish the end of the message string with a newline
-character, a newline character will be added automatically.</doc>
-      <parameters>
-        <parameter name="id">
-          <doc xml:space="preserve">An identifier of the message provider</doc>
         </parameter>
         <parameter name="...">
           <doc xml:space="preserve">printf-style message to output</doc>
@@ -21557,8 +21557,8 @@ The prefix/padding must be filled with 0 if @flags contains
         <doc xml:space="preserve">Return a copy of @size bytes from @mem starting from @offset. This copy is
 guaranteed to be writable. @size can be set to -1 to return a copy
 from @offset to the end of the memory region.</doc>
-        <return-value transfer-ownership="full">
-          <doc xml:space="preserve">a new #GstMemory.</doc>
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">a new copy of @mem if the copy succeeded, %NULL otherwise.</doc>
           <type name="Memory" c:type="GstMemory*"/>
         </return-value>
         <parameters>
@@ -25257,9 +25257,9 @@ returned.  This gives away the reference to the original mini object,
 and returns a reference to the new object.
 
 MT safe</doc>
-        <return-value transfer-ownership="full">
-          <doc xml:space="preserve">a mini-object (possibly the same pointer) that
-    is writable.</doc>
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">a writable mini-object (which may or may not be
+    the same as @mini_object) or %NULL if copying is required but not possible.</doc>
           <type name="MiniObject" c:type="GstMiniObject*"/>
         </return-value>
         <parameters>
@@ -41599,6 +41599,20 @@ character, a newline character will be added automatically.</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="TRACE_ID" c:identifier="GST_TRACE_ID" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Output a tracing message for the given identifier  in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="id">
+          <doc xml:space="preserve">An identifier of the message provider</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="TRACE_OBJECT" c:identifier="GST_TRACE_OBJECT" introspectable="0">
       <doc xml:space="preserve">Output a tracing message belonging to the given object in the default category.
 
@@ -41607,20 +41621,6 @@ character, a newline character will be added automatically.</doc>
       <parameters>
         <parameter name="obj">
           <doc xml:space="preserve">the #GObject the message belongs to</doc>
-        </parameter>
-        <parameter name="...">
-          <doc xml:space="preserve">printf-style message to output</doc>
-        </parameter>
-      </parameters>
-    </function-macro>
-    <function-macro name="TRACE_OBJECT_ID" c:identifier="GST_TRACE_OBJECT_ID" version="1.22" introspectable="0">
-      <doc xml:space="preserve">Output a tracing message for the given identifier  in the default category.
-
-There is no need to finish the end of the message string with a newline
-character, a newline character will be added automatically.</doc>
-      <parameters>
-        <parameter name="id">
-          <doc xml:space="preserve">An identifier of the message provider</doc>
         </parameter>
         <parameter name="...">
           <doc xml:space="preserve">printf-style message to output</doc>
@@ -46978,6 +46978,20 @@ character, a newline character will be added automatically.</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <function-macro name="WARNING_ID" c:identifier="GST_WARNING_ID" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Output a warning message for the given identifier in the default category.
+
+There is no need to finish the end of the message string with a newline
+character, a newline character will be added automatically.</doc>
+      <parameters>
+        <parameter name="id">
+          <doc xml:space="preserve">An identifier of the message provider</doc>
+        </parameter>
+        <parameter name="...">
+          <doc xml:space="preserve">printf-style message to output</doc>
+        </parameter>
+      </parameters>
+    </function-macro>
     <function-macro name="WARNING_OBJECT" c:identifier="GST_WARNING_OBJECT" introspectable="0">
       <doc xml:space="preserve">Output a warning message belonging to the given object in the default category.
 
@@ -46986,20 +47000,6 @@ character, a newline character will be added automatically.</doc>
       <parameters>
         <parameter name="obj">
           <doc xml:space="preserve">the #GObject the message belongs to</doc>
-        </parameter>
-        <parameter name="...">
-          <doc xml:space="preserve">printf-style message to output</doc>
-        </parameter>
-      </parameters>
-    </function-macro>
-    <function-macro name="WARNING_OBJECT_ID" c:identifier="GST_WARNING_OBJECT_ID" version="1.22" introspectable="0">
-      <doc xml:space="preserve">Output a warning message for the given identifier in the default category.
-
-There is no need to finish the end of the message string with a newline
-character, a newline character will be added automatically.</doc>
-      <parameters>
-        <parameter name="id">
-          <doc xml:space="preserve">An identifier of the message provider</doc>
         </parameter>
         <parameter name="...">
           <doc xml:space="preserve">printf-style message to output</doc>
@@ -49190,12 +49190,7 @@ for how to disable automatic registry updates.
 
 WARNING: This function will terminate your program if it was unable to
 initialize GStreamer for some reason. If you want your program to fall back,
-use gst_init_check() instead.
-
-WARNING: This function does not work in the same way as corresponding
-functions in other glib-style libraries, such as gtk_init\(\). In
-particular, unknown command line options cause this function to
-abort program execution.</doc>
+use gst_init_check() instead.</doc>
       <return-value transfer-ownership="none">
         <type name="none" c:type="void"/>
       </return-value>
@@ -49311,8 +49306,11 @@ or gst_init_check().</doc>
       </parameters>
     </function-macro>
     <function-macro name="memory_make_writable" c:identifier="gst_memory_make_writable" introspectable="0">
+      <doc xml:space="preserve">Returns a writable copy of @m. If the source memory is
+already writable, this will simply return the same memory.</doc>
       <parameters>
         <parameter name="m">
+          <doc xml:space="preserve">a #GstMemory</doc>
         </parameter>
       </parameters>
     </function-macro>

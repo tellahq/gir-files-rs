@@ -1957,8 +1957,20 @@ Apple, CapsLock or ShiftLock.</doc>
       <member name="control_mask" value="4" c:identifier="GST_NAVIGATION_MODIFIER_CONTROL_MASK" glib:nick="control-mask" glib:name="GST_NAVIGATION_MODIFIER_CONTROL_MASK">
         <doc xml:space="preserve">the Control key.</doc>
       </member>
-      <member name="alt_mask" value="8" c:identifier="GST_NAVIGATION_MODIFIER_ALT_MASK" glib:nick="alt-mask" glib:name="GST_NAVIGATION_MODIFIER_ALT_MASK">
+      <member name="mod1_mask" value="8" c:identifier="GST_NAVIGATION_MODIFIER_MOD1_MASK" glib:nick="mod1-mask" glib:name="GST_NAVIGATION_MODIFIER_MOD1_MASK">
+        <doc xml:space="preserve">the third modifier key</doc>
+      </member>
+      <member name="mod2_mask" value="16" c:identifier="GST_NAVIGATION_MODIFIER_MOD2_MASK" glib:nick="mod2-mask" glib:name="GST_NAVIGATION_MODIFIER_MOD2_MASK">
         <doc xml:space="preserve">the fourth modifier key</doc>
+      </member>
+      <member name="mod3_mask" value="32" c:identifier="GST_NAVIGATION_MODIFIER_MOD3_MASK" glib:nick="mod3-mask" glib:name="GST_NAVIGATION_MODIFIER_MOD3_MASK">
+        <doc xml:space="preserve">the fifth modifier key</doc>
+      </member>
+      <member name="mod4_mask" value="64" c:identifier="GST_NAVIGATION_MODIFIER_MOD4_MASK" glib:nick="mod4-mask" glib:name="GST_NAVIGATION_MODIFIER_MOD4_MASK">
+        <doc xml:space="preserve">the sixth modifier key</doc>
+      </member>
+      <member name="mod5_mask" value="128" c:identifier="GST_NAVIGATION_MODIFIER_MOD5_MASK" glib:nick="mod5-mask" glib:name="GST_NAVIGATION_MODIFIER_MOD5_MASK">
+        <doc xml:space="preserve">the seventh modifier key</doc>
       </member>
       <member name="button1_mask" value="256" c:identifier="GST_NAVIGATION_MODIFIER_BUTTON1_MASK" glib:nick="button1-mask" glib:name="GST_NAVIGATION_MODIFIER_BUTTON1_MASK">
         <doc xml:space="preserve">the first mouse button (usually the left button).</doc>
@@ -1984,7 +1996,7 @@ Apple, CapsLock or ShiftLock.</doc>
       <member name="meta_mask" value="268435456" c:identifier="GST_NAVIGATION_MODIFIER_META_MASK" glib:nick="meta-mask" glib:name="GST_NAVIGATION_MODIFIER_META_MASK">
         <doc xml:space="preserve">the Meta modifier</doc>
       </member>
-      <member name="mask" value="469769999" c:identifier="GST_NAVIGATION_MODIFIER_MASK" glib:nick="mask" glib:name="GST_NAVIGATION_MODIFIER_MASK">
+      <member name="mask" value="469770239" c:identifier="GST_NAVIGATION_MODIFIER_MASK" glib:nick="mask" glib:name="GST_NAVIGATION_MODIFIER_MASK">
         <doc xml:space="preserve">A mask covering all entries in #GdkModifierType.</doc>
       </member>
     </bitfield>
@@ -2796,6 +2808,14 @@ subsampling.</doc>
       </parameters>
     </function-macro>
     <function-macro name="VIDEO_FORMAT_INFO_IS_TILED" c:identifier="GST_VIDEO_FORMAT_INFO_IS_TILED" introspectable="0">
+      <parameters>
+        <parameter name="info">
+        </parameter>
+      </parameters>
+    </function-macro>
+    <function-macro name="VIDEO_FORMAT_INFO_IS_VALID_RAW" c:identifier="GST_VIDEO_FORMAT_INFO_IS_VALID_RAW" version="1.22" introspectable="0">
+      <doc xml:space="preserve">Tests that the given #GstVideoFormatInfo represents a valid un-encoded
+format.</doc>
       <parameters>
         <parameter name="info">
         </parameter>
