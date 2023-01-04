@@ -18515,7 +18515,7 @@ and make a copy if you want to modify it or store it for later use.</doc>
             <type name="Event" c:type="GstEvent*"/>
           </instance-parameter>
           <parameter name="collection" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
-            <doc xml:space="preserve">pointer to store the collection</doc>
+            <doc xml:space="preserve">pointer to store the collection.</doc>
             <type name="StreamCollection" c:type="GstStreamCollection**"/>
           </parameter>
         </parameters>

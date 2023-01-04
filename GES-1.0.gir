@@ -6466,7 +6466,7 @@ it has been set.</doc>
             <doc xml:space="preserve">A #GESPipeline</doc>
             <type name="Pipeline" c:type="GESPipeline*"/>
           </instance-parameter>
-          <parameter name="timeline" transfer-ownership="full">
+          <parameter name="timeline" transfer-ownership="none">
             <doc xml:space="preserve">The timeline to set for @pipeline</doc>
             <type name="Timeline" c:type="GESTimeline*"/>
           </parameter>
@@ -8551,7 +8551,7 @@ that you avoid adding tracks to timelines that already contain clips.</doc>
             <doc xml:space="preserve">The #GESTimeline</doc>
             <type name="Timeline" c:type="GESTimeline*"/>
           </instance-parameter>
-          <parameter name="track" transfer-ownership="full">
+          <parameter name="track" transfer-ownership="none">
             <doc xml:space="preserve">The track to add</doc>
             <type name="Track" c:type="GESTrack*"/>
           </parameter>

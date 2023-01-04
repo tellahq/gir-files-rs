@@ -1559,7 +1559,7 @@ active.
 @context_type must not be %GST_GL_PLATFORM_NONE or %GST_GL_PLATFORM_ANY
 
 @available_apis must not be %GST_GL_API_NONE or %GST_GL_API_ANY</doc>
-        <return-value transfer-ownership="full">
+        <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve">a #GstGLContext wrapping @handle</doc>
           <type name="GLContext" c:type="GstGLContext*"/>
         </return-value>
