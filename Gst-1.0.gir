@@ -33816,7 +33816,7 @@ Free-function: gst_query_unref()</doc>
           <type name="Query" c:type="GstQuery*"/>
         </return-value>
         <parameters>
-          <parameter name="caps" transfer-ownership="none">
+          <parameter name="caps" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">the negotiated caps</doc>
             <type name="Caps" c:type="GstCaps*"/>
           </parameter>
@@ -34398,7 +34398,7 @@ gst_query_parse_nth_allocation_pool().</doc>
             <doc xml:space="preserve">a #GstQuery</doc>
             <type name="Query" c:type="GstQuery*"/>
           </instance-parameter>
-          <parameter name="caps" direction="out" caller-allocates="0" transfer-ownership="none" optional="1" allow-none="1">
+          <parameter name="caps" direction="out" caller-allocates="0" transfer-ownership="none" nullable="1" optional="1" allow-none="1">
             <doc xml:space="preserve">The #GstCaps</doc>
             <type name="Caps" c:type="GstCaps**"/>
           </parameter>
@@ -46610,15 +46610,15 @@ determine a order for the two provided values.</doc>
       <doc xml:space="preserve">The major version of GStreamer at compile time:</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="VERSION_MICRO" value="3" c:type="GST_VERSION_MICRO">
+    <constant name="VERSION_MICRO" value="0" c:type="GST_VERSION_MICRO">
       <doc xml:space="preserve">The micro version of GStreamer at compile time:</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="VERSION_MINOR" value="21" c:type="GST_VERSION_MINOR">
+    <constant name="VERSION_MINOR" value="22" c:type="GST_VERSION_MINOR">
       <doc xml:space="preserve">The minor version of GStreamer at compile time:</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="VERSION_NANO" value="1" c:type="GST_VERSION_NANO">
+    <constant name="VERSION_NANO" value="0" c:type="GST_VERSION_NANO">
       <doc xml:space="preserve">The nano version of GStreamer at compile time:
 Actual releases have 0, GIT versions have 1, prerelease versions have 2-...</doc>
       <type name="gint" c:type="gint"/>
