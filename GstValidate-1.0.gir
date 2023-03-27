@@ -235,8 +235,12 @@ value to a GstClockTime.</doc>
       for mandatory streams.</doc>
         <type name="utf8" c:type="const gchar*"/>
       </field>
+      <field name="free" version="1.24" writable="1">
+        <doc xml:space="preserve">Function that frees the various members of the structure when done using</doc>
+        <type name="GLib.DestroyNotify" c:type="GDestroyNotify"/>
+      </field>
       <field name="_gst_reserved" readable="0" private="1">
-        <array zero-terminated="0" fixed-size="4">
+        <array zero-terminated="0" fixed-size="3">
           <type name="gpointer" c:type="gpointer"/>
         </array>
       </field>
@@ -3737,14 +3741,17 @@ target-element field.</doc>
       </parameters>
     </function>
     <function name="execute_action" c:identifier="gst_validate_execute_action">
+      <doc xml:space="preserve">Executes @action</doc>
       <return-value transfer-ownership="none">
         <type name="gint" c:type="gint"/>
       </return-value>
       <parameters>
         <parameter name="action_type" transfer-ownership="none">
+          <doc xml:space="preserve">The #GstValidateActionType to execute</doc>
           <type name="ActionType" c:type="GstValidateActionType*"/>
         </parameter>
-        <parameter name="action" transfer-ownership="none">
+        <parameter name="action" transfer-ownership="full">
+          <doc xml:space="preserve">The #GstValidateAction to execute</doc>
           <type name="Action" c:type="GstValidateAction*"/>
         </parameter>
       </parameters>
