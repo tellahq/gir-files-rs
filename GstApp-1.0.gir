@@ -801,6 +801,21 @@ skip basesink handling of the event, %FALSE otherwise.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
       </glib:signal>
+      <glib:signal name="propose-allocation" when="last" version="1.24">
+        <doc xml:space="preserve">Signal that a new propose_allocation query is available.
+
+This signal is emitted from the streaming thread and only when the
+"emit-signals" property is %TRUE.</doc>
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <parameter name="query" transfer-ownership="none">
+            <doc xml:space="preserve">the allocation query</doc>
+            <type name="Gst.Query"/>
+          </parameter>
+        </parameters>
+      </glib:signal>
       <glib:signal name="pull-preroll" when="last" action="1">
         <doc xml:space="preserve">Get the last preroll sample in @appsink. This was the sample that caused the
 appsink to preroll in the PAUSED state.
@@ -1001,8 +1016,26 @@ gst_app_sink_set_callbacks().</doc>
           </parameters>
         </callback>
       </field>
+      <field name="propose_allocation">
+        <callback name="propose_allocation">
+          <return-value transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </return-value>
+          <parameters>
+            <parameter name="appsink" transfer-ownership="none">
+              <type name="AppSink" c:type="GstAppSink*"/>
+            </parameter>
+            <parameter name="query" transfer-ownership="none">
+              <type name="Gst.Query" c:type="GstQuery*"/>
+            </parameter>
+            <parameter name="user_data" transfer-ownership="none" nullable="1" allow-none="1" closure="2">
+              <type name="gpointer" c:type="gpointer"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
       <field name="_gst_reserved" readable="0" private="1">
-        <array zero-terminated="0" fixed-size="3">
+        <array zero-terminated="0" fixed-size="2">
           <type name="gpointer" c:type="gpointer"/>
         </array>
       </field>

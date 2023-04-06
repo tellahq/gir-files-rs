@@ -10611,6 +10611,114 @@ mode.</doc>
         </parameters>
       </function>
     </record>
+    <record name="VideoInfoDmaDrm" c:type="GstVideoInfoDmaDrm" version="1.24" glib:type-name="GstVideoInfoDmaDrm" glib:get-type="gst_video_info_dma_drm_get_type" c:symbol-prefix="video_info_dma_drm">
+      <doc xml:space="preserve">Information describing a DMABuf image properties. It wraps #GstVideoInfo and
+adds DRM information such as drm-fourcc and drm-modifier, required for
+negotiation and mapping.</doc>
+      <field name="vinfo" writable="1">
+        <doc xml:space="preserve">the associated #GstVideoInfo</doc>
+        <type name="VideoInfo" c:type="GstVideoInfo"/>
+      </field>
+      <field name="drm_fourcc" writable="1">
+        <doc xml:space="preserve">the fourcc defined by drm</doc>
+        <type name="guint32" c:type="guint32"/>
+      </field>
+      <field name="drm_modifier" writable="1">
+        <doc xml:space="preserve">the drm modifier</doc>
+        <type name="guint64" c:type="guint64"/>
+      </field>
+      <field name="_gst_reserved" readable="0" private="1">
+        <array zero-terminated="0" fixed-size="20">
+          <type name="guint32" c:type="guint32"/>
+        </array>
+      </field>
+      <constructor name="new" c:identifier="gst_video_info_dma_drm_new" version="1.24">
+        <doc xml:space="preserve">Allocate a new #GstVideoInfoDmaDrm that is also initialized with
+gst_video_info_dma_drm_init().</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a new #GstVideoInfoDmaDrm.
+Free it with gst_video_info_dma_drm_free().</doc>
+          <type name="VideoInfoDmaDrm" c:type="GstVideoInfoDmaDrm*"/>
+        </return-value>
+      </constructor>
+      <constructor name="new_from_caps" c:identifier="gst_video_info_dma_drm_new_from_caps" version="1.24">
+        <doc xml:space="preserve">Parse @caps to generate a #GstVideoInfoDmaDrm. Please note that the
+@caps should be a dma drm caps. The gst_video_is_dma_drm_caps() can
+be used to verify it before calling this function.</doc>
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">A #GstVideoInfoDmaDrm,
+  or %NULL if @caps couldn't be parsed.</doc>
+          <type name="VideoInfoDmaDrm" c:type="GstVideoInfoDmaDrm*"/>
+        </return-value>
+        <parameters>
+          <parameter name="caps" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstCaps</doc>
+            <type name="Gst.Caps" c:type="const GstCaps*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <method name="free" c:identifier="gst_video_info_dma_drm_free" version="1.24">
+        <doc xml:space="preserve">Free a #GstVideoInfoDmaDrm structure previously allocated with
+gst_video_info_dma_drm_new()</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="drm_info" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoInfoDmaDrm</doc>
+            <type name="VideoInfoDmaDrm" c:type="GstVideoInfoDmaDrm*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="to_caps" c:identifier="gst_video_info_dma_drm_to_caps" version="1.24">
+        <doc xml:space="preserve">Convert the values of @drm_info into a #GstCaps. Please note that the
+@caps returned will be a dma drm caps which does not contain format field,
+but contains a drm-format field instead. The value of drm-format field is
+composed of a drm fourcc and a modifier, such as NV12:0x0100000000000002.</doc>
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">a new #GstCaps containing the
+info in @drm_info.</doc>
+          <type name="Gst.Caps" c:type="GstCaps*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="drm_info" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoInfoDmaDrm</doc>
+            <type name="VideoInfoDmaDrm" c:type="const GstVideoInfoDmaDrm*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <function name="from_caps" c:identifier="gst_video_info_dma_drm_from_caps" version="1.24">
+        <doc xml:space="preserve">Parse @caps and update @info. Please note that the @caps should be
+a dma drm caps. The gst_video_is_dma_drm_caps() can be used to verify
+it before calling this function.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">TRUE if @caps could be parsed</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <parameter name="drm_info" direction="out" caller-allocates="1" transfer-ownership="none">
+            <doc xml:space="preserve">#GstVideoInfoDmaDrm</doc>
+            <type name="VideoInfoDmaDrm" c:type="GstVideoInfoDmaDrm*"/>
+          </parameter>
+          <parameter name="caps" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstCaps</doc>
+            <type name="Gst.Caps" c:type="const GstCaps*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="init" c:identifier="gst_video_info_dma_drm_init" version="1.24">
+        <doc xml:space="preserve">Initialize @drm_info with default values.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="drm_info" direction="out" caller-allocates="1" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstVideoInfoDmaDrm</doc>
+            <type name="VideoInfoDmaDrm" c:type="GstVideoInfoDmaDrm*"/>
+          </parameter>
+        </parameters>
+      </function>
+    </record>
     <enumeration name="VideoInterlaceMode" glib:type-name="GstVideoInterlaceMode" glib:get-type="gst_video_interlace_mode_get_type" c:type="GstVideoInterlaceMode">
       <doc xml:space="preserve">The possible values of the #GstVideoInterlaceMode describing the interlace
 mode of the stream.</doc>
@@ -16862,6 +16970,74 @@ performance is achieved when @quantizer is a power of 2.
         </parameter>
       </parameters>
     </function>
+    <function name="video_dma_drm_fourcc_from_format" c:identifier="gst_video_dma_drm_fourcc_from_format" version="1.24">
+      <doc xml:space="preserve">Converting the video format into dma drm fourcc. If no
+matching fourcc found, then DRM_FORMAT_INVALID is returned.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">the DRM_FORMAT_* corresponding to the @format.</doc>
+        <type name="guint32" c:type="guint32"/>
+      </return-value>
+      <parameters>
+        <parameter name="format" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstVideoFormat</doc>
+          <type name="VideoFormat" c:type="GstVideoFormat"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="video_dma_drm_fourcc_from_string" c:identifier="gst_video_dma_drm_fourcc_from_string" version="1.24">
+      <doc xml:space="preserve">Convert the @format_str string into the drm fourcc value. The @modifier is
+also parsed if we want. Please note that the @format_str should follow the
+fourcc:modifier kind style, such as NV12:0x0100000000000002</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">The drm fourcc value or DRM_FORMAT_INVALID if @format_str is
+invalid.</doc>
+        <type name="guint32" c:type="guint32"/>
+      </return-value>
+      <parameters>
+        <parameter name="format_str" transfer-ownership="none">
+          <doc xml:space="preserve">a drm format string</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="modifier" direction="out" caller-allocates="0" transfer-ownership="full" optional="1" allow-none="1">
+          <doc xml:space="preserve">Return the modifier in @format or %NULL
+to ignore.</doc>
+          <type name="guint64" c:type="guint64*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="video_dma_drm_fourcc_to_format" c:identifier="gst_video_dma_drm_fourcc_to_format" version="1.24">
+      <doc xml:space="preserve">Converting a dma drm fourcc into the video format. If no matching
+video format found, then GST_VIDEO_FORMAT_UNKNOWN is returned.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">the GST_VIDEO_FORMAT_* corresponding to the @fourcc.</doc>
+        <type name="VideoFormat" c:type="GstVideoFormat"/>
+      </return-value>
+      <parameters>
+        <parameter name="fourcc" transfer-ownership="none">
+          <doc xml:space="preserve">the dma drm value.</doc>
+          <type name="guint32" c:type="guint32"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="video_dma_drm_fourcc_to_string" c:identifier="gst_video_dma_drm_fourcc_to_string" version="1.24">
+      <doc xml:space="preserve">Returns a string containing drm kind format, such as
+NV12:0x0100000000000002, or NULL otherwise.</doc>
+      <return-value transfer-ownership="full" nullable="1">
+        <doc xml:space="preserve">the drm kind string composed
+  of to @fourcc and @modifier.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </return-value>
+      <parameters>
+        <parameter name="fourcc" transfer-ownership="none">
+          <doc xml:space="preserve">a drm fourcc value.</doc>
+          <type name="guint32" c:type="guint32"/>
+        </parameter>
+        <parameter name="modifier" transfer-ownership="none">
+          <doc xml:space="preserve">the associated modifier value.</doc>
+          <type name="guint64" c:type="guint64"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="video_event_is_force_key_unit" c:identifier="gst_video_event_is_force_key_unit">
       <doc xml:space="preserve">Checks if an event is a force key unit event. Returns true for both upstream
 and downstream force key unit events.</doc>
@@ -17366,6 +17542,37 @@ recognised, and %FALSE otherwise.</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="video_info_dma_drm_from_caps" c:identifier="gst_video_info_dma_drm_from_caps" moved-to="VideoInfoDmaDrm.from_caps" version="1.24">
+      <doc xml:space="preserve">Parse @caps and update @info. Please note that the @caps should be
+a dma drm caps. The gst_video_is_dma_drm_caps() can be used to verify
+it before calling this function.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">TRUE if @caps could be parsed</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="drm_info" direction="out" caller-allocates="1" transfer-ownership="none">
+          <doc xml:space="preserve">#GstVideoInfoDmaDrm</doc>
+          <type name="VideoInfoDmaDrm" c:type="GstVideoInfoDmaDrm*"/>
+        </parameter>
+        <parameter name="caps" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstCaps</doc>
+          <type name="Gst.Caps" c:type="const GstCaps*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="video_info_dma_drm_init" c:identifier="gst_video_info_dma_drm_init" moved-to="VideoInfoDmaDrm.init" version="1.24">
+      <doc xml:space="preserve">Initialize @drm_info with default values.</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="drm_info" direction="out" caller-allocates="1" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstVideoInfoDmaDrm</doc>
+          <type name="VideoInfoDmaDrm" c:type="GstVideoInfoDmaDrm*"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="video_info_from_caps" c:identifier="gst_video_info_from_caps" moved-to="VideoInfo.from_caps">
       <doc xml:space="preserve">Parse @caps and update @info.</doc>
       <return-value transfer-ownership="none">
@@ -17448,6 +17655,20 @@ recognised, and %FALSE otherwise.</doc>
         <parameter name="par_d" transfer-ownership="none">
           <doc xml:space="preserve">Pixel aspect ratio denominator</doc>
           <type name="gint" c:type="gint"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="video_is_dma_drm_caps" c:identifier="gst_video_is_dma_drm_caps" version="1.24">
+      <doc xml:space="preserve">Check whether the @caps is a dma drm kind caps. Please note that
+the caps should be fixed.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE if the caps is a dma drm caps.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="caps" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstCaps</doc>
+          <type name="Gst.Caps" c:type="const GstCaps*"/>
         </parameter>
       </parameters>
     </function>

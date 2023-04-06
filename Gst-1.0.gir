@@ -926,7 +926,7 @@ A #GstBin implements the following default behaviour for answering to a
   sink is in the bin, the query fails.
 
 A #GstBin will by default forward any event sent to it to all sink
-( %GST_EVENT_TYPE_DOWNSTREAM ) or source ( %GST_EVENT_TYPE_UPSTREAM ) elements
+( %GST_EVENT_TYPE_UPSTREAM ) or source ( %GST_EVENT_TYPE_DOWNSTREAM ) elements
 depending on the event type.
 
 If all the elements return %TRUE, the bin will also return %TRUE, else %FALSE
@@ -11163,7 +11163,7 @@ by @datetime represents. Timezones ahead (to the east) of UTC have positive
 values, timezones before (to the west) of UTC have negative values.
 If @datetime represents UTC time, then the offset is zero.</doc>
         <return-value transfer-ownership="none">
-          <doc xml:space="preserve">the offset from UTC in hours, or %G_MAXDOUBLE if none is set.</doc>
+          <doc xml:space="preserve">the offset from UTC in hours, or %G_MAXFLOAT if none is set.</doc>
           <type name="gfloat" c:type="gfloat"/>
         </return-value>
         <parameters>
@@ -13181,6 +13181,10 @@ GST_ELEMENT_FACTORY_TYPE_MEDIA flag.</doc>
     <constant name="ELEMENT_FACTORY_TYPE_SRC" value="8" c:type="GST_ELEMENT_FACTORY_TYPE_SRC">
       <type name="ElementFactoryListType" c:type="GstElementFactoryListType"/>
     </constant>
+    <constant name="ELEMENT_FACTORY_TYPE_TIMESTAMPER" value="8192" c:type="GST_ELEMENT_FACTORY_TYPE_TIMESTAMPER" version="1.24">
+      <doc xml:space="preserve">Timestamp correcting elements</doc>
+      <type name="ElementFactoryListType" c:type="GstElementFactoryListType"/>
+    </constant>
     <constant name="ELEMENT_FACTORY_TYPE_VIDEO_ENCODER" value="2814749767106562" c:type="GST_ELEMENT_FACTORY_TYPE_VIDEO_ENCODER">
       <doc xml:space="preserve">All encoders handling video or image media types</doc>
       <type name="ElementFactoryListType" c:type="GstElementFactoryListType"/>
@@ -14358,6 +14362,100 @@ subclasses of #GstElement.</doc>
             <doc xml:space="preserve">a #GstElement to create pads for</doc>
             <type name="Element" c:type="GstElement*"/>
           </instance-parameter>
+        </parameters>
+      </method>
+      <method name="decorate_stream_id" c:identifier="gst_element_decorate_stream_id" version="1.24">
+        <doc xml:space="preserve">Creates a stream-id for @element by combining the upstream information with
+the @stream_id.
+
+This function generates an unique stream-id by getting the upstream
+stream-start event stream ID and appending @stream_id to it. If the element
+has no sinkpad it will generate an upstream stream-id by doing an URI query
+on the element and in the worst case just uses a random number. Source
+elements that don't implement the URI handler interface should ideally
+generate a unique, deterministic stream-id manually instead.
+
+Since stream IDs are sorted alphabetically, any numbers in the stream ID
+should be printed with a fixed number of characters, preceded by 0's, such as
+by using the format \%03u instead of \%u.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A stream-id for @element.</doc>
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="element" transfer-ownership="none">
+            <doc xml:space="preserve">The  #GstElement to create a stream-id for</doc>
+            <type name="Element" c:type="GstElement*"/>
+          </instance-parameter>
+          <parameter name="stream_id" transfer-ownership="none">
+            <doc xml:space="preserve">The stream-id</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="decorate_stream_id_printf" c:identifier="gst_element_decorate_stream_id_printf" version="1.24" introspectable="0">
+        <doc xml:space="preserve">Creates a stream-id for @element by combining the upstream information with
+the @format.
+
+This function generates an unique stream-id by getting the upstream
+stream-start event stream ID and appending the stream-id to it. If the element
+has no sinkpad it will generate an upstream stream-id by doing an URI query
+on the element and in the worst case just uses a random number. Source
+elements that don't implement the URI handler interface should ideally
+generate a unique, deterministic stream-id manually instead.
+
+Since stream IDs are sorted alphabetically, any numbers in the stream ID
+should be printed with a fixed number of characters, preceded by 0's, such as
+by using the format \%03u instead of \%u.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A stream-id for @element.</doc>
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="element" transfer-ownership="none">
+            <doc xml:space="preserve">The  #GstElement to create a stream-id for</doc>
+            <type name="Element" c:type="GstElement*"/>
+          </instance-parameter>
+          <parameter name="format" transfer-ownership="none">
+            <doc xml:space="preserve">The stream-id</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="..." transfer-ownership="none">
+            <varargs/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="decorate_stream_id_printf_valist" c:identifier="gst_element_decorate_stream_id_printf_valist" version="1.24" introspectable="0">
+        <doc xml:space="preserve">Creates a stream-id for @element by combining the upstream information with
+the @format.
+
+This function generates an unique stream-id by getting the upstream
+stream-start event stream ID and appending @format to it. If the element
+has no sinkpad it will generate an upstream stream-id by doing an URI query
+on the element and in the worst case just uses a random number. Source
+elements that don't implement the URI handler interface should ideally
+generate a unique, deterministic stream-id manually instead.
+
+Since stream IDs are sorted alphabetically, any numbers in the stream ID
+should be printed with a fixed number of characters, preceded by 0's, such as
+by using the format \%03u instead of \%u.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A stream-id for @element.</doc>
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="element" transfer-ownership="none">
+            <doc xml:space="preserve">The  #GstElement to create a stream-id for</doc>
+            <type name="Element" c:type="GstElement*"/>
+          </instance-parameter>
+          <parameter name="format" transfer-ownership="none">
+            <doc xml:space="preserve">The stream-id</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="var_args" transfer-ownership="none">
+            <doc xml:space="preserve">parameters for the @format string</doc>
+            <type name="va_list" c:type="va_list"/>
+          </parameter>
         </parameters>
       </method>
       <method name="foreach_pad" c:identifier="gst_element_foreach_pad" version="1.14">
@@ -44936,9 +45034,7 @@ returns and must not be freed.</doc>
         <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve">the
     requested data, or %NULL if that data is not available.</doc>
-          <array length="1" zero-terminated="0" c:type="const guint8*">
-            <type name="guint8" c:type="guint8"/>
-          </array>
+          <type name="guint8" c:type="const guint8*"/>
         </return-value>
         <parameters>
           <instance-parameter name="find" transfer-ownership="none">
@@ -44949,7 +45045,7 @@ returns and must not be freed.</doc>
             <doc xml:space="preserve">The offset</doc>
             <type name="gint64" c:type="gint64"/>
           </parameter>
-          <parameter name="size" direction="out" caller-allocates="0" transfer-ownership="full">
+          <parameter name="size" transfer-ownership="none">
             <doc xml:space="preserve">The number of bytes to return</doc>
             <type name="guint" c:type="guint"/>
           </parameter>
@@ -45796,6 +45892,31 @@ If @uri is %NULL then returns %GST_URI_NO_PORT.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="get_query_string_ordered" c:identifier="gst_uri_get_query_string_ordered" version="1.24">
+        <doc xml:space="preserve">Get a percent encoded URI query string from the @uri, with query parameters
+in the order provided by the @keys list. Only parameter keys in the list will
+be added to the resulting URI string. This method can be used by retrieving
+the keys with gst_uri_get_query_keys() and then sorting the list, for
+example.</doc>
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">A percent encoded query string. Use
+g_free() when no longer needed.</doc>
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="uri" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">The #GstUri to get the query string from.</doc>
+            <type name="Uri" c:type="const GstUri*"/>
+          </instance-parameter>
+          <parameter name="keys" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">A GList containing the
+  query argument key strings.</doc>
+            <type name="GLib.List" c:type="const GList*">
+              <type name="utf8"/>
+            </type>
+          </parameter>
+        </parameters>
+      </method>
       <method name="get_query_table" c:identifier="gst_uri_get_query_table" version="1.6">
         <doc xml:space="preserve">Get the query table from the URI. Keys and values in the table are freed
 with g_free when they are deleted. A value may be %NULL to indicate that
@@ -46272,6 +46393,31 @@ The string is put together as described in RFC 3986.</doc>
           </instance-parameter>
         </parameters>
       </method>
+      <method name="to_string_with_keys" c:identifier="gst_uri_to_string_with_keys" version="1.24">
+        <doc xml:space="preserve">Convert the URI to a string, with the query arguments in a specific order.
+Only the keys in the @keys list will be added to the resulting string.
+
+Returns the URI as held in this object as a #gchar* nul-terminated string.
+The caller should g_free() the string once they are finished with it.
+The string is put together as described in RFC 3986.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">The string version of the URI.</doc>
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="uri" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">This #GstUri to convert to a string.</doc>
+            <type name="Uri" c:type="const GstUri*"/>
+          </instance-parameter>
+          <parameter name="keys" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">A GList containing
+  the query argument key strings.</doc>
+            <type name="GLib.List" c:type="const GList*">
+              <type name="utf8"/>
+            </type>
+          </parameter>
+        </parameters>
+      </method>
       <method name="unref" c:identifier="gst_uri_unref" version="1.6">
         <doc xml:space="preserve">Decrement the reference count to this #GstUri object.
 
@@ -46614,11 +46760,11 @@ determine a order for the two provided values.</doc>
       <doc xml:space="preserve">The micro version of GStreamer at compile time:</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="VERSION_MINOR" value="22" c:type="GST_VERSION_MINOR">
+    <constant name="VERSION_MINOR" value="23" c:type="GST_VERSION_MINOR">
       <doc xml:space="preserve">The minor version of GStreamer at compile time:</doc>
       <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="VERSION_NANO" value="0" c:type="GST_VERSION_NANO">
+    <constant name="VERSION_NANO" value="1" c:type="GST_VERSION_NANO">
       <doc xml:space="preserve">The nano version of GStreamer at compile time:
 Actual releases have 0, GIT versions have 1, prerelease versions have 2-...</doc>
       <type name="gint" c:type="gint"/>

@@ -765,7 +765,7 @@ payload.</doc>
           </parameter>
           <parameter name="vf_data" transfer-ownership="none">
             <doc xml:space="preserve">the Valid From data</doc>
-            <array length="1" zero-terminated="0" c:type="const guint8*">
+            <array length="0" zero-terminated="0" c:type="const guint8*">
               <type name="guint8" c:type="guint8"/>
             </array>
           </parameter>

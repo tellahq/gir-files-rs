@@ -625,6 +625,10 @@ for more information.</doc>
             <doc xml:space="preserve">The ICE candidate</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
+          <parameter name="promise" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">A #GstPromise for task notifications (Since: 1.24)</doc>
+            <type name="Gst.Promise" c:type="GstPromise*"/>
+          </parameter>
         </parameters>
       </virtual-method>
       <virtual-method name="add_stream" invoker="add_stream" version="1.22">
@@ -980,6 +984,10 @@ Get HTTP Proxy to be used when connecting to TURN server.</doc>
           <parameter name="candidate" transfer-ownership="none">
             <doc xml:space="preserve">The ICE candidate</doc>
             <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="promise" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">A #GstPromise for task notifications (Since: 1.24)</doc>
+            <type name="Gst.Promise" c:type="GstPromise*"/>
           </parameter>
         </parameters>
       </method>
@@ -1509,6 +1517,10 @@ stops automatic ICE gathering.</doc>
             <parameter name="candidate" transfer-ownership="none">
               <doc xml:space="preserve">The ICE candidate</doc>
               <type name="utf8" c:type="const gchar*"/>
+            </parameter>
+            <parameter name="promise" transfer-ownership="none" nullable="1" allow-none="1">
+              <doc xml:space="preserve">A #GstPromise for task notifications (Since: 1.24)</doc>
+              <type name="Gst.Promise" c:type="GstPromise*"/>
             </parameter>
           </parameters>
         </callback>

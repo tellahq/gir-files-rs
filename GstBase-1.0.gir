@@ -5174,7 +5174,7 @@ implementation will use the negotiated allocator.</doc>
           <parameter name="size" transfer-ownership="none">
             <type name="guint" c:type="guint"/>
           </parameter>
-          <parameter name="buf" direction="out" caller-allocates="0" transfer-ownership="full">
+          <parameter name="buf" direction="out" caller-allocates="0" transfer-ownership="full" nullable="1">
             <type name="Gst.Buffer" c:type="GstBuffer**"/>
           </parameter>
         </parameters>
@@ -5195,7 +5195,7 @@ implementation will call alloc if no allocated @buf is provided and then call fi
           <parameter name="size" transfer-ownership="none">
             <type name="guint" c:type="guint"/>
           </parameter>
-          <parameter name="buf" direction="inout" caller-allocates="0" transfer-ownership="full">
+          <parameter name="buf" direction="inout" caller-allocates="0" transfer-ownership="full" nullable="1" allow-none="1">
             <type name="Gst.Buffer" c:type="GstBuffer**"/>
           </parameter>
         </parameters>
@@ -5259,14 +5259,16 @@ implementation will call alloc if no allocated @buf is provided and then call fi
         </parameters>
       </virtual-method>
       <virtual-method name="fixate">
+        <doc xml:space="preserve">Called if, in negotiation, caps need fixating.</doc>
         <return-value transfer-ownership="full">
+          <doc xml:space="preserve">the fixated caps</doc>
           <type name="Gst.Caps" c:type="GstCaps*"/>
         </return-value>
         <parameters>
           <instance-parameter name="src" transfer-ownership="none">
             <type name="BaseSrc" c:type="GstBaseSrc*"/>
           </instance-parameter>
-          <parameter name="caps" transfer-ownership="none">
+          <parameter name="caps" transfer-ownership="full">
             <type name="Gst.Caps" c:type="GstCaps*"/>
           </parameter>
         </parameters>
@@ -5588,6 +5590,36 @@ The format of @src must not be %GST_FORMAT_UNDEFINED and the format
 should be configured via gst_base_src_set_format() before calling this method.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve">%TRUE if preparation of new segment succeeded.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="src" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstBaseSrc</doc>
+            <type name="BaseSrc" c:type="GstBaseSrc*"/>
+          </instance-parameter>
+          <parameter name="segment" transfer-ownership="none">
+            <doc xml:space="preserve">a pointer to a #GstSegment</doc>
+            <type name="Gst.Segment" c:type="const GstSegment*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="push_segment" c:identifier="gst_base_src_push_segment" version="1.24">
+        <doc xml:space="preserve">Send a new segment downstream. This function must
+only be called by derived sub-classes, and only from the #GstBaseSrcClass::create function,
+as the stream-lock needs to be held.
+This method also requires that an out caps has been configured, so
+gst_base_src_set_caps() needs to have been called before.
+
+The format for the @segment must be identical with the current format
+of the source, as configured with gst_base_src_set_format().
+
+The format of @src must not be %GST_FORMAT_UNDEFINED and the format
+should be configured via gst_base_src_set_format() before calling this method.
+
+This is a variant of gst_base_src_new_segment() sending the segment right away,
+which can be useful to ensure events ordering.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if sending of new segment succeeded.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
@@ -5986,13 +6018,14 @@ buffers.</doc>
       <field name="fixate">
         <callback name="fixate">
           <return-value transfer-ownership="full">
+            <doc xml:space="preserve">the fixated caps</doc>
             <type name="Gst.Caps" c:type="GstCaps*"/>
           </return-value>
           <parameters>
             <parameter name="src" transfer-ownership="none">
               <type name="BaseSrc" c:type="GstBaseSrc*"/>
             </parameter>
-            <parameter name="caps" transfer-ownership="none">
+            <parameter name="caps" transfer-ownership="full">
               <type name="Gst.Caps" c:type="GstCaps*"/>
             </parameter>
           </parameters>
@@ -6206,7 +6239,7 @@ buffers.</doc>
             <parameter name="size" transfer-ownership="none">
               <type name="guint" c:type="guint"/>
             </parameter>
-            <parameter name="buf" direction="inout" caller-allocates="0" transfer-ownership="full">
+            <parameter name="buf" direction="inout" caller-allocates="0" transfer-ownership="full" nullable="1" allow-none="1">
               <type name="Gst.Buffer" c:type="GstBuffer**"/>
             </parameter>
           </parameters>
@@ -6227,7 +6260,7 @@ buffers.</doc>
             <parameter name="size" transfer-ownership="none">
               <type name="guint" c:type="guint"/>
             </parameter>
-            <parameter name="buf" direction="out" caller-allocates="0" transfer-ownership="full">
+            <parameter name="buf" direction="out" caller-allocates="0" transfer-ownership="full" nullable="1">
               <type name="Gst.Buffer" c:type="GstBuffer**"/>
             </parameter>
           </parameters>
@@ -12213,7 +12246,7 @@ base class.</doc>
           <instance-parameter name="src" transfer-ownership="none">
             <type name="PushSrc" c:type="GstPushSrc*"/>
           </instance-parameter>
-          <parameter name="buf" direction="out" caller-allocates="0" transfer-ownership="full">
+          <parameter name="buf" direction="out" caller-allocates="0" transfer-ownership="full" nullable="1">
             <type name="Gst.Buffer" c:type="GstBuffer**"/>
           </parameter>
         </parameters>
@@ -12228,7 +12261,7 @@ no allocated @buf is provided and then call fill.</doc>
           <instance-parameter name="src" transfer-ownership="none">
             <type name="PushSrc" c:type="GstPushSrc*"/>
           </instance-parameter>
-          <parameter name="buf" direction="inout" caller-allocates="0" transfer-ownership="full">
+          <parameter name="buf" direction="inout" caller-allocates="0" transfer-ownership="full" nullable="1" allow-none="1">
             <type name="Gst.Buffer" c:type="GstBuffer**"/>
           </parameter>
         </parameters>
@@ -12272,7 +12305,7 @@ buffers.</doc>
             <parameter name="src" transfer-ownership="none">
               <type name="PushSrc" c:type="GstPushSrc*"/>
             </parameter>
-            <parameter name="buf" direction="inout" caller-allocates="0" transfer-ownership="full">
+            <parameter name="buf" direction="inout" caller-allocates="0" transfer-ownership="full" nullable="1" allow-none="1">
               <type name="Gst.Buffer" c:type="GstBuffer**"/>
             </parameter>
           </parameters>
@@ -12287,7 +12320,7 @@ buffers.</doc>
             <parameter name="src" transfer-ownership="none">
               <type name="PushSrc" c:type="GstPushSrc*"/>
             </parameter>
-            <parameter name="buf" direction="out" caller-allocates="0" transfer-ownership="full">
+            <parameter name="buf" direction="out" caller-allocates="0" transfer-ownership="full" nullable="1">
               <type name="Gst.Buffer" c:type="GstBuffer**"/>
             </parameter>
           </parameters>

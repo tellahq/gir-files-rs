@@ -1976,6 +1976,54 @@ ISO 639-1 language code from the returned ISO 639-2 one.</doc>
           </parameter>
         </parameters>
       </method>
+      <method name="parse_metadata" c:identifier="gst_mpegts_descriptor_parse_metadata" version="1.24">
+        <doc xml:space="preserve">Parses out the metadata descriptor from the @descriptor.
+
+See ISO/IEC 13818-1:2018 Section 2.6.60 and 2.6.61 for details.
+metadata_application_format is provided in Table 2-82. metadata_format is
+provided in Table 2-85.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if the parsing worked correctly, else %FALSE.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="descriptor" transfer-ownership="none">
+            <doc xml:space="preserve">a %GST_TYPE_MPEGTS_METADATA_DESCRIPTOR #GstMpegtsDescriptor</doc>
+            <type name="Descriptor" c:type="const GstMpegtsDescriptor*"/>
+          </instance-parameter>
+          <parameter name="res" direction="out" caller-allocates="0" transfer-ownership="full">
+            <doc xml:space="preserve">#GstMpegtsMetadataDescriptor</doc>
+            <type name="MetadataDescriptor" c:type="GstMpegtsMetadataDescriptor**"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="parse_metadata_std" c:identifier="gst_mpegts_descriptor_parse_metadata_std" version="1.24">
+        <doc xml:space="preserve">Extracts the metadata STD descriptor from @descriptor.
+
+See ISO/IEC 13818-1:2018 Section 2.6.62 and 2.6.63 for details.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if parsing succeeded, else %FALSE.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="descriptor" transfer-ownership="none">
+            <doc xml:space="preserve">a %GST_MTS_DESC_METADATA_STD #GstMpegtsDescriptor
+@metadata_input_leak_rate (out): the input leak rate in units of 400bits/sec.
+@metadata_buffer_size (out): the buffer size in units of 1024 bytes
+@metadata_output_leak_rate (out): the output leak rate in units of 400bits/sec.</doc>
+            <type name="Descriptor" c:type="const GstMpegtsDescriptor*"/>
+          </instance-parameter>
+          <parameter name="metadata_input_leak_rate" transfer-ownership="none">
+            <type name="guint32" c:type="guint32*"/>
+          </parameter>
+          <parameter name="metadata_buffer_size" transfer-ownership="none">
+            <type name="guint32" c:type="guint32*"/>
+          </parameter>
+          <parameter name="metadata_output_leak_rate" transfer-ownership="none">
+            <type name="guint32" c:type="guint32*"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="parse_registration" c:identifier="gst_mpegts_descriptor_parse_registration" version="1.20">
         <doc xml:space="preserve">Extracts the Registration information from @descriptor.</doc>
         <return-value transfer-ownership="none">
@@ -2616,6 +2664,53 @@ Consult the relevant specifications for more details.</doc>
         </array>
       </field>
     </record>
+    <record name="MetadataDescriptor" c:type="GstMpegtsMetadataDescriptor" version="1.24" glib:type-name="GstMpegtsMetadataDescriptor" glib:get-type="gst_mpegts_metadata_descriptor_get_type" c:symbol-prefix="metadata_descriptor">
+      <doc xml:space="preserve">The metadata descriptor specifies parameters of a metadata service carried in an MPEG-2 Transport Stream (or Program Stream). The descriptor is included in the PMT in the descriptor loop for the elementary stream that carries the
+metadata service. The descriptor specifies the format of the associated metadata, and contains the value of the
+metadata_service_id to identify the metadata service to which the metadata descriptor applies.
+
+Note that this structure does not include all of the metadata_descriptor items, and will need extension to support DSM-CC and private data.
+See ISO/IEC 13818-1:2018 Section 2.6.60 and Section 2.6.61 for more information.</doc>
+      <field name="metadata_application_format" writable="1">
+        <doc xml:space="preserve">specifies the application responsible for defining usage, syntax and semantics</doc>
+        <type name="guint16" c:type="guint16"/>
+      </field>
+      <field name="metadata_format" writable="1">
+        <doc xml:space="preserve">indicates the format and coding of the metadata</doc>
+        <type name="MetadataFormat" c:type="GstMpegtsMetadataFormat"/>
+      </field>
+      <field name="metadata_format_identifier" writable="1">
+        <doc xml:space="preserve">format identifier (equivalent to registration descriptor), for example 0x4B4C4641 ('KLVA') to indicate SMPTE 336 KLV.</doc>
+        <type name="guint32" c:type="guint32"/>
+      </field>
+      <field name="metadata_service_id" writable="1">
+        <doc xml:space="preserve">metadata service to which this metadata descriptor applies, typically 0x00</doc>
+        <type name="guint8" c:type="guint8"/>
+      </field>
+      <field name="decoder_config_flags" writable="1">
+        <doc xml:space="preserve">decoder flags, see ISO/IEC 13818-1:2018 Table 2-88.</doc>
+        <type name="guint8" c:type="guint8"/>
+      </field>
+      <field name="dsm_cc_flag" writable="1">
+        <doc xml:space="preserve">true if stream associated with this descriptor is in an ISO/IEC 13818-6 data or object carousel.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </field>
+    </record>
+    <enumeration name="MetadataFormat" version="1.24" c:type="GstMpegtsMetadataFormat">
+      <doc xml:space="preserve">metadata_descriptor metadata_format valid values. See ISO/IEC 13818-1:2018(E) Table 2-85.</doc>
+      <member name="tem" value="16" c:identifier="GST_MPEGTS_METADATA_FORMAT_TEM" version="1.24">
+        <doc xml:space="preserve">ISO/IEC 15938-1 TeM.</doc>
+      </member>
+      <member name="bim" value="17" c:identifier="GST_MPEGTS_METADATA_FORMAT_BIM" version="1.24">
+        <doc xml:space="preserve">ISO/IEC 15938-1 BiM.</doc>
+      </member>
+      <member name="application_format" value="63" c:identifier="GST_MPEGTS_METADATA_FORMAT_APPLICATION_FORMAT" version="1.24">
+        <doc xml:space="preserve">Defined by metadata application format.</doc>
+      </member>
+      <member name="identifier_field" value="255" c:identifier="GST_MPEGTS_METADATA_FORMAT_IDENTIFIER_FIELD" version="1.24">
+        <doc xml:space="preserve">Defined by metadata_format_identifier field.</doc>
+      </member>
+    </enumeration>
     <enumeration name="MiscDescriptorType" c:type="GstMpegtsMiscDescriptorType">
       <doc xml:space="preserve">The type of #GstMpegtsDescriptor
 
@@ -2705,6 +2800,32 @@ not yet identified from known specifications.</doc>
           <type name="NITStream" c:type="GstMpegtsNITStream*"/>
         </return-value>
       </constructor>
+    </record>
+    <record name="PESMetadataMeta" c:type="GstMpegtsPESMetadataMeta" version="1.24">
+      <doc xml:space="preserve">Extra buffer metadata describing the PES Metadata context.
+This is based on the Metadata AU cell header in
+ISO/IEC 13818-1:2018 Section 2.12.4.
+
+AU_cell_data_length is not provided, since it matches the length of the buffer</doc>
+      <field name="meta" writable="1">
+        <doc xml:space="preserve">parent #GstMeta</doc>
+        <type name="Gst.Meta" c:type="GstMeta"/>
+      </field>
+      <field name="metadata_service_id" writable="1">
+        <doc xml:space="preserve">metadata service identifier</doc>
+        <type name="guint8" c:type="guint8"/>
+      </field>
+      <field name="flags" writable="1">
+        <doc xml:space="preserve">bit flags, see spec for details</doc>
+        <type name="guint8" c:type="guint8"/>
+      </field>
+      <function name="get_info" c:identifier="gst_mpegts_pes_metadata_meta_get_info" version="1.24">
+        <doc xml:space="preserve">Gets the global #GstMetaInfo describing the #GstMpegtsPESMetadataMeta meta.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">The #GstMetaInfo</doc>
+          <type name="Gst.MetaInfo" c:type="const GstMetaInfo*"/>
+        </return-value>
+      </function>
     </record>
     <record name="PMT" c:type="GstMpegtsPMT" glib:type-name="GstMpegtsPMT" glib:get-type="gst_mpegts_pmt_get_type" c:symbol-prefix="pmt">
       <doc xml:space="preserve">Program Map Table (ISO/IEC 13818-1). Provides the mappings between program
@@ -4535,6 +4656,19 @@ profiles defined in Annex A for service-compatible stereoscopic 3D services</doc
       <member name="c3780" value="8" c:identifier="GST_MPEGTS_TRANSMISSION_MODE_C3780">
       </member>
     </enumeration>
+    <function name="buffer_add_mpegts_pes_metadata_meta" c:identifier="gst_buffer_add_mpegts_pes_metadata_meta" version="1.24" introspectable="0">
+      <doc xml:space="preserve">Creates and adds a #GstMpegtsPESMetadataMeta to a @buffer.</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">a newly created #GstMpegtsPESMetadataMeta</doc>
+        <type name="PESMetadataMeta" c:type="GstMpegtsPESMetadataMeta*"/>
+      </return-value>
+      <parameters>
+        <parameter name="buffer" transfer-ownership="none">
+          <doc xml:space="preserve">a #GstBuffer</doc>
+          <type name="Gst.Buffer" c:type="GstBuffer*"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="descriptor_from_custom" c:identifier="gst_mpegts_descriptor_from_custom" moved-to="Descriptor.from_custom">
       <doc xml:space="preserve">Creates a #GstMpegtsDescriptor with custom @tag and @data</doc>
       <return-value transfer-ownership="full">
@@ -4967,6 +5101,20 @@ and then converted to a PAT section with gst_mpegts_section_from_pat().</doc>
         <array name="GLib.PtrArray" c:type="GPtrArray*">
           <type name="PatProgram"/>
         </array>
+      </return-value>
+    </function>
+    <function name="pes_metadata_meta_api_get_type" c:identifier="gst_mpegts_pes_metadata_meta_api_get_type" version="1.24">
+      <doc xml:space="preserve">Return the #GType associated with #GstMpegtsPESMetadataMeta</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">a #GType</doc>
+        <type name="GType" c:type="GType"/>
+      </return-value>
+    </function>
+    <function name="pes_metadata_meta_get_info" c:identifier="gst_mpegts_pes_metadata_meta_get_info" moved-to="PESMetadataMeta.get_info" version="1.24">
+      <doc xml:space="preserve">Gets the global #GstMetaInfo describing the #GstMpegtsPESMetadataMeta meta.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">The #GstMetaInfo</doc>
+        <type name="Gst.MetaInfo" c:type="const GstMetaInfo*"/>
       </return-value>
     </function>
     <function name="scte_cancel_new" c:identifier="gst_mpegts_scte_cancel_new">

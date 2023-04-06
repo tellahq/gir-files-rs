@@ -2786,7 +2786,7 @@ Must be called with the object lock held.</doc>
             <doc xml:space="preserve">a #GstGLDisplay</doc>
             <type name="GLDisplay" c:type="GstGLDisplay*"/>
           </instance-parameter>
-          <parameter name="other_context" transfer-ownership="none">
+          <parameter name="other_context" transfer-ownership="none" nullable="1" allow-none="1">
             <doc xml:space="preserve">other #GstGLContext to share resources with.</doc>
             <type name="GLContext" c:type="GstGLContext*"/>
           </parameter>
@@ -2806,6 +2806,28 @@ Must be called with the object lock held.</doc>
             <doc xml:space="preserve">a #GstGLDisplay</doc>
             <type name="GLDisplay" c:type="GstGLDisplay*"/>
           </instance-parameter>
+        </parameters>
+      </method>
+      <method name="ensure_context" c:identifier="gst_gl_display_ensure_context" version="1.24" throws="1">
+        <doc xml:space="preserve">Ensures that the display has a valid GL context for the current thread. If
+@context already contains a valid context, this does nothing.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">wether @context contains a valid context.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="display" transfer-ownership="none">
+            <doc xml:space="preserve">a #GstGLDisplay</doc>
+            <type name="GLDisplay" c:type="GstGLDisplay*"/>
+          </instance-parameter>
+          <parameter name="other_context" transfer-ownership="none" nullable="1" allow-none="1">
+            <doc xml:space="preserve">other #GstGLContext to share resources with.</doc>
+            <type name="GLContext" c:type="GstGLContext*"/>
+          </parameter>
+          <parameter name="context" direction="inout" caller-allocates="0" transfer-ownership="full" nullable="1" allow-none="1">
+            <doc xml:space="preserve">the resulting #GstGLContext</doc>
+            <type name="GLContext" c:type="GstGLContext**"/>
+          </parameter>
         </parameters>
       </method>
       <method name="filter_gl_api" c:identifier="gst_gl_display_filter_gl_api">

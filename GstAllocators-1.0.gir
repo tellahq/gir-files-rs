@@ -64,6 +64,99 @@ gst_is_dmabuf_memory().</doc>
         </parameter>
       </parameters>
     </function-macro>
+    <class name="DRMDumbAllocator" c:symbol-prefix="drm_dumb_allocator" c:type="GstDRMDumbAllocator" version="1.24" parent="Gst.Allocator" glib:type-name="GstDRMDumbAllocator" glib:get-type="gst_drm_dumb_allocator_get_type" glib:type-struct="DRMDumbAllocatorClass">
+      <doc xml:space="preserve">Private intance object for #GstDRMDumbAllocator.</doc>
+      <constructor name="new_with_device_path" c:identifier="gst_drm_dumb_allocator_new_with_device_path" version="1.24">
+        <doc xml:space="preserve">Creates a new #GstDRMDumbAllocator for the specific device path. This
+function can fail if the path does not exist, is not a DRM device or if
+the DRM device doesnot support DUMB allocation.</doc>
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">a new DRM Dumb allocator. Use gst_object_unref()
+  to release the allocator after usage.</doc>
+          <type name="Gst.Allocator" c:type="GstAllocator*"/>
+        </return-value>
+        <parameters>
+          <parameter name="drm_device_path" transfer-ownership="none">
+            <doc xml:space="preserve">path to the DRM device to open</doc>
+            <type name="filename" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <constructor name="new_with_fd" c:identifier="gst_drm_dumb_allocator_new_with_fd" version="1.24">
+        <doc xml:space="preserve">Creates a new #GstDRMDumbAllocator for the specific file desciptor. This
+function can fail if the file descriptor is not a DRM device or if
+the DRM device does not support DUMB allocation.</doc>
+        <return-value transfer-ownership="full" nullable="1">
+          <doc xml:space="preserve">a new DRM Dumb allocator. Use gst_object_unref()
+  to release the allocator after usage.</doc>
+          <type name="Gst.Allocator" c:type="GstAllocator*"/>
+        </return-value>
+        <parameters>
+          <parameter name="drm_fd" transfer-ownership="none">
+            <doc xml:space="preserve">file descriptor of the DRM device</doc>
+            <type name="gint" c:type="gint"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <method name="alloc" c:identifier="gst_drm_dumb_allocator_alloc" version="1.24">
+        <doc xml:space="preserve">Allocated a DRM buffer object for the specific @drm_fourcc, @width and
+@height. Note that the DRM Dumb allocation interface is agnostic to the
+pixel format. This @drm_fourcc is converted into a bpp (bit-per-pixel)
+number and the height is scaled according to the sub-sampling.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">a new DRM Dumb #GstMemory. Use gst_memory_unref()
+  to release the memory after usage.</doc>
+          <type name="Gst.Memory" c:type="GstMemory*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="allocator" transfer-ownership="none">
+            <doc xml:space="preserve">the allocator instance</doc>
+            <type name="DRMDumbAllocator" c:type="GstAllocator*"/>
+          </instance-parameter>
+          <parameter name="drm_fourcc" transfer-ownership="none">
+            <doc xml:space="preserve">the DRM format to allocate for</doc>
+            <type name="guint32" c:type="guint32"/>
+          </parameter>
+          <parameter name="width" transfer-ownership="none">
+            <doc xml:space="preserve">padded width for this allocation</doc>
+            <type name="guint32" c:type="guint32"/>
+          </parameter>
+          <parameter name="height" transfer-ownership="none">
+            <doc xml:space="preserve">padded height for this allocation</doc>
+            <type name="guint32" c:type="guint32"/>
+          </parameter>
+          <parameter name="out_pitch" direction="out" caller-allocates="0" transfer-ownership="full">
+            <doc xml:space="preserve">the pitch as returned by the driver</doc>
+            <type name="guint32" c:type="guint32*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="has_prime_export" c:identifier="gst_drm_dumb_allocator_has_prime_export" version="1.24">
+        <doc xml:space="preserve">This function allow verifying if the driver support dma-buf exportation.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if the allocator support exporting dma-buf.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="allocator" transfer-ownership="none">
+            <doc xml:space="preserve">the #GstAllocator</doc>
+            <type name="DRMDumbAllocator" c:type="GstAllocator*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="drm-device-path" version="1.24" writable="1" construct-only="1" transfer-ownership="none">
+        <type name="filename" c:type="gchar*"/>
+      </property>
+      <property name="drm-fd" version="1.24" writable="1" construct-only="1" transfer-ownership="none">
+        <type name="gint" c:type="gint"/>
+      </property>
+    </class>
+    <record name="DRMDumbAllocatorClass" c:type="GstDRMDumbAllocatorClass" glib:is-gtype-struct-for="DRMDumbAllocator">
+      <field name="parent_class" version="1.24">
+        <doc xml:space="preserve">Parent Class.</doc>
+        <type name="Gst.AllocatorClass" c:type="GstAllocatorClass"/>
+      </field>
+    </record>
     <class name="DmaBufAllocator" c:symbol-prefix="dmabuf_allocator" c:type="GstDmaBufAllocator" version="1.12" parent="FdAllocator" glib:type-name="GstDmaBufAllocator" glib:get-type="gst_dmabuf_allocator_get_type" glib:type-struct="DmaBufAllocatorClass">
       <doc xml:space="preserve">Base class for allocators with dmabuf-backed memory</doc>
       <constructor name="new" c:identifier="gst_dmabuf_allocator_new" version="1.2">
@@ -322,6 +415,37 @@ The memory is only mmapped on gst_buffer_map() request.</doc>
         </parameter>
       </parameters>
     </function>
+    <function name="drm_dumb_memory_export_dmabuf" c:identifier="gst_drm_dumb_memory_export_dmabuf" version="1.24">
+      <doc xml:space="preserve">Exports a DMABuf from the DRM Bumb buffer object. One can check if this
+feature is supported using gst_drm_dumb_allocator_has_prime_export();</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">a #GstMemory from #GstDmaBufAllocator wrapping the exported dma-buf
+   file descriptor.</doc>
+        <type name="Gst.Memory" c:type="GstMemory*"/>
+      </return-value>
+      <parameters>
+        <parameter name="mem" transfer-ownership="none">
+          <doc xml:space="preserve">the memory to export from</doc>
+          <type name="Gst.Memory" c:type="GstMemory*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="drm_dumb_memory_get_handle" c:identifier="gst_drm_dumb_memory_get_handle" version="1.24">
+      <doc xml:space="preserve">Return the DRM buffer object handle associated with @mem.</doc>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">the DRM buffer object handle associated with the memory, or 0.
+    The handle is still owned by the GstMemory and cannot be used
+    beyond the lifetime of this GstMemory unless it is being passed
+    to DRM driver, which does handle a refcount internally.</doc>
+        <type name="guint32" c:type="guint32"/>
+      </return-value>
+      <parameters>
+        <parameter name="mem" transfer-ownership="none">
+          <doc xml:space="preserve">the memory to get the handle from</doc>
+          <type name="Gst.Memory" c:type="GstMemory*"/>
+        </parameter>
+      </parameters>
+    </function>
     <function name="fd_memory_get_fd" c:identifier="gst_fd_memory_get_fd" version="1.6">
       <doc xml:space="preserve">Get the fd from @mem. Call gst_is_fd_memory() to check if @mem has
 an fd.</doc>
@@ -345,6 +469,18 @@ an fd.</doc>
       <parameters>
         <parameter name="mem" transfer-ownership="none">
           <doc xml:space="preserve">the memory to be check</doc>
+          <type name="Gst.Memory" c:type="GstMemory*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="is_drm_dumb_memory" c:identifier="gst_is_drm_dumb_memory" version="1.24">
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve">%TRUE if @mem is DRM Dumb memory, otherwise %FALSE</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="mem" transfer-ownership="none">
+          <doc xml:space="preserve">the memory to be checked</doc>
           <type name="Gst.Memory" c:type="GstMemory*"/>
         </parameter>
       </parameters>
