@@ -494,7 +494,7 @@ after use.</doc>
         </array>
       </field>
     </record>
-    <record name="RTSPAddressPoolPrivate" c:type="GstRTSPAddressPoolPrivate" disguised="1"/>
+    <record name="RTSPAddressPoolPrivate" c:type="GstRTSPAddressPoolPrivate" disguised="1" opaque="1"/>
     <enumeration name="RTSPAddressPoolResult" c:type="GstRTSPAddressPoolResult">
       <doc xml:space="preserve">Result codes from RTSP address pool functions.</doc>
       <member name="ok" value="0" c:identifier="GST_RTSP_ADDRESS_POOL_OK">
@@ -1015,7 +1015,7 @@ no one else overrides it.</doc>
         </array>
       </field>
     </record>
-    <record name="RTSPAuthPrivate" c:type="GstRTSPAuthPrivate" disguised="1"/>
+    <record name="RTSPAuthPrivate" c:type="GstRTSPAuthPrivate" disguised="1" opaque="1"/>
     <class name="RTSPClient" c:symbol-prefix="rtsp_client" c:type="GstRTSPClient" parent="GObject.Object" glib:type-name="GstRTSPClient" glib:get-type="gst_rtsp_client_get_type" glib:type-struct="RTSPClientClass">
       <doc xml:space="preserve">The client object represents the connection and its state with a client.</doc>
       <constructor name="new" c:identifier="gst_rtsp_client_new">
@@ -1918,13 +1918,13 @@ that created the client but can be overridden later.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="drop-backlog" writable="1" transfer-ownership="none">
+      <property name="drop-backlog" writable="1" transfer-ownership="none" default-value="TRUE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
       <property name="mount-points" writable="1" transfer-ownership="none" setter="set_mount_points" getter="get_mount_points">
         <type name="RTSPMountPoints"/>
       </property>
-      <property name="post-session-timeout" writable="1" transfer-ownership="none">
+      <property name="post-session-timeout" writable="1" transfer-ownership="none" default-value="-1">
         <type name="gint" c:type="gint"/>
       </property>
       <property name="session-pool" writable="1" transfer-ownership="none" setter="set_session_pool" getter="get_session_pool">
@@ -2837,7 +2837,7 @@ that created the client but can be overridden later.</doc>
         </array>
       </field>
     </record>
-    <record name="RTSPClientPrivate" c:type="GstRTSPClientPrivate" disguised="1"/>
+    <record name="RTSPClientPrivate" c:type="GstRTSPClientPrivate" disguised="1" opaque="1"/>
     <callback name="RTSPClientSendFunc" c:type="GstRTSPClientSendFunc">
       <doc xml:space="preserve">This callback is called when @client wants to send @message. When @close is
 %TRUE, the connection should be closed when the message has been sent.</doc>
@@ -4532,52 +4532,52 @@ when the media was not in the suspended state.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="bind-mcast-address" writable="1" transfer-ownership="none" setter="set_bind_mcast_address">
+      <property name="bind-mcast-address" writable="1" transfer-ownership="none" setter="set_bind_mcast_address" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="buffer-size" writable="1" transfer-ownership="none" setter="set_buffer_size" getter="get_buffer_size">
+      <property name="buffer-size" writable="1" transfer-ownership="none" setter="set_buffer_size" getter="get_buffer_size" default-value="524288">
         <type name="guint" c:type="guint"/>
       </property>
       <property name="clock" writable="1" transfer-ownership="none" setter="set_clock" getter="get_clock">
         <type name="Gst.Clock"/>
       </property>
-      <property name="dscp-qos" writable="1" transfer-ownership="none" setter="set_dscp_qos" getter="get_dscp_qos">
+      <property name="dscp-qos" writable="1" transfer-ownership="none" setter="set_dscp_qos" getter="get_dscp_qos" default-value="-1">
         <type name="gint" c:type="gint"/>
       </property>
       <property name="element" writable="1" construct-only="1" transfer-ownership="none" getter="get_element">
         <type name="Gst.Element"/>
       </property>
-      <property name="eos-shutdown" writable="1" transfer-ownership="none" setter="set_eos_shutdown">
+      <property name="eos-shutdown" writable="1" transfer-ownership="none" setter="set_eos_shutdown" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="latency" writable="1" transfer-ownership="none" setter="set_latency" getter="get_latency">
+      <property name="latency" writable="1" transfer-ownership="none" setter="set_latency" getter="get_latency" default-value="200">
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="max-mcast-ttl" writable="1" transfer-ownership="none" setter="set_max_mcast_ttl" getter="get_max_mcast_ttl">
+      <property name="max-mcast-ttl" writable="1" transfer-ownership="none" setter="set_max_mcast_ttl" getter="get_max_mcast_ttl" default-value="255">
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="profiles" writable="1" transfer-ownership="none" setter="set_profiles" getter="get_profiles">
+      <property name="profiles" writable="1" transfer-ownership="none" setter="set_profiles" getter="get_profiles" default-value="GST_RTSP_PROFILE_AVP">
         <type name="GstRtsp.RTSPProfile"/>
       </property>
-      <property name="protocols" writable="1" transfer-ownership="none" setter="set_protocols" getter="get_protocols">
+      <property name="protocols" writable="1" transfer-ownership="none" setter="set_protocols" getter="get_protocols" default-value="GST_RTSP_LOWER_TRANS_UDP | GST_RTSP_LOWER_TRANS_UDP_MCAST | GST_RTSP_LOWER_TRANS_TCP">
         <type name="GstRtsp.RTSPLowerTrans"/>
       </property>
-      <property name="reusable" writable="1" transfer-ownership="none" setter="set_reusable">
+      <property name="reusable" writable="1" transfer-ownership="none" setter="set_reusable" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="shared" writable="1" transfer-ownership="none" setter="set_shared">
+      <property name="shared" writable="1" transfer-ownership="none" setter="set_shared" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="stop-on-disconnect" writable="1" transfer-ownership="none" setter="set_stop_on_disconnect">
+      <property name="stop-on-disconnect" writable="1" transfer-ownership="none" setter="set_stop_on_disconnect" default-value="TRUE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="suspend-mode" writable="1" transfer-ownership="none" setter="set_suspend_mode" getter="get_suspend_mode">
+      <property name="suspend-mode" writable="1" transfer-ownership="none" setter="set_suspend_mode" getter="get_suspend_mode" default-value="GST_RTSP_SUSPEND_MODE_NONE">
         <type name="RTSPSuspendMode"/>
       </property>
-      <property name="time-provider" writable="1" transfer-ownership="none" getter="get_time_provider">
+      <property name="time-provider" writable="1" transfer-ownership="none" getter="get_time_provider" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="transport-mode" writable="1" transfer-ownership="none" setter="set_transport_mode" getter="get_transport_mode">
+      <property name="transport-mode" writable="1" transfer-ownership="none" setter="set_transport_mode" getter="get_transport_mode" default-value="GST_RTSP_TRANSPORT_MODE_PLAY">
         <type name="RTSPTransportMode"/>
       </property>
       <field name="parent">
@@ -5806,50 +5806,50 @@ when a client disconnects without sending TEARDOWN.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="bind-mcast-address" writable="1" transfer-ownership="none" setter="set_bind_mcast_address">
+      <property name="bind-mcast-address" writable="1" transfer-ownership="none" setter="set_bind_mcast_address" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="buffer-size" writable="1" transfer-ownership="none" setter="set_buffer_size" getter="get_buffer_size">
+      <property name="buffer-size" writable="1" transfer-ownership="none" setter="set_buffer_size" getter="get_buffer_size" default-value="524288">
         <type name="guint" c:type="guint"/>
       </property>
       <property name="clock" writable="1" transfer-ownership="none" setter="set_clock" getter="get_clock">
         <type name="Gst.Clock"/>
       </property>
-      <property name="dscp-qos" writable="1" transfer-ownership="none" setter="set_dscp_qos" getter="get_dscp_qos">
+      <property name="dscp-qos" writable="1" transfer-ownership="none" setter="set_dscp_qos" getter="get_dscp_qos" default-value="-1">
         <type name="gint" c:type="gint"/>
       </property>
-      <property name="enable-rtcp" version="1.20" writable="1" transfer-ownership="none" setter="set_enable_rtcp">
+      <property name="enable-rtcp" version="1.20" writable="1" transfer-ownership="none" setter="set_enable_rtcp" default-value="TRUE">
         <doc xml:space="preserve">Whether the created media should send and receive RTCP</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="eos-shutdown" writable="1" transfer-ownership="none" setter="set_eos_shutdown">
+      <property name="eos-shutdown" writable="1" transfer-ownership="none" setter="set_eos_shutdown" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="latency" writable="1" transfer-ownership="none" setter="set_latency" getter="get_latency">
+      <property name="latency" writable="1" transfer-ownership="none" setter="set_latency" getter="get_latency" default-value="200">
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="launch" writable="1" transfer-ownership="none" setter="set_launch" getter="get_launch">
+      <property name="launch" writable="1" transfer-ownership="none" setter="set_launch" getter="get_launch" default-value="NULL">
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="max-mcast-ttl" writable="1" transfer-ownership="none" setter="set_max_mcast_ttl" getter="get_max_mcast_ttl">
+      <property name="max-mcast-ttl" writable="1" transfer-ownership="none" setter="set_max_mcast_ttl" getter="get_max_mcast_ttl" default-value="255">
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="profiles" writable="1" transfer-ownership="none" setter="set_profiles" getter="get_profiles">
+      <property name="profiles" writable="1" transfer-ownership="none" setter="set_profiles" getter="get_profiles" default-value="GST_RTSP_PROFILE_AVP">
         <type name="GstRtsp.RTSPProfile"/>
       </property>
-      <property name="protocols" writable="1" transfer-ownership="none" setter="set_protocols" getter="get_protocols">
+      <property name="protocols" writable="1" transfer-ownership="none" setter="set_protocols" getter="get_protocols" default-value="GST_RTSP_LOWER_TRANS_UDP | GST_RTSP_LOWER_TRANS_UDP_MCAST | GST_RTSP_LOWER_TRANS_TCP">
         <type name="GstRtsp.RTSPLowerTrans"/>
       </property>
-      <property name="shared" writable="1" transfer-ownership="none" setter="set_shared">
+      <property name="shared" writable="1" transfer-ownership="none" setter="set_shared" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="stop-on-disconnect" writable="1" transfer-ownership="none" setter="set_stop_on_disconnect">
+      <property name="stop-on-disconnect" writable="1" transfer-ownership="none" setter="set_stop_on_disconnect" default-value="TRUE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="suspend-mode" writable="1" transfer-ownership="none" setter="set_suspend_mode" getter="get_suspend_mode">
+      <property name="suspend-mode" writable="1" transfer-ownership="none" setter="set_suspend_mode" getter="get_suspend_mode" default-value="GST_RTSP_SUSPEND_MODE_NONE">
         <type name="RTSPSuspendMode"/>
       </property>
-      <property name="transport-mode" writable="1" transfer-ownership="none" setter="set_transport_mode" getter="get_transport_mode">
+      <property name="transport-mode" writable="1" transfer-ownership="none" setter="set_transport_mode" getter="get_transport_mode" default-value="GST_RTSP_TRANSPORT_MODE_PLAY">
         <type name="RTSPTransportMode"/>
       </property>
       <field name="parent">
@@ -6006,7 +6006,7 @@ when a client disconnects without sending TEARDOWN.</doc>
         </array>
       </field>
     </record>
-    <record name="RTSPMediaFactoryPrivate" c:type="GstRTSPMediaFactoryPrivate" disguised="1"/>
+    <record name="RTSPMediaFactoryPrivate" c:type="GstRTSPMediaFactoryPrivate" disguised="1" opaque="1"/>
     <class name="RTSPMediaFactoryURI" c:symbol-prefix="rtsp_media_factory_uri" c:type="GstRTSPMediaFactoryURI" parent="RTSPMediaFactory" glib:type-name="GstRTSPMediaFactoryURI" glib:get-type="gst_rtsp_media_factory_uri_get_type" glib:type-struct="RTSPMediaFactoryURIClass">
       <doc xml:space="preserve">A media factory that creates a pipeline to play any uri.</doc>
       <constructor name="new" c:identifier="gst_rtsp_media_factory_uri_new">
@@ -6045,10 +6045,10 @@ when a client disconnects without sending TEARDOWN.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="uri" writable="1" transfer-ownership="none" setter="set_uri" getter="get_uri">
+      <property name="uri" writable="1" transfer-ownership="none" setter="set_uri" getter="get_uri" default-value="NULL">
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="use-gstpay" writable="1" transfer-ownership="none">
+      <property name="use-gstpay" writable="1" transfer-ownership="none" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
       <field name="parent">
@@ -6074,8 +6074,8 @@ when a client disconnects without sending TEARDOWN.</doc>
         </array>
       </field>
     </record>
-    <record name="RTSPMediaFactoryURIPrivate" c:type="GstRTSPMediaFactoryURIPrivate" disguised="1"/>
-    <record name="RTSPMediaPrivate" c:type="GstRTSPMediaPrivate" disguised="1"/>
+    <record name="RTSPMediaFactoryURIPrivate" c:type="GstRTSPMediaFactoryURIPrivate" disguised="1" opaque="1"/>
+    <record name="RTSPMediaPrivate" c:type="GstRTSPMediaPrivate" disguised="1" opaque="1"/>
     <enumeration name="RTSPMediaStatus" c:type="GstRTSPMediaStatus">
       <doc xml:space="preserve">The state of the media pipeline.</doc>
       <member name="unprepared" value="0" c:identifier="GST_RTSP_MEDIA_STATUS_UNPREPARED">
@@ -6278,7 +6278,7 @@ g_object_unref() after usage.</doc>
         </array>
       </field>
     </record>
-    <record name="RTSPMountPointsPrivate" c:type="GstRTSPMountPointsPrivate" disguised="1"/>
+    <record name="RTSPMountPointsPrivate" c:type="GstRTSPMountPointsPrivate" disguised="1" opaque="1"/>
     <class name="RTSPOnvifClient" c:symbol-prefix="rtsp_onvif_client" c:type="GstRTSPOnvifClient" version="1.14" parent="RTSPClient" glib:type-name="GstRTSPOnvifClient" glib:get-type="gst_rtsp_onvif_client_get_type" glib:type-struct="RTSPOnvifClientClass">
       <constructor name="new" c:identifier="gst_rtsp_onvif_client_new" version="1.18">
         <doc xml:space="preserve">Create a new #GstRTSPOnvifClient instance.</doc>
@@ -6566,8 +6566,8 @@ prepare.</doc>
         </array>
       </field>
     </record>
-    <record name="RTSPOnvifMediaFactoryPrivate" c:type="GstRTSPOnvifMediaFactoryPrivate" disguised="1"/>
-    <record name="RTSPOnvifMediaPrivate" c:type="GstRTSPOnvifMediaPrivate" disguised="1"/>
+    <record name="RTSPOnvifMediaFactoryPrivate" c:type="GstRTSPOnvifMediaFactoryPrivate" disguised="1" opaque="1"/>
+    <record name="RTSPOnvifMediaPrivate" c:type="GstRTSPOnvifMediaPrivate" disguised="1" opaque="1"/>
     <class name="RTSPOnvifServer" c:symbol-prefix="rtsp_onvif_server" c:type="GstRTSPOnvifServer" version="1.14" parent="RTSPServer" glib:type-name="GstRTSPOnvifServer" glib:get-type="gst_rtsp_onvif_server_get_type" glib:type-struct="RTSPOnvifServerClass">
       <constructor name="new" c:identifier="gst_rtsp_onvif_server_new">
         <doc xml:space="preserve">Create a new #GstRTSPOnvifServer instance.</doc>
@@ -7292,22 +7292,22 @@ that the HTTP server read from the socket while parsing the HTTP header.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="address" writable="1" transfer-ownership="none" setter="set_address" getter="get_address">
+      <property name="address" writable="1" transfer-ownership="none" setter="set_address" getter="get_address" default-value="0.0.0.0">
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="backlog" writable="1" transfer-ownership="none" setter="set_backlog" getter="get_backlog">
+      <property name="backlog" writable="1" transfer-ownership="none" setter="set_backlog" getter="get_backlog" default-value="5">
         <type name="gint" c:type="gint"/>
       </property>
-      <property name="bound-port" transfer-ownership="none" getter="get_bound_port">
+      <property name="bound-port" transfer-ownership="none" getter="get_bound_port" default-value="-1">
         <type name="gint" c:type="gint"/>
       </property>
-      <property name="content-length-limit" writable="1" transfer-ownership="none" setter="set_content_length_limit" getter="get_content_length_limit">
+      <property name="content-length-limit" writable="1" transfer-ownership="none" setter="set_content_length_limit" getter="get_content_length_limit" default-value="4294967295">
         <type name="guint" c:type="guint"/>
       </property>
       <property name="mount-points" writable="1" transfer-ownership="none" setter="set_mount_points" getter="get_mount_points">
         <type name="RTSPMountPoints"/>
       </property>
-      <property name="service" writable="1" transfer-ownership="none" setter="set_service" getter="get_service">
+      <property name="service" writable="1" transfer-ownership="none" setter="set_service" getter="get_service" default-value="8554">
         <type name="utf8" c:type="gchar*"/>
       </property>
       <property name="session-pool" writable="1" transfer-ownership="none" setter="set_session_pool" getter="get_session_pool">
@@ -7404,7 +7404,7 @@ gst_rtsp_server_client_filter().</doc>
         </parameter>
       </parameters>
     </callback>
-    <record name="RTSPServerPrivate" c:type="GstRTSPServerPrivate" disguised="1"/>
+    <record name="RTSPServerPrivate" c:type="GstRTSPServerPrivate" disguised="1" opaque="1"/>
     <class name="RTSPSession" c:symbol-prefix="rtsp_session" c:type="GstRTSPSession" parent="GObject.Object" glib:type-name="GstRTSPSession" glib:get-type="gst_rtsp_session_get_type" glib:type-struct="RTSPSessionClass">
       <doc xml:space="preserve">Session information kept by the server for a specific client.
 One client session, identified with a session id, can handle multiple medias
@@ -7711,16 +7711,16 @@ cleaned up when there is no activity for @timeout seconds.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <property name="extra-timeout" writable="1" transfer-ownership="none">
+      <property name="extra-timeout" writable="1" transfer-ownership="none" default-value="5">
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="sessionid" writable="1" construct-only="1" transfer-ownership="none" getter="get_sessionid">
+      <property name="sessionid" writable="1" construct-only="1" transfer-ownership="none" getter="get_sessionid" default-value="NULL">
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="timeout" writable="1" transfer-ownership="none" setter="set_timeout" getter="get_timeout">
+      <property name="timeout" writable="1" transfer-ownership="none" setter="set_timeout" getter="get_timeout" default-value="60">
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="timeout-always-visible" writable="1" transfer-ownership="none">
+      <property name="timeout-always-visible" writable="1" transfer-ownership="none" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
       <field name="parent">
@@ -8003,7 +8003,7 @@ matched characters is returned in @matched.</doc>
         </array>
       </field>
     </record>
-    <record name="RTSPSessionMediaPrivate" c:type="GstRTSPSessionMediaPrivate" disguised="1"/>
+    <record name="RTSPSessionMediaPrivate" c:type="GstRTSPSessionMediaPrivate" disguised="1" opaque="1"/>
     <class name="RTSPSessionPool" c:symbol-prefix="rtsp_session_pool" c:type="GstRTSPSessionPool" parent="GObject.Object" glib:type-name="GstRTSPSessionPool" glib:get-type="gst_rtsp_session_pool_get_type" glib:type-struct="RTSPSessionPoolClass">
       <doc xml:space="preserve">An object that keeps track of the active sessions. This object is usually
 attached to a #GstRTSPServer object to manage the sessions in that server.</doc>
@@ -8210,7 +8210,7 @@ A value of 0 means an unlimited amount of sessions.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="max-sessions" writable="1" transfer-ownership="none" setter="set_max_sessions" getter="get_max_sessions">
+      <property name="max-sessions" writable="1" transfer-ownership="none" setter="set_max_sessions" getter="get_max_sessions" default-value="0">
         <type name="guint" c:type="guint"/>
       </property>
       <field name="parent">
@@ -8338,8 +8338,8 @@ more sessions timed out.</doc>
         </parameter>
       </parameters>
     </callback>
-    <record name="RTSPSessionPoolPrivate" c:type="GstRTSPSessionPoolPrivate" disguised="1"/>
-    <record name="RTSPSessionPrivate" c:type="GstRTSPSessionPrivate" disguised="1"/>
+    <record name="RTSPSessionPoolPrivate" c:type="GstRTSPSessionPoolPrivate" disguised="1" opaque="1"/>
+    <record name="RTSPSessionPrivate" c:type="GstRTSPSessionPrivate" disguised="1" opaque="1"/>
     <class name="RTSPStream" c:symbol-prefix="rtsp_stream" c:type="GstRTSPStream" parent="GObject.Object" glib:type-name="GstRTSPStream" glib:get-type="gst_rtsp_stream_get_type" glib:type-struct="RTSPStreamClass">
       <doc xml:space="preserve">The definition of a media stream.</doc>
       <constructor name="new" c:identifier="gst_rtsp_stream_new">
@@ -9799,13 +9799,13 @@ be removed from @stream.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="control" writable="1" transfer-ownership="none" setter="set_control" getter="get_control">
+      <property name="control" writable="1" transfer-ownership="none" setter="set_control" getter="get_control" default-value="NULL">
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="profiles" writable="1" transfer-ownership="none" setter="set_profiles" getter="get_profiles">
+      <property name="profiles" writable="1" transfer-ownership="none" setter="set_profiles" getter="get_profiles" default-value="GST_RTSP_PROFILE_AVP">
         <type name="GstRtsp.RTSPProfile"/>
       </property>
-      <property name="protocols" writable="1" transfer-ownership="none" setter="set_protocols" getter="get_protocols">
+      <property name="protocols" writable="1" transfer-ownership="none" setter="set_protocols" getter="get_protocols" default-value="GST_RTSP_LOWER_TRANS_UDP | GST_RTSP_LOWER_TRANS_UDP_MCAST | GST_RTSP_LOWER_TRANS_TCP">
         <type name="GstRtsp.RTSPLowerTrans"/>
       </property>
       <field name="parent">
@@ -9860,7 +9860,7 @@ be removed from @stream.</doc>
         </array>
       </field>
     </record>
-    <record name="RTSPStreamPrivate" c:type="GstRTSPStreamPrivate" disguised="1"/>
+    <record name="RTSPStreamPrivate" c:type="GstRTSPStreamPrivate" disguised="1" opaque="1"/>
     <class name="RTSPStreamTransport" c:symbol-prefix="rtsp_stream_transport" c:type="GstRTSPStreamTransport" parent="GObject.Object" glib:type-name="GstRTSPStreamTransport" glib:get-type="gst_rtsp_stream_transport_get_type" glib:type-struct="RTSPStreamTransportClass">
       <doc xml:space="preserve">A Transport description for a stream</doc>
       <constructor name="new" c:identifier="gst_rtsp_stream_transport_new">
@@ -10319,7 +10319,7 @@ gst_rtsp_stream_transport_filter().</doc>
         </parameter>
       </parameters>
     </callback>
-    <record name="RTSPStreamTransportPrivate" c:type="GstRTSPStreamTransportPrivate" disguised="1"/>
+    <record name="RTSPStreamTransportPrivate" c:type="GstRTSPStreamTransportPrivate" disguised="1" opaque="1"/>
     <enumeration name="RTSPSuspendMode" glib:type-name="GstRTSPSuspendMode" glib:get-type="gst_rtsp_suspend_mode_get_type" c:type="GstRTSPSuspendMode">
       <doc xml:space="preserve">The suspend mode of the media pipeline. A media pipeline is suspended right
 after creating the SDP and when the client performs a PAUSED request.</doc>
@@ -10526,7 +10526,7 @@ unlimited number of threads.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="max-threads" writable="1" transfer-ownership="none" setter="set_max_threads" getter="get_max_threads">
+      <property name="max-threads" writable="1" transfer-ownership="none" setter="set_max_threads" getter="get_max_threads" default-value="1">
         <type name="gint" c:type="gint"/>
       </property>
       <field name="parent">
@@ -10627,7 +10627,7 @@ gst_rtsp_thread_stop() after usage</doc>
         </array>
       </field>
     </record>
-    <record name="RTSPThreadPoolPrivate" c:type="GstRTSPThreadPoolPrivate" disguised="1"/>
+    <record name="RTSPThreadPoolPrivate" c:type="GstRTSPThreadPoolPrivate" disguised="1" opaque="1"/>
     <enumeration name="RTSPThreadType" c:type="GstRTSPThreadType">
       <doc xml:space="preserve">Different thread types</doc>
       <member name="client" value="0" c:identifier="GST_RTSP_THREAD_TYPE_CLIENT">

@@ -4034,7 +4034,7 @@ Subclasses can add their own operation to perform using the returned
           </instance-parameter>
         </parameters>
       </method>
-      <property name="force-live" version="1.22" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="force-live" version="1.22" writable="1" construct-only="1" transfer-ownership="none" default-value="FALSE">
         <doc xml:space="preserve">Causes the element to aggregate on a timeout even when no live source is
 connected to its sinks. See #GstAggregator:min-upstream-latency for a
 companion property: in the vast majority of cases where you plan to plug in
@@ -4210,7 +4210,7 @@ update for any changes that have happened.</doc>
         </array>
       </field>
     </record>
-    <record name="VideoAggregatorConvertPadPrivate" c:type="GstVideoAggregatorConvertPadPrivate" disguised="1"/>
+    <record name="VideoAggregatorConvertPadPrivate" c:type="GstVideoAggregatorConvertPadPrivate" disguised="1" opaque="1"/>
     <class name="VideoAggregatorPad" c:symbol-prefix="video_aggregator_pad" c:type="GstVideoAggregatorPad" version="1.16" parent="GstBase.AggregatorPad" glib:type-name="GstVideoAggregatorPad" glib:get-type="gst_video_aggregator_pad_get_type" glib:type-struct="VideoAggregatorPadClass">
       <virtual-method name="clean_frame">
         <return-value transfer-ownership="none">
@@ -4378,13 +4378,13 @@ or from the #GstVideoAggregatorPadClass::prepare_frame virtual method of the agg
           </parameter>
         </parameters>
       </method>
-      <property name="max-last-buffer-repeat" writable="1" transfer-ownership="none">
+      <property name="max-last-buffer-repeat" writable="1" transfer-ownership="none" default-value="18446744073709551615">
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="repeat-after-eos" writable="1" transfer-ownership="none">
+      <property name="repeat-after-eos" writable="1" transfer-ownership="none" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="zorder" writable="1" transfer-ownership="none">
+      <property name="zorder" writable="1" transfer-ownership="none" default-value="0">
         <type name="guint" c:type="guint"/>
       </property>
       <field name="parent">
@@ -4510,7 +4510,7 @@ or from the #GstVideoAggregatorPadClass::prepare_frame virtual method of the agg
         </array>
       </field>
     </record>
-    <record name="VideoAggregatorPadPrivate" c:type="GstVideoAggregatorPadPrivate" disguised="1"/>
+    <record name="VideoAggregatorPadPrivate" c:type="GstVideoAggregatorPadPrivate" disguised="1" opaque="1"/>
     <class name="VideoAggregatorParallelConvertPad" c:symbol-prefix="video_aggregator_parallel_convert_pad" c:type="GstVideoAggregatorParallelConvertPad" version="1.20" parent="VideoAggregatorConvertPad" glib:type-name="GstVideoAggregatorParallelConvertPad" glib:get-type="gst_video_aggregator_parallel_convert_pad_get_type" glib:type-struct="VideoAggregatorParallelConvertPadClass">
       <doc xml:space="preserve">An implementation of GstPad that can be used with #GstVideoAggregator.
 
@@ -4529,7 +4529,7 @@ See #GstVideoAggregator for more details.</doc>
         </array>
       </field>
     </record>
-    <record name="VideoAggregatorPrivate" c:type="GstVideoAggregatorPrivate" disguised="1"/>
+    <record name="VideoAggregatorPrivate" c:type="GstVideoAggregatorPrivate" disguised="1" opaque="1"/>
     <record name="VideoAlignment" c:type="GstVideoAlignment">
       <doc xml:space="preserve">Extra alignment parameters for the memory of video buffers. This
 structure is usually used to configure the bufferpool if it supports the
@@ -4781,7 +4781,7 @@ supports all the video bufferpool options.</doc>
         <type name="Gst.BufferPoolClass" c:type="GstBufferPoolClass"/>
       </field>
     </record>
-    <record name="VideoBufferPoolPrivate" c:type="GstVideoBufferPoolPrivate" disguised="1"/>
+    <record name="VideoBufferPoolPrivate" c:type="GstVideoBufferPoolPrivate" disguised="1" opaque="1"/>
     <record name="VideoCaptionMeta" c:type="GstVideoCaptionMeta" version="1.16">
       <doc xml:space="preserve">Extra buffer metadata providing Closed Caption.</doc>
       <field name="meta" writable="1">
@@ -4905,7 +4905,7 @@ type, or %GST_VIDEO_CAPTION_TYPE_UNKNOWN.</doc>
         <doc xml:space="preserve">disable chroma resampling</doc>
       </member>
     </enumeration>
-    <record name="VideoChromaResample" c:type="GstVideoChromaResample" disguised="1">
+    <record name="VideoChromaResample" c:type="GstVideoChromaResample" disguised="1" opaque="1">
       <method name="" c:identifier="gst_video_chroma_resample" moved-to="video_chroma_resample">
         <doc xml:space="preserve">Perform resampling of @width chroma pixels in @lines.</doc>
         <return-value transfer-ownership="none">
@@ -5870,7 +5870,7 @@ with the parsed values.</doc>
         </parameter>
       </parameters>
     </callback>
-    <record name="VideoConverter" c:type="GstVideoConverter" disguised="1">
+    <record name="VideoConverter" c:type="GstVideoConverter" disguised="1" opaque="1">
       <method name="frame" c:identifier="gst_video_converter_frame" version="1.6">
         <doc xml:space="preserve">Convert the pixels of @src into @dest using @convert.
 
@@ -7306,28 +7306,28 @@ handler with %GST_PAD_SET_ACCEPT_INTERSECT and
           </parameter>
         </parameters>
       </method>
-      <property name="automatic-request-sync-point-flags" version="1.20" writable="1" transfer-ownership="none">
+      <property name="automatic-request-sync-point-flags" version="1.20" writable="1" transfer-ownership="none" default-value="GST_VIDEO_DECODER_REQUEST_SYNC_POINT_DISCARD_INPUT | GST_VIDEO_DECODER_REQUEST_SYNC_POINT_CORRUPT_OUTPUT">
         <doc xml:space="preserve">GstVideoDecoderRequestSyncPointFlags to use for the automatically
 requested sync points if `automatic-request-sync-points` is enabled.</doc>
         <type name="VideoDecoderRequestSyncPointFlags"/>
       </property>
-      <property name="automatic-request-sync-points" version="1.20" writable="1" transfer-ownership="none">
+      <property name="automatic-request-sync-points" version="1.20" writable="1" transfer-ownership="none" default-value="FALSE">
         <doc xml:space="preserve">If set to %TRUE the decoder will automatically request sync points when
 it seems like a good idea, e.g. if the first frames are not key frames or
 if packet loss was reported by upstream.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="discard-corrupted-frames" version="1.20" writable="1" transfer-ownership="none">
+      <property name="discard-corrupted-frames" version="1.20" writable="1" transfer-ownership="none" default-value="FALSE">
         <doc xml:space="preserve">If set to %TRUE the decoder will discard frames that are marked as
 corrupted instead of outputting them.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="max-errors" version="1.18" writable="1" transfer-ownership="none" setter="set_max_errors" getter="get_max_errors">
+      <property name="max-errors" version="1.18" writable="1" transfer-ownership="none" setter="set_max_errors" getter="get_max_errors" default-value="-1">
         <doc xml:space="preserve">Maximum number of tolerated consecutive decode errors. See
 gst_video_decoder_set_max_errors() for more details.</doc>
         <type name="gint" c:type="gint"/>
       </property>
-      <property name="min-force-key-unit-interval" version="1.20" writable="1" transfer-ownership="none">
+      <property name="min-force-key-unit-interval" version="1.20" writable="1" transfer-ownership="none" default-value="0">
         <doc xml:space="preserve">Minimum interval between force-key-unit events sent upstream by the
 decoder. Setting this to 0 will cause every event to be handled, setting
 this to %GST_CLOCK_TIME_NONE will cause every event to be ignored.
@@ -7336,7 +7336,7 @@ See gst_video_event_new_upstream_force_key_unit() for more details about
 force-key-unit events.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="qos" version="1.18" writable="1" transfer-ownership="none">
+      <property name="qos" version="1.18" writable="1" transfer-ownership="none" default-value="TRUE">
         <doc xml:space="preserve">If set to %TRUE the decoder will handle QoS events received
 from downstream elements.
 This includes dropping output frames which are detected as late
@@ -7695,7 +7695,7 @@ and likely as well.  If non-packetized input is supported or expected,
         </array>
       </field>
     </record>
-    <record name="VideoDecoderPrivate" c:type="GstVideoDecoderPrivate" disguised="1"/>
+    <record name="VideoDecoderPrivate" c:type="GstVideoDecoderPrivate" disguised="1" opaque="1"/>
     <bitfield name="VideoDecoderRequestSyncPointFlags" version="1.20" glib:type-name="GstVideoDecoderRequestSyncPointFlags" glib:get-type="gst_video_decoder_request_sync_point_flags_get_type" c:type="GstVideoDecoderRequestSyncPointFlags">
       <doc xml:space="preserve">Flags to be used in combination with gst_video_decoder_request_sync_point().
 See the function documentation for more details.</doc>
@@ -7711,7 +7711,7 @@ See the function documentation for more details.</doc>
     <interface name="VideoDirection" c:symbol-prefix="video_direction" c:type="GstVideoDirection" version="1.10" glib:type-name="GstVideoDirection" glib:get-type="gst_video_direction_get_type" glib:type-struct="VideoDirectionInterface">
       <doc xml:space="preserve">The interface allows unified access to control flipping and rotation
 operations of video-sources or operators.</doc>
-      <property name="video-direction" writable="1" construct="1" transfer-ownership="none">
+      <property name="video-direction" writable="1" construct="1" transfer-ownership="none" default-value="GST_VIDEO_ORIENTATION_IDENTITY">
         <type name="VideoOrientationMethod"/>
       </property>
     </interface>
@@ -7722,7 +7722,7 @@ operations of video-sources or operators.</doc>
         <type name="GObject.TypeInterface" c:type="GTypeInterface"/>
       </field>
     </record>
-    <record name="VideoDither" c:type="GstVideoDither" disguised="1">
+    <record name="VideoDither" c:type="GstVideoDither" disguised="1" opaque="1">
       <doc xml:space="preserve">GstVideoDither provides implementations of several dithering algorithms
 that can be applied to lines of video pixels to quantize and dither them.</doc>
       <method name="free" c:identifier="gst_video_dither_free">
@@ -8575,12 +8575,12 @@ from the next call to #gst_video_encoder_finish_frame().</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="min-force-key-unit-interval" version="1.18" writable="1" transfer-ownership="none" setter="set_min_force_key_unit_interval" getter="get_min_force_key_unit_interval">
+      <property name="min-force-key-unit-interval" version="1.18" writable="1" transfer-ownership="none" setter="set_min_force_key_unit_interval" getter="get_min_force_key_unit_interval" default-value="0">
         <doc xml:space="preserve">Minimum interval between force-keyunit requests in nanoseconds. See
 gst_video_encoder_set_min_force_key_unit_interval() for more details.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="qos" writable="1" transfer-ownership="none">
+      <property name="qos" writable="1" transfer-ownership="none" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
       <field name="element" readable="0" private="1">
@@ -8892,7 +8892,7 @@ and @get_caps are likely needed as well.</doc>
         </array>
       </field>
     </record>
-    <record name="VideoEncoderPrivate" c:type="GstVideoEncoderPrivate" disguised="1"/>
+    <record name="VideoEncoderPrivate" c:type="GstVideoEncoderPrivate" disguised="1" opaque="1"/>
     <enumeration name="VideoFieldOrder" version="1.12" glib:type-name="GstVideoFieldOrder" glib:get-type="gst_video_field_order_get_type" c:type="GstVideoFieldOrder">
       <doc xml:space="preserve">Field order of interlaced content. This is only valid for
 interlace-mode=interleaved and not interlace-mode=mixed. In the case of
@@ -12368,7 +12368,7 @@ tell the overlay to stop using that window and create an internal one.</doc>
         </parameters>
       </method>
     </interface>
-    <record name="VideoOverlayComposition" c:type="GstVideoOverlayComposition" glib:type-name="GstVideoOverlayComposition" glib:get-type="gst_video_overlay_composition_get_type" c:symbol-prefix="video_overlay_composition">
+    <record name="VideoOverlayComposition" c:type="GstVideoOverlayComposition" opaque="1" glib:type-name="GstVideoOverlayComposition" glib:get-type="gst_video_overlay_composition_get_type" c:symbol-prefix="video_overlay_composition">
       <doc xml:space="preserve">Functions to create and handle overlay compositions on video buffers.
 
 An overlay composition describes one or more overlay rectangles to be
@@ -12641,7 +12641,7 @@ contained in the rectangles are not copied.</doc>
         </callback>
       </field>
     </record>
-    <record name="VideoOverlayRectangle" c:type="GstVideoOverlayRectangle" glib:type-name="GstVideoOverlayRectangle" glib:get-type="gst_video_overlay_rectangle_get_type" c:symbol-prefix="video_overlay_rectangle">
+    <record name="VideoOverlayRectangle" c:type="GstVideoOverlayRectangle" opaque="1" glib:type-name="GstVideoOverlayRectangle" glib:get-type="gst_video_overlay_rectangle_get_type" c:symbol-prefix="video_overlay_rectangle">
       <doc xml:space="preserve">An opaque video overlay rectangle object. A rectangle contains a single
 overlay rectangle which can be added to a composition.</doc>
       <constructor name="new_raw" c:identifier="gst_video_overlay_rectangle_new_raw">
@@ -13288,7 +13288,7 @@ required to perform various kinds of resampling filtering.</doc>
         </return-value>
       </function>
     </record>
-    <record name="VideoScaler" c:type="GstVideoScaler" disguised="1">
+    <record name="VideoScaler" c:type="GstVideoScaler" disguised="1" opaque="1">
       <doc xml:space="preserve">#GstVideoScaler is a utility object for rescaling and resampling
 video frames using various interpolation / sampling methods.</doc>
       <method name="2d" c:identifier="gst_video_scaler_2d">
@@ -13606,7 +13606,7 @@ observing out-of-sync frames.</doc>
           </parameter>
         </parameters>
       </virtual-method>
-      <property name="show-preroll-frame" writable="1" construct="1" transfer-ownership="none">
+      <property name="show-preroll-frame" writable="1" construct="1" transfer-ownership="none" default-value="TRUE">
         <doc xml:space="preserve">Whether to show video frames during preroll. If set to %FALSE, video
 frames will only be rendered in PLAYING state.</doc>
         <type name="gboolean" c:type="gboolean"/>
@@ -13679,7 +13679,7 @@ frames will only be rendered in PLAYING state.</doc>
         </array>
       </field>
     </record>
-    <record name="VideoSinkPrivate" c:type="GstVideoSinkPrivate" disguised="1"/>
+    <record name="VideoSinkPrivate" c:type="GstVideoSinkPrivate" disguised="1" opaque="1"/>
     <record name="VideoTileInfo" c:type="GstVideoTileInfo" version="1.22">
       <doc xml:space="preserve">Description of a tile. This structure allow to describe arbitrary tile
 dimensions and sizes.</doc>
@@ -14569,7 +14569,7 @@ and "ITU-T H.273 Table 3".
         </parameters>
       </function>
     </enumeration>
-    <record name="VideoVBIEncoder" c:type="GstVideoVBIEncoder" version="1.16" glib:type-name="GstVideoVBIEncoder" glib:get-type="gst_video_vbi_encoder_get_type" c:symbol-prefix="video_vbi_encoder">
+    <record name="VideoVBIEncoder" c:type="GstVideoVBIEncoder" opaque="1" version="1.16" glib:type-name="GstVideoVBIEncoder" glib:get-type="gst_video_vbi_encoder_get_type" c:symbol-prefix="video_vbi_encoder">
       <doc xml:space="preserve">An encoder for writing ancillary data to the
 Vertical Blanking Interval lines of component signals.</doc>
       <constructor name="new" c:identifier="gst_video_vbi_encoder_new" version="1.16">
@@ -14667,7 +14667,7 @@ the parity check bits).</doc>
         </parameters>
       </method>
     </record>
-    <record name="VideoVBIParser" c:type="GstVideoVBIParser" version="1.16" glib:type-name="GstVideoVBIParser" glib:get-type="gst_video_vbi_parser_get_type" c:symbol-prefix="video_vbi_parser">
+    <record name="VideoVBIParser" c:type="GstVideoVBIParser" opaque="1" version="1.16" glib:type-name="GstVideoVBIParser" glib:get-type="gst_video_vbi_parser_get_type" c:symbol-prefix="video_vbi_parser">
       <doc xml:space="preserve">A parser for detecting and extracting @GstVideoAncillary data from
 Vertical Blanking Interval lines of component signals.</doc>
       <constructor name="new" c:identifier="gst_video_vbi_parser_new" version="1.16">

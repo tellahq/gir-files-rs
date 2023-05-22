@@ -708,25 +708,25 @@ condition.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="buffer-list" writable="1" transfer-ownership="none">
+      <property name="buffer-list" writable="1" transfer-ownership="none" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
       <property name="caps" writable="1" transfer-ownership="none" setter="set_caps" getter="get_caps">
         <type name="Gst.Caps"/>
       </property>
-      <property name="drop" writable="1" transfer-ownership="none" setter="set_drop" getter="get_drop">
+      <property name="drop" writable="1" transfer-ownership="none" setter="set_drop" getter="get_drop" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="emit-signals" writable="1" transfer-ownership="none" setter="set_emit_signals" getter="get_emit_signals">
+      <property name="emit-signals" writable="1" transfer-ownership="none" setter="set_emit_signals" getter="get_emit_signals" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="eos" transfer-ownership="none">
+      <property name="eos" transfer-ownership="none" default-value="TRUE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="max-buffers" writable="1" transfer-ownership="none" setter="set_max_buffers" getter="get_max_buffers">
+      <property name="max-buffers" writable="1" transfer-ownership="none" setter="set_max_buffers" getter="get_max_buffers" default-value="0">
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="wait-on-eos" writable="1" transfer-ownership="none" setter="set_wait_on_eos" getter="get_wait_on_eos">
+      <property name="wait-on-eos" writable="1" transfer-ownership="none" setter="set_wait_on_eos" getter="get_wait_on_eos" default-value="TRUE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
       <field name="basesink">
@@ -1173,7 +1173,7 @@ Call gst_mini_object_unref() after usage.</doc>
         </array>
       </field>
     </record>
-    <record name="AppSinkPrivate" c:type="GstAppSinkPrivate" disguised="1"/>
+    <record name="AppSinkPrivate" c:type="GstAppSinkPrivate" disguised="1" opaque="1"/>
     <class name="AppSrc" c:symbol-prefix="app_src" c:type="GstAppSrc" parent="GstBase.BaseSrc" glib:type-name="GstAppSrc" glib:get-type="gst_app_src_get_type" glib:type-struct="AppSrcClass">
       <doc xml:space="preserve">The appsrc element can be used by applications to insert data into a
 GStreamer pipeline. Unlike most GStreamer elements, appsrc provides
@@ -1857,7 +1857,7 @@ A stream_type stream</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="block" writable="1" transfer-ownership="none">
+      <property name="block" writable="1" transfer-ownership="none" default-value="FALSE">
         <doc xml:space="preserve">When max-bytes are queued and after the enough-data signal has been emitted,
 block any further push-buffer calls until the amount of queued bytes drops
 below the max-bytes limit.</doc>
@@ -1868,35 +1868,35 @@ below the max-bytes limit.</doc>
 on outgoing buffers.</doc>
         <type name="Gst.Caps"/>
       </property>
-      <property name="current-level-buffers" version="1.20" transfer-ownership="none" getter="get_current_level_buffers">
+      <property name="current-level-buffers" version="1.20" transfer-ownership="none" getter="get_current_level_buffers" default-value="0">
         <doc xml:space="preserve">The number of currently queued buffers inside appsrc.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="current-level-bytes" version="1.2" transfer-ownership="none" getter="get_current_level_bytes">
+      <property name="current-level-bytes" version="1.2" transfer-ownership="none" getter="get_current_level_bytes" default-value="0">
         <doc xml:space="preserve">The number of currently queued bytes inside appsrc.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="current-level-time" version="1.20" transfer-ownership="none" getter="get_current_level_time">
+      <property name="current-level-time" version="1.20" transfer-ownership="none" getter="get_current_level_time" default-value="0">
         <doc xml:space="preserve">The amount of currently queued time inside appsrc.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="duration" version="1.10" writable="1" transfer-ownership="none" setter="set_duration" getter="get_duration">
+      <property name="duration" version="1.10" writable="1" transfer-ownership="none" setter="set_duration" getter="get_duration" default-value="18446744073709551615">
         <doc xml:space="preserve">The total duration in nanoseconds of the data stream. If the total duration is known, it
 is recommended to configure it with this property.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="emit-signals" writable="1" transfer-ownership="none" setter="set_emit_signals" getter="get_emit_signals">
+      <property name="emit-signals" writable="1" transfer-ownership="none" setter="set_emit_signals" getter="get_emit_signals" default-value="TRUE">
         <doc xml:space="preserve">Make appsrc emit the "need-data", "enough-data" and "seek-data" signals.
 This option is by default enabled for backwards compatibility reasons but
 can disabled when needed because signal emission is expensive.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="format" writable="1" transfer-ownership="none">
+      <property name="format" writable="1" transfer-ownership="none" default-value="GST_FORMAT_BYTES">
         <doc xml:space="preserve">The format to use for segment events. When the source is producing
 timestamped buffers this property should be set to GST_FORMAT_TIME.</doc>
         <type name="Gst.Format"/>
       </property>
-      <property name="handle-segment-change" version="1.18" writable="1" transfer-ownership="none">
+      <property name="handle-segment-change" version="1.18" writable="1" transfer-ownership="none" default-value="FALSE">
         <doc xml:space="preserve">When enabled, appsrc will check GstSegment in GstSample which was
 pushed via gst_app_src_push_sample() or "push-sample" signal action.
 If a GstSegment is changed, corresponding segment event will be followed
@@ -1907,55 +1907,55 @@ GstAppSrc::format should be time. However, possibly #GstAppSrc can support
 other formats.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="is-live" writable="1" transfer-ownership="none">
+      <property name="is-live" writable="1" transfer-ownership="none" default-value="FALSE">
         <doc xml:space="preserve">Instruct the source to behave like a live source. This includes that it
 will only push out buffers in the PLAYING state.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="leaky-type" version="1.20" writable="1" transfer-ownership="none" setter="set_leaky_type" getter="get_leaky_type">
+      <property name="leaky-type" version="1.20" writable="1" transfer-ownership="none" setter="set_leaky_type" getter="get_leaky_type" default-value="GST_APP_LEAKY_TYPE_NONE">
         <doc xml:space="preserve">When set to any other value than GST_APP_LEAKY_TYPE_NONE then the appsrc
 will drop any buffers that are pushed into it once its internal queue is
 full. The selected type defines whether to drop the oldest or new
 buffers.</doc>
         <type name="AppLeakyType"/>
       </property>
-      <property name="max-buffers" version="1.20" writable="1" transfer-ownership="none" setter="set_max_buffers" getter="get_max_buffers">
+      <property name="max-buffers" version="1.20" writable="1" transfer-ownership="none" setter="set_max_buffers" getter="get_max_buffers" default-value="0">
         <doc xml:space="preserve">The maximum amount of buffers that can be queued internally.
 After the maximum amount of buffers are queued, appsrc will emit the
 "enough-data" signal.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="max-bytes" writable="1" transfer-ownership="none" setter="set_max_bytes" getter="get_max_bytes">
+      <property name="max-bytes" writable="1" transfer-ownership="none" setter="set_max_bytes" getter="get_max_bytes" default-value="200000">
         <doc xml:space="preserve">The maximum amount of bytes that can be queued internally.
 After the maximum amount of bytes are queued, appsrc will emit the
 "enough-data" signal.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="max-latency" writable="1" transfer-ownership="none">
+      <property name="max-latency" writable="1" transfer-ownership="none" default-value="-1">
         <type name="gint64" c:type="gint64"/>
       </property>
-      <property name="max-time" version="1.20" writable="1" transfer-ownership="none" setter="set_max_time" getter="get_max_time">
+      <property name="max-time" version="1.20" writable="1" transfer-ownership="none" setter="set_max_time" getter="get_max_time" default-value="0">
         <doc xml:space="preserve">The maximum amount of time that can be queued internally.
 After the maximum amount of time are queued, appsrc will emit the
 "enough-data" signal.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="min-latency" writable="1" transfer-ownership="none">
+      <property name="min-latency" writable="1" transfer-ownership="none" default-value="-1">
         <doc xml:space="preserve">The minimum latency of the source. A value of -1 will use the default
 latency calculations of #GstBaseSrc.</doc>
         <type name="gint64" c:type="gint64"/>
       </property>
-      <property name="min-percent" writable="1" transfer-ownership="none">
+      <property name="min-percent" writable="1" transfer-ownership="none" default-value="0">
         <doc xml:space="preserve">Make appsrc emit the "need-data" signal when the amount of bytes in the
 queue drops below this percentage of max-bytes.</doc>
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="size" writable="1" transfer-ownership="none" setter="set_size" getter="get_size">
+      <property name="size" writable="1" transfer-ownership="none" setter="set_size" getter="get_size" default-value="-1">
         <doc xml:space="preserve">The total size in bytes of the data stream. If the total size is known, it
 is recommended to configure it with this property.</doc>
         <type name="gint64" c:type="gint64"/>
       </property>
-      <property name="stream-type" writable="1" transfer-ownership="none" setter="set_stream_type" getter="get_stream_type">
+      <property name="stream-type" writable="1" transfer-ownership="none" setter="set_stream_type" getter="get_stream_type" default-value="GST_APP_STREAM_TYPE_STREAM">
         <doc xml:space="preserve">The type of stream that this source is producing.  For seekable streams the
 application should connect to the seek-data signal.</doc>
         <type name="AppStreamType"/>
@@ -2272,7 +2272,7 @@ extracted</doc>
         </array>
       </field>
     </record>
-    <record name="AppSrcPrivate" c:type="GstAppSrcPrivate" disguised="1"/>
+    <record name="AppSrcPrivate" c:type="GstAppSrcPrivate" disguised="1" opaque="1"/>
     <enumeration name="AppStreamType" glib:type-name="GstAppStreamType" glib:get-type="gst_app_stream_type_get_type" c:type="GstAppStreamType">
       <doc xml:space="preserve">The stream type.</doc>
       <member name="stream" value="0" c:identifier="GST_APP_STREAM_TYPE_STREAM" glib:nick="stream" glib:name="GST_APP_STREAM_TYPE_STREAM">

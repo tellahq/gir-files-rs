@@ -245,7 +245,7 @@ value to a GstClockTime.</doc>
         </array>
       </field>
     </record>
-    <record name="ActionPrivate" c:type="GstValidateActionPrivate" disguised="1"/>
+    <record name="ActionPrivate" c:type="GstValidateActionPrivate" disguised="1" opaque="1"/>
     <enumeration name="ActionReturn" glib:type-name="GstValidateActionReturn" glib:get-type="gst_validate_action_return_get_type" c:type="GstValidateActionReturn">
       <doc xml:space="preserve">GST_VALIDATE_EXECUTE_ACTION_ERROR:
 GST_VALIDATE_EXECUTE_ACTION_OK:
@@ -382,7 +382,7 @@ This implies that the action can be executed from any thread and not only from t
 types.</doc>
       </member>
     </bitfield>
-    <record name="ActionTypePrivate" c:type="GstValidateActionTypePrivate" disguised="1"/>
+    <record name="ActionTypePrivate" c:type="GstValidateActionTypePrivate" disguised="1" opaque="1"/>
     <class name="BinMonitor" c:symbol-prefix="bin_monitor" c:type="GstValidateBinMonitor" parent="ElementMonitor" glib:type-name="GstValidateBinMonitor" glib:get-type="gst_validate_bin_monitor_get_type" glib:type-struct="BinMonitorClass">
       <doc xml:space="preserve">GStreamer Validate BinMonitor class.
 
@@ -421,7 +421,7 @@ under @monitor watch</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <property name="handles-states" transfer-ownership="none">
+      <property name="handles-states" transfer-ownership="none" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
       <field name="parent">
@@ -1049,8 +1049,8 @@ GST_VALIDATE_ISSUE_FLAGS_NO_BACKTRACE: Do not generate backtrace for the issue t
         </array>
       </field>
     </record>
-    <record name="MediaDescriptorParserPrivate" c:type="GstValidateMediaDescriptorParserPrivate" disguised="1"/>
-    <record name="MediaDescriptorPrivate" c:type="GstValidateMediaDescriptorPrivate" disguised="1"/>
+    <record name="MediaDescriptorParserPrivate" c:type="GstValidateMediaDescriptorParserPrivate" disguised="1" opaque="1"/>
+    <record name="MediaDescriptorPrivate" c:type="GstValidateMediaDescriptorPrivate" disguised="1" opaque="1"/>
     <class name="MediaDescriptorWriter" c:symbol-prefix="media_descriptor_writer" c:type="GstValidateMediaDescriptorWriter" parent="MediaDescriptor" glib:type-name="GstValidateMediaDescriptorWriter" glib:get-type="gst_validate_media_descriptor_writer_get_type" glib:type-struct="MediaDescriptorWriterClass">
       <implements name="Reporter"/>
       <constructor name="new" c:identifier="gst_validate_media_descriptor_writer_new">
@@ -1241,7 +1241,7 @@ GST_VALIDATE_ISSUE_FLAGS_NO_BACKTRACE: Do not generate backtrace for the issue t
       <member name="handle_glogs" value="8" c:identifier="GST_VALIDATE_MEDIA_DESCRIPTOR_WRITER_FLAGS_HANDLE_GLOGS" glib:nick="handle-glogs" glib:name="GST_VALIDATE_MEDIA_DESCRIPTOR_WRITER_FLAGS_HANDLE_GLOGS">
       </member>
     </bitfield>
-    <record name="MediaDescriptorWriterPrivate" c:type="GstValidateMediaDescriptorWriterPrivate" disguised="1"/>
+    <record name="MediaDescriptorWriterPrivate" c:type="GstValidateMediaDescriptorWriterPrivate" disguised="1" opaque="1"/>
     <record name="MediaInfo" c:type="GstValidateMediaInfo">
       <doc xml:space="preserve">GStreamer Validate MediaInfo struct.
 
@@ -1525,7 +1525,7 @@ target is in.</doc>
       <property name="validate-runner" writable="1" construct-only="1" transfer-ownership="none">
         <type name="Runner"/>
       </property>
-      <property name="verbosity" writable="1" transfer-ownership="none">
+      <property name="verbosity" writable="1" transfer-ownership="none" default-value="GST_VALIDATE_VERBOSITY_POSITION">
         <type name="VerbosityFlags"/>
       </property>
       <field name="object">
@@ -2100,7 +2100,7 @@ target is in.</doc>
         </parameter>
       </parameters>
     </callback>
-    <record name="OverridePrivate" c:type="GstValidateOverridePrivate" disguised="1"/>
+    <record name="OverridePrivate" c:type="GstValidateOverridePrivate" disguised="1" opaque="1"/>
     <callback name="OverrideQueryHandler" c:type="GstValidateOverrideQueryHandler">
       <return-value transfer-ownership="none">
         <type name="none" c:type="void"/>
@@ -2392,7 +2392,7 @@ Class that wraps a #GstPad for Validate checks</doc>
         </array>
       </field>
     </record>
-    <record name="PadSeekData" c:type="GstValidatePadSeekData" disguised="1"/>
+    <record name="PadSeekData" c:type="GstValidatePadSeekData" disguised="1" opaque="1"/>
     <callback name="ParseVariableFunc" c:type="GstValidateParseVariableFunc">
       <return-value transfer-ownership="none">
         <type name="gint" c:type="int"/>
@@ -3372,7 +3372,7 @@ exit code of the application.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <property name="params" writable="1" construct="1" transfer-ownership="none">
+      <property name="params" writable="1" construct="1" transfer-ownership="none" default-value="NULL">
         <type name="utf8" c:type="gchar*"/>
       </property>
       <field name="object">
@@ -3414,7 +3414,7 @@ exit code of the application.</doc>
         </array>
       </field>
     </record>
-    <record name="RunnerPrivate" c:type="GstValidateRunnerPrivate" disguised="1"/>
+    <record name="RunnerPrivate" c:type="GstValidateRunnerPrivate" disguised="1" opaque="1"/>
     <function-macro name="SCENARIO_EOS_HANDLING_LOCK" c:identifier="GST_VALIDATE_SCENARIO_EOS_HANDLING_LOCK" introspectable="0">
       <parameters>
         <parameter name="scenario">
@@ -3544,10 +3544,10 @@ against</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <property name="execute-on-idle" writable="1" transfer-ownership="none">
+      <property name="execute-on-idle" writable="1" transfer-ownership="none" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="handles-states" transfer-ownership="none">
+      <property name="handles-states" transfer-ownership="none" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
       <property name="validate-runner" writable="1" construct-only="1" transfer-ownership="none">
@@ -3599,8 +3599,8 @@ against</doc>
         </array>
       </field>
     </record>
-    <record name="ScenarioPrivate" c:type="GstValidateScenarioPrivate" disguised="1"/>
-    <record name="StreamInfo" c:type="GstValidateStreamInfo" disguised="1"/>
+    <record name="ScenarioPrivate" c:type="GstValidateScenarioPrivate" disguised="1" opaque="1"/>
+    <record name="StreamInfo" c:type="GstValidateStreamInfo" disguised="1" opaque="1"/>
     <bitfield name="StructureResolveVariablesFlags" version="1.20" glib:type-name="GstValidateStructureResolveVariablesFlags" glib:get-type="gst_validate_structure_resolve_variables_flags_get_type" c:type="GstValidateStructureResolveVariablesFlags">
       <member name="all" value="0" c:identifier="GST_VALIDATE_STRUCTURE_RESOLVE_VARIABLES_ALL" glib:nick="all" glib:name="GST_VALIDATE_STRUCTURE_RESOLVE_VARIABLES_ALL">
       </member>

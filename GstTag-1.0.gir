@@ -507,7 +507,7 @@ Subclasses should set this in their class_init function.</doc>
         </array>
       </field>
     </record>
-    <record name="TagDemuxPrivate" c:type="GstTagDemuxPrivate" disguised="1"/>
+    <record name="TagDemuxPrivate" c:type="GstTagDemuxPrivate" disguised="1" opaque="1"/>
     <enumeration name="TagDemuxResult" glib:type-name="GstTagDemuxResult" glib:get-type="gst_tag_demux_result_get_type" c:type="GstTagDemuxResult">
       <doc xml:space="preserve">Result values from the parse_tag virtual function.</doc>
       <member name="broken_tag" value="0" c:identifier="GST_TAG_DEMUX_RESULT_BROKEN_TAG" glib:nick="broken-tag" glib:name="GST_TAG_DEMUX_RESULT_BROKEN_TAG">
@@ -747,7 +747,7 @@ of the two render vfuncs.</doc>
         </array>
       </field>
     </record>
-    <record name="TagMuxPrivate" c:type="GstTagMuxPrivate" disguised="1"/>
+    <record name="TagMuxPrivate" c:type="GstTagMuxPrivate" disguised="1" opaque="1"/>
     <interface name="TagXmpWriter" c:symbol-prefix="tag_xmp_writer" c:type="GstTagXmpWriter" glib:type-name="GstTagXmpWriter" glib:get-type="gst_tag_xmp_writer_get_type" glib:type-struct="TagXmpWriterInterface">
       <doc xml:space="preserve">This interface is implemented by elements that are able to do XMP serialization. Examples for
 such elements are #jifmux and #qtmux.

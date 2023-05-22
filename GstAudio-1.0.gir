@@ -1090,20 +1090,20 @@ additional information in the info #GstStructure of the returned sample:
           </parameter>
         </parameters>
       </method>
-      <property name="alignment-threshold" writable="1" transfer-ownership="none">
+      <property name="alignment-threshold" writable="1" transfer-ownership="none" default-value="40000000">
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="discont-wait" writable="1" transfer-ownership="none">
+      <property name="discont-wait" writable="1" transfer-ownership="none" default-value="1000000000">
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="force-live" version="1.22" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="force-live" version="1.22" writable="1" construct-only="1" transfer-ownership="none" default-value="FALSE">
         <doc xml:space="preserve">Causes the element to aggregate on a timeout even when no live source is
 connected to its sinks. See #GstAggregator:min-upstream-latency for a
 companion property: in the vast majority of cases where you plan to plug in
 live sources with a non-zero latency, you should set it to a non-zero value.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="ignore-inactive-pads" version="1.20" writable="1" transfer-ownership="none">
+      <property name="ignore-inactive-pads" version="1.20" writable="1" transfer-ownership="none" default-value="FALSE">
         <doc xml:space="preserve">Don't wait for inactive pads when live. An inactive pad
 is a pad that hasn't yet received a buffer, but that has
 been waited on at least once.
@@ -1114,10 +1114,10 @@ data flow, for example the user may decide to connect it later,
 but wants to configure it already.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="output-buffer-duration" writable="1" transfer-ownership="none">
+      <property name="output-buffer-duration" writable="1" transfer-ownership="none" default-value="10000000">
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="output-buffer-duration-fraction" version="1.18" writable="1" transfer-ownership="none">
+      <property name="output-buffer-duration-fraction" version="1.18" writable="1" transfer-ownership="none" default-value="1/100">
         <doc xml:space="preserve">Output block size in nanoseconds, expressed as a fraction.</doc>
         <type name="Gst.Fraction"/>
       </property>
@@ -1221,7 +1221,7 @@ See #GstAudioAggregator for more details.</doc>
         </array>
       </field>
     </record>
-    <record name="AudioAggregatorConvertPadPrivate" c:type="GstAudioAggregatorConvertPadPrivate" disguised="1"/>
+    <record name="AudioAggregatorConvertPadPrivate" c:type="GstAudioAggregatorConvertPadPrivate" disguised="1" opaque="1"/>
     <class name="AudioAggregatorPad" c:symbol-prefix="audio_aggregator_pad" c:type="GstAudioAggregatorPad" version="1.14" parent="GstBase.AggregatorPad" glib:type-name="GstAudioAggregatorPad" glib:get-type="gst_audio_aggregator_pad_get_type" glib:type-struct="AudioAggregatorPadClass">
       <doc xml:space="preserve">The default implementation of GstPad used with #GstAudioAggregator</doc>
       <virtual-method name="convert_buffer">
@@ -1253,7 +1253,7 @@ See #GstAudioAggregator for more details.</doc>
           </instance-parameter>
         </parameters>
       </virtual-method>
-      <property name="qos-messages" version="1.20" writable="1" transfer-ownership="none">
+      <property name="qos-messages" version="1.20" writable="1" transfer-ownership="none" default-value="FALSE">
         <doc xml:space="preserve">Emit QoS messages when dropping buffers.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
@@ -1316,8 +1316,8 @@ See #GstAudioAggregator for more details.</doc>
         </array>
       </field>
     </record>
-    <record name="AudioAggregatorPadPrivate" c:type="GstAudioAggregatorPadPrivate" disguised="1"/>
-    <record name="AudioAggregatorPrivate" c:type="GstAudioAggregatorPrivate" disguised="1"/>
+    <record name="AudioAggregatorPadPrivate" c:type="GstAudioAggregatorPadPrivate" disguised="1" opaque="1"/>
+    <record name="AudioAggregatorPrivate" c:type="GstAudioAggregatorPrivate" disguised="1" opaque="1"/>
     <class name="AudioBaseSink" c:symbol-prefix="audio_base_sink" c:type="GstAudioBaseSink" parent="GstBase.BaseSink" glib:type-name="GstAudioBaseSink" glib:get-type="gst_audio_base_sink_get_type" glib:type-struct="AudioBaseSinkClass">
       <doc xml:space="preserve">This is the base class for audio sinks. Subclasses need to implement the
 ::create_ringbuffer vmethod. This base class will then take care of
@@ -1561,32 +1561,32 @@ NULL.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="alignment-threshold" writable="1" transfer-ownership="none" setter="set_alignment_threshold" getter="get_alignment_threshold">
+      <property name="alignment-threshold" writable="1" transfer-ownership="none" setter="set_alignment_threshold" getter="get_alignment_threshold" default-value="40000000">
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="buffer-time" writable="1" transfer-ownership="none">
+      <property name="buffer-time" writable="1" transfer-ownership="none" default-value="200000">
         <type name="gint64" c:type="gint64"/>
       </property>
-      <property name="can-activate-pull" writable="1" transfer-ownership="none">
+      <property name="can-activate-pull" writable="1" transfer-ownership="none" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="discont-wait" writable="1" transfer-ownership="none" setter="set_discont_wait" getter="get_discont_wait">
+      <property name="discont-wait" writable="1" transfer-ownership="none" setter="set_discont_wait" getter="get_discont_wait" default-value="1000000000">
         <doc xml:space="preserve">A window of time in nanoseconds to wait before creating a discontinuity as
 a result of breaching the drift-tolerance.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="drift-tolerance" writable="1" transfer-ownership="none" setter="set_drift_tolerance" getter="get_drift_tolerance">
+      <property name="drift-tolerance" writable="1" transfer-ownership="none" setter="set_drift_tolerance" getter="get_drift_tolerance" default-value="40000">
         <doc xml:space="preserve">Controls the amount of time in microseconds that clocks are allowed
 to drift before resynchronisation happens.</doc>
         <type name="gint64" c:type="gint64"/>
       </property>
-      <property name="latency-time" writable="1" transfer-ownership="none">
+      <property name="latency-time" writable="1" transfer-ownership="none" default-value="10000">
         <type name="gint64" c:type="gint64"/>
       </property>
-      <property name="provide-clock" writable="1" transfer-ownership="none" setter="set_provide_clock" getter="get_provide_clock">
+      <property name="provide-clock" writable="1" transfer-ownership="none" setter="set_provide_clock" getter="get_provide_clock" default-value="TRUE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="slave-method" writable="1" transfer-ownership="none" setter="set_slave_method" getter="get_slave_method">
+      <property name="slave-method" writable="1" transfer-ownership="none" setter="set_slave_method" getter="get_slave_method" default-value="GST_AUDIO_BASE_SINK_SLAVE_SKEW">
         <type name="AudioBaseSinkSlaveMethod"/>
       </property>
       <field name="element">
@@ -1737,7 +1737,7 @@ slave method.</doc>
         <doc xml:space="preserve">Audio output device experienced and recovered from an error but introduced latency in the process (see also gst_audio_base_sink_report_device_failure())</doc>
       </member>
     </enumeration>
-    <record name="AudioBaseSinkPrivate" c:type="GstAudioBaseSinkPrivate" disguised="1"/>
+    <record name="AudioBaseSinkPrivate" c:type="GstAudioBaseSinkPrivate" disguised="1" opaque="1"/>
     <enumeration name="AudioBaseSinkSlaveMethod" glib:type-name="GstAudioBaseSinkSlaveMethod" glib:get-type="gst_audio_base_sink_slave_method_get_type" c:type="GstAudioBaseSinkSlaveMethod">
       <doc xml:space="preserve">Different possible clock slaving algorithms used when the internal audio
 clock is not selected as the pipeline master clock.</doc>
@@ -1850,24 +1850,24 @@ of @src. If @provide is %FALSE, gst_element_provide_clock() will return NULL.</d
           </parameter>
         </parameters>
       </method>
-      <property name="actual-buffer-time" transfer-ownership="none">
+      <property name="actual-buffer-time" transfer-ownership="none" default-value="-1">
         <doc xml:space="preserve">Actual configured size of audio buffer in microseconds.</doc>
         <type name="gint64" c:type="gint64"/>
       </property>
-      <property name="actual-latency-time" transfer-ownership="none">
+      <property name="actual-latency-time" transfer-ownership="none" default-value="-1">
         <doc xml:space="preserve">Actual configured audio latency in microseconds.</doc>
         <type name="gint64" c:type="gint64"/>
       </property>
-      <property name="buffer-time" writable="1" transfer-ownership="none">
+      <property name="buffer-time" writable="1" transfer-ownership="none" default-value="200000">
         <type name="gint64" c:type="gint64"/>
       </property>
-      <property name="latency-time" writable="1" transfer-ownership="none">
+      <property name="latency-time" writable="1" transfer-ownership="none" default-value="10000">
         <type name="gint64" c:type="gint64"/>
       </property>
-      <property name="provide-clock" writable="1" transfer-ownership="none" setter="set_provide_clock" getter="get_provide_clock">
+      <property name="provide-clock" writable="1" transfer-ownership="none" setter="set_provide_clock" getter="get_provide_clock" default-value="TRUE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="slave-method" writable="1" transfer-ownership="none" setter="set_slave_method" getter="get_slave_method">
+      <property name="slave-method" writable="1" transfer-ownership="none" setter="set_slave_method" getter="get_slave_method" default-value="GST_AUDIO_BASE_SRC_SLAVE_SKEW">
         <type name="AudioBaseSrcSlaveMethod"/>
       </property>
       <field name="element">
@@ -1924,7 +1924,7 @@ functionality.</doc>
         </array>
       </field>
     </record>
-    <record name="AudioBaseSrcPrivate" c:type="GstAudioBaseSrcPrivate" disguised="1"/>
+    <record name="AudioBaseSrcPrivate" c:type="GstAudioBaseSrcPrivate" disguised="1" opaque="1"/>
     <enumeration name="AudioBaseSrcSlaveMethod" glib:type-name="GstAudioBaseSrcSlaveMethod" glib:get-type="gst_audio_base_src_slave_method_get_type" c:type="GstAudioBaseSrcSlaveMethod">
       <doc xml:space="preserve">Different possible clock slaving algorithms when the internal audio clock was
 not selected as the pipeline clock.</doc>
@@ -2263,13 +2263,13 @@ copy of the structure (and take ownership of the taglist if there is one).</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="device" writable="1" transfer-ownership="none">
+      <property name="device" writable="1" transfer-ownership="none" default-value="NULL">
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="mode" writable="1" transfer-ownership="none">
+      <property name="mode" writable="1" transfer-ownership="none" default-value="GST_AUDIO_CD_SRC_MODE_NORMAL">
         <type name="AudioCdSrcMode"/>
       </property>
-      <property name="track" writable="1" transfer-ownership="none">
+      <property name="track" writable="1" transfer-ownership="none" default-value="1">
         <type name="guint" c:type="guint"/>
       </property>
       <field name="pushsrc">
@@ -2356,7 +2356,7 @@ EOS handling and seeking.</doc>
         <doc xml:space="preserve">the entire disc is a single stream</doc>
       </member>
     </enumeration>
-    <record name="AudioCdSrcPrivate" c:type="GstAudioCdSrcPrivate" disguised="1"/>
+    <record name="AudioCdSrcPrivate" c:type="GstAudioCdSrcPrivate" disguised="1" opaque="1"/>
     <record name="AudioCdSrcTrack" c:type="GstAudioCdSrcTrack">
       <doc xml:space="preserve">CD track abstraction to communicate TOC entries to the base class.
 
@@ -2396,7 +2396,7 @@ on the pipeline's #GstBus instead.</doc>
         </array>
       </field>
     </record>
-    <record name="AudioChannelMixer" c:type="GstAudioChannelMixer" disguised="1">
+    <record name="AudioChannelMixer" c:type="GstAudioChannelMixer" disguised="1" opaque="1">
       <method name="free" c:identifier="gst_audio_channel_mixer_free">
         <doc xml:space="preserve">Free memory allocated by @mix.</doc>
         <return-value transfer-ownership="none">
@@ -2855,7 +2855,7 @@ be used.</doc>
         </parameter>
       </parameters>
     </callback>
-    <record name="AudioConverter" c:type="GstAudioConverter" version="1.8" glib:type-name="GstAudioConverter" glib:get-type="gst_audio_converter_get_type" c:symbol-prefix="audio_converter">
+    <record name="AudioConverter" c:type="GstAudioConverter" opaque="1" version="1.8" glib:type-name="GstAudioConverter" glib:get-type="gst_audio_converter_get_type" c:symbol-prefix="audio_converter">
       <doc xml:space="preserve">This object is used to convert audio samples from one format to another.
 The object can perform conversion of:
 
@@ -4076,18 +4076,18 @@ handler with %GST_PAD_SET_ACCEPT_INTERSECT and
           </parameter>
         </parameters>
       </method>
-      <property name="max-errors" version="1.18" writable="1" transfer-ownership="none" setter="set_max_errors" getter="get_max_errors">
+      <property name="max-errors" version="1.18" writable="1" transfer-ownership="none" setter="set_max_errors" getter="get_max_errors" default-value="-1">
         <doc xml:space="preserve">Maximum number of tolerated consecutive decode errors. See
 gst_audio_decoder_set_max_errors() for more details.</doc>
         <type name="gint" c:type="gint"/>
       </property>
-      <property name="min-latency" writable="1" transfer-ownership="none" setter="set_min_latency" getter="get_min_latency">
+      <property name="min-latency" writable="1" transfer-ownership="none" setter="set_min_latency" getter="get_min_latency" default-value="0">
         <type name="gint64" c:type="gint64"/>
       </property>
-      <property name="plc" writable="1" transfer-ownership="none" setter="set_plc" getter="get_plc">
+      <property name="plc" writable="1" transfer-ownership="none" setter="set_plc" getter="get_plc" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="tolerance" writable="1" transfer-ownership="none" setter="set_tolerance" getter="get_tolerance">
+      <property name="tolerance" writable="1" transfer-ownership="none" setter="set_tolerance" getter="get_tolerance" default-value="0">
         <type name="gint64" c:type="gint64"/>
       </property>
       <field name="element">
@@ -4400,7 +4400,7 @@ overridden.</doc>
         </array>
       </field>
     </record>
-    <record name="AudioDecoderPrivate" c:type="GstAudioDecoderPrivate" disguised="1"/>
+    <record name="AudioDecoderPrivate" c:type="GstAudioDecoderPrivate" disguised="1" opaque="1"/>
     <enumeration name="AudioDitherMethod" glib:type-name="GstAudioDitherMethod" glib:get-type="gst_audio_dither_method_get_type" c:type="GstAudioDitherMethod">
       <doc xml:space="preserve">Set of available dithering methods.</doc>
       <member name="none" value="0" c:identifier="GST_AUDIO_DITHER_NONE" glib:nick="none" glib:name="GST_AUDIO_DITHER_NONE">
@@ -5339,16 +5339,16 @@ MT safe.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="hard-resync" writable="1" transfer-ownership="none" setter="set_hard_resync" getter="get_hard_resync">
+      <property name="hard-resync" writable="1" transfer-ownership="none" setter="set_hard_resync" getter="get_hard_resync" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="mark-granule" transfer-ownership="none" getter="get_mark_granule">
+      <property name="mark-granule" transfer-ownership="none" getter="get_mark_granule" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="perfect-timestamp" writable="1" transfer-ownership="none" setter="set_perfect_timestamp" getter="get_perfect_timestamp">
+      <property name="perfect-timestamp" writable="1" transfer-ownership="none" setter="set_perfect_timestamp" getter="get_perfect_timestamp" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="tolerance" writable="1" transfer-ownership="none" setter="set_tolerance" getter="get_tolerance">
+      <property name="tolerance" writable="1" transfer-ownership="none" setter="set_tolerance" getter="get_tolerance" default-value="40000000">
         <type name="gint64" c:type="gint64"/>
       </property>
       <field name="element">
@@ -5636,7 +5636,7 @@ needed. At minimum @set_format and @handle_frame needs to be overridden.</doc>
         </array>
       </field>
     </record>
-    <record name="AudioEncoderPrivate" c:type="GstAudioEncoderPrivate" disguised="1"/>
+    <record name="AudioEncoderPrivate" c:type="GstAudioEncoderPrivate" disguised="1" opaque="1"/>
     <class name="AudioFilter" c:symbol-prefix="audio_filter" c:type="GstAudioFilter" parent="GstBase.BaseTransform" abstract="1" glib:type-name="GstAudioFilter" glib:get-type="gst_audio_filter_get_type" glib:type-struct="AudioFilterClass">
       <doc xml:space="preserve">#GstAudioFilter is a #GstBaseTransform&lt;!-- --&gt;-derived base class for simple audio
 filters, ie. those that output the same format that they get as input.
@@ -6441,7 +6441,7 @@ meta as well as extracting it.</doc>
   in the least significant bits of the destination.</doc>
       </member>
     </bitfield>
-    <record name="AudioQuantize" c:type="GstAudioQuantize" disguised="1">
+    <record name="AudioQuantize" c:type="GstAudioQuantize" disguised="1" opaque="1">
       <method name="free" c:identifier="gst_audio_quantize_free">
         <doc xml:space="preserve">Free a #GstAudioQuantize.</doc>
         <return-value transfer-ownership="none">
@@ -6549,7 +6549,7 @@ the @dither and @ns parameters.</doc>
         <doc xml:space="preserve">samples are non-interleaved</doc>
       </member>
     </bitfield>
-    <record name="AudioResampler" c:type="GstAudioResampler" disguised="1" version="1.10">
+    <record name="AudioResampler" c:type="GstAudioResampler" disguised="1" opaque="1" version="1.10">
       <doc xml:space="preserve">#GstAudioResampler is a structure which holds the information
 required to perform various kinds of resampling filtering.</doc>
       <method name="free" c:identifier="gst_audio_resampler_free">
@@ -8692,7 +8692,7 @@ functionality.</doc>
         </array>
       </field>
     </record>
-    <record name="AudioStreamAlign" c:type="GstAudioStreamAlign" version="1.14" glib:type-name="GstAudioStreamAlign" glib:get-type="gst_audio_stream_align_get_type" c:symbol-prefix="audio_stream_align">
+    <record name="AudioStreamAlign" c:type="GstAudioStreamAlign" opaque="1" version="1.14" glib:type-name="GstAudioStreamAlign" glib:get-type="gst_audio_stream_align_get_type" c:symbol-prefix="audio_stream_align">
       <doc xml:space="preserve">#GstAudioStreamAlign provides a helper object that helps tracking audio
 stream alignment and discontinuities, and detects discontinuities if
 possible.
@@ -9232,10 +9232,10 @@ The volume property is defined to be a linear volume factor.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="mute" writable="1" transfer-ownership="none" setter="set_mute" getter="get_mute">
+      <property name="mute" writable="1" transfer-ownership="none" setter="set_mute" getter="get_mute" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="volume" writable="1" transfer-ownership="none" setter="set_volume" getter="get_volume">
+      <property name="volume" writable="1" transfer-ownership="none" setter="set_volume" getter="get_volume" default-value="1.000000">
         <type name="gdouble" c:type="gdouble"/>
       </property>
     </interface>

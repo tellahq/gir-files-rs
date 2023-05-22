@@ -252,7 +252,7 @@ target property range without any transformations.</doc>
           </parameter>
         </parameters>
       </constructor>
-      <property name="absolute" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="absolute" writable="1" construct-only="1" transfer-ownership="none" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
       <property name="control-source" writable="1" construct="1" transfer-ownership="none">
@@ -462,7 +462,7 @@ All functions are MT-safe.</doc>
           <type name="Gst.ControlSource" c:type="GstControlSource*"/>
         </return-value>
       </constructor>
-      <property name="mode" writable="1" transfer-ownership="none">
+      <property name="mode" writable="1" transfer-ownership="none" default-value="GST_INTERPOLATION_MODE_NONE">
         <type name="InterpolationMode"/>
       </property>
       <field name="parent">
@@ -487,7 +487,7 @@ All functions are MT-safe.</doc>
         </array>
       </field>
     </record>
-    <record name="InterpolationControlSourcePrivate" c:type="GstInterpolationControlSourcePrivate" disguised="1"/>
+    <record name="InterpolationControlSourcePrivate" c:type="GstInterpolationControlSourcePrivate" disguised="1" opaque="1"/>
     <enumeration name="InterpolationMode" glib:type-name="GstInterpolationMode" glib:get-type="gst_interpolation_mode_get_type" c:type="GstInterpolationMode">
       <doc xml:space="preserve">The various interpolation modes available.</doc>
       <member name="none" value="0" c:identifier="GST_INTERPOLATION_MODE_NONE" glib:nick="none" glib:name="GST_INTERPOLATION_MODE_NONE">
@@ -522,21 +522,21 @@ All functions are MT-safe.</doc>
           <type name="Gst.ControlSource" c:type="GstControlSource*"/>
         </return-value>
       </constructor>
-      <property name="amplitude" writable="1" transfer-ownership="none">
+      <property name="amplitude" writable="1" transfer-ownership="none" default-value="1.000000">
         <doc xml:space="preserve">Specifies the amplitude for the waveform of this #GstLFOControlSource.</doc>
         <type name="gdouble" c:type="gdouble"/>
       </property>
-      <property name="frequency" writable="1" transfer-ownership="none">
+      <property name="frequency" writable="1" transfer-ownership="none" default-value="1.000000">
         <doc xml:space="preserve">Specifies the frequency that should be used for the waveform
 of this #GstLFOControlSource. It should be large enough
 so that the period is longer than one nanosecond.</doc>
         <type name="gdouble" c:type="gdouble"/>
       </property>
-      <property name="offset" writable="1" transfer-ownership="none">
+      <property name="offset" writable="1" transfer-ownership="none" default-value="1.000000">
         <doc xml:space="preserve">Specifies the value offset for the waveform of this #GstLFOControlSource.</doc>
         <type name="gdouble" c:type="gdouble"/>
       </property>
-      <property name="timeshift" writable="1" transfer-ownership="none">
+      <property name="timeshift" writable="1" transfer-ownership="none" default-value="0">
         <doc xml:space="preserve">Specifies the timeshift to the right that should be used for the waveform
 of this #GstLFOControlSource in nanoseconds.
 
@@ -544,7 +544,7 @@ To get a n nanosecond shift to the left use
 "(GST_SECOND / frequency) - n".</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="waveform" writable="1" transfer-ownership="none">
+      <property name="waveform" writable="1" transfer-ownership="none" default-value="GST_LFO_WAVEFORM_SINE">
         <doc xml:space="preserve">Specifies the waveform that should be used for this #GstLFOControlSource.</doc>
         <type name="LFOWaveform"/>
       </property>
@@ -573,7 +573,7 @@ To get a n nanosecond shift to the left use
         </array>
       </field>
     </record>
-    <record name="LFOControlSourcePrivate" c:type="GstLFOControlSourcePrivate" disguised="1"/>
+    <record name="LFOControlSourcePrivate" c:type="GstLFOControlSourcePrivate" disguised="1" opaque="1"/>
     <enumeration name="LFOWaveform" glib:type-name="GstLFOWaveform" glib:get-type="gst_lfo_waveform_get_type" c:type="GstLFOWaveform">
       <doc xml:space="preserve">The various waveform modes available.</doc>
       <member name="sine" value="0" c:identifier="GST_LFO_WAVEFORM_SINE" glib:nick="sine" glib:name="GST_LFO_WAVEFORM_SINE">
@@ -932,7 +932,7 @@ time.</doc>
         </array>
       </field>
     </record>
-    <record name="TimedValueControlSourcePrivate" c:type="GstTimedValueControlSourcePrivate" disguised="1"/>
+    <record name="TimedValueControlSourcePrivate" c:type="GstTimedValueControlSourcePrivate" disguised="1" opaque="1"/>
     <class name="TriggerControlSource" c:symbol-prefix="trigger_control_source" c:type="GstTriggerControlSource" parent="TimedValueControlSource" glib:type-name="GstTriggerControlSource" glib:get-type="gst_trigger_control_source_get_type" glib:type-struct="TriggerControlSourceClass">
       <doc xml:space="preserve">#GstTriggerControlSource is a #GstControlSource, that returns values from user-given
 control points. It allows for a tolerance on the time-stamps.
@@ -949,7 +949,7 @@ All functions are MT-safe.</doc>
           <type name="Gst.ControlSource" c:type="GstControlSource*"/>
         </return-value>
       </constructor>
-      <property name="tolerance" writable="1" transfer-ownership="none">
+      <property name="tolerance" writable="1" transfer-ownership="none" default-value="0">
         <type name="gint64" c:type="gint64"/>
       </property>
       <field name="parent">
@@ -974,7 +974,7 @@ All functions are MT-safe.</doc>
         </array>
       </field>
     </record>
-    <record name="TriggerControlSourcePrivate" c:type="GstTriggerControlSourcePrivate" disguised="1"/>
+    <record name="TriggerControlSourcePrivate" c:type="GstTriggerControlSourcePrivate" disguised="1" opaque="1"/>
     <function name="timed_value_control_invalidate_cache" c:identifier="gst_timed_value_control_invalidate_cache">
       <doc xml:space="preserve">Reset the controlled value cache.</doc>
       <return-value transfer-ownership="none">

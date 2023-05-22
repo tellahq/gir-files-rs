@@ -2181,7 +2181,7 @@ audio codec</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="buffer-list" writable="1" transfer-ownership="none">
+      <property name="buffer-list" writable="1" transfer-ownership="none" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
       <field name="payload">
@@ -2220,7 +2220,7 @@ audio codec</doc>
         </array>
       </field>
     </record>
-    <record name="RTPBaseAudioPayloadPrivate" c:type="GstRTPBaseAudioPayloadPrivate" disguised="1"/>
+    <record name="RTPBaseAudioPayloadPrivate" c:type="GstRTPBaseAudioPayloadPrivate" disguised="1" opaque="1"/>
     <class name="RTPBaseDepayload" c:symbol-prefix="rtp_base_depayload" c:type="GstRTPBaseDepayload" parent="Gst.Element" abstract="1" glib:type-name="GstRTPBaseDepayload" glib:get-type="gst_rtp_base_depayload_get_type" glib:type-struct="RTPBaseDepayloadClass">
       <doc xml:space="preserve">Provides a base class for RTP depayloaders</doc>
       <virtual-method name="handle_event">
@@ -2356,21 +2356,21 @@ the outgoing buffer when it didn't have a timestamp already.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="auto-header-extension" version="1.20" writable="1" transfer-ownership="none">
+      <property name="auto-header-extension" version="1.20" writable="1" transfer-ownership="none" default-value="TRUE">
         <doc xml:space="preserve">If enabled, the depayloader will automatically try to enable all the
 RTP header extensions provided in the sink caps, saving the application
 the need to handle these extensions manually using the
 GstRTPBaseDepayload::request-extension: signal.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="max-reorder" version="1.18" writable="1" transfer-ownership="none">
+      <property name="max-reorder" version="1.18" writable="1" transfer-ownership="none" default-value="100">
         <doc xml:space="preserve">Max seqnum reorder before the sender is assumed to have restarted.
 
 When max-reorder is set to 0 all reordered/duplicate packets are
 considered coming from a restarted sender.</doc>
         <type name="gint" c:type="gint"/>
       </property>
-      <property name="source-info" version="1.16" writable="1" transfer-ownership="none">
+      <property name="source-info" version="1.16" writable="1" transfer-ownership="none" default-value="FALSE">
         <doc xml:space="preserve">Add RTP source information found in RTP header as meta to output buffer.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
@@ -2544,7 +2544,7 @@ necessary attributes as required by the extension implementation.</doc>
         </array>
       </field>
     </record>
-    <record name="RTPBaseDepayloadPrivate" c:type="GstRTPBaseDepayloadPrivate" disguised="1"/>
+    <record name="RTPBaseDepayloadPrivate" c:type="GstRTPBaseDepayloadPrivate" disguised="1" opaque="1"/>
     <class name="RTPBasePayload" c:symbol-prefix="rtp_base_payload" c:type="GstRTPBasePayload" parent="Gst.Element" abstract="1" glib:type-name="GstRTPBasePayload" glib:get-type="gst_rtp_base_payload_get_type" glib:type-struct="RTPBasePayloadClass">
       <doc xml:space="preserve">Provides a base class for RTP payloaders</doc>
       <virtual-method name="get_caps">
@@ -2844,29 +2844,29 @@ Variable arguments should be in the form field name, field type
           </parameter>
         </parameters>
       </method>
-      <property name="auto-header-extension" version="1.20" writable="1" transfer-ownership="none">
+      <property name="auto-header-extension" version="1.20" writable="1" transfer-ownership="none" default-value="TRUE">
         <doc xml:space="preserve">If enabled, the payloader will automatically try to enable all the
 RTP header extensions provided in the src caps, saving the application
 the need to handle these extensions manually using the
 GstRTPBasePayload::request-extension: signal.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="max-ptime" writable="1" transfer-ownership="none">
+      <property name="max-ptime" writable="1" transfer-ownership="none" default-value="-1">
         <type name="gint64" c:type="gint64"/>
       </property>
-      <property name="min-ptime" writable="1" transfer-ownership="none">
+      <property name="min-ptime" writable="1" transfer-ownership="none" default-value="0">
         <doc xml:space="preserve">Minimum duration of the packet data in ns (can't go above MTU)</doc>
         <type name="gint64" c:type="gint64"/>
       </property>
-      <property name="mtu" writable="1" transfer-ownership="none">
+      <property name="mtu" writable="1" transfer-ownership="none" default-value="1400">
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="onvif-no-rate-control" version="1.16" writable="1" transfer-ownership="none">
+      <property name="onvif-no-rate-control" version="1.16" writable="1" transfer-ownership="none" default-value="FALSE">
         <doc xml:space="preserve">Make the payloader timestamp packets according to the Rate-Control=no
 behaviour specified in the ONVIF replay spec.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="perfect-rtptime" writable="1" transfer-ownership="none">
+      <property name="perfect-rtptime" writable="1" transfer-ownership="none" default-value="TRUE">
         <doc xml:space="preserve">Try to use the offset fields to generate perfect RTP timestamps. When this
 option is disabled, RTP timestamps are generated from GST_BUFFER_PTS of
 each payloaded buffer. The PTSes of buffers may not necessarily increment
@@ -2884,14 +2884,14 @@ buffer. Currently GstRTPBasePayload is limited to handling perfect RTP
 timestamps for audio streams.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="pt" writable="1" transfer-ownership="none">
+      <property name="pt" writable="1" transfer-ownership="none" default-value="96">
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="ptime-multiple" writable="1" transfer-ownership="none">
+      <property name="ptime-multiple" writable="1" transfer-ownership="none" default-value="0">
         <doc xml:space="preserve">Force buffers to be multiples of this duration in ns (0 disables)</doc>
         <type name="gint64" c:type="gint64"/>
       </property>
-      <property name="scale-rtptime" version="1.18" writable="1" transfer-ownership="none">
+      <property name="scale-rtptime" version="1.18" writable="1" transfer-ownership="none" default-value="TRUE">
         <doc xml:space="preserve">Make the RTP packets' timestamps be scaled with the segment's rate
 (corresponding to RTSP speed parameter). Disabling this property means
 the timestamps will not be affected by the set delivery speed (RTSP speed).
@@ -2902,18 +2902,18 @@ video. This is achieved by the client setting RTSP Speed to 2 while the
 server has this property disabled.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="seqnum" transfer-ownership="none">
+      <property name="seqnum" transfer-ownership="none" default-value="0">
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="seqnum-offset" writable="1" transfer-ownership="none">
+      <property name="seqnum-offset" writable="1" transfer-ownership="none" default-value="-1">
         <type name="gint" c:type="gint"/>
       </property>
-      <property name="source-info" version="1.16" writable="1" transfer-ownership="none">
+      <property name="source-info" version="1.16" writable="1" transfer-ownership="none" default-value="FALSE">
         <doc xml:space="preserve">Enable writing the CSRC field in allocated RTP header based on RTP source
 information found in the input buffer's #GstRTPSourceMeta.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="ssrc" writable="1" transfer-ownership="none">
+      <property name="ssrc" writable="1" transfer-ownership="none" default-value="4294967295">
         <type name="guint" c:type="guint"/>
       </property>
       <property name="stats" transfer-ownership="none">
@@ -2933,10 +2933,10 @@ the last processed buffer and current state of the stream being payloaded:
   * `timestamp-offset` :#G_TYPE_UINT, The current offset added to the timestamp</doc>
         <type name="Gst.Structure"/>
       </property>
-      <property name="timestamp" transfer-ownership="none">
+      <property name="timestamp" transfer-ownership="none" default-value="0">
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="timestamp-offset" writable="1" transfer-ownership="none">
+      <property name="timestamp-offset" writable="1" transfer-ownership="none" default-value="4294967295">
         <type name="guint" c:type="guint"/>
       </property>
       <field name="element">
@@ -3159,7 +3159,7 @@ necessary attributes as required by the extension implementation.</doc>
         </array>
       </field>
     </record>
-    <record name="RTPBasePayloadPrivate" c:type="GstRTPBasePayloadPrivate" disguised="1"/>
+    <record name="RTPBasePayloadPrivate" c:type="GstRTPBasePayloadPrivate" disguised="1" opaque="1"/>
     <record name="RTPBuffer" c:type="GstRTPBuffer">
       <doc xml:space="preserve">The GstRTPBuffer helper functions makes it easy to parse and create regular
 #GstBuffer objects that contain RTP payloads. These buffers are typically of

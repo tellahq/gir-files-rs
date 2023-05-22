@@ -96,10 +96,10 @@ new frame.</doc>
           </instance-parameter>
         </parameters>
       </virtual-method>
-      <property name="shade-amount" writable="1" transfer-ownership="none">
+      <property name="shade-amount" writable="1" transfer-ownership="none" default-value="657930">
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="shader" writable="1" transfer-ownership="none">
+      <property name="shader" writable="1" transfer-ownership="none" default-value="GST_AUDIO_VISUALIZER_SHADER_FADE">
         <type name="AudioVisualizerShader"/>
       </property>
       <field name="parent">
@@ -168,7 +168,7 @@ new frame.</doc>
         </callback>
       </field>
     </record>
-    <record name="AudioVisualizerPrivate" c:type="GstAudioVisualizerPrivate" disguised="1"/>
+    <record name="AudioVisualizerPrivate" c:type="GstAudioVisualizerPrivate" disguised="1" opaque="1"/>
     <enumeration name="AudioVisualizerShader" glib:type-name="GstAudioVisualizerShader" glib:get-type="gst_audio_visualizer_shader_get_type" c:type="GstAudioVisualizerShader">
       <doc xml:space="preserve">Different types of supported background shading functions.</doc>
       <member name="none" value="0" c:identifier="GST_AUDIO_VISUALIZER_SHADER_NONE" glib:nick="none" glib:name="GST_AUDIO_VISUALIZER_SHADER_NONE">
@@ -430,7 +430,7 @@ pending URIS (if any).</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <property name="timeout" writable="1" construct="1" transfer-ownership="none">
+      <property name="timeout" writable="1" construct="1" transfer-ownership="none" default-value="15000000000">
         <doc xml:space="preserve">The duration (in nanoseconds) after which the discovery of an individual
 URI will timeout.
 
@@ -438,7 +438,7 @@ If the discovery of a URI times out, the %GST_DISCOVERER_TIMEOUT will be
 set on the result flags.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="use-cache" writable="1" construct="1" transfer-ownership="none">
+      <property name="use-cache" writable="1" construct="1" transfer-ownership="none" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
       <field name="parent">
@@ -990,7 +990,7 @@ what needs to be serialized.</doc>
         </parameters>
       </method>
     </class>
-    <record name="DiscovererPrivate" c:type="GstDiscovererPrivate" disguised="1"/>
+    <record name="DiscovererPrivate" c:type="GstDiscovererPrivate" disguised="1" opaque="1"/>
     <enumeration name="DiscovererResult" glib:type-name="GstDiscovererResult" glib:get-type="gst_discoverer_result_get_type" c:type="GstDiscovererResult">
       <doc xml:space="preserve">Result values for the discovery process.</doc>
       <member name="ok" value="0" c:identifier="GST_DISCOVERER_OK" glib:nick="ok" glib:name="GST_DISCOVERER_OK">
@@ -1435,7 +1435,7 @@ NULL. See gst_encoding_profile_get_restriction() for more details.</doc>
         </parameters>
       </constructor>
     </class>
-    <record name="EncodingAudioProfileClass" c:type="GstEncodingAudioProfileClass" disguised="1" glib:is-gtype-struct-for="EncodingAudioProfile"/>
+    <record name="EncodingAudioProfileClass" c:type="GstEncodingAudioProfileClass" disguised="1" opaque="1" glib:is-gtype-struct-for="EncodingAudioProfile"/>
     <class name="EncodingContainerProfile" c:symbol-prefix="encoding_container_profile" c:type="GstEncodingContainerProfile" parent="EncodingProfile" glib:type-name="GstEncodingContainerProfile" glib:get-type="gst_encoding_container_profile_get_type" glib:type-struct="EncodingContainerProfileClass">
       <doc xml:space="preserve">Encoding profiles for containers. Keeps track of a list of #GstEncodingProfile</doc>
       <constructor name="new" c:identifier="gst_encoding_container_profile_new">
@@ -1519,7 +1519,7 @@ the list of contained #GstEncodingProfile.</doc>
         </parameters>
       </method>
     </class>
-    <record name="EncodingContainerProfileClass" c:type="GstEncodingContainerProfileClass" disguised="1" glib:is-gtype-struct-for="EncodingContainerProfile"/>
+    <record name="EncodingContainerProfileClass" c:type="GstEncodingContainerProfileClass" disguised="1" opaque="1" glib:is-gtype-struct-for="EncodingContainerProfile"/>
     <class name="EncodingProfile" c:symbol-prefix="encoding_profile" c:type="GstEncodingProfile" parent="GObject.Object" glib:type-name="GstEncodingProfile" glib:get-type="gst_encoding_profile_get_type" glib:type-struct="EncodingProfileClass">
       <doc xml:space="preserve">The opaque base class object for all encoding profiles. This contains generic
 information like name, description, format and preset.</doc>
@@ -1990,7 +1990,7 @@ element-properties,row-mt=true, end-usage=vbr
         <type name="Gst.Caps"/>
       </property>
     </class>
-    <record name="EncodingProfileClass" c:type="GstEncodingProfileClass" disguised="1" glib:is-gtype-struct-for="EncodingProfile"/>
+    <record name="EncodingProfileClass" c:type="GstEncodingProfileClass" disguised="1" opaque="1" glib:is-gtype-struct-for="EncodingProfile"/>
     <class name="EncodingTarget" c:symbol-prefix="encoding_target" c:type="GstEncodingTarget" parent="GObject.Object" glib:type-name="GstEncodingTarget" glib:get-type="gst_encoding_target_get_type">
       <doc xml:space="preserve">Collection of #GstEncodingProfile for a specific target or use-case.
 
@@ -2311,7 +2311,7 @@ constance framerate.</doc>
         </parameters>
       </method>
     </class>
-    <record name="EncodingVideoProfileClass" c:type="GstEncodingVideoProfileClass" disguised="1" glib:is-gtype-struct-for="EncodingVideoProfile"/>
+    <record name="EncodingVideoProfileClass" c:type="GstEncodingVideoProfileClass" disguised="1" opaque="1" glib:is-gtype-struct-for="EncodingVideoProfile"/>
     <function-macro name="IS_DISCOVERER" c:identifier="GST_IS_DISCOVERER" introspectable="0">
       <parameters>
         <parameter name="obj">
@@ -2402,7 +2402,7 @@ constance framerate.</doc>
         </parameter>
       </parameters>
     </function-macro>
-    <record name="InstallPluginsContext" c:type="GstInstallPluginsContext" glib:type-name="GstInstallPluginsContext" glib:get-type="gst_install_plugins_context_get_type" c:symbol-prefix="install_plugins_context">
+    <record name="InstallPluginsContext" c:type="GstInstallPluginsContext" opaque="1" glib:type-name="GstInstallPluginsContext" glib:get-type="gst_install_plugins_context_get_type" c:symbol-prefix="install_plugins_context">
       <doc xml:space="preserve">Opaque context structure for the plugin installation. Use the provided
 API to set details on it.</doc>
       <constructor name="new" c:identifier="gst_install_plugins_context_new">

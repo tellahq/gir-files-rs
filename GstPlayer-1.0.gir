@@ -1167,7 +1167,7 @@ in the stream.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <property name="audio-video-offset" writable="1" transfer-ownership="none" setter="set_audio_video_offset" getter="get_audio_video_offset">
+      <property name="audio-video-offset" writable="1" transfer-ownership="none" setter="set_audio_video_offset" getter="get_audio_video_offset" default-value="0">
         <type name="gint64" c:type="gint64"/>
       </property>
       <property name="current-audio-track" transfer-ownership="none" getter="get_current_audio_track">
@@ -1179,46 +1179,46 @@ in the stream.</doc>
       <property name="current-video-track" transfer-ownership="none" getter="get_current_video_track">
         <type name="PlayerVideoInfo"/>
       </property>
-      <property name="duration" transfer-ownership="none" getter="get_duration">
+      <property name="duration" transfer-ownership="none" getter="get_duration" default-value="18446744073709551615">
         <type name="guint64" c:type="guint64"/>
       </property>
       <property name="media-info" transfer-ownership="none" getter="get_media_info">
         <type name="PlayerMediaInfo"/>
       </property>
-      <property name="mute" writable="1" transfer-ownership="none" setter="set_mute" getter="get_mute">
+      <property name="mute" writable="1" transfer-ownership="none" setter="set_mute" getter="get_mute" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
       <property name="pipeline" transfer-ownership="none" getter="get_pipeline">
         <type name="Gst.Element"/>
       </property>
-      <property name="position" transfer-ownership="none" getter="get_position">
+      <property name="position" transfer-ownership="none" getter="get_position" default-value="18446744073709551615">
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="rate" writable="1" transfer-ownership="none" setter="set_rate" getter="get_rate">
+      <property name="rate" writable="1" transfer-ownership="none" setter="set_rate" getter="get_rate" default-value="1.000000">
         <type name="gdouble" c:type="gdouble"/>
       </property>
       <property name="signal-dispatcher" readable="0" writable="1" construct-only="1" transfer-ownership="none">
         <type name="PlayerSignalDispatcher"/>
       </property>
-      <property name="subtitle-video-offset" writable="1" transfer-ownership="none" setter="set_subtitle_video_offset" getter="get_subtitle_video_offset">
+      <property name="subtitle-video-offset" writable="1" transfer-ownership="none" setter="set_subtitle_video_offset" getter="get_subtitle_video_offset" default-value="0">
         <type name="gint64" c:type="gint64"/>
       </property>
-      <property name="suburi" writable="1" transfer-ownership="none">
+      <property name="suburi" writable="1" transfer-ownership="none" default-value="NULL">
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="uri" writable="1" transfer-ownership="none" setter="set_uri" getter="get_uri">
+      <property name="uri" writable="1" transfer-ownership="none" setter="set_uri" getter="get_uri" default-value="NULL">
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="video-multiview-flags" writable="1" transfer-ownership="none">
+      <property name="video-multiview-flags" writable="1" transfer-ownership="none" default-value="GST_VIDEO_MULTIVIEW_FLAGS_NONE">
         <type name="GstVideo.VideoMultiviewFlags"/>
       </property>
-      <property name="video-multiview-mode" writable="1" transfer-ownership="none">
+      <property name="video-multiview-mode" writable="1" transfer-ownership="none" default-value="GST_VIDEO_MULTIVIEW_FRAME_PACKING_NONE">
         <type name="GstVideo.VideoMultiviewFramePacking"/>
       </property>
       <property name="video-renderer" writable="1" construct-only="1" transfer-ownership="none">
         <type name="PlayerVideoRenderer"/>
       </property>
-      <property name="volume" writable="1" transfer-ownership="none" setter="set_volume" getter="get_volume">
+      <property name="volume" writable="1" transfer-ownership="none" setter="set_volume" getter="get_volume" default-value="1.000000">
         <type name="gdouble" c:type="gdouble"/>
       </property>
       <glib:signal name="buffering" when="last" no-recurse="1" no-hooks="1">
@@ -1404,8 +1404,8 @@ unknown.</doc>
         </parameters>
       </method>
     </class>
-    <record name="PlayerAudioInfoClass" c:type="GstPlayerAudioInfoClass" disguised="1" glib:is-gtype-struct-for="PlayerAudioInfo"/>
-    <record name="PlayerClass" c:type="GstPlayerClass" disguised="1" glib:is-gtype-struct-for="Player"/>
+    <record name="PlayerAudioInfoClass" c:type="GstPlayerAudioInfoClass" disguised="1" opaque="1" glib:is-gtype-struct-for="PlayerAudioInfo"/>
+    <record name="PlayerClass" c:type="GstPlayerClass" disguised="1" opaque="1" glib:is-gtype-struct-for="Player"/>
     <enumeration name="PlayerColorBalanceType" glib:type-name="GstPlayerColorBalanceType" glib:get-type="gst_player_color_balance_type_get_type" c:type="GstPlayerColorBalanceType">
       <member name="hue" value="3" c:identifier="GST_PLAYER_COLOR_BALANCE_HUE" glib:nick="hue" glib:name="GST_PLAYER_COLOR_BALANCE_HUE">
         <doc xml:space="preserve">hue or color balance.</doc>
@@ -1478,7 +1478,7 @@ or the thread default one if %NULL is used. See gst_player_new().</doc>
         <type name="GLib.MainContext"/>
       </property>
     </class>
-    <record name="PlayerGMainContextSignalDispatcherClass" c:type="GstPlayerGMainContextSignalDispatcherClass" disguised="1" glib:is-gtype-struct-for="PlayerGMainContextSignalDispatcher"/>
+    <record name="PlayerGMainContextSignalDispatcherClass" c:type="GstPlayerGMainContextSignalDispatcherClass" disguised="1" opaque="1" glib:is-gtype-struct-for="PlayerGMainContextSignalDispatcher"/>
     <class name="PlayerMediaInfo" c:symbol-prefix="player_media_info" c:type="GstPlayerMediaInfo" parent="GObject.Object" glib:type-name="GstPlayerMediaInfo" glib:get-type="gst_player_media_info_get_type" glib:type-struct="PlayerMediaInfoClass">
       <doc xml:space="preserve">Structure containing the media information of a URI.</doc>
       <method name="get_audio_streams" c:identifier="gst_player_media_info_get_audio_streams">
@@ -1688,7 +1688,7 @@ matching #GstPlayerVideoInfo.</doc>
         </parameters>
       </method>
     </class>
-    <record name="PlayerMediaInfoClass" c:type="GstPlayerMediaInfoClass" disguised="1" glib:is-gtype-struct-for="PlayerMediaInfo"/>
+    <record name="PlayerMediaInfoClass" c:type="GstPlayerMediaInfoClass" disguised="1" opaque="1" glib:is-gtype-struct-for="PlayerMediaInfo"/>
     <interface name="PlayerSignalDispatcher" c:symbol-prefix="player_signal_dispatcher" c:type="GstPlayerSignalDispatcher" glib:type-name="GstPlayerSignalDispatcher" glib:get-type="gst_player_signal_dispatcher_get_type" glib:type-struct="PlayerSignalDispatcherInterface">
       <virtual-method name="dispatch">
         <return-value transfer-ownership="none">
@@ -1862,7 +1862,7 @@ of the given @info (ex: "audio", "video", "subtitle")</doc>
         </parameters>
       </method>
     </class>
-    <record name="PlayerStreamInfoClass" c:type="GstPlayerStreamInfoClass" disguised="1" glib:is-gtype-struct-for="PlayerStreamInfo"/>
+    <record name="PlayerStreamInfoClass" c:type="GstPlayerStreamInfoClass" disguised="1" opaque="1" glib:is-gtype-struct-for="PlayerStreamInfo"/>
     <class name="PlayerSubtitleInfo" c:symbol-prefix="player_subtitle_info" c:type="GstPlayerSubtitleInfo" parent="PlayerStreamInfo" glib:type-name="GstPlayerSubtitleInfo" glib:get-type="gst_player_subtitle_info_get_type" glib:type-struct="PlayerSubtitleInfoClass">
       <doc xml:space="preserve">#GstPlayerStreamInfo specific to subtitle streams.</doc>
       <method name="get_language" c:identifier="gst_player_subtitle_info_get_language">
@@ -1878,7 +1878,7 @@ of the given @info (ex: "audio", "video", "subtitle")</doc>
         </parameters>
       </method>
     </class>
-    <record name="PlayerSubtitleInfoClass" c:type="GstPlayerSubtitleInfoClass" disguised="1" glib:is-gtype-struct-for="PlayerSubtitleInfo"/>
+    <record name="PlayerSubtitleInfoClass" c:type="GstPlayerSubtitleInfoClass" disguised="1" opaque="1" glib:is-gtype-struct-for="PlayerSubtitleInfo"/>
     <class name="PlayerVideoInfo" c:symbol-prefix="player_video_info" c:type="GstPlayerVideoInfo" parent="PlayerStreamInfo" glib:type-name="GstPlayerVideoInfo" glib:get-type="gst_player_video_info_get_type" glib:type-struct="PlayerVideoInfoClass">
       <doc xml:space="preserve">#GstPlayerStreamInfo specific to video streams.</doc>
       <method name="get_bitrate" c:identifier="gst_player_video_info_get_bitrate">
@@ -1971,7 +1971,7 @@ unknown.</doc>
         </parameters>
       </method>
     </class>
-    <record name="PlayerVideoInfoClass" c:type="GstPlayerVideoInfoClass" disguised="1" glib:is-gtype-struct-for="PlayerVideoInfo"/>
+    <record name="PlayerVideoInfoClass" c:type="GstPlayerVideoInfoClass" disguised="1" opaque="1" glib:is-gtype-struct-for="PlayerVideoInfo"/>
     <class name="PlayerVideoOverlayVideoRenderer" c:symbol-prefix="player_video_overlay_video_renderer" c:type="GstPlayerVideoOverlayVideoRenderer" parent="GObject.Object" glib:type-name="GstPlayerVideoOverlayVideoRenderer" glib:get-type="gst_player_video_overlay_video_renderer_get_type" glib:type-struct="PlayerVideoOverlayVideoRendererClass">
       <implements name="PlayerVideoRenderer"/>
       <function name="new" c:identifier="gst_player_video_overlay_video_renderer_new">
@@ -2116,7 +2116,7 @@ should be rendered</doc>
         <type name="gpointer" c:type="gpointer"/>
       </property>
     </class>
-    <record name="PlayerVideoOverlayVideoRendererClass" c:type="GstPlayerVideoOverlayVideoRendererClass" disguised="1" glib:is-gtype-struct-for="PlayerVideoOverlayVideoRenderer"/>
+    <record name="PlayerVideoOverlayVideoRendererClass" c:type="GstPlayerVideoOverlayVideoRendererClass" disguised="1" opaque="1" glib:is-gtype-struct-for="PlayerVideoOverlayVideoRenderer"/>
     <interface name="PlayerVideoRenderer" c:symbol-prefix="player_video_renderer" c:type="GstPlayerVideoRenderer" glib:type-name="GstPlayerVideoRenderer" glib:get-type="gst_player_video_renderer_get_type" glib:type-struct="PlayerVideoRendererInterface">
       <virtual-method name="create_video_sink" introspectable="0">
         <return-value>

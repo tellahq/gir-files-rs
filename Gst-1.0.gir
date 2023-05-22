@@ -427,8 +427,8 @@ use an alignment of 7.</doc>
         <doc xml:space="preserve">first flag that can be used for custom purposes</doc>
       </member>
     </bitfield>
-    <record name="AllocatorPrivate" c:type="GstAllocatorPrivate" disguised="1"/>
-    <record name="AtomicQueue" c:type="GstAtomicQueue" glib:type-name="GstAtomicQueue" glib:get-type="gst_atomic_queue_get_type" c:symbol-prefix="atomic_queue">
+    <record name="AllocatorPrivate" c:type="GstAllocatorPrivate" disguised="1" opaque="1"/>
+    <record name="AtomicQueue" c:type="GstAtomicQueue" opaque="1" glib:type-name="GstAtomicQueue" glib:get-type="gst_atomic_queue_get_type" c:symbol-prefix="atomic_queue">
       <doc xml:space="preserve">The #GstAtomicQueue object implements a queue that can be used from multiple
 threads without performing any blocking operations.</doc>
       <constructor name="new" c:identifier="gst_atomic_queue_new">
@@ -1437,13 +1437,13 @@ of @bin. See also gst_element_sync_state_with_parent().</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <property name="async-handling" writable="1" transfer-ownership="none">
+      <property name="async-handling" writable="1" transfer-ownership="none" default-value="FALSE">
         <doc xml:space="preserve">If set to %TRUE, the bin will handle asynchronous state changes.
 This should be used only if the bin subclass is modifying the state
 of its children on its own.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="message-forward" writable="1" transfer-ownership="none">
+      <property name="message-forward" writable="1" transfer-ownership="none" default-value="FALSE">
         <doc xml:space="preserve">Forward all children messages, even those that would normally be filtered by
 the bin. This can be interesting when one wants to be notified of the EOS
 state of individual elements, for example.
@@ -1763,7 +1763,7 @@ at any point in time without first posting a no-more-pads signal.</doc>
 as first value in a list of flags.</doc>
       </member>
     </bitfield>
-    <record name="BinPrivate" c:type="GstBinPrivate" disguised="1"/>
+    <record name="BinPrivate" c:type="GstBinPrivate" disguised="1" opaque="1"/>
     <class name="Bitmask" c:symbol-prefix="bitmask" glib:type-name="GstBitmask" glib:get-type="gst_bitmask_get_type" glib:fundamental="1">
       <doc xml:space="preserve">A fundamental type that describes a 64-bit bitmask</doc>
     </class>
@@ -3436,7 +3436,7 @@ When @meta is set to %NULL, the item will be removed from the buffer.</doc>
         </parameter>
       </parameters>
     </callback>
-    <record name="BufferList" c:type="GstBufferList" glib:type-name="GstBufferList" glib:get-type="gst_buffer_list_get_type" c:symbol-prefix="buffer_list">
+    <record name="BufferList" c:type="GstBufferList" opaque="1" glib:type-name="GstBufferList" glib:get-type="gst_buffer_list_get_type" c:symbol-prefix="buffer_list">
       <doc xml:space="preserve">Buffer lists are an object containing a list of buffers.
 
 Buffer lists are created with gst_buffer_list_new() and filled with data
@@ -4662,7 +4662,7 @@ successful.</doc>
         </array>
       </field>
     </record>
-    <record name="BufferPoolPrivate" c:type="GstBufferPoolPrivate" disguised="1"/>
+    <record name="BufferPoolPrivate" c:type="GstBufferPoolPrivate" disguised="1" opaque="1"/>
     <enumeration name="BufferingMode" glib:type-name="GstBufferingMode" glib:get-type="gst_buffering_mode_get_type" c:type="GstBufferingMode">
       <doc xml:space="preserve">The different types of buffering methods.</doc>
       <member name="stream" value="0" c:identifier="GST_BUFFERING_STREAM" glib:nick="stream" glib:name="GST_BUFFERING_STREAM">
@@ -5297,7 +5297,7 @@ matching message was posted on the bus.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="enable-async" readable="0" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="enable-async" readable="0" writable="1" construct-only="1" transfer-ownership="none" default-value="TRUE">
         <doc xml:space="preserve">Enables async message delivery support for bus watches,
 gst_bus_pop() and similar API. Without this only the
 synchronous message handlers are called.
@@ -5433,7 +5433,7 @@ Note that this function is used as a #GSourceFunc which means that returning
         </parameter>
       </parameters>
     </callback>
-    <record name="BusPrivate" c:type="GstBusPrivate" disguised="1"/>
+    <record name="BusPrivate" c:type="GstBusPrivate" disguised="1" opaque="1"/>
     <callback name="BusSyncHandler" c:type="GstBusSyncHandler">
       <doc xml:space="preserve">Handler will be invoked synchronously, when a new message has been injected
 into the bus. This function is mostly used internally. Only one sync handler
@@ -7170,7 +7170,7 @@ of @new_caps.</doc>
         </parameters>
       </function>
     </record>
-    <record name="CapsFeatures" c:type="GstCapsFeatures" version="1.2" glib:type-name="GstCapsFeatures" glib:get-type="gst_caps_features_get_type" c:symbol-prefix="caps_features">
+    <record name="CapsFeatures" c:type="GstCapsFeatures" opaque="1" version="1.2" glib:type-name="GstCapsFeatures" glib:get-type="gst_caps_features_get_type" c:symbol-prefix="caps_features">
       <doc xml:space="preserve">#GstCapsFeatures can optionally be set on a #GstCaps to add requirements
 for additional features for a specific #GstStructure. Caps structures with
 the same name but with a non-equal set of caps features are not compatible.
@@ -9094,13 +9094,13 @@ is not set on the clock, or if the clock is already synced.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="timeout" writable="1" transfer-ownership="none" setter="set_timeout" getter="get_timeout">
+      <property name="timeout" writable="1" transfer-ownership="none" setter="set_timeout" getter="get_timeout" default-value="100000000">
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="window-size" writable="1" transfer-ownership="none">
+      <property name="window-size" writable="1" transfer-ownership="none" default-value="32">
         <type name="gint" c:type="gint"/>
       </property>
-      <property name="window-threshold" writable="1" transfer-ownership="none">
+      <property name="window-threshold" writable="1" transfer-ownership="none" default-value="4">
         <type name="gint" c:type="gint"/>
       </property>
       <field name="object">
@@ -9363,7 +9363,7 @@ not be extended or allocated using a custom allocator.</doc>
         <doc xml:space="preserve">subclasses can add additional flags starting from this flag</doc>
       </member>
     </bitfield>
-    <record name="ClockPrivate" c:type="GstClockPrivate" disguised="1"/>
+    <record name="ClockPrivate" c:type="GstClockPrivate" disguised="1" opaque="1"/>
     <enumeration name="ClockReturn" glib:type-name="GstClockReturn" glib:get-type="gst_clock_return_get_type" c:type="GstClockReturn">
       <doc xml:space="preserve">The return value of a clock operation.</doc>
       <member name="ok" value="0" c:identifier="GST_CLOCK_OK" glib:nick="ok" glib:name="GST_CLOCK_OK">
@@ -9408,7 +9408,7 @@ not be extended or allocated using a custom allocator.</doc>
                      as reference (Since: 1.18)</doc>
       </member>
     </enumeration>
-    <record name="Context" c:type="GstContext" version="1.2" glib:type-name="GstContext" glib:get-type="gst_context_get_type" c:symbol-prefix="context">
+    <record name="Context" c:type="GstContext" opaque="1" version="1.2" glib:type-name="GstContext" glib:get-type="gst_context_get_type" c:symbol-prefix="context">
       <doc xml:space="preserve">#GstContext is a container object used to store contexts like a device
 context, a display server connection and similar concepts that should
 be shared between multiple elements.
@@ -9879,7 +9879,7 @@ property, %FALSE otherwise</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="name" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="name" writable="1" construct-only="1" transfer-ownership="none" default-value="NULL">
         <type name="utf8" c:type="gchar*"/>
       </property>
       <property name="object" writable="1" construct-only="1" transfer-ownership="none">
@@ -10056,7 +10056,7 @@ or %NULL if the property isn't controlled.</doc>
         </parameter>
       </parameters>
     </callback>
-    <record name="ControlBindingPrivate" c:type="GstControlBindingPrivate" disguised="1"/>
+    <record name="ControlBindingPrivate" c:type="GstControlBindingPrivate" disguised="1" opaque="1"/>
     <class name="ControlSource" c:symbol-prefix="control_source" c:type="GstControlSource" parent="Object" abstract="1" glib:type-name="GstControlSource" glib:get-type="gst_control_source_get_type" glib:type-struct="ControlSourceClass">
       <doc xml:space="preserve">The #GstControlSource is a base class for control value sources that could
 be used to get timestamp-value pairs. A control source essentially is a
@@ -10783,7 +10783,7 @@ Used to generate `gst_dynamic_type_register_*(GstPlugin* plugin)`.</doc>
         </parameter>
       </parameters>
     </function-macro>
-    <record name="DateTime" c:type="GstDateTime" glib:type-name="GstDateTime" glib:get-type="gst_date_time_get_type" c:symbol-prefix="date_time">
+    <record name="DateTime" c:type="GstDateTime" opaque="1" glib:type-name="GstDateTime" glib:get-type="gst_date_time_get_type" c:symbol-prefix="date_time">
       <doc xml:space="preserve">Struct to store date, time and timezone information altogether.
 #GstDateTime is refcounted and immutable.
 
@@ -11608,7 +11608,7 @@ message is, the greater the probability that the debugging system outputs it.</d
         </parameters>
       </function>
     </enumeration>
-    <record name="DebugMessage" c:type="GstDebugMessage" disguised="1">
+    <record name="DebugMessage" c:type="GstDebugMessage" disguised="1" opaque="1">
       <method name="get" c:identifier="gst_debug_message_get">
         <doc xml:space="preserve">Gets the string representation of a #GstDebugMessage. This function is used
 in debug handlers to extract the message.</doc>
@@ -12133,7 +12133,7 @@ will be emitted on the bus when the list of devices changes.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <property name="show-all" writable="1" transfer-ownership="none">
+      <property name="show-all" writable="1" transfer-ownership="none" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
       <field name="parent">
@@ -12161,8 +12161,8 @@ will be emitted on the bus when the list of devices changes.</doc>
         </array>
       </field>
     </record>
-    <record name="DeviceMonitorPrivate" c:type="GstDeviceMonitorPrivate" disguised="1"/>
-    <record name="DevicePrivate" c:type="GstDevicePrivate" disguised="1"/>
+    <record name="DeviceMonitorPrivate" c:type="GstDeviceMonitorPrivate" disguised="1" opaque="1"/>
+    <record name="DevicePrivate" c:type="GstDevicePrivate" disguised="1" opaque="1"/>
     <class name="DeviceProvider" c:symbol-prefix="device_provider" c:type="GstDeviceProvider" version="1.4" parent="Object" abstract="1" glib:type-name="GstDeviceProvider" glib:get-type="gst_device_provider_get_type" glib:type-struct="DeviceProviderClass">
       <doc xml:space="preserve">A #GstDeviceProvider subclass is provided by a plugin that handles devices
 if there is a way to programmatically list connected devices. It can also
@@ -12895,10 +12895,10 @@ metadata. Free with g_strfreev() when no longer needed.</doc>
         </parameters>
       </method>
     </class>
-    <record name="DeviceProviderFactoryClass" c:type="GstDeviceProviderFactoryClass" disguised="1" glib:is-gtype-struct-for="DeviceProviderFactory" version="1.4">
+    <record name="DeviceProviderFactoryClass" c:type="GstDeviceProviderFactoryClass" disguised="1" opaque="1" glib:is-gtype-struct-for="DeviceProviderFactory" version="1.4">
       <doc xml:space="preserve">The opaque #GstDeviceProviderFactoryClass data structure.</doc>
     </record>
-    <record name="DeviceProviderPrivate" c:type="GstDeviceProviderPrivate" disguised="1"/>
+    <record name="DeviceProviderPrivate" c:type="GstDeviceProviderPrivate" disguised="1" opaque="1"/>
     <class name="DoubleRange" c:symbol-prefix="double_range" glib:type-name="GstDoubleRange" glib:get-type="gst_double_range_get_type" glib:fundamental="1">
       <doc xml:space="preserve">A fundamental type that describes a #gdouble range</doc>
     </class>
@@ -12933,7 +12933,7 @@ plugin_init (GstPlugin * plugin)
         </parameters>
       </function>
     </class>
-    <record name="DynamicTypeFactoryClass" c:type="GstDynamicTypeFactoryClass" disguised="1" glib:is-gtype-struct-for="DynamicTypeFactory"/>
+    <record name="DynamicTypeFactoryClass" c:type="GstDynamicTypeFactoryClass" disguised="1" opaque="1" glib:is-gtype-struct-for="DynamicTypeFactory"/>
     <function-macro name="ELEMENT" c:identifier="GST_ELEMENT" introspectable="0">
       <parameters>
         <parameter name="obj">
@@ -13433,8 +13433,8 @@ As an example, you may define the element named "stream-filter"
 with the namespace `my` as following:
 
 ```
-#define _pre_register_init  *   my_stream_filter_pre_register (plugin);
-;
+#define _pre_register_init \
+  my_stream_filter_pre_register (plugin);
 GST_ELEMENT_REGISTER_DEFINE_WITH_CODE (stream_filter, "stream-filter", GST_RANK_PRIMARY, MY_TYPE_STREAM_FILTER, _pre_register_init)
 ```</doc>
       <parameters>
@@ -17231,7 +17231,7 @@ make a copy of the protocol string array if you need to.</doc>
         </parameters>
       </method>
     </class>
-    <record name="ElementFactoryClass" c:type="GstElementFactoryClass" disguised="1" glib:is-gtype-struct-for="ElementFactory"/>
+    <record name="ElementFactoryClass" c:type="GstElementFactoryClass" disguised="1" opaque="1" glib:is-gtype-struct-for="ElementFactory"/>
     <bitfield name="ElementFlags" glib:type-name="GstElementFlags" glib:get-type="gst_element_flags_get_type" c:type="GstElementFlags">
       <doc xml:space="preserve">The standard flags that an element may have.</doc>
       <member name="locked_state" value="16" c:identifier="GST_ELEMENT_FLAG_LOCKED_STATE" glib:nick="locked-state" glib:name="GST_ELEMENT_FLAG_LOCKED_STATE">
@@ -19707,7 +19707,7 @@ is unlinked and links to the new target are established. if @newtarget is
         </array>
       </field>
     </record>
-    <record name="GhostPadPrivate" c:type="GstGhostPadPrivate" disguised="1"/>
+    <record name="GhostPadPrivate" c:type="GstGhostPadPrivate" disguised="1" opaque="1"/>
     <function-macro name="INFO" c:identifier="GST_INFO" introspectable="0">
       <doc xml:space="preserve">Output an informational message in the default category.
 
@@ -26530,7 +26530,7 @@ this might deadlock the dispose function.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <property name="name" writable="1" construct="1" transfer-ownership="none" setter="set_name" getter="get_name">
+      <property name="name" writable="1" construct="1" transfer-ownership="none" setter="set_name" getter="get_name" default-value="NULL">
         <type name="utf8" c:type="gchar*"/>
       </property>
       <property name="parent" writable="1" transfer-ownership="none" setter="set_parent" getter="get_parent">
@@ -29658,10 +29658,10 @@ be renegotiated to something else.</doc>
       <property name="caps" transfer-ownership="none">
         <type name="Caps"/>
       </property>
-      <property name="direction" writable="1" construct-only="1" transfer-ownership="none" getter="get_direction">
+      <property name="direction" writable="1" construct-only="1" transfer-ownership="none" getter="get_direction" default-value="GST_PAD_UNKNOWN">
         <type name="PadDirection"/>
       </property>
-      <property name="offset" version="1.6" writable="1" transfer-ownership="none" setter="set_offset" getter="get_offset">
+      <property name="offset" version="1.6" writable="1" transfer-ownership="none" setter="set_offset" getter="get_offset" default-value="0">
         <doc xml:space="preserve">The offset that will be applied to the running time of the pad.</doc>
         <type name="gint64" c:type="gint64"/>
       </property>
@@ -30342,7 +30342,7 @@ pad operates in push or pull mode.</doc>
  gst_element_request_pad().</doc>
       </member>
     </enumeration>
-    <record name="PadPrivate" c:type="GstPadPrivate" disguised="1"/>
+    <record name="PadPrivate" c:type="GstPadPrivate" disguised="1" opaque="1"/>
     <callback name="PadProbeCallback" c:type="GstPadProbeCallback">
       <doc xml:space="preserve">Callback used by gst_pad_add_probe(). Gets called to notify about the current
 blocking type.
@@ -30833,7 +30833,7 @@ expose "stable" caps to the reader.</doc>
         <doc xml:space="preserve">The capabilities of the pad described by the pad template.</doc>
         <type name="Caps"/>
       </property>
-      <property name="direction" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="direction" writable="1" construct-only="1" transfer-ownership="none" default-value="GST_PAD_UNKNOWN">
         <doc xml:space="preserve">The direction of the pad described by the pad template.</doc>
         <type name="PadDirection"/>
       </property>
@@ -30841,11 +30841,11 @@ expose "stable" caps to the reader.</doc>
         <doc xml:space="preserve">The type of the pad described by the pad template.</doc>
         <type name="GType" c:type="GType"/>
       </property>
-      <property name="name-template" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="name-template" writable="1" construct-only="1" transfer-ownership="none" default-value="NULL">
         <doc xml:space="preserve">The name template of the pad template.</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="presence" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="presence" writable="1" construct-only="1" transfer-ownership="none" default-value="GST_PAD_ALWAYS">
         <doc xml:space="preserve">When the pad described by the pad template will become available.</doc>
         <type name="PadPresence"/>
       </property>
@@ -31022,7 +31022,7 @@ for re-use.</doc>
         </return-value>
       </function>
     </record>
-    <record name="ParseContext" c:type="GstParseContext" glib:type-name="GstParseContext" glib:get-type="gst_parse_context_get_type" c:symbol-prefix="parse_context">
+    <record name="ParseContext" c:type="GstParseContext" opaque="1" glib:type-name="GstParseContext" glib:get-type="gst_parse_context_get_type" c:symbol-prefix="parse_context">
       <doc xml:space="preserve">Opaque structure.</doc>
       <constructor name="new" c:identifier="gst_parse_context_new">
         <doc xml:space="preserve">Allocates a parse context for use with gst_parse_launch_full() or
@@ -31436,19 +31436,19 @@ MT safe.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="auto-flush-bus" writable="1" transfer-ownership="none" setter="set_auto_flush_bus" getter="get_auto_flush_bus">
+      <property name="auto-flush-bus" writable="1" transfer-ownership="none" setter="set_auto_flush_bus" getter="get_auto_flush_bus" default-value="TRUE">
         <doc xml:space="preserve">Whether or not to automatically flush all messages on the
 pipeline's bus when going from READY to NULL state. Please see
 gst_pipeline_set_auto_flush_bus() for more information on this option.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="delay" writable="1" transfer-ownership="none" setter="set_delay" getter="get_delay">
+      <property name="delay" writable="1" transfer-ownership="none" setter="set_delay" getter="get_delay" default-value="0">
         <doc xml:space="preserve">The expected delay needed for elements to spin up to the
 PLAYING state expressed in nanoseconds.
 see gst_pipeline_set_delay() for more information on this option.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="latency" version="1.6" writable="1" transfer-ownership="none" setter="set_latency" getter="get_latency">
+      <property name="latency" version="1.6" writable="1" transfer-ownership="none" setter="set_latency" getter="get_latency" default-value="18446744073709551615">
         <doc xml:space="preserve">Latency to configure on the pipeline. See gst_pipeline_set_latency().</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
@@ -31500,7 +31500,7 @@ see gst_pipeline_set_delay() for more information on this option.</doc>
         <doc xml:space="preserve">offset to define more flags</doc>
       </member>
     </bitfield>
-    <record name="PipelinePrivate" c:type="GstPipelinePrivate" disguised="1"/>
+    <record name="PipelinePrivate" c:type="GstPipelinePrivate" disguised="1" opaque="1"/>
     <class name="Plugin" c:symbol-prefix="plugin" c:type="GstPlugin" parent="Object" glib:type-name="GstPlugin" glib:get-type="gst_plugin_get_type" glib:type-struct="PluginClass">
       <doc xml:space="preserve">GStreamer is extensible, so #GstElement instances can be loaded at runtime.
 A plugin system can provide one or more of the basic GStreamer
@@ -31987,7 +31987,7 @@ The cache is flushed every time the registry is rebuilt.</doc>
   dynamically, in order not to expose incorrect documentation to the end user.</doc>
       </member>
     </bitfield>
-    <record name="PluginClass" c:type="GstPluginClass" disguised="1" glib:is-gtype-struct-for="Plugin"/>
+    <record name="PluginClass" c:type="GstPluginClass" disguised="1" opaque="1" glib:is-gtype-struct-for="Plugin"/>
     <bitfield name="PluginDependencyFlags" glib:type-name="GstPluginDependencyFlags" glib:get-type="gst_plugin_dependency_flags_get_type" c:type="GstPluginDependencyFlags">
       <doc xml:space="preserve">Flags used in connection with gst_plugin_add_dependency().</doc>
       <member name="none" value="0" c:identifier="GST_PLUGIN_DEPENDENCY_FLAG_NONE" glib:nick="none" glib:name="GST_PLUGIN_DEPENDENCY_FLAG_NONE">
@@ -32282,7 +32282,7 @@ the most appropriate feature.</doc>
         </parameters>
       </method>
     </class>
-    <record name="PluginFeatureClass" c:type="GstPluginFeatureClass" disguised="1" glib:is-gtype-struct-for="PluginFeature"/>
+    <record name="PluginFeatureClass" c:type="GstPluginFeatureClass" disguised="1" opaque="1" glib:is-gtype-struct-for="PluginFeature"/>
     <callback name="PluginFeatureFilter" c:type="GstPluginFeatureFilter">
       <doc xml:space="preserve">A function that can be used with e.g. gst_registry_feature_filter()
 to get a list of pluginfeature that match certain criteria.</doc>
@@ -32366,7 +32366,7 @@ register each #GstPluginFeature.</doc>
         </parameter>
       </parameters>
     </callback>
-    <record name="Poll" c:type="GstPoll" disguised="1">
+    <record name="Poll" c:type="GstPoll" disguised="1" opaque="1">
       <doc xml:space="preserve">A #GstPoll keeps track of file descriptors much like fd_set (used with
 select ()) or a struct pollfd array (used with poll ()). Once created with
 gst_poll_new(), the set can be used to wait for file descriptors to be
@@ -33767,7 +33767,7 @@ be %NULL.  Unref target pad after usage.</doc>
         </array>
       </field>
     </record>
-    <record name="ProxyPadPrivate" c:type="GstProxyPadPrivate" disguised="1"/>
+    <record name="ProxyPadPrivate" c:type="GstProxyPadPrivate" disguised="1" opaque="1"/>
     <enumeration name="QOSType" glib:type-name="GstQOSType" glib:get-type="gst_qos_type_get_type" c:type="GstQOSType">
       <doc xml:space="preserve">The different types of QoS events that can be given to the
 gst_event_new_qos() method.</doc>
@@ -36638,7 +36638,7 @@ replacing a previously-added one by the same name)</doc>
         <type name="ObjectClass" c:type="GstObjectClass"/>
       </field>
     </record>
-    <record name="RegistryPrivate" c:type="GstRegistryPrivate" disguised="1"/>
+    <record name="RegistryPrivate" c:type="GstRegistryPrivate" disguised="1" opaque="1"/>
     <enumeration name="ResourceError" glib:type-name="GstResourceError" glib:get-type="gst_resource_error_get_type" c:type="GstResourceError" glib:error-domain="gst-resource-error-quark">
       <doc xml:space="preserve">Resource errors are for any resource used by an element:
 memory, files, network connections, process space, ...
@@ -36911,8 +36911,8 @@ This can be used in pad templates.</doc>
 structure.
 Example:
 |[&lt;!-- language="C" --&gt;
-static GstStaticPadTemplate my_src_template =  *   GST_STATIC_PAD_TEMPLATE("src", GST_PAD_SRC, GST_PAD_ALWAYS,
-,
+static GstStaticPadTemplate my_src_template = \
+  GST_STATIC_PAD_TEMPLATE("src", GST_PAD_SRC, GST_PAD_ALWAYS,
                           GST_STATIC_CAPS_ANY);
 ]|</doc>
       <parameters>
@@ -37070,7 +37070,7 @@ strings.</doc>
         </parameter>
       </parameters>
     </function-macro>
-    <record name="Sample" c:type="GstSample" glib:type-name="GstSample" glib:get-type="gst_sample_get_type" c:symbol-prefix="sample">
+    <record name="Sample" c:type="GstSample" opaque="1" glib:type-name="GstSample" glib:get-type="gst_sample_get_type" c:symbol-prefix="sample">
       <doc xml:space="preserve">A #GstSample is a small object containing data, a type, timing and
 extra arbitrary information.</doc>
       <constructor name="new" c:identifier="gst_sample_new">
@@ -38253,7 +38253,7 @@ Setting @max_threads to 0 effectively freezes the pool.</doc>
         </array>
       </field>
     </record>
-    <record name="SharedTaskPoolPrivate" c:type="GstSharedTaskPoolPrivate" disguised="1"/>
+    <record name="SharedTaskPoolPrivate" c:type="GstSharedTaskPoolPrivate" disguised="1" opaque="1"/>
     <bitfield name="StackTraceFlags" version="1.12" glib:type-name="GstStackTraceFlags" glib:get-type="gst_stack_trace_flags_get_type" c:type="GstStackTraceFlags">
       <member name="none" value="0" c:identifier="GST_STACK_TRACE_SHOW_NONE" glib:nick="none" glib:name="GST_STACK_TRACE_SHOW_NONE">
         <doc xml:space="preserve">Try to retrieve the minimum information
@@ -38674,15 +38674,15 @@ during the lifetime of @stream.</doc>
         <doc xml:space="preserve">The #GstCaps of the #GstStream.</doc>
         <type name="Caps"/>
       </property>
-      <property name="stream-flags" writable="1" construct="1" transfer-ownership="none" setter="set_stream_flags" getter="get_stream_flags">
+      <property name="stream-flags" writable="1" construct="1" transfer-ownership="none" setter="set_stream_flags" getter="get_stream_flags" default-value="GST_STREAM_FLAG_NONE">
         <type name="StreamFlags"/>
       </property>
-      <property name="stream-id" writable="1" construct-only="1" transfer-ownership="none" getter="get_stream_id">
+      <property name="stream-id" writable="1" construct-only="1" transfer-ownership="none" getter="get_stream_id" default-value="NULL">
         <doc xml:space="preserve">The unique identifier of the #GstStream. Can only be set at construction
 time.</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="stream-type" writable="1" construct="1" transfer-ownership="none" setter="set_stream_type" getter="get_stream_type">
+      <property name="stream-type" writable="1" construct="1" transfer-ownership="none" setter="set_stream_type" getter="get_stream_type" default-value="GST_STREAM_TYPE_UNKNOWN">
         <doc xml:space="preserve">The #GstStreamType of the #GstStream. Can only be set at construction time.</doc>
         <type name="StreamType"/>
       </property>
@@ -38826,7 +38826,7 @@ The caller should not modify the returned #GstStream</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <property name="upstream-id" writable="1" construct="1" transfer-ownership="none" getter="get_upstream_id">
+      <property name="upstream-id" writable="1" construct="1" transfer-ownership="none" getter="get_upstream_id" default-value="NULL">
         <type name="utf8" c:type="gchar*"/>
       </property>
       <field name="object" readable="0" private="1">
@@ -38887,7 +38887,7 @@ The caller should not modify the returned #GstStream</doc>
         </array>
       </field>
     </record>
-    <record name="StreamCollectionPrivate" c:type="GstStreamCollectionPrivate" disguised="1"/>
+    <record name="StreamCollectionPrivate" c:type="GstStreamCollectionPrivate" disguised="1" opaque="1"/>
     <enumeration name="StreamError" glib:type-name="GstStreamError" glib:get-type="gst_stream_error_get_type" c:type="GstStreamError" glib:error-domain="gst-stream-error-quark">
       <doc xml:space="preserve">Stream errors are for anything related to the stream being processed:
 format errors, media type errors, ...
@@ -38972,7 +38972,7 @@ can't be decrypted because no suitable key is available.</doc>
    a director's commentary track).</doc>
       </member>
     </bitfield>
-    <record name="StreamPrivate" c:type="GstStreamPrivate" disguised="1"/>
+    <record name="StreamPrivate" c:type="GstStreamPrivate" disguised="1" opaque="1"/>
     <enumeration name="StreamStatusType" glib:type-name="GstStreamStatusType" glib:get-type="gst_stream_status_type_get_type" c:type="GstStreamStatusType">
       <doc xml:space="preserve">The type of a %GST_MESSAGE_STREAM_STATUS. The stream status messages inform the
 application of new streaming threads and their status.</doc>
@@ -40889,7 +40889,7 @@ MT safe.</doc>
           </parameter>
         </parameters>
       </function>
-      <property name="clock-type" writable="1" transfer-ownership="none">
+      <property name="clock-type" writable="1" transfer-ownership="none" default-value="GST_CLOCK_TYPE_MONOTONIC">
         <type name="ClockType"/>
       </property>
       <field name="clock">
@@ -40914,7 +40914,7 @@ MT safe.</doc>
         </array>
       </field>
     </record>
-    <record name="SystemClockPrivate" c:type="GstSystemClockPrivate" disguised="1"/>
+    <record name="SystemClockPrivate" c:type="GstSystemClockPrivate" disguised="1" opaque="1"/>
     <constant name="TAG_ALBUM" value="album" c:type="GST_TAG_ALBUM">
       <doc xml:space="preserve">album containing this data (string)
 
@@ -44131,7 +44131,7 @@ instead.</doc>
         </parameter>
       </parameters>
     </callback>
-    <record name="TaskPrivate" c:type="GstTaskPrivate" disguised="1"/>
+    <record name="TaskPrivate" c:type="GstTaskPrivate" disguised="1" opaque="1"/>
     <enumeration name="TaskState" glib:type-name="GstTaskState" glib:get-type="gst_task_state_get_type" c:type="GstTaskState">
       <doc xml:space="preserve">The different states a task can be in</doc>
       <member name="started" value="0" c:identifier="GST_TASK_STARTED" glib:nick="started" glib:name="GST_TASK_STARTED">
@@ -44175,7 +44175,7 @@ instead.</doc>
         <type name="gdouble" c:type="gdouble"/>
       </field>
     </record>
-    <record name="Toc" c:type="GstToc" glib:type-name="GstToc" glib:get-type="gst_toc_get_type" c:symbol-prefix="toc">
+    <record name="Toc" c:type="GstToc" opaque="1" glib:type-name="GstToc" glib:get-type="gst_toc_get_type" c:symbol-prefix="toc">
       <doc xml:space="preserve">#GstToc functions are used to create/free #GstToc and #GstTocEntry structures.
 Also they are used to convert #GstToc into #GstStructure and vice versa.
 
@@ -44356,7 +44356,7 @@ a track listing from different sources).</doc>
         </parameters>
       </method>
     </record>
-    <record name="TocEntry" c:type="GstTocEntry" glib:type-name="GstTocEntry" glib:get-type="gst_toc_entry_get_type" c:symbol-prefix="toc_entry">
+    <record name="TocEntry" c:type="GstTocEntry" opaque="1" glib:type-name="GstTocEntry" glib:get-type="gst_toc_entry_get_type" c:symbol-prefix="toc_entry">
       <constructor name="new" c:identifier="gst_toc_entry_new">
         <doc xml:space="preserve">Create new #GstTocEntry structure.</doc>
         <return-value transfer-ownership="full">
@@ -44790,7 +44790,7 @@ contextual data, which they must not modify.</doc>
           </parameter>
         </parameters>
       </function>
-      <property name="params" writable="1" construct="1" transfer-ownership="none">
+      <property name="params" writable="1" construct="1" transfer-ownership="none" default-value="NULL">
         <type name="utf8" c:type="gchar*"/>
       </property>
       <field name="parent">
@@ -44850,8 +44850,8 @@ the factory is not loaded.</doc>
         </parameters>
       </method>
     </class>
-    <record name="TracerFactoryClass" c:type="GstTracerFactoryClass" disguised="1" glib:is-gtype-struct-for="TracerFactory"/>
-    <record name="TracerPrivate" c:type="GstTracerPrivate" disguised="1"/>
+    <record name="TracerFactoryClass" c:type="GstTracerFactoryClass" disguised="1" opaque="1" glib:is-gtype-struct-for="TracerFactory"/>
+    <record name="TracerPrivate" c:type="GstTracerPrivate" disguised="1" opaque="1"/>
     <class name="TracerRecord" c:symbol-prefix="tracer_record" c:type="GstTracerRecord" version="1.8" parent="Object" glib:type-name="GstTracerRecord" glib:get-type="gst_tracer_record_get_type" glib:type-struct="TracerRecordClass">
       <doc xml:space="preserve">Tracing modules will create instances of this class to announce the data they
 will log and create a log formatter.</doc>
@@ -44916,7 +44916,7 @@ the category "GST_TRACER".
         </parameters>
       </method>
     </class>
-    <record name="TracerRecordClass" c:type="GstTracerRecordClass" disguised="1" glib:is-gtype-struct-for="TracerRecord"/>
+    <record name="TracerRecordClass" c:type="GstTracerRecordClass" disguised="1" opaque="1" glib:is-gtype-struct-for="TracerRecord"/>
     <bitfield name="TracerValueFlags" glib:type-name="GstTracerValueFlags" glib:get-type="gst_tracer_value_flags_get_type" c:type="GstTracerValueFlags">
       <doc xml:space="preserve">Flag that describe the value. These flags help applications processing the
 logs to understand the values.</doc>
@@ -45320,7 +45320,7 @@ e.g. assume a certain media type based on the file extension.</doc>
         </parameters>
       </method>
     </class>
-    <record name="TypeFindFactoryClass" c:type="GstTypeFindFactoryClass" disguised="1" glib:is-gtype-struct-for="TypeFindFactory"/>
+    <record name="TypeFindFactoryClass" c:type="GstTypeFindFactoryClass" disguised="1" opaque="1" glib:is-gtype-struct-for="TypeFindFactory"/>
     <callback name="TypeFindFunction" c:type="GstTypeFindFunction">
       <doc xml:space="preserve">A function that will be called by typefinding.</doc>
       <return-value transfer-ownership="none">
@@ -45617,7 +45617,7 @@ Returns #GST_URI_UNKNOWN if the @handler isn't implemented correctly.</doc>
       <doc xml:space="preserve">Constant that defines one GStreamer microsecond.</doc>
       <type name="ClockTimeDiff" c:type="GstClockTimeDiff"/>
     </constant>
-    <record name="Uri" c:type="GstUri" glib:type-name="GstUri" glib:get-type="gst_uri_get_type" c:symbol-prefix="uri">
+    <record name="Uri" c:type="GstUri" opaque="1" glib:type-name="GstUri" glib:get-type="gst_uri_get_type" c:symbol-prefix="uri">
       <doc xml:space="preserve">A #GstUri object can be used to parse and split a URI string into its
 constituent parts. Two #GstUri objects can be joined to make a new #GstUri
 using the algorithm described in RFC3986.</doc>

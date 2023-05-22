@@ -144,10 +144,10 @@ number and the height is scaled according to the sub-sampling.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <property name="drm-device-path" version="1.24" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="drm-device-path" version="1.24" writable="1" construct-only="1" transfer-ownership="none" default-value="NULL">
         <type name="filename" c:type="gchar*"/>
       </property>
-      <property name="drm-fd" version="1.24" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="drm-fd" version="1.24" writable="1" construct-only="1" transfer-ownership="none" default-value="-1">
         <type name="gint" c:type="gint"/>
       </property>
     </class>

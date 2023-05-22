@@ -20,7 +20,7 @@ and/or use gtk-doc annotations.  -->
                           to be used for the specific CSB.</doc>
       </member>
     </enumeration>
-    <record name="MIKEYDecryptInfo" c:type="GstMIKEYDecryptInfo" disguised="1"/>
+    <record name="MIKEYDecryptInfo" c:type="GstMIKEYDecryptInfo" disguised="1" opaque="1"/>
     <enumeration name="MIKEYEncAlg" c:type="GstMIKEYEncAlg">
       <doc xml:space="preserve">The encryption algorithm used to encrypt the Encr data field</doc>
       <member name="null" value="0" c:identifier="GST_MIKEY_ENC_NULL">
@@ -36,7 +36,7 @@ and/or use gtk-doc annotations.  -->
         <doc xml:space="preserve">AES-GCM using a 128-bit key (Since: 1.16)</doc>
       </member>
     </enumeration>
-    <record name="MIKEYEncryptInfo" c:type="GstMIKEYEncryptInfo" disguised="1"/>
+    <record name="MIKEYEncryptInfo" c:type="GstMIKEYEncryptInfo" disguised="1" opaque="1"/>
     <enumeration name="MIKEYKVType" c:type="GstMIKEYKVType">
       <doc xml:space="preserve">The key validity type</doc>
       <member name="null" value="0" c:identifier="GST_MIKEY_KV_NULL">

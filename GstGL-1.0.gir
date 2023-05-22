@@ -650,7 +650,7 @@ context is available and current in the calling thread.</doc>
         </array>
       </field>
     </record>
-    <record name="GLBaseFilterPrivate" c:type="GstGLBaseFilterPrivate" disguised="1"/>
+    <record name="GLBaseFilterPrivate" c:type="GstGLBaseFilterPrivate" disguised="1" opaque="1"/>
     <record name="GLBaseMemory" c:type="GstGLBaseMemory" glib:type-name="GstGLBaseMemory" glib:get-type="gst_gl_base_memory_get_type" c:symbol-prefix="gl_base_memory">
       <doc xml:space="preserve">GstGLBaseMemory is a #GstMemory subclass providing the basis of support
 for the mapping of GL buffers.
@@ -1034,7 +1034,7 @@ current in the calling thread.</doc>
           </instance-parameter>
         </parameters>
       </virtual-method>
-      <property name="timestamp-offset" writable="1" transfer-ownership="none">
+      <property name="timestamp-offset" writable="1" transfer-ownership="none" default-value="0">
         <type name="gint64" c:type="gint64"/>
       </property>
       <field name="parent">
@@ -1123,7 +1123,7 @@ current in the calling thread.</doc>
         </array>
       </field>
     </record>
-    <record name="GLBaseSrcPrivate" c:type="GstGLBaseSrcPrivate" disguised="1"/>
+    <record name="GLBaseSrcPrivate" c:type="GstGLBaseSrcPrivate" disguised="1" opaque="1"/>
     <record name="GLBuffer" c:type="GstGLBuffer" glib:type-name="GstGLBuffer" glib:get-type="gst_gl_buffer_get_type" c:symbol-prefix="gl_buffer">
       <doc xml:space="preserve">GstGLBuffer is a #GstMemory subclass providing support for the mapping of
 GL buffers.
@@ -1286,7 +1286,7 @@ gst_buffer_pool_set_config() will cause this function to return a new
         </array>
       </field>
     </record>
-    <record name="GLBufferPoolPrivate" c:type="GstGLBufferPoolPrivate" disguised="1"/>
+    <record name="GLBufferPoolPrivate" c:type="GstGLBufferPoolPrivate" disguised="1" opaque="1"/>
     <class name="GLColorConvert" c:symbol-prefix="gl_color_convert" c:type="GstGLColorConvert" parent="Gst.Object" glib:type-name="GstGLColorConvert" glib:get-type="gst_gl_color_convert_get_type" glib:type-struct="GLColorConvertClass">
       <doc xml:space="preserve">#GstGLColorConvert is an object that converts between color spaces and/or
 formats using OpenGL Shaders.
@@ -1464,7 +1464,7 @@ The glcolorconvertelement provides a GStreamer element that uses
         </array>
       </field>
     </record>
-    <record name="GLColorConvertPrivate" c:type="GstGLColorConvertPrivate" disguised="1"/>
+    <record name="GLColorConvertPrivate" c:type="GstGLColorConvertPrivate" disguised="1" opaque="1"/>
     <enumeration name="GLConfigCaveat" version="1.20" glib:type-name="GstGLConfigCaveat" glib:get-type="gst_gl_config_caveat_get_type" c:type="GstGLConfigCaveat">
       <member name="none" value="0" c:identifier="GST_GL_CONFIG_CAVEAT_NONE" glib:nick="none" glib:name="GST_GL_CONFIG_CAVEAT_NONE">
         <doc xml:space="preserve">none</doc>
@@ -2671,7 +2671,7 @@ MT-safe</doc>
         </return-value>
       </function>
     </enumeration>
-    <record name="GLContextPrivate" c:type="GstGLContextPrivate" disguised="1"/>
+    <record name="GLContextPrivate" c:type="GstGLContextPrivate" disguised="1" opaque="1"/>
     <callback name="GLContextThreadFunc" c:type="GstGLContextThreadFunc">
       <doc xml:space="preserve">Represents a function to run in the GL thread with @context and @data</doc>
       <return-value transfer-ownership="none">
@@ -3072,7 +3072,7 @@ display's object lock held.</doc>
         </array>
       </field>
     </record>
-    <record name="GLDisplayPrivate" c:type="GstGLDisplayPrivate" disguised="1"/>
+    <record name="GLDisplayPrivate" c:type="GstGLDisplayPrivate" disguised="1" opaque="1"/>
     <bitfield name="GLDisplayType" glib:type-name="GstGLDisplayType" glib:get-type="gst_gl_display_type_get_type" c:type="GstGLDisplayType">
       <member name="none" value="0" c:identifier="GST_GL_DISPLAY_TYPE_NONE" glib:nick="none" glib:name="GST_GL_DISPLAY_TYPE_NONE">
         <doc xml:space="preserve">no display type</doc>
@@ -3825,8 +3825,8 @@ with.</doc>
         </parameter>
       </parameters>
     </callback>
-    <record name="GLFramebufferPrivate" c:type="GstGLFramebufferPrivate" disguised="1"/>
-    <record name="GLFuncs" c:type="GstGLFuncs" disguised="1">
+    <record name="GLFramebufferPrivate" c:type="GstGLFramebufferPrivate" disguised="1" opaque="1"/>
+    <record name="GLFuncs" c:type="GstGLFuncs" disguised="1" opaque="1">
       <doc xml:space="preserve">Structure containing function pointers to OpenGL functions.
 
 Each field is named exactly the same as the OpenGL function without the
@@ -4386,7 +4386,7 @@ mappings between texture formats.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="yinvert" writable="1" transfer-ownership="none">
+      <property name="yinvert" writable="1" transfer-ownership="none" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
       <field name="parent" readable="0" private="1">
@@ -5133,7 +5133,7 @@ multiple times.  This must be called before any other GstGLRenderbuffer operatio
         </array>
       </field>
     </record>
-    <record name="GLSLStagePrivate" c:type="GstGLSLStagePrivate" disguised="1"/>
+    <record name="GLSLStagePrivate" c:type="GstGLSLStagePrivate" disguised="1" opaque="1"/>
     <enumeration name="GLSLVersion" version="1.8" glib:type-name="GstGLSLVersion" glib:get-type="gst_glsl_version_get_type" c:type="GstGLSLVersion">
       <doc xml:space="preserve">GLSL version list</doc>
       <member name="none" value="0" c:identifier="GST_GLSL_VERSION_NONE" glib:nick="none" glib:name="GST_GLSL_VERSION_NONE">
@@ -6319,7 +6319,7 @@ Note: must be called in the GL thread and @shader must have been linked.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <property name="linked" transfer-ownership="none">
+      <property name="linked" transfer-ownership="none" default-value="FALSE">
         <type name="gboolean" c:type="gboolean"/>
       </property>
       <field name="parent">
@@ -6342,7 +6342,7 @@ Note: must be called in the GL thread and @shader must have been linked.</doc>
         <type name="Gst.ObjectClass" c:type="GstObjectClass"/>
       </field>
     </record>
-    <record name="GLShaderPrivate" c:type="GstGLShaderPrivate" disguised="1"/>
+    <record name="GLShaderPrivate" c:type="GstGLShaderPrivate" disguised="1" opaque="1"/>
     <enumeration name="GLStereoDownmix" glib:type-name="GstGLStereoDownmix" glib:get-type="gst_gl_stereo_downmix_get_type" c:type="GstGLStereoDownmix">
       <doc xml:space="preserve">Output anaglyph type to generate when downmixing to mono</doc>
       <member name="green_magenta_dubois" value="0" c:identifier="GST_GL_STEREO_DOWNMIX_ANAGLYPH_GREEN_MAGENTA_DUBOIS" glib:nick="green-magenta-dubois" glib:name="GST_GL_STEREO_DOWNMIX_ANAGLYPH_GREEN_MAGENTA_DUBOIS">
@@ -6816,7 +6816,7 @@ gst_gl_upload_set_caps() creating a new #GstBuffer in @outbuf_ptr.</doc>
         </array>
       </field>
     </record>
-    <record name="GLUploadPrivate" c:type="GstGLUploadPrivate" disguised="1"/>
+    <record name="GLUploadPrivate" c:type="GstGLUploadPrivate" disguised="1" opaque="1"/>
     <enumeration name="GLUploadReturn" glib:type-name="GstGLUploadReturn" glib:get-type="gst_gl_upload_return_get_type" c:type="GstGLUploadReturn">
       <member name="done" value="1" c:identifier="GST_GL_UPLOAD_DONE" glib:nick="done" glib:name="GST_GL_UPLOAD_DONE">
         <doc xml:space="preserve">No further processing required</doc>
@@ -7314,19 +7314,19 @@ setting the caps with gst_gl_view_convert_set_caps().</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="downmix-mode" writable="1" transfer-ownership="none">
+      <property name="downmix-mode" writable="1" transfer-ownership="none" default-value="GST_GL_STEREO_DOWNMIX_ANAGLYPH_GREEN_MAGENTA_DUBOIS">
         <type name="GLStereoDownmix"/>
       </property>
-      <property name="input-flags-override" writable="1" transfer-ownership="none">
+      <property name="input-flags-override" writable="1" transfer-ownership="none" default-value="GST_VIDEO_MULTIVIEW_FLAGS_NONE">
         <type name="GstVideo.VideoMultiviewFlags"/>
       </property>
-      <property name="input-mode-override" writable="1" transfer-ownership="none">
+      <property name="input-mode-override" writable="1" transfer-ownership="none" default-value="GST_VIDEO_MULTIVIEW_MODE_NONE">
         <type name="GstVideo.VideoMultiviewMode"/>
       </property>
-      <property name="output-flags-override" writable="1" transfer-ownership="none">
+      <property name="output-flags-override" writable="1" transfer-ownership="none" default-value="GST_VIDEO_MULTIVIEW_FLAGS_NONE">
         <type name="GstVideo.VideoMultiviewFlags"/>
       </property>
-      <property name="output-mode-override" writable="1" transfer-ownership="none">
+      <property name="output-mode-override" writable="1" transfer-ownership="none" default-value="GST_VIDEO_MULTIVIEW_MODE_NONE">
         <type name="GstVideo.VideoMultiviewMode"/>
       </property>
       <field name="object">
@@ -7397,7 +7397,7 @@ setting the caps with gst_gl_view_convert_set_caps().</doc>
         </array>
       </field>
     </record>
-    <record name="GLViewConvertPrivate" c:type="GstGLViewConvertPrivate" disguised="1"/>
+    <record name="GLViewConvertPrivate" c:type="GstGLViewConvertPrivate" disguised="1" opaque="1"/>
     <class name="GLWindow" c:symbol-prefix="gl_window" c:type="GstGLWindow" parent="Gst.Object" abstract="1" glib:type-name="GstGLWindow" glib:get-type="gst_gl_window_get_type" glib:type-struct="GLWindowClass">
       <doc xml:space="preserve">GstGLWindow represents a window that elements can render into.  A window can
 either be a user visible window (onscreen) or hidden (offscreen).</doc>
@@ -8555,7 +8555,7 @@ direct handle comparision.</doc>
         </return-value>
       </function>
     </enumeration>
-    <record name="GLWindowPrivate" c:type="GstGLWindowPrivate" disguised="1"/>
+    <record name="GLWindowPrivate" c:type="GstGLWindowPrivate" disguised="1" opaque="1"/>
     <callback name="GLWindowResizeCB" c:type="GstGLWindowResizeCB">
       <return-value transfer-ownership="none">
         <type name="none" c:type="void"/>

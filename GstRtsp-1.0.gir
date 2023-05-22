@@ -74,7 +74,7 @@ and/or use gtk-doc annotations.  -->
         </parameters>
       </method>
     </record>
-    <record name="RTSPConnection" c:type="GstRTSPConnection" disguised="1">
+    <record name="RTSPConnection" c:type="GstRTSPConnection" disguised="1" opaque="1">
       <doc xml:space="preserve">This object manages the RTSP connection to the server. It provides function
 to receive and send bytes and messages.</doc>
       <method name="clear_auth_params" c:identifier="gst_rtsp_connection_clear_auth_params">
@@ -3500,7 +3500,7 @@ with gst_rtsp_url_free().</doc>
         </parameters>
       </function>
     </enumeration>
-    <record name="RTSPWatch" c:type="GstRTSPWatch" disguised="1">
+    <record name="RTSPWatch" c:type="GstRTSPWatch" disguised="1" opaque="1">
       <doc xml:space="preserve">Opaque RTSP watch object that can be used for asynchronous RTSP
 operations.</doc>
       <method name="attach" c:identifier="gst_rtsp_watch_attach">

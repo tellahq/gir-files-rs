@@ -1990,8 +1990,8 @@ MT safe.</doc>
         </parameter>
       </parameters>
     </callback>
-    <record name="HarnessPrivate" c:type="GstHarnessPrivate" disguised="1"/>
-    <record name="HarnessThread" c:type="GstHarnessThread" disguised="1" version="1.6">
+    <record name="HarnessPrivate" c:type="GstHarnessPrivate" disguised="1" opaque="1"/>
+    <record name="HarnessThread" c:type="GstHarnessThread" disguised="1" opaque="1" version="1.6">
       <doc xml:space="preserve">Opaque handle representing a GstHarness stress testing thread.</doc>
     </record>
     <function-macro name="IS_TEST_CLOCK" c:identifier="GST_IS_TEST_CLOCK" introspectable="0">
@@ -2006,7 +2006,7 @@ MT safe.</doc>
         </parameter>
       </parameters>
     </function-macro>
-    <record name="StreamConsistency" c:type="GstStreamConsistency" disguised="1">
+    <record name="StreamConsistency" c:type="GstStreamConsistency" disguised="1" opaque="1">
       <doc xml:space="preserve">Opaque consistency checker handle.</doc>
     </record>
     <function-macro name="TEST_CLOCK" c:identifier="GST_TEST_CLOCK" introspectable="0">
@@ -2512,10 +2512,10 @@ with information about the pending clock notification</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="clock-type" writable="1" transfer-ownership="none">
+      <property name="clock-type" writable="1" transfer-ownership="none" default-value="GST_CLOCK_TYPE_MONOTONIC">
         <type name="Gst.ClockType"/>
       </property>
-      <property name="start-time" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="start-time" writable="1" construct-only="1" transfer-ownership="none" default-value="0">
         <doc xml:space="preserve">When a #GstTestClock is constructed it will have a certain start time set.
 If the clock was created using gst_test_clock_new_with_start_time() then
 this property contains the value of the @start_time argument. If
@@ -2537,7 +2537,7 @@ this property contains the value 0.</doc>
         <type name="Gst.ClockClass" c:type="GstClockClass"/>
       </field>
     </record>
-    <record name="TestClockPrivate" c:type="GstTestClockPrivate" disguised="1"/>
+    <record name="TestClockPrivate" c:type="GstTestClockPrivate" disguised="1" opaque="1"/>
     <function name="consistency_checker_add_pad" c:identifier="gst_consistency_checker_add_pad">
       <doc xml:space="preserve">Sets up a data probe on the given pad which will raise assertions if the
 data flow is inconsistent.</doc>

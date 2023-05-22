@@ -504,7 +504,7 @@ list.</doc>
         <doc xml:space="preserve">The #GESExtractable object type that can be extracted from the asset.</doc>
         <type name="GType" c:type="GType"/>
       </property>
-      <property name="id" writable="1" construct-only="1" transfer-ownership="none" getter="get_id">
+      <property name="id" writable="1" construct-only="1" transfer-ownership="none" getter="get_id" default-value="NULL">
         <doc xml:space="preserve">The ID of the asset. This should be unique amongst all assets with
 the same #GESAsset:extractable-type. Depending on the associated
 #GESExtractable implementation, this id may convey some information
@@ -650,7 +650,7 @@ asynchronously</doc>
 error</doc>
       </member>
     </enumeration>
-    <record name="AssetPrivate" c:type="GESAssetPrivate" disguised="1"/>
+    <record name="AssetPrivate" c:type="GESAssetPrivate" disguised="1" opaque="1"/>
     <class name="AudioSource" c:symbol-prefix="audio_source" c:type="GESAudioSource" parent="Source" abstract="1" glib:type-name="GESAudioSource" glib:get-type="ges_audio_source_get_type" glib:type-struct="AudioSourceClass">
       <doc xml:space="preserve">## Children Properties
 
@@ -695,7 +695,7 @@ You can use the following children properties through the
         </array>
       </field>
     </record>
-    <record name="AudioSourcePrivate" c:type="GESAudioSourcePrivate" disguised="1"/>
+    <record name="AudioSourcePrivate" c:type="GESAudioSourcePrivate" disguised="1" opaque="1"/>
     <class name="AudioTestSource" c:symbol-prefix="audio_test_source" c:type="GESAudioTestSource" parent="AudioSource" glib:type-name="GESAudioTestSource" glib:get-type="ges_audio_test_source_get_type" glib:type-struct="AudioTestSourceClass">
       <doc xml:space="preserve">Outputs a test audio stream using audiotestsrc. The default property values
 output silence. Useful for testing pipelines, or to fill gaps in an audio
@@ -782,7 +782,7 @@ track.</doc>
         </array>
       </field>
     </record>
-    <record name="AudioTestSourcePrivate" c:type="GESAudioTestSourcePrivate" disguised="1"/>
+    <record name="AudioTestSourcePrivate" c:type="GESAudioTestSourcePrivate" disguised="1" opaque="1"/>
     <class name="AudioTrack" c:symbol-prefix="audio_track" c:type="GESAudioTrack" parent="Track" glib:type-name="GESAudioTrack" glib:get-type="ges_audio_track_get_type" glib:type-struct="AudioTrackClass">
       <doc xml:space="preserve">A #GESAudioTrack is a default audio #GESTrack, with a
 #GES_TRACK_TYPE_AUDIO #GESTrack:track-type and "audio/x-raw(ANY)"
@@ -843,7 +843,7 @@ modify these fields, or add additional ones.</doc>
         </array>
       </field>
     </record>
-    <record name="AudioTrackPrivate" c:type="GESAudioTrackPrivate" disguised="1"/>
+    <record name="AudioTrackPrivate" c:type="GESAudioTrackPrivate" disguised="1" opaque="1"/>
     <class name="AudioTransition" c:symbol-prefix="audio_transition" c:type="GESAudioTransition" parent="Transition" glib:type-name="GESAudioTransition" glib:get-type="ges_audio_transition_get_type" glib:type-struct="AudioTransitionClass">
       <implements name="Extractable"/>
       <implements name="MetaContainer"/>
@@ -878,14 +878,14 @@ be created by clips.</doc-deprecated>
         </array>
       </field>
     </record>
-    <record name="AudioTransitionPrivate" c:type="GESAudioTransitionPrivate" disguised="1"/>
+    <record name="AudioTransitionPrivate" c:type="GESAudioTransitionPrivate" disguised="1" opaque="1"/>
     <class name="AudioUriSource" c:symbol-prefix="audio_uri_source" c:type="GESAudioUriSource" parent="AudioSource" glib:type-name="GESAudioUriSource" glib:get-type="ges_audio_uri_source_get_type" glib:type-struct="AudioUriSourceClass">
       <doc xml:space="preserve">### Children Properties
 
  {{ libs/GESVideoUriSource-children-props.md }}</doc>
       <implements name="Extractable"/>
       <implements name="MetaContainer"/>
-      <property name="uri" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="uri" writable="1" construct-only="1" transfer-ownership="none" default-value="NULL">
         <doc xml:space="preserve">The location of the file/resource to use.</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
@@ -914,7 +914,7 @@ be created by clips.</doc-deprecated>
         </array>
       </field>
     </record>
-    <record name="AudioUriSourcePrivate" c:type="GESAudioUriSourcePrivate" disguised="1"/>
+    <record name="AudioUriSourcePrivate" c:type="GESAudioUriSourcePrivate" disguised="1" opaque="1"/>
     <class name="BaseEffect" c:symbol-prefix="base_effect" c:type="GESBaseEffect" parent="Operation" abstract="1" glib:type-name="GESBaseEffect" glib:get-type="ges_base_effect_get_type" glib:type-struct="BaseEffectClass">
       <doc xml:space="preserve">A #GESBaseEffect is some operation that applies an effect to the data
 it receives.
@@ -1121,8 +1121,8 @@ as core children, nor as additional effects.</doc>
         </array>
       </field>
     </record>
-    <record name="BaseEffectClipPrivate" c:type="GESBaseEffectClipPrivate" disguised="1"/>
-    <record name="BaseEffectPrivate" c:type="GESBaseEffectPrivate" disguised="1"/>
+    <record name="BaseEffectClipPrivate" c:type="GESBaseEffectClipPrivate" disguised="1" opaque="1"/>
+    <record name="BaseEffectPrivate" c:type="GESBaseEffectPrivate" disguised="1" opaque="1"/>
     <callback name="BaseEffectTimeTranslationFunc" c:type="GESBaseEffectTimeTranslationFunc" version="1.18">
       <doc xml:space="preserve">A function for querying how an effect would translate a time if it had
 the given child property values set. The keys for @time_properties will
@@ -1182,7 +1182,7 @@ property name/value pairs</doc>
         </array>
       </field>
     </record>
-    <record name="BaseTransitionClipPrivate" c:type="GESBaseTransitionClipPrivate" disguised="1"/>
+    <record name="BaseTransitionClipPrivate" c:type="GESBaseTransitionClipPrivate" disguised="1" opaque="1"/>
     <class name="BaseXmlFormatter" c:symbol-prefix="base_xml_formatter" c:type="GESBaseXmlFormatter" parent="Formatter" abstract="1" glib:type-name="GESBaseXmlFormatter" glib:get-type="ges_base_xml_formatter_get_type" glib:type-struct="BaseXmlFormatterClass">
       <implements name="Extractable"/>
       <field name="parent">
@@ -1228,7 +1228,7 @@ property name/value pairs</doc>
         </array>
       </field>
     </record>
-    <record name="BaseXmlFormatterPrivate" c:type="GESBaseXmlFormatterPrivate" disguised="1"/>
+    <record name="BaseXmlFormatterPrivate" c:type="GESBaseXmlFormatterPrivate" disguised="1" opaque="1"/>
     <function-macro name="CLIP_CLASS_CAN_ADD_EFFECTS" c:identifier="GES_CLIP_CLASS_CAN_ADD_EFFECTS" introspectable="0">
       <doc xml:space="preserve">Whether the class allows for the user to add additional non-core
 #GESBaseEffect-s to clips from this class.</doc>
@@ -2112,7 +2112,7 @@ the start and end of the clip</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="duration-limit" version="1.18" transfer-ownership="none" getter="get_duration_limit">
+      <property name="duration-limit" version="1.18" transfer-ownership="none" getter="get_duration_limit" default-value="18446744073709551615">
         <doc xml:space="preserve">The maximum #GESTimelineElement:duration that can be *currently* set
 for the clip, taking into account the #GESTimelineElement:in-point,
 #GESTimelineElement:max-duration, #GESTrackElement:active, and
@@ -2137,7 +2137,7 @@ you should connect to it with g_signal_connect_after() since the
 signal emission may be stopped internally.</doc>
         <type name="Layer"/>
       </property>
-      <property name="supported-formats" writable="1" construct="1" transfer-ownership="none" setter="set_supported_formats" getter="get_supported_formats">
+      <property name="supported-formats" writable="1" construct="1" transfer-ownership="none" setter="set_supported_formats" getter="get_supported_formats" default-value="GES_TRACK_TYPE_AUDIO | GES_TRACK_TYPE_VIDEO">
         <doc xml:space="preserve">The #GESTrackType-s that the clip supports, which it can create
 #GESTrackElement-s for. Note that this can be a combination of
 #GESTrackType flags to indicate support for several
@@ -2257,7 +2257,7 @@ a layer</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="supported-formats" writable="1" construct="1" transfer-ownership="none" setter="set_supported_formats" getter="get_supported_formats">
+      <property name="supported-formats" writable="1" construct="1" transfer-ownership="none" setter="set_supported_formats" getter="get_supported_formats" default-value="GES_TRACK_TYPE_AUDIO | GES_TRACK_TYPE_VIDEO">
         <doc xml:space="preserve">The formats supported by the asset.</doc>
         <type name="TrackType"/>
       </property>
@@ -2305,7 +2305,7 @@ a layer</doc>
         </array>
       </field>
     </record>
-    <record name="ClipAssetPrivate" c:type="GESClipAssetPrivate" disguised="1"/>
+    <record name="ClipAssetPrivate" c:type="GESClipAssetPrivate" disguised="1" opaque="1"/>
     <record name="ClipClass" c:type="GESClipClass" glib:is-gtype-struct-for="Clip">
       <field name="parent_class" readable="0" private="1">
         <type name="ContainerClass" c:type="GESContainerClass"/>
@@ -2339,7 +2339,7 @@ default implementation</doc>
         </record>
       </union>
     </record>
-    <record name="ClipPrivate" c:type="GESClipPrivate" disguised="1"/>
+    <record name="ClipPrivate" c:type="GESClipPrivate" disguised="1" opaque="1"/>
     <class name="CommandLineFormatter" c:symbol-prefix="command_line_formatter" c:type="GESCommandLineFormatter" parent="Formatter" glib:type-name="GESCommandLineFormatter" glib:get-type="ges_command_line_formatter_get_type" glib:type-struct="CommandLineFormatterClass">
       <implements name="Extractable"/>
       <function name="get_help" c:identifier="ges_command_line_formatter_get_help" version="1.10">
@@ -2385,7 +2385,7 @@ Result: (transfer full): A help string.</doc>
         <type name="FormatterClass" c:type="GESFormatterClass"/>
       </field>
     </record>
-    <record name="CommandLineFormatterPrivate" c:type="GESCommandLineFormatterPrivate" disguised="1"/>
+    <record name="CommandLineFormatterPrivate" c:type="GESCommandLineFormatterPrivate" disguised="1" opaque="1"/>
     <class name="Container" c:symbol-prefix="container" c:type="GESContainer" parent="TimelineElement" abstract="1" glib:type-name="GESContainer" glib:get-type="ges_container_get_type" glib:type-struct="ContainerClass">
       <doc xml:space="preserve">A #GESContainer is a timeline element that controls other
 #GESTimelineElement-s, which are its children. In particular, it is
@@ -2683,7 +2683,7 @@ new #GESContainer-s created from the splitting of @container.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="height" transfer-ownership="none">
+      <property name="height" transfer-ownership="none" default-value="1">
         <doc xml:space="preserve">The span of the container's children's #GESTimelineElement:priority
 values, which is the number of integers that lie between (inclusive)
 the minimum and maximum priorities found amongst the container's
@@ -2893,7 +2893,7 @@ be moved to. -1 means no move</doc>
         </array>
       </field>
     </record>
-    <record name="ContainerPrivate" c:type="GESContainerPrivate" disguised="1"/>
+    <record name="ContainerPrivate" c:type="GESContainerPrivate" disguised="1" opaque="1"/>
     <callback name="CreateElementForGapFunc" c:type="GESCreateElementForGapFunc" introspectable="0">
       <doc xml:space="preserve">A function that creates a #GstElement that can be used as a source to
 fill the gaps of the track. A gap is a timeline region where the track
@@ -2971,115 +2971,6 @@ if no track elements are created or an error occurred.</doc>
         </parameter>
       </parameters>
     </function-macro>
-    <class name="DiscovererManager" c:symbol-prefix="discoverer_manager" c:type="GESDiscovererManager" version="1.24" parent="GObject.Object" glib:type-name="GESDiscovererManager" glib:get-type="ges_discoverer_manager_get_type" glib:type-struct="DiscovererManagerClass">
-      <function name="get_default" c:identifier="ges_discoverer_manager_get_default" version="1.24">
-        <return-value transfer-ownership="full">
-          <doc xml:space="preserve">The default #GESDiscovererManager</doc>
-          <type name="DiscovererManager" c:type="GESDiscovererManager*"/>
-        </return-value>
-      </function>
-      <method name="get_timeout" c:identifier="ges_discoverer_manager_get_timeout" glib:get-property="timeout" version="1.24">
-        <return-value transfer-ownership="none">
-          <doc xml:space="preserve">The timeout to use for the discoverer</doc>
-          <type name="Gst.ClockTime" c:type="GstClockTime"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="self" transfer-ownership="none">
-            <doc xml:space="preserve">The #GESDiscovererManager</doc>
-            <type name="DiscovererManager" c:type="GESDiscovererManager*"/>
-          </instance-parameter>
-        </parameters>
-      </method>
-      <method name="get_use_cache" c:identifier="ges_discoverer_manager_get_use_cache" glib:get-property="use-cache" version="1.24">
-        <return-value transfer-ownership="none">
-          <doc xml:space="preserve">Whether to use the cache or not</doc>
-          <type name="gboolean" c:type="gboolean"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="self" transfer-ownership="none">
-            <doc xml:space="preserve">The #GESDiscovererManager</doc>
-            <type name="DiscovererManager" c:type="GESDiscovererManager*"/>
-          </instance-parameter>
-        </parameters>
-      </method>
-      <method name="set_timeout" c:identifier="ges_discoverer_manager_set_timeout" glib:set-property="timeout" version="1.24">
-        <doc xml:space="preserve">Sets the timeout to use for the discoverer</doc>
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="self" transfer-ownership="none">
-            <doc xml:space="preserve">The #GESDiscovererManager</doc>
-            <type name="DiscovererManager" c:type="GESDiscovererManager*"/>
-          </instance-parameter>
-          <parameter name="timeout" transfer-ownership="none">
-            <doc xml:space="preserve">The timeout to set</doc>
-            <type name="Gst.ClockTime" c:type="GstClockTime"/>
-          </parameter>
-        </parameters>
-      </method>
-      <method name="set_use_cache" c:identifier="ges_discoverer_manager_set_use_cache" glib:set-property="use-cache" version="1.24">
-        <doc xml:space="preserve">Sets whether to use the cache or not</doc>
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="self" transfer-ownership="none">
-            <doc xml:space="preserve">The #GESDiscovererManager</doc>
-            <type name="DiscovererManager" c:type="GESDiscovererManager*"/>
-          </instance-parameter>
-          <parameter name="use_cache" transfer-ownership="none">
-            <doc xml:space="preserve">Whether to use the cache</doc>
-            <type name="gboolean" c:type="gboolean"/>
-          </parameter>
-        </parameters>
-      </method>
-      <property name="timeout" version="1.24" writable="1" construct="1" transfer-ownership="none" setter="set_timeout" getter="get_timeout">
-        <doc xml:space="preserve">The timeout (in milliseconds) for the #GstDiscoverer operations</doc>
-        <type name="guint64" c:type="guint64"/>
-      </property>
-      <property name="use-cache" writable="1" construct="1" transfer-ownership="none" setter="set_use_cache" getter="get_use_cache">
-        <type name="gboolean" c:type="gboolean"/>
-      </property>
-      <glib:signal name="discovered" when="last" action="1" version="1.24">
-        <attribute name="doc.skip" value="true"/>
-        <return-value transfer-ownership="none">
-          <type name="none" c:type="void"/>
-        </return-value>
-        <parameters>
-          <parameter name="info" transfer-ownership="none">
-            <doc xml:space="preserve">The #GstDiscovererInfo representing the discovered URI</doc>
-            <type name="GstPbutils.DiscovererInfo"/>
-          </parameter>
-          <parameter name="error" transfer-ownership="none">
-            <doc xml:space="preserve">The #GError that occurred, or %NULL</doc>
-            <type name="GLib.Error"/>
-          </parameter>
-        </parameters>
-      </glib:signal>
-      <glib:signal name="load-serialized-info" when="last" action="1" version="1.24">
-        <doc xml:space="preserve">Retrieves information about a URI from and external source of information,
-like a cache file. This is used by the discoverer to speed up the
-discovery.</doc>
-        <return-value transfer-ownership="full" nullable="1">
-          <doc xml:space="preserve">The #GstDiscovererInfo representing
-@uri, or %NULL if no information</doc>
-          <type name="GstPbutils.DiscovererInfo"/>
-        </return-value>
-        <parameters>
-          <parameter name="uri" transfer-ownership="none">
-            <doc xml:space="preserve">The URI to load the serialized info for</doc>
-            <type name="utf8" c:type="gchar*"/>
-          </parameter>
-        </parameters>
-      </glib:signal>
-    </class>
-    <record name="DiscovererManagerClass" c:type="GESDiscovererManagerClass" glib:is-gtype-struct-for="DiscovererManager">
-      <field name="parent_class">
-        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
-      </field>
-    </record>
-    <record name="DiscovererManagerPrivate" c:type="GESDiscovererManagerPrivate" disguised="1"/>
     <function-macro name="EXTRACTABLE_GET_INTERFACE" c:identifier="GES_EXTRACTABLE_GET_INTERFACE" introspectable="0">
       <parameters>
         <parameter name="inst">
@@ -3314,7 +3205,7 @@ wrong.</doc>
           </parameter>
         </parameters>
       </constructor>
-      <property name="bin-description" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="bin-description" writable="1" construct-only="1" transfer-ownership="none" default-value="NULL">
         <doc xml:space="preserve">The description of the effect bin with a gst-launch-style
 pipeline description.
 
@@ -3361,7 +3252,7 @@ to what track type the effect should be used in.</doc>
         </array>
       </field>
     </record>
-    <record name="EffectAssetPrivate" c:type="GESEffectAssetPrivate" disguised="1"/>
+    <record name="EffectAssetPrivate" c:type="GESEffectAssetPrivate" disguised="1" opaque="1"/>
     <record name="EffectClass" c:type="GESEffectClass" glib:is-gtype-struct-for="Effect">
       <field name="parent_class" readable="0" private="1">
         <doc xml:space="preserve">parent class</doc>
@@ -3454,14 +3345,14 @@ The asset ID of an effect clip is in the form:
           </parameter>
         </parameters>
       </constructor>
-      <property name="audio-bin-description" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="audio-bin-description" writable="1" construct-only="1" transfer-ownership="none" default-value="NULL">
         <doc xml:space="preserve">The description of the audio track of the effect bin with a gst-launch-style
 pipeline description. This should be used for test purposes.
 
 Example: "audiopanorama panorama=1.0"</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="video-bin-description" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="video-bin-description" writable="1" construct-only="1" transfer-ownership="none" default-value="NULL">
         <doc xml:space="preserve">The description of the video track of the effect bin with a gst-launch-style
 pipeline description. This should be used for test purposes.
 
@@ -3490,8 +3381,8 @@ Example: "videobalance saturation=1.5 hue=+0.5"</doc>
         </array>
       </field>
     </record>
-    <record name="EffectClipPrivate" c:type="GESEffectClipPrivate" disguised="1"/>
-    <record name="EffectPrivate" c:type="GESEffectPrivate" disguised="1"/>
+    <record name="EffectClipPrivate" c:type="GESEffectClipPrivate" disguised="1" opaque="1"/>
+    <record name="EffectPrivate" c:type="GESEffectPrivate" disguised="1" opaque="1"/>
     <enumeration name="Error" c:type="GESError">
       <member name="asset_wrong_id" value="0" c:identifier="GES_ERROR_ASSET_WRONG_ID">
         <doc xml:space="preserve">The ID passed is malformed</doc>
@@ -4129,7 +4020,7 @@ else FALSE.</doc>
         </parameter>
       </parameters>
     </callback>
-    <record name="FormatterPrivate" c:type="GESFormatterPrivate" disguised="1"/>
+    <record name="FormatterPrivate" c:type="GESFormatterPrivate" disguised="1" opaque="1"/>
     <callback name="FormatterSaveToURIMethod" c:type="GESFormatterSaveToURIMethod" throws="1">
       <doc xml:space="preserve">Virtual method for saving a timeline to a uri.
 
@@ -4204,7 +4095,7 @@ ges_container_group() instead, which can return a different
           <type name="Group" c:type="GESGroup*"/>
         </return-value>
       </constructor>
-      <property name="duration" writable="1" transfer-ownership="none">
+      <property name="duration" writable="1" transfer-ownership="none" default-value="18446744073709551615">
         <doc xml:space="preserve">An overwrite of the #GESTimelineElement:duration property. For a
 #GESGroup, this is the difference between the earliest
 #GESTimelineElement:start time and the latest end time (given by
@@ -4212,23 +4103,23 @@ ges_container_group() instead, which can return a different
 its children.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="in-point" writable="1" transfer-ownership="none">
+      <property name="in-point" writable="1" transfer-ownership="none" default-value="0">
         <doc xml:space="preserve">An overwrite of the #GESTimelineElement:in-point property. This has
 no meaning for a group and should not be set.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="max-duration" writable="1" construct="1" transfer-ownership="none">
+      <property name="max-duration" writable="1" construct="1" transfer-ownership="none" default-value="18446744073709551615">
         <doc xml:space="preserve">An overwrite of the #GESTimelineElement:max-duration property. This
 has no meaning for a group and should not be set.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="priority" writable="1" transfer-ownership="none">
+      <property name="priority" writable="1" transfer-ownership="none" default-value="0">
         <doc xml:space="preserve">An overwrite of the #GESTimelineElement:priority property.
 Setting #GESTimelineElement priorities is deprecated as all priority
 management is now done by GES itself.</doc>
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="start" writable="1" transfer-ownership="none">
+      <property name="start" writable="1" transfer-ownership="none" default-value="0">
         <doc xml:space="preserve">An overwrite of the #GESTimelineElement:start property. For a
 #GESGroup, this is the earliest #GESTimelineElement:start time
 amongst its children.</doc>
@@ -4256,7 +4147,7 @@ amongst its children.</doc>
         </array>
       </field>
     </record>
-    <record name="GroupPrivate" c:type="GESGroupPrivate" disguised="1"/>
+    <record name="GroupPrivate" c:type="GESGroupPrivate" disguised="1" opaque="1"/>
     <class name="ImageSource" c:symbol-prefix="image_source" c:type="GESImageSource" deprecated="1" deprecated-version="1.18" parent="VideoSource" glib:type-name="GESImageSource" glib:get-type="ges_image_source_get_type" glib:type-struct="ImageSourceClass">
       <doc xml:space="preserve">Outputs the video stream from a given file as a still frame. The frame chosen
 will be determined by the in-point property on the track element. For image
@@ -4266,7 +4157,7 @@ files, do not set the in-point property.</doc>
 #ges_uri_source_asset_is_image returns %TRUE.</doc-deprecated>
       <implements name="Extractable"/>
       <implements name="MetaContainer"/>
-      <property name="uri" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="uri" writable="1" construct-only="1" transfer-ownership="none" default-value="NULL">
         <doc xml:space="preserve">The location of the file/resource to use.</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
@@ -4295,7 +4186,7 @@ files, do not set the in-point property.</doc>
         </array>
       </field>
     </record>
-    <record name="ImageSourcePrivate" c:type="GESImageSourcePrivate" disguised="1"/>
+    <record name="ImageSourcePrivate" c:type="GESImageSourcePrivate" disguised="1" opaque="1"/>
     <class name="Layer" c:symbol-prefix="layer" c:type="GESLayer" parent="GObject.InitiallyUnowned" glib:type-name="GESLayer" glib:get-type="ges_layer_get_type" glib:type-struct="LayerClass">
       <doc xml:space="preserve">#GESLayer-s are responsible for collecting and ordering #GESClip-s.
 
@@ -4716,7 +4607,7 @@ will make sure there is never 'gaps' between layer priorities.</doc-deprecated>
           </parameter>
         </parameters>
       </method>
-      <property name="auto-transition" writable="1" transfer-ownership="none" setter="set_auto_transition" getter="get_auto_transition">
+      <property name="auto-transition" writable="1" transfer-ownership="none" setter="set_auto_transition" getter="get_auto_transition" default-value="FALSE">
         <doc xml:space="preserve">Whether to automatically create a #GESTransitionClip whenever two
 #GESSource-s that both belong to a #GESClip in the layer overlap.
 See #GESTimeline for what counts as an overlap.
@@ -4726,7 +4617,7 @@ When a layer is added to a #GESTimeline, if this property is left as
 will be set to %TRUE as well.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="priority" deprecated="1" deprecated-version="1.16.0" writable="1" transfer-ownership="none" setter="set_priority" getter="get_priority">
+      <property name="priority" deprecated="1" deprecated-version="1.16.0" writable="1" transfer-ownership="none" setter="set_priority" getter="get_priority" default-value="0">
         <doc xml:space="preserve">The priority of the layer in the #GESTimeline. 0 is the highest
 priority. Conceptually, a timeline is a stack of layers,
 and the priority of the layer represents its position in the stack. Two
@@ -4861,7 +4752,7 @@ efficient way of providing the list of contained #GESClip-s.</doc>
         </array>
       </field>
     </record>
-    <record name="LayerPrivate" c:type="GESLayerPrivate" disguised="1"/>
+    <record name="LayerPrivate" c:type="GESLayerPrivate" disguised="1" opaque="1"/>
     <constant name="META_DESCRIPTION" value="description" c:type="GES_META_DESCRIPTION">
       <doc xml:space="preserve">The description of the object, to be used in various contexts (string).</doc>
       <type name="utf8" c:type="gchar*"/>
@@ -4909,7 +4800,7 @@ assets (string).</doc>
     <class name="Marker" c:symbol-prefix="marker" c:type="GESMarker" version="1.18" parent="GObject.Object" glib:type-name="GESMarker" glib:get-type="ges_marker_get_type" glib:type-struct="MarkerClass">
       <doc xml:space="preserve">A timed #GESMetaContainer object.</doc>
       <implements name="MetaContainer"/>
-      <property name="position" version="1.18" transfer-ownership="none">
+      <property name="position" version="1.18" transfer-ownership="none" default-value="18446744073709551615">
         <doc xml:space="preserve">Current position (in nanoseconds) of the #GESMarker</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
@@ -5014,7 +4905,7 @@ marker by 1.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <property name="flags" version="1.20" writable="1" construct="1" transfer-ownership="none">
+      <property name="flags" version="1.20" writable="1" construct="1" transfer-ownership="none" default-value="GES_MARKER_FLAG_NONE">
         <doc xml:space="preserve">Flags indicating how markers on the list should be treated.</doc>
         <type name="MarkerFlags"/>
       </property>
@@ -6194,7 +6085,7 @@ information.</doc>
           </parameter>
         </parameters>
       </constructor>
-      <property name="uri" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="uri" writable="1" construct-only="1" transfer-ownership="none" default-value="NULL">
         <doc xml:space="preserve">The uri of the file/resource to use. You can set a start index,
 a stop index and a sequence pattern.
 The format is &lt;multifile://start:stop\@location-pattern&gt;.
@@ -6232,7 +6123,7 @@ multifile://20:50@/home/you/sequence/\%04d.png</doc>
         </array>
       </field>
     </record>
-    <record name="MultiFileSourcePrivate" c:type="GESMultiFileSourcePrivate" disguised="1"/>
+    <record name="MultiFileSourcePrivate" c:type="GESMultiFileSourcePrivate" disguised="1" opaque="1"/>
     <class name="Operation" c:symbol-prefix="operation" c:type="GESOperation" parent="TrackElement" abstract="1" glib:type-name="GESOperation" glib:get-type="ges_operation_get_type" glib:type-struct="OperationClass">
       <doc xml:space="preserve">Base class for overlays, transitions, and effects</doc>
       <implements name="Extractable"/>
@@ -6285,8 +6176,8 @@ multifile://20:50@/home/you/sequence/\%04d.png</doc>
         </array>
       </field>
     </record>
-    <record name="OperationClipPrivate" c:type="GESOperationClipPrivate" disguised="1"/>
-    <record name="OperationPrivate" c:type="GESOperationPrivate" disguised="1"/>
+    <record name="OperationClipPrivate" c:type="GESOperationClipPrivate" disguised="1" opaque="1"/>
+    <record name="OperationPrivate" c:type="GESOperationPrivate" disguised="1" opaque="1"/>
     <class name="OverlayClip" c:symbol-prefix="overlay_clip" c:type="GESOverlayClip" parent="OperationClip" abstract="1" glib:type-name="GESOverlayClip" glib:get-type="ges_overlay_clip_get_type" glib:type-struct="OverlayClipClass">
       <doc xml:space="preserve">Overlays are objects which modify the underlying layer(s).
 
@@ -6319,7 +6210,7 @@ not considered overlays.</doc>
         </array>
       </field>
     </record>
-    <record name="OverlayClipPrivate" c:type="GESOverlayClipPrivate" disguised="1"/>
+    <record name="OverlayClipPrivate" c:type="GESOverlayClipPrivate" disguised="1" opaque="1"/>
     <constant name="PADDING" value="4" c:type="GES_PADDING">
       <attribute name="doc.skip" value="true"/>
       <type name="gint" c:type="gint"/>
@@ -6592,7 +6483,7 @@ immediately before the #GESPipeline:audio-sink. This exposes the
 #playsink:audio-sink property of the internal #playsink.</doc>
         <type name="Gst.Element"/>
       </property>
-      <property name="mode" writable="1" transfer-ownership="none" setter="set_mode" getter="get_mode">
+      <property name="mode" writable="1" transfer-ownership="none" setter="set_mode" getter="get_mode" default-value="GES_PIPELINE_MODE_PREVIEW_AUDIO | GES_PIPELINE_MODE_PREVIEW_VIDEO">
         <doc xml:space="preserve">The pipeline's mode. In preview mode (for audio or video, or both)
 the pipeline can display the timeline's content to an end user. In
 rendering mode the pipeline can encode the timeline's content and
@@ -6668,7 +6559,7 @@ avoiding decoding/reencoding (the underlying #encodebin has its
 &gt; is enabled.</doc>
       </member>
     </bitfield>
-    <record name="PipelinePrivate" c:type="GESPipelinePrivate" disguised="1"/>
+    <record name="PipelinePrivate" c:type="GESPipelinePrivate" disguised="1" opaque="1"/>
     <class name="PitiviFormatter" c:symbol-prefix="pitivi_formatter" c:type="GESPitiviFormatter" deprecated="1" deprecated-version="1.0" parent="Formatter" glib:type-name="GESPitiviFormatter" glib:get-type="ges_pitivi_formatter_get_type" glib:type-struct="PitiviFormatterClass">
       <attribute name="doc.skip" value="true"/>
       <doc xml:space="preserve">This is a legacy format and you should avoid to use it. The formatter
@@ -6702,7 +6593,7 @@ is really not in good shape and is deprecated.</doc>
         </array>
       </field>
     </record>
-    <record name="PitiviFormatterPrivate" c:type="GESPitiviFormatterPrivate" disguised="1"/>
+    <record name="PitiviFormatterPrivate" c:type="GESPitiviFormatterPrivate" disguised="1" opaque="1"/>
     <class name="Project" c:symbol-prefix="project" c:type="GESProject" parent="Asset" glib:type-name="GESProject" glib:get-type="ges_project_get_type" glib:type-struct="ProjectClass">
       <doc xml:space="preserve">The #GESProject is used to control a set of #GESAsset and is a
 #GESAsset with `GES_TYPE_TIMELINE` as @extractable_type itself. That
@@ -7127,7 +7018,7 @@ as defined in #ges_find_formatter_for_uri</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="uri" writable="1" construct-only="1" transfer-ownership="none" getter="get_uri">
+      <property name="uri" writable="1" construct-only="1" transfer-ownership="none" getter="get_uri" default-value="NULL">
         <type name="utf8" c:type="gchar*"/>
       </property>
       <field name="parent">
@@ -7395,7 +7286,7 @@ only to find out what the new location is.</doc>
         </array>
       </field>
     </record>
-    <record name="ProjectPrivate" c:type="GESProjectPrivate" disguised="1"/>
+    <record name="ProjectPrivate" c:type="GESProjectPrivate" disguised="1" opaque="1"/>
     <class name="Source" c:symbol-prefix="source" c:type="GESSource" parent="TrackElement" glib:type-name="GESSource" glib:get-type="ges_source_get_type" glib:type-struct="SourceClass">
       <doc xml:space="preserve">Base class for single-media sources</doc>
       <implements name="Extractable"/>
@@ -7541,8 +7432,8 @@ or %NULL if there was an error.</doc>
         </array>
       </field>
     </record>
-    <record name="SourceClipPrivate" c:type="GESSourceClipPrivate" disguised="1"/>
-    <record name="SourcePrivate" c:type="GESSourcePrivate" disguised="1"/>
+    <record name="SourceClipPrivate" c:type="GESSourceClipPrivate" disguised="1" opaque="1"/>
+    <record name="SourcePrivate" c:type="GESSourcePrivate" disguised="1" opaque="1"/>
     <function-macro name="TIMELINE_ELEMENT_DURATION" c:identifier="GES_TIMELINE_ELEMENT_DURATION" introspectable="0">
       <doc xml:space="preserve">The #GESTimelineElement:duration of @obj.</doc>
       <parameters>
@@ -7802,19 +7693,19 @@ or %NULL if there was an error.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="freq" writable="1" construct="1" transfer-ownership="none">
+      <property name="freq" writable="1" construct="1" transfer-ownership="none" default-value="440.000000">
         <doc xml:space="preserve">The frequency to generate for audio track elements.</doc>
         <type name="gdouble" c:type="gdouble"/>
       </property>
-      <property name="mute" writable="1" construct="1" transfer-ownership="none" setter="set_mute">
+      <property name="mute" writable="1" construct="1" transfer-ownership="none" setter="set_mute" default-value="FALSE">
         <doc xml:space="preserve">Whether the sound will be played or not.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="volume" writable="1" construct="1" transfer-ownership="none" setter="set_volume" getter="get_volume">
+      <property name="volume" writable="1" construct="1" transfer-ownership="none" setter="set_volume" getter="get_volume" default-value="1.000000">
         <doc xml:space="preserve">The volume for the audio track elements.</doc>
         <type name="gdouble" c:type="gdouble"/>
       </property>
-      <property name="vpattern" writable="1" construct="1" transfer-ownership="none" setter="set_vpattern" getter="get_vpattern">
+      <property name="vpattern" writable="1" construct="1" transfer-ownership="none" setter="set_vpattern" getter="get_vpattern" default-value="GES_VIDEO_TEST_PATTERN_SMPTE">
         <doc xml:space="preserve">Video pattern to display in video track elements.</doc>
         <type name="VideoTestPattern"/>
       </property>
@@ -7840,7 +7731,7 @@ or %NULL if there was an error.</doc>
         </array>
       </field>
     </record>
-    <record name="TestClipPrivate" c:type="GESTestClipPrivate" disguised="1"/>
+    <record name="TestClipPrivate" c:type="GESTestClipPrivate" disguised="1" opaque="1"/>
     <enumeration name="TextHAlign" glib:type-name="GESTextHAlign" glib:get-type="ges_text_halign_get_type" c:type="GESTextHAlign">
       <doc xml:space="preserve">Horizontal alignment of the text.</doc>
       <member name="left" value="0" c:identifier="GES_TEXT_HALIGN_LEFT" glib:nick="left" glib:name="GES_TEXT_HALIGN_LEFT">
@@ -8316,15 +8207,15 @@ made.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="color" writable="1" construct="1" transfer-ownership="none" setter="set_color" getter="get_color">
+      <property name="color" writable="1" construct="1" transfer-ownership="none" setter="set_color" getter="get_color" default-value="4294967295">
         <doc xml:space="preserve">The color of the text</doc>
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="font-desc" writable="1" construct="1" transfer-ownership="none" setter="set_font_desc" getter="get_font_desc">
+      <property name="font-desc" writable="1" construct="1" transfer-ownership="none" setter="set_font_desc" getter="get_font_desc" default-value="Serif 36">
         <doc xml:space="preserve">Pango font description string</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="halignment" writable="1" construct="1" transfer-ownership="none" getter="get_halignment">
+      <property name="halignment" writable="1" construct="1" transfer-ownership="none" getter="get_halignment" default-value="GES_TEXT_HALIGN_CENTER">
         <doc xml:space="preserve">Horizontal alignment of the text</doc>
         <type name="TextHAlign"/>
       </property>
@@ -8332,15 +8223,15 @@ made.</doc>
         <doc xml:space="preserve">The text to diplay</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="valignment" writable="1" construct="1" transfer-ownership="none" getter="get_valignment">
+      <property name="valignment" writable="1" construct="1" transfer-ownership="none" getter="get_valignment" default-value="GES_TEXT_VALIGN_BASELINE">
         <doc xml:space="preserve">Vertical alignent of the text</doc>
         <type name="TextVAlign"/>
       </property>
-      <property name="xpos" writable="1" construct="1" transfer-ownership="none" setter="set_xpos" getter="get_xpos">
+      <property name="xpos" writable="1" construct="1" transfer-ownership="none" setter="set_xpos" getter="get_xpos" default-value="0.500000">
         <doc xml:space="preserve">The horizontal position of the text</doc>
         <type name="gdouble" c:type="gdouble"/>
       </property>
-      <property name="ypos" writable="1" construct="1" transfer-ownership="none" setter="set_ypos" getter="get_ypos">
+      <property name="ypos" writable="1" construct="1" transfer-ownership="none" setter="set_ypos" getter="get_ypos" default-value="0.500000">
         <doc xml:space="preserve">The vertical position of the text</doc>
         <type name="gdouble" c:type="gdouble"/>
       </property>
@@ -8366,8 +8257,8 @@ made.</doc>
         </array>
       </field>
     </record>
-    <record name="TextOverlayClipPrivate" c:type="GESTextOverlayClipPrivate" disguised="1"/>
-    <record name="TextOverlayPrivate" c:type="GESTextOverlayPrivate" disguised="1"/>
+    <record name="TextOverlayClipPrivate" c:type="GESTextOverlayClipPrivate" disguised="1" opaque="1"/>
+    <record name="TextOverlayPrivate" c:type="GESTextOverlayPrivate" disguised="1" opaque="1"/>
     <enumeration name="TextVAlign" glib:type-name="GESTextVAlign" glib:get-type="ges_text_valign_get_type" c:type="GESTextVAlign">
       <doc xml:space="preserve">Vertical alignment of the text.</doc>
       <member name="baseline" value="0" c:identifier="GES_TEXT_VALIGN_BASELINE" glib:nick="baseline" glib:name="GES_TEXT_VALIGN_BASELINE">
@@ -9198,20 +9089,20 @@ actually taken into account.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <property name="auto-transition" writable="1" transfer-ownership="none" setter="set_auto_transition" getter="get_auto_transition">
+      <property name="auto-transition" writable="1" transfer-ownership="none" setter="set_auto_transition" getter="get_auto_transition" default-value="FALSE">
         <doc xml:space="preserve">Whether to automatically create a transition whenever two
 #GESSource-s overlap in a track of the timeline. See
 #GESLayer:auto-transition if you want this to only happen in some
 layers.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="duration" transfer-ownership="none" getter="get_duration">
+      <property name="duration" transfer-ownership="none" getter="get_duration" default-value="18446744073709551615">
         <doc xml:space="preserve">The current duration (in nanoseconds) of the timeline. A timeline
 'starts' at time 0, so this is the maximum end time of all of its
 #GESTimelineElement-s.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="snapping-distance" writable="1" transfer-ownership="none" setter="set_snapping_distance" getter="get_snapping_distance">
+      <property name="snapping-distance" writable="1" transfer-ownership="none" setter="set_snapping_distance" getter="get_snapping_distance" default-value="0">
         <doc xml:space="preserve">The distance (in nanoseconds) at which a #GESTimelineElement being
 moved within the timeline should snap one of its #GESSource-s with
 another #GESSource-s edge. See #GESEditMode for which edges can
@@ -11084,7 +10975,7 @@ See ges_timeline_element_edit() with #GES_EDIT_MODE_TRIM and
           </parameter>
         </parameters>
       </method>
-      <property name="duration" writable="1" transfer-ownership="none" setter="set_duration" getter="get_duration">
+      <property name="duration" writable="1" transfer-ownership="none" setter="set_duration" getter="get_duration" default-value="18446744073709551615">
         <doc xml:space="preserve">The duration that the element is in effect for in the timeline (a
 time difference in nanoseconds using the time coordinates of the
 timeline). For example, for a source element, this would determine
@@ -11093,7 +10984,7 @@ operation element, this would determine for how long its effect
 should be applied to any source content.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="in-point" writable="1" transfer-ownership="none">
+      <property name="in-point" writable="1" transfer-ownership="none" default-value="0">
         <doc xml:space="preserve">The initial offset to use internally when outputting content (in
 nanoseconds, but in the time coordinates of the internal content).
 
@@ -11109,7 +11000,7 @@ For elements that have no internal content, this should be kept
 as 0.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="max-duration" writable="1" construct="1" transfer-ownership="none" setter="set_max_duration" getter="get_max_duration">
+      <property name="max-duration" writable="1" construct="1" transfer-ownership="none" setter="set_max_duration" getter="get_max_duration" default-value="18446744073709551615">
         <doc xml:space="preserve">The full duration of internal content that is available (a time
 difference in nanoseconds using the time coordinates of the internal
 content).
@@ -11126,7 +11017,7 @@ For elements that have no internal content, or whose content is
 indefinite, this should be kept as #GST_CLOCK_TIME_NONE.</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="name" writable="1" construct="1" transfer-ownership="none" setter="set_name" getter="get_name">
+      <property name="name" writable="1" construct="1" transfer-ownership="none" setter="set_name" getter="get_name" default-value="NULL">
         <doc xml:space="preserve">The name of the element. This should be unique within its timeline.</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
@@ -11134,16 +11025,16 @@ indefinite, this should be kept as #GST_CLOCK_TIME_NONE.</doc>
         <doc xml:space="preserve">The parent container of the element.</doc>
         <type name="TimelineElement"/>
       </property>
-      <property name="priority" deprecated="1" deprecated-version="1.10" writable="1" transfer-ownership="none" setter="set_priority" getter="get_priority">
+      <property name="priority" deprecated="1" deprecated-version="1.10" writable="1" transfer-ownership="none" setter="set_priority" getter="get_priority" default-value="0">
         <doc xml:space="preserve">The priority of the element.</doc>
         <doc-deprecated xml:space="preserve">Priority management is now done by GES itself.</doc-deprecated>
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="serialize" writable="1" transfer-ownership="none">
+      <property name="serialize" writable="1" transfer-ownership="none" default-value="TRUE">
         <doc xml:space="preserve">Whether the element should be serialized.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="start" writable="1" transfer-ownership="none" setter="set_start" getter="get_start">
+      <property name="start" writable="1" transfer-ownership="none" setter="set_start" getter="get_start" default-value="0">
         <doc xml:space="preserve">The starting position of the element in the timeline (in nanoseconds
 and in the time coordinates of the timeline). For example, for a
 source element, this would determine the time at which it should
@@ -11651,8 +11542,8 @@ not the case.</doc>
         </array>
       </field>
     </record>
-    <record name="TimelineElementPrivate" c:type="GESTimelineElementPrivate" disguised="1"/>
-    <record name="TimelinePrivate" c:type="GESTimelinePrivate" disguised="1"/>
+    <record name="TimelineElementPrivate" c:type="GESTimelineElementPrivate" disguised="1" opaque="1"/>
+    <record name="TimelinePrivate" c:type="GESTimelinePrivate" disguised="1" opaque="1"/>
     <class name="TitleClip" c:symbol-prefix="title_clip" c:type="GESTitleClip" parent="SourceClip" glib:type-name="GESTitleClip" glib:get-type="ges_title_clip_get_type" glib:type-struct="TitleClipClass">
       <doc xml:space="preserve">Renders the given text in the specified font, at specified position, and
 with the specified background pattern.</doc>
@@ -11930,28 +11821,28 @@ See #GESTitleSource for more information about exposed properties</doc-deprecate
           </parameter>
         </parameters>
       </method>
-      <property name="background" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_background">
+      <property name="background" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_background" default-value="4294967295">
         <doc xml:space="preserve">The background of the text</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties or
 #ges_timeline_element_get_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="color" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_color">
+      <property name="color" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_color" default-value="4294967295">
         <doc xml:space="preserve">The color of the text</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties or
 #ges_timeline_element_get_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="font-desc" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_font_desc" getter="get_font_desc">
+      <property name="font-desc" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_font_desc" getter="get_font_desc" default-value="Serif 36">
         <doc xml:space="preserve">Pango font description string</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties or
 #ges_timeline_element_get_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="halignment" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_halignment" getter="get_halignment">
+      <property name="halignment" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_halignment" getter="get_halignment" default-value="GES_TEXT_HALIGN_CENTER">
         <doc xml:space="preserve">Horizontal alignment of the text</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties or
 #ges_timeline_element_get_children_properties instead.
@@ -11965,21 +11856,21 @@ See #GESTitleSource for more information about exposed properties</doc-deprecate
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="valignment" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_valignment" getter="get_valignment">
+      <property name="valignment" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_valignment" getter="get_valignment" default-value="GES_TEXT_VALIGN_BASELINE">
         <doc xml:space="preserve">Vertical alignent of the text</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties or
 #ges_timeline_element_get_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
         <type name="TextVAlign"/>
       </property>
-      <property name="xpos" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_xpos" getter="get_xpos">
+      <property name="xpos" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_xpos" getter="get_xpos" default-value="0.500000">
         <doc xml:space="preserve">The horizontal position of the text</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties or
 #ges_timeline_element_get_children_properties instead.
 See #GESTitleSource for more information about exposed properties</doc-deprecated>
         <type name="gdouble" c:type="gdouble"/>
       </property>
-      <property name="ypos" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_ypos" getter="get_ypos">
+      <property name="ypos" deprecated="1" deprecated-version="1.6" writable="1" construct="1" transfer-ownership="none" setter="set_ypos" getter="get_ypos" default-value="0.500000">
         <doc xml:space="preserve">The vertical position of the text</doc>
         <doc-deprecated xml:space="preserve">use #ges_timeline_element_set_children_properties or
 #ges_timeline_element_get_children_properties instead.
@@ -12008,7 +11899,7 @@ See #GESTitleSource for more information about exposed properties</doc-deprecate
         </array>
       </field>
     </record>
-    <record name="TitleClipPrivate" c:type="GESTitleClipPrivate" disguised="1"/>
+    <record name="TitleClipPrivate" c:type="GESTitleClipPrivate" disguised="1" opaque="1"/>
     <class name="TitleSource" c:symbol-prefix="title_source" c:type="GESTitleSource" parent="VideoSource" glib:type-name="GESTitleSource" glib:get-type="ges_title_source_get_type" glib:type-struct="TitleSourceClass">
       <doc xml:space="preserve">#GESTitleSource is a GESTimelineElement that implements the notion
 of titles in GES.</doc>
@@ -12278,7 +12169,7 @@ made.</doc>
         </array>
       </field>
     </record>
-    <record name="TitleSourcePrivate" c:type="GESTitleSourcePrivate" disguised="1"/>
+    <record name="TitleSourcePrivate" c:type="GESTitleSourcePrivate" disguised="1" opaque="1"/>
     <class name="Track" c:symbol-prefix="track" c:type="GESTrack" parent="Gst.Bin" glib:type-name="GESTrack" glib:get-type="ges_track_get_type" glib:type-struct="TrackClass">
       <doc xml:space="preserve">A #GESTrack acts an output source for a #GESTimeline. Each one
 essentially provides an additional #GstPad for the timeline, with
@@ -12648,17 +12539,17 @@ this.
 Default value: #GST_CAPS_ANY.</doc>
         <type name="Gst.Caps"/>
       </property>
-      <property name="duration" transfer-ownership="none">
+      <property name="duration" transfer-ownership="none" default-value="1000000000">
         <doc xml:space="preserve">Current duration of the track
 
 Default value: O</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="id" version="1.18" writable="1" transfer-ownership="none">
+      <property name="id" version="1.18" writable="1" transfer-ownership="none" default-value="NULL">
         <doc xml:space="preserve">The #nlecomposition:id of the underlying #nlecomposition.</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="mixing" writable="1" construct="1" transfer-ownership="none" setter="set_mixing" getter="get_mixing">
+      <property name="mixing" writable="1" construct="1" transfer-ownership="none" setter="set_mixing" getter="get_mixing" default-value="TRUE">
         <doc xml:space="preserve">Whether the track should support the mixing of #GESLayer data, such
 as composing the video data of each layer (when part of the video
 data is transparent, the next layer will become visible) or adding
@@ -12678,7 +12569,7 @@ You may change this property after the track has been added to a
 Default value: #GST_CAPS_ANY.</doc>
         <type name="Gst.Caps"/>
       </property>
-      <property name="track-type" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="track-type" writable="1" construct-only="1" transfer-ownership="none" default-value="GES_TRACK_TYPE_CUSTOM">
         <doc xml:space="preserve">The track type of the track. This controls the type of
 #GESTrackElement-s that can be added to the track. This should
 match with the track's #GESTrack:caps.
@@ -13570,13 +13461,13 @@ set to %FALSE, this method will also set the
           </parameter>
         </parameters>
       </method>
-      <property name="active" writable="1" transfer-ownership="none" setter="set_active">
+      <property name="active" writable="1" transfer-ownership="none" setter="set_active" default-value="TRUE">
         <doc xml:space="preserve">Whether the effect of the element should be applied in its
 #GESTrackElement:track. If set to %FALSE, it will not be used in
 the output of the track.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="auto-clamp-control-sources" version="1.18" writable="1" transfer-ownership="none" setter="set_auto_clamp_control_sources" getter="get_auto_clamp_control_sources">
+      <property name="auto-clamp-control-sources" version="1.18" writable="1" transfer-ownership="none" setter="set_auto_clamp_control_sources" getter="get_auto_clamp_control_sources" default-value="TRUE">
         <doc xml:space="preserve">Whether the control sources on the element (see
 ges_track_element_set_control_source()) will be automatically
 updated whenever the #GESTimelineElement:in-point or out-point of the
@@ -13588,7 +13479,7 @@ per control source.
 Default value: %TRUE</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="has-internal-source" version="1.18" writable="1" transfer-ownership="none" setter="set_has_internal_source">
+      <property name="has-internal-source" version="1.18" writable="1" transfer-ownership="none" setter="set_has_internal_source" default-value="FALSE">
         <doc xml:space="preserve">This property is used to determine whether the 'internal time'
 properties of the element have any meaning. In particular, unless
 this is set to %TRUE, the #GESTimelineElement:in-point and
@@ -13630,7 +13521,7 @@ effects).</doc>
 belong to a track.</doc>
         <type name="Track"/>
       </property>
-      <property name="track-type" writable="1" construct="1" transfer-ownership="none" setter="set_track_type" getter="get_track_type">
+      <property name="track-type" writable="1" construct="1" transfer-ownership="none" setter="set_track_type" getter="get_track_type" default-value="GES_TRACK_TYPE_UNKNOWN">
         <doc xml:space="preserve">The track type of the element, which determines the type of track the
 element can be added to (see #GESTrack:track-type). This should
 correspond to the type of data that the element can produce or
@@ -13757,7 +13648,7 @@ should get into</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="track-type" writable="1" construct="1" transfer-ownership="none" setter="set_track_type" getter="get_track_type">
+      <property name="track-type" writable="1" construct="1" transfer-ownership="none" setter="set_track_type" getter="get_track_type" default-value="GES_TRACK_TYPE_UNKNOWN">
         <type name="TrackType"/>
       </property>
       <field name="parent">
@@ -13804,7 +13695,7 @@ should get into</doc>
         </array>
       </field>
     </record>
-    <record name="TrackElementAssetPrivate" c:type="GESTrackElementAssetPrivate" disguised="1"/>
+    <record name="TrackElementAssetPrivate" c:type="GESTrackElementAssetPrivate" disguised="1" opaque="1"/>
     <record name="TrackElementClass" c:type="GESTrackElementClass" glib:is-gtype-struct-for="TrackElement">
       <field name="parent_class" readable="0" private="1">
         <type name="TimelineElementClass" c:type="GESTimelineElementClass"/>
@@ -13935,8 +13826,8 @@ usage.</doc>
         </record>
       </union>
     </record>
-    <record name="TrackElementPrivate" c:type="GESTrackElementPrivate" disguised="1"/>
-    <record name="TrackPrivate" c:type="GESTrackPrivate" disguised="1"/>
+    <record name="TrackElementPrivate" c:type="GESTrackElementPrivate" disguised="1" opaque="1"/>
+    <record name="TrackPrivate" c:type="GESTrackPrivate" disguised="1" opaque="1"/>
     <bitfield name="TrackType" glib:type-name="GESTrackType" glib:get-type="ges_track_type_get_type" c:type="GESTrackType">
       <doc xml:space="preserve">Types of content handled by a track. If the content is not one of
 @GES_TRACK_TYPE_AUDIO, @GES_TRACK_TYPE_VIDEO or @GES_TRACK_TYPE_TEXT,
@@ -14039,7 +13930,7 @@ or %NULL if something went wrong</doc>
           </parameter>
         </parameters>
       </constructor>
-      <property name="vtype" writable="1" construct="1" transfer-ownership="none">
+      <property name="vtype" writable="1" construct="1" transfer-ownership="none" default-value="GES_VIDEO_STANDARD_TRANSITION_TYPE_CROSSFADE">
         <doc xml:space="preserve">a #GESVideoStandardTransitionType representing the wipe to use</doc>
         <type name="VideoStandardTransitionType"/>
       </property>
@@ -14070,8 +13961,8 @@ to apply.</doc>
         </array>
       </field>
     </record>
-    <record name="TransitionClipPrivate" c:type="GESTransitionClipPrivate" disguised="1"/>
-    <record name="TransitionPrivate" c:type="GESTransitionPrivate" disguised="1"/>
+    <record name="TransitionClipPrivate" c:type="GESTransitionClipPrivate" disguised="1" opaque="1"/>
+    <record name="TransitionPrivate" c:type="GESTransitionPrivate" disguised="1" opaque="1"/>
     <class name="UriClip" c:symbol-prefix="uri_clip" c:type="GESUriClip" parent="SourceClip" glib:type-name="GESUriClip" glib:get-type="ges_uri_clip_get_type" glib:type-struct="UriClipClass">
       <doc xml:space="preserve">Represents all the output streams from a particular uri. It is assumed that
 the URI points to a file of some type.</doc>
@@ -14167,19 +14058,19 @@ the URI points to a file of some type.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="is-image" writable="1" construct="1" transfer-ownership="none" setter="set_is_image">
+      <property name="is-image" writable="1" construct="1" transfer-ownership="none" setter="set_is_image" default-value="FALSE">
         <doc xml:space="preserve">Whether this uri clip represents a still image or not. This must be set
 before create_track_elements is called.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="mute" writable="1" construct="1" transfer-ownership="none" setter="set_mute">
+      <property name="mute" writable="1" construct="1" transfer-ownership="none" setter="set_mute" default-value="FALSE">
         <doc xml:space="preserve">Whether the sound will be played or not.</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="supported-formats" writable="1" construct="1" transfer-ownership="none">
+      <property name="supported-formats" writable="1" construct="1" transfer-ownership="none" default-value="GES_TRACK_TYPE_UNKNOWN">
         <type name="TrackType"/>
       </property>
-      <property name="uri" writable="1" construct-only="1" transfer-ownership="none" getter="get_uri">
+      <property name="uri" writable="1" construct-only="1" transfer-ownership="none" getter="get_uri" default-value="NULL">
         <doc xml:space="preserve">The location of the file/resource to use.</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
@@ -14264,7 +14155,7 @@ ges_uri_clip_asset_new (uri, (GAsyncReadyCallback) filesource_asset_loaded_cb, u
         </parameters>
       </function>
       <function name="request_sync" c:identifier="ges_uri_clip_asset_request_sync" throws="1">
-        <doc xml:space="preserve">Creates a #GESUriClipAsset for @uri synchonously. You should avoid
+        <doc xml:space="preserve">Creates a #GESUriClipAsset for @uri syncronously. You should avoid
 to use it in application, and rather create #GESUriClipAsset asynchronously</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve">A reference to the requested asset or %NULL if
@@ -14350,11 +14241,11 @@ are different as those can be extended 'infinitely'.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <property name="duration" writable="1" transfer-ownership="none" getter="get_duration">
+      <property name="duration" writable="1" transfer-ownership="none" getter="get_duration" default-value="18446744073709551615">
         <doc xml:space="preserve">The duration (in nanoseconds) of the media file</doc>
         <type name="guint64" c:type="guint64"/>
       </property>
-      <property name="is-nested-timeline" version="1.18" transfer-ownership="none">
+      <property name="is-nested-timeline" version="1.18" transfer-ownership="none" default-value="FALSE">
         <doc xml:space="preserve">The duration (in nanoseconds) of the media file</doc>
         <type name="gboolean" c:type="gboolean"/>
       </property>
@@ -14406,9 +14297,8 @@ are different as those can be extended 'infinitely'.</doc>
           <type name="gpointer" c:type="gpointer"/>
         </array>
       </field>
-      <method name="set_timeout" c:identifier="ges_uri_clip_asset_class_set_timeout" deprecated="1" deprecated-version="1.24">
+      <method name="set_timeout" c:identifier="ges_uri_clip_asset_class_set_timeout">
         <doc xml:space="preserve">Sets the timeout of #GESUriClipAsset loading</doc>
-        <doc-deprecated xml:space="preserve">ges_discoverer_manager_set_timeout() should be used instead</doc-deprecated>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -14424,7 +14314,7 @@ are different as those can be extended 'infinitely'.</doc>
         </parameters>
       </method>
     </record>
-    <record name="UriClipAssetPrivate" c:type="GESUriClipAssetPrivate" disguised="1"/>
+    <record name="UriClipAssetPrivate" c:type="GESUriClipAssetPrivate" disguised="1" opaque="1"/>
     <record name="UriClipClass" c:type="GESUriClipClass" glib:is-gtype-struct-for="UriClip">
       <field name="parent_class" readable="0" private="1">
         <type name="SourceClipClass" c:type="GESSourceClipClass"/>
@@ -14435,8 +14325,8 @@ are different as those can be extended 'infinitely'.</doc>
         </array>
       </field>
     </record>
-    <record name="UriClipPrivate" c:type="GESUriClipPrivate" disguised="1"/>
-    <record name="UriSource" c:type="GESUriSource" disguised="1">
+    <record name="UriClipPrivate" c:type="GESUriClipPrivate" disguised="1" opaque="1"/>
+    <record name="UriSource" c:type="GESUriSource" disguised="1" opaque="1">
       <attribute name="doc.skip" value="true"/>
     </record>
     <class name="UriSourceAsset" c:symbol-prefix="uri_source_asset" c:type="GESUriSourceAsset" parent="TrackElementAsset" glib:type-name="GESUriSourceAsset" glib:get-type="ges_uri_source_asset_get_type" glib:type-struct="UriSourceAssetClass">
@@ -14519,7 +14409,7 @@ contains one frame)</doc>
         </array>
       </field>
     </record>
-    <record name="UriSourceAssetPrivate" c:type="GESUriSourceAssetPrivate" disguised="1"/>
+    <record name="UriSourceAssetPrivate" c:type="GESUriSourceAssetPrivate" disguised="1" opaque="1"/>
     <constant name="VERSION_MAJOR" value="1" c:type="GES_VERSION_MAJOR">
       <type name="gint" c:type="gint"/>
     </constant>
@@ -14654,7 +14544,7 @@ account.</doc>
         </record>
       </union>
     </record>
-    <record name="VideoSourcePrivate" c:type="GESVideoSourcePrivate" disguised="1"/>
+    <record name="VideoSourcePrivate" c:type="GESVideoSourcePrivate" disguised="1" opaque="1"/>
     <enumeration name="VideoStandardTransitionType" glib:type-name="GESVideoStandardTransitionType" glib:get-type="ges_video_standard_transition_type_get_type" c:type="GESVideoStandardTransitionType">
       <member name="none" value="0" c:identifier="GES_VIDEO_STANDARD_TRANSITION_TYPE_NONE" glib:nick="none" glib:name="GES_VIDEO_STANDARD_TRANSITION_TYPE_NONE">
         <doc xml:space="preserve">Transition type has not been set,</doc>
@@ -14991,7 +14881,7 @@ the background one</doc>
         </array>
       </field>
     </record>
-    <record name="VideoTestSourcePrivate" c:type="GESVideoTestSourcePrivate" disguised="1"/>
+    <record name="VideoTestSourcePrivate" c:type="GESVideoTestSourcePrivate" disguised="1" opaque="1"/>
     <class name="VideoTrack" c:symbol-prefix="video_track" c:type="GESVideoTrack" parent="Track" glib:type-name="GESVideoTrack" glib:get-type="ges_video_track_get_type" glib:type-struct="VideoTrackClass">
       <doc xml:space="preserve">A #GESVideoTrack is a default video #GESTrack, with a
 #GES_TRACK_TYPE_VIDEO #GESTrack:track-type and "video/x-raw(ANY)"
@@ -15050,7 +14940,7 @@ modify these fields, or add additional ones.</doc>
         </array>
       </field>
     </record>
-    <record name="VideoTrackPrivate" c:type="GESVideoTrackPrivate" disguised="1"/>
+    <record name="VideoTrackPrivate" c:type="GESVideoTrackPrivate" disguised="1" opaque="1"/>
     <class name="VideoTransition" c:symbol-prefix="video_transition" c:type="GESVideoTransition" parent="Transition" glib:type-name="GESVideoTransition" glib:get-type="ges_video_transition_get_type" glib:type-struct="VideoTransitionClass">
       <implements name="Extractable"/>
       <implements name="MetaContainer"/>
@@ -15160,16 +15050,16 @@ for later use.</doc>
           </parameter>
         </parameters>
       </method>
-      <property name="border" writable="1" transfer-ownership="none" setter="set_border" getter="get_border">
+      <property name="border" writable="1" transfer-ownership="none" setter="set_border" getter="get_border" default-value="0">
         <doc xml:space="preserve">This value represents the border width of the transition.</doc>
         <type name="guint" c:type="guint"/>
       </property>
-      <property name="invert" deprecated="1" deprecated-version="1.20" writable="1" transfer-ownership="none">
+      <property name="invert" deprecated="1" deprecated-version="1.20" writable="1" transfer-ownership="none" default-value="FALSE">
         <doc xml:space="preserve">This value represents the direction of the transition.</doc>
         <doc-deprecated xml:space="preserve">Use ges_timeline_element_[sg]et_child_property instead.</doc-deprecated>
         <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="transition-type" writable="1" transfer-ownership="none" setter="set_transition_type" getter="get_transition_type">
+      <property name="transition-type" writable="1" transfer-ownership="none" setter="set_transition_type" getter="get_transition_type" default-value="GES_VIDEO_STANDARD_TRANSITION_TYPE_CROSSFADE">
         <type name="VideoStandardTransitionType"/>
       </property>
       <field name="parent">
@@ -15195,14 +15085,14 @@ for later use.</doc>
         </array>
       </field>
     </record>
-    <record name="VideoTransitionPrivate" c:type="GESVideoTransitionPrivate" disguised="1"/>
+    <record name="VideoTransitionPrivate" c:type="GESVideoTransitionPrivate" disguised="1" opaque="1"/>
     <class name="VideoUriSource" c:symbol-prefix="video_uri_source" c:type="GESVideoUriSource" parent="VideoSource" glib:type-name="GESVideoUriSource" glib:get-type="ges_video_uri_source_get_type" glib:type-struct="VideoUriSourceClass">
       <doc xml:space="preserve">### Children Properties
 
  {{ libs/GESVideoUriSource-children-props.md }}</doc>
       <implements name="Extractable"/>
       <implements name="MetaContainer"/>
-      <property name="uri" writable="1" construct-only="1" transfer-ownership="none">
+      <property name="uri" writable="1" construct-only="1" transfer-ownership="none" default-value="NULL">
         <doc xml:space="preserve">The location of the file/resource to use.</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
@@ -15231,7 +15121,7 @@ for later use.</doc>
         </array>
       </field>
     </record>
-    <record name="VideoUriSourcePrivate" c:type="GESVideoUriSourcePrivate" disguised="1"/>
+    <record name="VideoUriSourcePrivate" c:type="GESVideoUriSourcePrivate" disguised="1" opaque="1"/>
     <class name="XmlFormatter" c:symbol-prefix="xml_formatter" c:type="GESXmlFormatter" parent="BaseXmlFormatter" glib:type-name="GESXmlFormatter" glib:get-type="ges_xml_formatter_get_type" glib:type-struct="XmlFormatterClass">
       <implements name="Extractable"/>
       <field name="parent">
@@ -15256,7 +15146,7 @@ for later use.</doc>
         </array>
       </field>
     </record>
-    <record name="XmlFormatterPrivate" c:type="GESXmlFormatterPrivate" disguised="1"/>
+    <record name="XmlFormatterPrivate" c:type="GESXmlFormatterPrivate" disguised="1" opaque="1"/>
     <function name="add_missing_uri_relocation_uri" c:identifier="ges_add_missing_uri_relocation_uri">
       <return-value transfer-ownership="none">
         <type name="gboolean" c:type="gboolean"/>
