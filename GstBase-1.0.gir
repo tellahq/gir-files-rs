@@ -260,7 +260,7 @@ available before calling this function.</doc>
             <doc xml:space="preserve">the bytes offset in the adapter to start from</doc>
             <type name="gsize" c:type="gsize"/>
           </parameter>
-          <parameter name="size" direction="out" caller-allocates="0" transfer-ownership="full">
+          <parameter name="size" transfer-ownership="none">
             <doc xml:space="preserve">the number of bytes to copy</doc>
             <type name="gsize" c:type="gsize"/>
           </parameter>
