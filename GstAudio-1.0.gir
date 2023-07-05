@@ -9117,31 +9117,31 @@ in a more readable fashion.</doc>
     </constant>
     <enumeration name="DsdFormat" version="1.24" glib:type-name="GstDsdFormat" glib:get-type="gst_dsd_format_get_type" c:type="GstDsdFormat">
       <doc xml:space="preserve">Enum value describing how DSD bits are grouped.</doc>
-      <member name="dsd_format_u8" value="0" c:identifier="GST_DSD_FORMAT_U8" glib:nick="dsd-format-u8" glib:name="GST_DSD_FORMAT_U8">
-        <doc xml:space="preserve">8 DSD bits in 1 byte</doc>
-      </member>
-      <member name="dsd_format_u16le" value="1" c:identifier="GST_DSD_FORMAT_U16LE" glib:nick="dsd-format-u16le" glib:name="GST_DSD_FORMAT_U16LE">
-        <doc xml:space="preserve">16 DSD bits in 2 bytes, little endian order</doc>
-      </member>
-      <member name="dsd_format_u16be" value="2" c:identifier="GST_DSD_FORMAT_U16BE" glib:nick="dsd-format-u16be" glib:name="GST_DSD_FORMAT_U16BE">
-        <doc xml:space="preserve">16 DSD bits in 2 bytes, big endian order</doc>
-      </member>
-      <member name="dsd_format_u32le" value="3" c:identifier="GST_DSD_FORMAT_U32LE" glib:nick="dsd-format-u32le" glib:name="GST_DSD_FORMAT_U32LE">
-        <doc xml:space="preserve">32 DSD bits in 4 bytes, little endian order</doc>
-      </member>
-      <member name="dsd_format_u32be" value="4" c:identifier="GST_DSD_FORMAT_U32BE" glib:nick="dsd-format-u32be" glib:name="GST_DSD_FORMAT_U32BE">
-        <doc xml:space="preserve">32 DSD bits in 4 bytes, big endian order</doc>
-      </member>
-      <member name="num_dsd_formats" value="5" c:identifier="GST_NUM_DSD_FORMATS" glib:nick="num-dsd-formats" glib:name="GST_NUM_DSD_FORMATS">
-        <doc xml:space="preserve">number of valid DSD formats</doc>
-      </member>
-      <member name="dsd_format_unknown" value="4294967295" c:identifier="GST_DSD_FORMAT_UNKNOWN" glib:nick="dsd-format-unknown" glib:name="GST_DSD_FORMAT_UNKNOWN">
+      <member name="dsd_format_unknown" value="0" c:identifier="GST_DSD_FORMAT_UNKNOWN" glib:nick="dsd-format-unknown" glib:name="GST_DSD_FORMAT_UNKNOWN">
         <doc xml:space="preserve">unknown / invalid DSD format</doc>
       </member>
-      <member name="dsd_format_u16" value="1" c:identifier="GST_DSD_FORMAT_U16" glib:nick="dsd-format-u16" glib:name="GST_DSD_FORMAT_U16">
+      <member name="dsd_format_u8" value="1" c:identifier="GST_DSD_FORMAT_U8" glib:nick="dsd-format-u8" glib:name="GST_DSD_FORMAT_U8">
+        <doc xml:space="preserve">8 DSD bits in 1 byte</doc>
+      </member>
+      <member name="dsd_format_u16le" value="2" c:identifier="GST_DSD_FORMAT_U16LE" glib:nick="dsd-format-u16le" glib:name="GST_DSD_FORMAT_U16LE">
+        <doc xml:space="preserve">16 DSD bits in 2 bytes, little endian order</doc>
+      </member>
+      <member name="dsd_format_u16be" value="3" c:identifier="GST_DSD_FORMAT_U16BE" glib:nick="dsd-format-u16be" glib:name="GST_DSD_FORMAT_U16BE">
+        <doc xml:space="preserve">16 DSD bits in 2 bytes, big endian order</doc>
+      </member>
+      <member name="dsd_format_u32le" value="4" c:identifier="GST_DSD_FORMAT_U32LE" glib:nick="dsd-format-u32le" glib:name="GST_DSD_FORMAT_U32LE">
+        <doc xml:space="preserve">32 DSD bits in 4 bytes, little endian order</doc>
+      </member>
+      <member name="dsd_format_u32be" value="5" c:identifier="GST_DSD_FORMAT_U32BE" glib:nick="dsd-format-u32be" glib:name="GST_DSD_FORMAT_U32BE">
+        <doc xml:space="preserve">32 DSD bits in 4 bytes, big endian order</doc>
+      </member>
+      <member name="num_dsd_formats" value="6" c:identifier="GST_NUM_DSD_FORMATS" glib:nick="num-dsd-formats" glib:name="GST_NUM_DSD_FORMATS">
+        <doc xml:space="preserve">number of valid DSD formats</doc>
+      </member>
+      <member name="dsd_format_u16" value="2" c:identifier="GST_DSD_FORMAT_U16" glib:nick="dsd-format-u16" glib:name="GST_DSD_FORMAT_U16">
         <doc xml:space="preserve">16 DSD bits in 2 bytes, native endianness</doc>
       </member>
-      <member name="dsd_format_u32" value="3" c:identifier="GST_DSD_FORMAT_U32" glib:nick="dsd-format-u32" glib:name="GST_DSD_FORMAT_U32">
+      <member name="dsd_format_u32" value="4" c:identifier="GST_DSD_FORMAT_U32" glib:nick="dsd-format-u32" glib:name="GST_DSD_FORMAT_U32">
         <doc xml:space="preserve">32 DSD bits in 4 bytes, native endianness</doc>
       </member>
       <function name="from_string" c:identifier="gst_dsd_format_from_string" version="1.24">
