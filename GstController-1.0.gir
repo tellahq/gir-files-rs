@@ -505,6 +505,10 @@ All functions are MT-safe.</doc>
   produce any values outside of the min-max range set by the control points
   (Since: 1.8)</doc>
       </member>
+      <member name="ease_in_out_expo" value="4" c:identifier="GST_INTERPOLATION_MODE_EASE_IN_OUT_EXPO" glib:nick="ease-in-out-expo" glib:name="GST_INTERPOLATION_MODE_EASE_IN_OUT_EXPO">
+        <doc xml:space="preserve">ease in out exponential interpolation.
+  Implements the css easing 'cubic-bezier(0.87, 0, 0.13, 1)'.</doc>
+      </member>
     </enumeration>
     <class name="LFOControlSource" c:symbol-prefix="lfo_control_source" c:type="GstLFOControlSource" parent="Gst.ControlSource" glib:type-name="GstLFOControlSource" glib:get-type="gst_lfo_control_source_get_type" glib:type-struct="LFOControlSourceClass">
       <doc xml:space="preserve">#GstLFOControlSource is a #GstControlSource, that provides several periodic
